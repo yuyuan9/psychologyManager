@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- 公共头部 -->
+    <th:block th:include="block/headlink :: test('服务商')" /> 
+    <!-- 结束 -->
+    <link rel="stylesheet" th:href="@{/statics/css/footer.css?v=0.0.1}">
+    <link rel="stylesheet" th:href="@{/statics/css/service/index.css?v=0.0.1}">
+    <style>
+        .page_content{
+            background: #fff;
+        }
+        .copyright {
+            padding-top: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="user">
+        <div th:replace="~{user_head::copy}"></div>
+    </div>
+    <div class="wrap" id="box">
+        <!-- 登录组件 -->
+        <mylogin :islogin="false" @close-login="isLogin=!false"></mylogin>
+        <!-- over -->
+        <div th:replace="~{header::copy}"></div>
+        <section>
+            <div class="banner">
+                <div class="banner_img">
+                    <img src="/statics/images/service/banner.jpg" alt="">
+                    <div class="ruzhu">
+                        <a id="enter" href="javascript:void(0);" @click="enter()">立即入驻</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="welfare">
+                <div class="welfare_tit">
+                        <h2>入驻服务商6大福利</h2>
+                        <p>PLATFORM WELFARE</p>
+                    
+                    <div class="welfare_block clearfix">
+                        <div class="clearfix">
+                            <div class="p_l">
+                                <i>海量需求，助力企业发展</i>
+                                <span>自由交易，运营数据监控，助力入驻服务商快速拓展业务，共享千亿市场</span>
+                            </div>
+                            <div class="p_r">
+                                <i class="welfare_icon1"></i>
+                            </div>
+                        </div>
+                        <div class="clearfix">
+                            <div class="p_l">
+                                <i>专属商铺，快速审核入驻</i>
+                                <span>只需3步，3个工作日内即可完成入驻，1个专属客服即可开启交易</span>
+                            </div>
+                            <div class="p_r">
+                                <i class="welfare_icon2"></i>
+                            </div>
+                        </div>
+                        <div class="clearfix">
+                            <div class="p_l">
+                                <i>培训支持，培育行业标杆</i>
+                                <span>海量培训资源，专业项目经理培训课程，统一和提升服务标准，打造行业标杆企业</span>
+                            </div>
+                            <div class="p_r">
+                                <i class="welfare_icon3"></i>
+                            </div>
+                        </div>
+                        <div class="clearfix">
+                            <div class="p_l">
+                                <i>互利共赢，共享大数据资源</i>
+                                <span>开放平台系统、工具使用权、文库编辑权，共享平台“大数据+人工智能”资源</span>
+                            </div>
+                            <div class="p_r">
+                                <i class="welfare_icon4"></i>
+                            </div>
+                        </div>
+                        <div class="clearfix">
+                            <div class="p_l">
+                                <i>全网营销，助力品牌升级</i>
+                                <span>全网宣传推广企业品牌，站内外广告位宣传引流，各类活动宣传并进，助力引流</span>
+                            </div>
+                            <div class="p_r">
+                                <i class="welfare_icon5"></i>
+                            </div>
+                        </div>
+                        <div class="clearfix">
+                            <div class="p_l">
+                                <i>享优质资源展示位置</i>
+                                <span>交易资源在平台优质资源位置展示，第一时间吸引潜在用户</span>
+                            </div>
+                            <div class="p_r">
+                                <i class="welfare_icon6"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flow">
+                <div class="flow_tit">
+                    <h2>服务商申请流程</h2>
+                    <p>APPLICATION PROCESS</p>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="flow_img">
+                <img src="/statics/images/service/flow.jpg" alt="">
+            </div>
+        </section>
+
+        <!--E=底部-->
+        <div th:replace="~{footer::copy}"></div>
+
+
+    </div>
+    <!-- 公共js部分 -->
+    <th:block th:include="block/footlink :: copy" /> 
+    <!-- over -->
+    <script type="text/javascript" th:src="@{/statics/js/component/mylogin.js?v=1.0.2}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/service/index.js?v=0.0.3}"></script>
+    
+    <th:block th:include="block/service_each :: copy" />
+    <th:block th:include="block/statistics :: copy" />
+</body>
+
+</html>

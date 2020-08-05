@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    <!-- 开启二级缓存 -->
+    <!--<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>-->
+<mapper namespace="com.ht.biz.mapper.PolicyDigMapper">
+<resultMap type="com.ht.entity.policydig.PolicyDig" id="PolicyDigResultMap">
+<id column="id" property="id"/>
+<result column="serialVersionUID" property="serialVersionUID"/>
+<result column="name" property="name"/>
+<result column="seoword" property="seoword"/>
+<result column="title" property="title"/>
+<result column="date" property="date"/>
+<result column="datetime" property="datetime"/>
+<result column="province" property="province"/>
+<result column="city" property="city"/>
+<result column="area" property="area"/>
+<result column="areaGrade" property="areaGrade"/>
+<result column="companyProvince" property="companyProvince"/>
+<result column="companyCity" property="companyCity"/>
+<result column="companyArea" property="companyArea"/>
+<result column="source" property="source"/>
+<result column="content" property="content"/>
+<result column="url" property="url"/>
+<result column="shortUrl" property="shortUrl"/>
+<result column="sign" property="sign"/>
+<result column="productType" property="productType"/>
+<result column="issueCompany" property="issueCompany"/>
+<result column="nature" property="nature"/>
+<result column="status" property="status"/>
+<result column="onShow" property="onShow"/>
+<result column="top" property="top"/>
+<result column="beginDate" property="beginDate"/>
+<result column="endDate" property="endDate"/>
+<result column="browsecount" property="browsecount"/>
+<result column="field" property="field"/>
+<result column="originalDate" property="originalDate"/>
+<result column="forward" property="forward"/>
+<result column="collection" property="collection"/>
+<result column="industry" property="industry"/>
+<result column="tecnology" property="tecnology"/>
+<result column="tecnologyFirst" property="tecnologyFirst"/>
+<result column="createdate" property="createdate"/>
+<result column="createid" property="createid"/>
+<result column="lastmodified" property="lastmodified"/>
+</resultMap>
+<sql id="sql">
+	    id,name,seoword,status,title,date,datetime,province,city,area,areaGrade,companyProvince,companyCity,
+	    companyArea,source,url,shortUrl,sign,
+	    (select username from t_sys_user where USER_ID=createId)createId,
+	    createdate,lastmodified,productType,
+	    issueCompany,nature,onShow,top,beginDate,endDate,browsecount,field,originalDate,forward,collection,
+	    industry,tecnology,tecnologyFirst,sort
+</sql>
+<select id="findlistPage" resultMap="PolicyDigResultMap" parameterType="com.ht.commons.utils.MyPage">
+ select * from t_policy_dig t where 1=1 
+ 	 <if test="pd.keyword!= null and pd.keyword != ''">
+			and
+			(
+			    name LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+			    or
+				title LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+				or
+				date LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+				or
+				province LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+				or
+				city LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+				or
+				area LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+				or
+				source LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+				or
+				tecnology LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+			)
+         </if>
+	 <if test="pd.province!=null and pd.province!=''">
+	 	and t.province LIKE CONCAT(CONCAT('%', #{pd.province}),'%')
+	 </if>
+	 <if test="pd.city!=null and pd.city!=''">
+	 	and t.city=#{pd.city}
+	 </if>
+	 <if test="pd.area!=null and pd.area!=''">
+	 	and t.area=#{pd.area}
+	 </if>
+	 <if test="pd.datetime1!=null and pd.datetime1!='' and pd.datetime2!=null and pd.datetime2!=''">
+	 	and t.datetime between #{pd.datetime1} and #{pd.datetime2}
+	 </if>
+	 <if test="pd.nature!=null and pd.nature!=0">
+	 	and t.nature=#{pd.nature}
+	 </if>
+	 
+	 <if test="pd.top!=null">
+	 	<if test="pd.top==1">
+	 		and t.top=1
+	 	</if>
+	 	<if test="pd.top==0">
+	 		and t.top=0
+	 	</if>
+	 </if>
+	 <choose>
+	 	<when test="pd.status!=null and pd.status==0">
+	 		and t.status in(0,3)
+	 	</when>
+	 	<when test="pd.status!=null">
+	 		and t.status=#{pd.status}
+	 	</when>
+	 </choose>
+	 <if test="pd.productType!=null and pd.productType!=0">
+	 	and t.productType=#{pd.productType}
+	 </if>
+	 <if test="pd.source!=null and pd.source!=''">
+	 	and t.source LIKE CONCAT(CONCAT('%', #{pd.source}),'%')
+	 </if>
+ order by t.originalDate desc,t.datetime desc
+</select>
+<select id="findV3listPage" resultMap="PolicyDigResultMap" parameterType="com.ht.commons.utils.MyPage">
+	select * from ${pd.sql} 
+	where 1=1 and status=1
+	<if test="pd.keyword!= null and pd.keyword != ''">
+		and
+		(
+			<!-- name LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+			or -->
+			title LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+			or
+			sign LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+			or
+			source LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+			or
+			url LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+		)
+    </if>
+    <!-- 性质分类 -->
+    <if test="pd.nature!=null and pd.nature!=''">
+    	and nature=#{pd.nature}
+    </if>
+    <!-- 政策类型 -->
+    <if test="pd.productType!=null and pd.productType!=''">
+		and productType=#{pd.productType}
+	</if>
+    <!-- 发布单位 -->
+    <if test="pd.issueCompany!=null and pd.issueCompany!=''">
+		and issueCompany LIKE CONCAT(CONCAT('%', #{pd.issueCompany}),'%')
+	</if>
+	<!-- 产业领域 -->
+    <if test="pd.industry!=null and pd.industry!=''">
+		and industry=#{pd.industry}
+	</if>
+    <!-- 发布日期 -->
+    <if test="pd.datetime1!=null and pd.datetime1!='' and pd.datetime2!=null and pd.datetime2!=''">
+    	and (datetime between #{pd.datetime1} and #{pd.datetime2})
+    </if>
+    <!-- 申报通知状态 apply==1申报中apply==0申报终止-->
+    <if test="pd.apply!=null and pd.apply==1 and pd.nature==1">
+		and (#{pd.totalday} BETWEEN beginDate and endDate)
+	</if>
+	<if test="pd.apply!=null and pd.apply==0 and pd.nature==1">
+		and endDate &lt; #{pd.totalday}
+	</if>
+	<if test="pd.tecnology!=null and pd.tecnology!=''">
+		and tecnologyFirst=#{pd.tecnology}
+	</if>
+	<if test="pd.date !=null and pd.date !='' and pd.today !=null and pd.today !=''">
+		and datetime between #{pd.date} and #{pd.today}
+	</if>
+	
+	order by digtype asc , datetime desc
+	
+</select>
+<select id="findlist" resultMap="PolicyDigResultMap" parameterType="com.ht.commons.utils.MyPage">
+	select * from policydigs t where 1=1
+	<if test="pd.province !=null and pd.province !=''">
+		and t.province=#{pd.province}
+	</if>
+	<if test="pd.city !=null and pd.city !=''">
+		and t.city=#{pd.city}
+	</if>
+	<if test="pd.nature !=null and pd.nature !=''">
+		and t.nature=#{pd.nature}
+	</if>
+	order by t.datetime desc
+</select>
+<update id="updateStatus" parameterType="com.ht.commons.utils.PageData">
+	update t_policy_dig set status=#{status} where id in (${ids})
+</update>
+<update id="updateTop" parameterType="com.ht.entity.policydig.PolicyDig">
+	update t_policy_dig set top=#{top},originalDate=#{originalDate} where id=#{id}
+</update>
+<select id="subscribeList" parameterType="com.ht.commons.utils.MyPage" resultMap="PolicyDigResultMap">
+	select * from policydigs where 1=1
+	<if test="pd.region !=null and pd.region != ''">
+		and ${pd.region}
+	</if>
+	<if test="pd.nature !=null and pd.nature != ''">
+		and nature in(${pd.nature})
+	</if>
+	<if test="pd.productType !=null and pd.productType != ''">
+		and productType in(${pd.productType})
+	</if>
+	<if test="pd.tecnology !=null and pd.tecnology != ''">
+		and tecnology in(${pd.tecnology})
+	</if>
+	
+</select>
+<select id="searchlist" parameterType="com.ht.commons.utils.MyPage" resultType="com.ht.entity.policydig.PolicyDig">
+	select * from search_view sv where 1=1
+	<if test="pd.keyword !=null and pd.keyword !=''">
+		and 
+		(
+			sv.title LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+			or
+			sv.province LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+			or
+			sv.city LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+			or
+			sv.area LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+		)
+	</if>
+	<if test="pd.sign !=null and pd.sign !=''">
+		and sv.sign=#{pd.sign}
+	</if>
+	order by sv.datetime desc
+</select>
+	
+	<select id="geelinkfindall" resultType="com.ht.commons.support.geelink.entity.GeelinkPolicyDig">
+		 select * from policydigs t where 1=1
+	</select>
+	
+	<select id="centerlist" parameterType="com.ht.commons.utils.MyPage" resultMap="PolicyDigResultMap">
+		select * from policydigs t where 1=1
+		<if test="pd.nature !=null and pd.nature !=''">
+			and t.nature=#{pd.nature}
+		</if>
+		<!-- 申报通知状态 apply==1申报中apply==0申报终止-->
+	    <if test="pd.apply!=null and pd.apply==1 and pd.nature==1">
+			and (#{pd.totalday} BETWEEN beginDate and endDate)
+		</if>
+		<if test="pd.apply!=null and pd.apply==0 and pd.nature==1">
+			and endDate &lt; #{pd.totalday}
+		</if>
+	</select>
+	<select id="appnewlist" parameterType="com.ht.commons.utils.MyPage" resultMap="PolicyDigResultMap">
+		select * from ${pd.sql} where 1=1
+		ORDER BY datetime desc
+	</select>
+</mapper>

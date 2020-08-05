@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+</head>
+
+<body>
+    <div th:fragment="copy">
+            <header>
+                <div class="title">
+                    <div class="tit_left">
+                        <span>
+                            <a href=""><s class="place"></s>广东</a>[切换城市]
+                        </span>
+                        <span>咨询热线：400-166-3308</span>
+                        <span><a target="_blank" href="/help/help/index">帮助中心</a></span>
+                    </div>
+                    <div class="tit_right">
+                        <a v-cloak v-if="code!=10000" target="_blank" href="/ht-biz/login/login"><s class="register_icon"></s>登录</a>
+                        <a v-cloak target="_blank" v-else-if="username!=null&&username!=''" href="/ht-biz/usercenter/user/index"><s
+                                class="register_icon"></s>{{username}}</a>
+                        <a v-if="code!=10000" target="_blank" href="/ht-biz/login/register">免费注册</a>
+                        <a v-if="code==10000" @click="quitRegister()" href="javascript:void(0);">退出</a>
+                        <a v-if="code==10000" target="_blank" href="/ht-biz/usercenter/user/index">个人云中心</a>
+                        <a target="_blank" href="/ht-biz/service/index/index">服务商入驻</a>
+                        <a target="_blank" class="xcx_h" href="">掌上政策通</a>
+                    </div>
+                </div>
+            </header>
+    </div>
+</body>
+
+</html>

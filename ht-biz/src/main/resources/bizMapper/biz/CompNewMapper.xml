@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.biz.mapper.CompNewMapper">
+	<select id="findlist" parameterType="com.ht.commons.utils.MyPage" resultType="com.ht.commons.utils.PageData">
+		select t.*,n.title as nhtitle from t_company_info_rz t
+		left JOIN t_newhight n on t.newhightid=n.id where 1=1
+		<if test="pd.keyword != null and pd.keyword != ''">
+			and 
+			(
+				t.companyname LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+				or 
+				t.number LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+				or
+			  	n.title LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+			)
+		</if>
+		<if test="pd.year != null and pd.year != ''">
+			and t.year LIKE CONCAT(CONCAT('%', #{pd.year}),'%')
+		</if>
+		<if test="pd.province != null and pd.province != ''">
+			and t.province LIKE CONCAT(CONCAT('%', #{pd.province}),'%')
+		</if>
+		<if test="pd.city != null and pd.city != ''">
+			and t.city LIKE CONCAT(CONCAT('%', #{pd.city}),'%')
+		</if>
+		<if test="pd.area != null and pd.area != ''">
+			and t.area LIKE CONCAT(CONCAT('%', #{pd.area}),'%')
+		</if>
+		ORDER BY t.year desc
+	</select>
+	<update id="editCompany" parameterType="com.ht.commons.utils.PageData">
+		update t_company_info_rz set 
+		companyname=#{companyname},
+		number=#{number},
+		remark=#{remark},
+		province=#{province},
+		city=#{city},
+		area=#{area},
+		year=#{year},
+		type=#{type}
+		where id=#{id}
+	</update>
+	<delete id="deleted" parameterType="java.lang.String">
+		delete from t_company_info_rz where id=#{id}
+	</delete>
+</mapper>

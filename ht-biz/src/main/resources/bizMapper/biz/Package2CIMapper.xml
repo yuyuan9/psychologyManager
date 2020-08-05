@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.biz.mapper.Package2CIMapper">
+	<select id="findByPackageId" parameterType="java.lang.String" resultType="com.ht.commons.utils.PageData">
+		select c.*,IFNULL(t.name,'--') name,
+				IFNULL(t.leadingPerson,'--') leadingPerson,
+				IFNULL(t.phone,'--') phone,
+				IFNULL(t.province,'--') province,
+				IFNULL(t.city,'--') city,
+				IFNULL(t.area,'--') area,
+				IFNULL(t.industry,'--') industry 
+				from t_customer_info t  
+        inner join t_package2_c_i c on t.id=c.ciId 
+        where c.packageId=#{packageId} 
+	</select>
+	<delete id="deleteByPackageId" parameterType="java.lang.String">
+		delete from t_package2_c_i where packageId=#{packageId}
+	</delete>
+	<select id="findByIdAndPackageId" parameterType="com.ht.entity.policydig.Package2CI" resultType="com.ht.entity.policydig.Package2CI">
+		select * from t_package2_c_i t where t.ciId=#{ciId} and t.packageId=#{packageId}
+	</select>
+</mapper>

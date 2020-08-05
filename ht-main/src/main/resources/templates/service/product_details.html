@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+     <!-- 公共头部 -->
+     <th:block th:include="block/headlink :: test('添加产品详情')" /> 
+     <!-- 结束 -->
+    <link rel="stylesheet" th:href="@{/statics/css/user/pagination.css}">
+    <link rel="stylesheet" th:href="@{/statics/css/service/index.css?v=0.0.2}">
+    <link rel="stylesheet" th:href="@{/statics/css/inquire/msgbox.css?v=0.0.2}">
+    <style>
+        .service_content>.service_details{
+            width: 973px;
+            height: 910px;
+            margin-left: 15px;
+            background-color: #fff;
+        }
+        .service_content>.service_list{
+            height: 910px;
+        }
+        .page-bar-ul{
+            left: 0;
+        }
+        .service_content {
+            margin-top: 10px;
+        }
+        .advantage_img>p>img{width: 100%;}
+    </style>
+</head>
+
+<body>
+    <div id="user">
+        <div th:replace="~{servive_nav::copy}"></div>
+    </div>
+    <div class="wrap" id="box">
+        <section>
+            <div class="service_content clearfix">
+                <div class="product_nav">
+                    当前位置：<a href="/ht-biz/service/index/product">产品管理</a>&nbsp;&gt;&nbsp;<a href="/">产品详情</a>
+                </div>
+                <div class="product_details1">
+                    <h2>产品详情
+                        <span v-cloak v-if="staut == 5" @click="getChange()">下线</span>
+                    </h2>
+                    <div class="service_box" >
+                        <div class="product_service service_info">
+                            <h3><i></i>服务信息</h3>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>产品名称</td>
+                                        <td>{{productname}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>产品类型</td>
+                                        <td>{{producttypeonename}}/{{producttypetwoname}}/{{producttypethreename}}</td>
+                                    </tr>
+                                    <tr v-if="isscience==true">
+                                        <td>产品级别</td>
+                                        <td >{{plevelname}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>产品所属区域</td>
+                                        <td>{{provice}}{{city}}{{area}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>产品价格</td>
+                                        <td>
+                                            <span v-if="pricetype == 1">{{price}}元</span>
+                                            <span v-if="pricetype == 2">{{price}}元 - {{pricetwo}}元</span>
+                                            <span v-if="pricetype == 3">面议</span>
+                                        </td>
+                                    </tr>
+                                    <tr v-if="isscience==false">
+                                        <td>完成时间</td>
+                                        <td>
+                                            <span>{{finishtime}}</span>
+                                        </td>
+                                    </tr>
+                                    <tr v-if="isscience==true">
+                                        <td>申报时间</td>
+                                        <td>
+                                            <span v-if="applytimetype == 1">{{begintime | date}}-{{endtime | date}}</span>
+                                            <span v-if="applytimetype == 2">全年申报</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div v-if="isscience==true" class="product_service product_info">
+                            <h3><i></i>产品信息</h3>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>申报对象</td>
+                                        <td>{{applyobject}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>支持方式</td>
+                                        <td>{{supportmode}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>主管部门</td>
+                                        <td>{{departmet}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>项目补助金额</td>
+                                        <td>{{subsidy}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div  v-if="isscience==true" class="product_service advantage">
+                            <h3><i></i>申报好处</h3>
+                            <div class="advantage_img" v-html="applybenefit">
+                            </div>
+                            <p></p>
+                        </div>
+                        <div  v-if="isscience==true" class="product_service advantage">
+                            <h3><i></i>产品介绍</h3>
+                            <div class="advantage_img" v-html="productinfo">
+                            </div>
+                            <p></p>
+                        </div>
+                         <div class="product_service advantage">
+                            <h3><i></i>服务内容</h3>
+                            <div class="advantage_img" v-html="servicecontent">
+                            </div>
+                            <p></p>
+                        </div>
+                        <div class="product_service other">
+                            <h3><i></i>其他</h3>
+                            <div class="other_img" v-html="other">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section v-cloak>
+            <!-- 产品下线提示 -->
+            <div v-cloak class="contract_mask" v-show="Stauts3"></div>
+            <div v-cloak class="read_over" v-show="Stauts3">
+                <div id="look" class="next_page next_page1" style="height: 263px;">
+                    <div class="table_top">
+                        <p>产品下线提示<i>(可在下线产品中编辑产品再上线)</i></p>
+                        <s class="fa close_login fr" @click="Stauts3=false"></s>
+                    </div>
+                    <div class="table_bottom ac middle_ipt" >
+                        <p style="margin-top: 40px;margin-bottom:40px">下线产品：{{productname}}</p>
+                    </div>
+                    <div class="table_bottom table_bottom_xian ac">
+                        <p>
+                            <a href="javascript:void(0)" class="use_honey buy_honey ac" @click="Stauts3=false">取消</a>
+                            <a href="javascript:void(0)" class="use_honey ac" @click="getUnderLine()">确认</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- 下线成功弹窗 -->
+        <div v-cloak class="submitaudit submitaudit1" v-show="auditframe">
+            <div class="submitAuditHeader clearfix">
+                <i @click="auditframe=false"></i>
+                <s></s>
+            </div>
+            <h3>下线成功</h3>
+        </div>
+        <footer>
+            <div class="copyright ac">
+                <p>COPYRIGHT © 版本归属 广州高企云信息科技有限公司 粤ICP备16007486号-1</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- 公共js部分 -->
+    <th:block th:include="block/footlink :: copy" /> 
+    <!-- over -->
+    <th:block th:include="block/service_each :: copy" />
+    <th:block th:include="block/statistics :: copy" />
+    <script type="text/javascript" th:src="@{/statics/js/service/product_details.js?v=0.0.5}"></script>
+    <script>
+        $(function(){
+            var timer=setTimeout(function(){
+                $(".advantage_img>p").children("img").attr("style","");
+            },500);
+        })
+    </script>
+</body>
+
+</html>

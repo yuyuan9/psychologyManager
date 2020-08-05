@@ -1,0 +1,558 @@
+    <!DOCTYPE html>
+    <html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>高企云-一站式高新技术企业培育平台</title>
+        <meta name="keywords" content="高企云,高企申报政策解读,高企申报,高企培育,高企认定,高新技术企业认定条件,高新技术企业认定,科技小巨人,高新企业税收优惠" />
+        <meta name="description" content="高企云服务平台是集培训、交易、服务一体的高企培育平台,为用户申报高新技术企业认定与培育提供在线评估、在线交易、过程管控、评估和管理以及全面的高新技术企业申报政策解读." />    
+        <!-- 公共头部 -->
+        <th:block th:include="block/headlink :: test('高企云')" /> 
+        <!-- 结束 -->
+        <link rel="stylesheet" th:href="@{/statics/css/index.css?v=0.1.2}">
+    </head>
+    <body>
+        <div id="library"></div>
+        <div id="box1"></div>
+        <div id="user">
+            <div th:replace="~{user_head::copy}"></div>
+        </div>
+
+        <div class="wrap" id="box">
+            <!-- 登录组件 -->
+            <mylogin :islogin="false" @close-login="isLogin=!false"></mylogin>
+            <!-- over -->
+            <!-- * 1 公共头部 -->
+            <div th:replace="~{header::copy}"></div>
+            <!-- * 2 轮播图-->
+            <div th:replace="~{commom::banner}"></div>
+            <!-- * 3 意见反馈-->
+            <section class="contain">
+                <div id="advise" v-cloak>
+                    <section class='fix-server'>
+                        <a class="qq" href="http://p.qiao.baidu.com/cps/chat?siteId=11406523&userId=20408321" title="高企云咨询" target="_blank">
+                            <div class="hotLine_zx">
+                                <i class='online_zx'></i>
+                                <div class="hot-number">
+                                    <span class='number-text'>服务热线：400-166-3308</span>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="QRCode">
+                            <i class='bg-img second'></i>
+                            <div class="QR-bg">
+                                <i class='QR-imgbg' style="padding-top: 5px;display: none;">
+                                    <img src="/statics/images/codeLogo.png" width="90px" height="90px" alt=""/>
+                                </i> 
+                                <span class='QR-text'>高企云微信二维码</span>
+                            </div>
+                        </div>
+                        <div class="suggestions" title="反馈意见" @click="tickling">
+                            <i class='bg-img third'></i>
+                            <div class="suggestbox" style="display: none;">
+                                <span class='suggest-text'>欢迎反馈意见和建议</span>
+                            </div>
+                        </div>
+                        <a href="javascript:void(0)" title="返回顶部" id="goTop" style="visibility: hidden;"><div class="toTop"><i class="bg-img fourth"></i></div></a>
+                    </section>
+                   
+                </div> 
+            </section>
+            <section>
+                <div id="ids1" style="display: none;">
+                    <h3>欢迎反馈意见和建议</h3>
+                    <textarea name="" id=""></textarea>
+                    <a class="btn0 " @click="submitBtn()">确定</a>
+                </div>
+            </section>
+
+            <!-- * 4 政策 立项查询-->
+            <section class="policy_wrap clearfix">
+                <div class="policy clearfix">
+                    <div class="search">
+                        <div class="search_head clearfix">
+                            <div class="search_box">
+                                <s class="search_icon"></s>
+                                <input v-cloak type="text" @keyup.enter="seachPolicy" placeholder="查政策输入政策名称    查立项输入企业名称或立项名称" v-model="keyword1">
+                                <!-- <input v-cloak type="text" v-show="curColor==1" @keyup.enter="seachProject" placeholder="查政策输入政策名称    查立项输入企业名称或立项名称" v-model="keyword2"> -->
+                            </div>
+                            <button class="b1"  @mouseover="curColor=0" :class="{active:curColor==0}" @click="seachPolicy">政策查询</button>
+                            <button class="b2"  @mouseover="curColor=1" :class="{active:curColor==1}" @click="seachProject">立项查询</button>
+                        </div>
+                        <div class="search_content clearfix">
+                            <div class="con_head">
+                                <p @mouseover="cur=0" :class="{active:cur==0}">申报通知<s></s></p>
+                                <p @mouseover="cur=1" :class="{active:cur==1}">公示名录<s></s></p>
+                                <p @mouseover="cur=2" :class="{active:cur==2}">政策解读<s></s></p>
+
+                                <!-- <a v-cloak v-show="cur==0" href="/ht-biz/policydig/index?isclaCation=1" class="icon_position">
+                                    <span class="gd"><i style="color: #4a5177;">更多</i>>></span>
+                                    <b class="icon_box"><em class="icon_animate"></em></b>
+                                </a>
+                                <a v-cloak v-show="cur==1" href="/ht-biz/policydig/index?isclaCation=3" class="icon_position">
+                                    <span class="gd"><i style="color: #4a5177;">更多</i>>></span>
+                                    <b class="icon_box"><em class="icon_animate"></em></b>
+                                </a>
+                                <a v-cloak v-show="cur==2" href="/ht-biz/library/index?curPolicy=4" class="icon_position">
+                                    <span class="gd"><i style="color: #4a5177;">更多</i>>></span>
+                                    <b class="icon_box"><em class="icon_animate"></em></b>
+                                </a> -->
+                            </div>
+                            <div class="con_body">
+                                <div v-cloak v-show="cur==0">
+                                    <p v-for="list in declareList">
+                                        <a :href="'/ht-biz/policydig/details?id='+list.id" target="_blank">
+                                            <s></s>{{list.title}}
+                                        </a><span>{{list.datetime|moment}}</span>
+                                    </p>
+                                </div>
+                                <div v-cloak v-show="cur==1">
+                                    <p v-for="list in publicityList">
+                                        <a :href="'/ht-biz/policydig/details?id='+list.id" target="_blank">
+                                            <s></s>{{list.title}}
+                                        </a><span>{{list.datetime|moment}}</span>
+                                    </p>
+                                </div>
+                                <div v-cloak v-show="cur==2">
+                                    <p v-for="list in policyList">
+                                        <a :href="'/ht-biz/library/findLibrayById?id='+list.id" target="_blank">
+                                            <s></s>{{list.title}}
+                                        </a><span>{{list.createdate|moment}}</span>
+                                    </p>
+                                </div>
+                                <div class="more_search">
+                                    <a v-cloak v-show="cur==0" href="/ht-biz/policydig/index?isclaCation=1" class="icon_position">
+                                        <span class="gd"><i style="color: #4a5177;">更多</i>>></span>
+                                        <b class="icon_box"><em class="icon_animate"></em></b>
+                                    </a>
+                                    <a v-cloak v-show="cur==1" href="/ht-biz/policydig/index?isclaCation=3" class="icon_position">
+                                        <span class="gd"><i style="color: #4a5177;">更多</i>>></span>
+                                        <b class="icon_box"><em class="icon_animate"></em></b>
+                                    </a>
+                                    <a v-cloak v-show="cur==2" href="/ht-biz/library/index?curPolicy=4" class="icon_position">
+                                        <span class="gd"><i style="color: #4a5177;">更多</i>>></span>
+                                        <b class="icon_box"><em class="icon_animate"></em></b>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="other">
+                        <div class="project clearfix">
+                            <div class="pro_l">
+                                <h2>高企在线评估规划</h2>
+                                <h3>精准测评，综合分析，科学布局</h3>
+                                <a href="/ht-biz/hisself/hisself_index">免费评估<s></s></a>
+                            </div>
+                            <div class="pro_r">
+                                <s></s>
+                                <em class="icon-server"></em>
+                            </div>
+                        </div>
+                        <div class="manage clearfix">
+                            <div class="m1" @click="handletips()">
+                                <a href="javascript:;">
+                                    <i></i>
+                                    <em class="icon-server1"></em>
+                                    <h2>项目申报管理</h2>
+                                    <p>申报进度，科学管理</p>
+                                </a>
+
+                            </div>
+                            <div class="m2" @click="handletips()">
+                                <a href="javascript:;">
+                                    <i></i>
+                                    <em class="icon-server2"></em>
+                                    <h2>元数据管理</h2>
+                                    <p>各类报表智能导出</p>
+                                </a>
+
+                            </div>
+                        </div>
+                        <div class="enter">
+                            <a href="/ht-biz/service/index/index">
+                                <h2>
+                                    服务商入驻 
+                                </h2>
+                                <p>诚邀您入驻，<br />共享科技创新服务大市场</p>
+                            </a>
+                        </div>
+                        <div class="professor" @click="handletips()">
+                            <a href="javascript:void(0);">
+                                <h2>
+                                    专家库 <s class="enter_icon"></s>
+                                </h2>
+                                <p>八大领域专家，深度专业咨询</p>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- * 5 创新服务产品推荐 -->
+            <section class="innovate_wrap clearfix">
+                <div class="innovate_tit clearfix">
+                    <h2><s class="icon_tiem"></s>创新服务产品推荐<span>优选服务商，严格审核服务商资质，打造健康高效的科技服务生态体系</span></h2>
+                </div>
+                <div class="innovate clearfix">
+                    <div style="clear: both;"></div>
+                    <div class="innovate_box clearfix">
+                        <div class="innovate1 fl">
+                            <h2>科技政策服务<a href="javascript:void(0);">进入专题></a></h2>
+                            <div class="fudao">
+                                <a href="javascript:void(0);">
+                                    <h3 class="fudao_tit">国家高新技术企业认定辅导</h3>
+                                    <p style="width: 211px;" class="fudao_p">国家级荣誉资质，税收优惠减免，政府财政补贴最高可达<i style="font-weight: bold;color: #ffe934;">100万</i></p>
+                                    <i style="margin-top: 15px;margin-left: 14px;" class="comein"></i>
+                                </a>
+                            </div>
+                            <div class="fudao_small clearfix">
+                                <div class="fudao1 fl">
+                                    <a href="javascript:void(0);">
+                                        <h3 style="padding-top:10px" class="fudao_tit wd">科技型中小企业评价辅导<i class="comein"></i></h3>
+                                        <p style="font-size: 12px;padding-top:10px" class="fudao_p">政府财政补贴</p>
+                                    </a>
+                                </div>
+                                <div class="fudao2 fl">
+                                    <a href="javascript:void(0);">
+                                        <h3 style="padding-top:10px" class="fudao_tit wd">工程中心认定辅导<i class="comein"></i></h3>
+                                        <p style="font-size: 12px;padding-top:10px" class="fudao_p">提升企业创新资质</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="fudao_bot">
+                                <p><a href="javascript:void(0);"><i class="fudao_bot_icon"></i>创新创业大赛辅导<s class="fudao_bot_s"></s></a></p>
+                                <p><a href="javascript:void(0);"><i class="fudao_bot_icon"></i>新型研发机构辅导<s class="fudao_bot_s"></s></a></p>
+                                <p><a href="javascript:void(0);"><i class="fudao_bot_icon"></i>高新技术产品认定辅导<s class="fudao_bot_s"></s></a></p>
+                                <p><a href="javascript:void(0);"><i class="fudao_bot_icon"></i>科技创新券申领辅导<s class="fudao_bot_s"></s></a></p>
+                            </div>
+                        </div>
+                        <div class="innovate2 fl">
+                            <h2>粒度化服务<i>服务模块化，解决企业创新难点</i><a href="javascript:void(0);">进入专题></a></h2>
+                            <div class="liduhua">
+                                <div class="liduhua_top">
+                                    <a href="javascript:void(0);">
+                                        <h3 class="fudao_tit">项目立项报告编写<i  style="margin-bottom: 2px;" class="comein"></i></h3>
+                                        <p style="padding-top: 5px;" class="fudao_p">专业项目人员，快速分析编写</p>
+                                    </a>
+                                </div>
+                                <div class="liduhua_low clearfix">
+                                    <p><a href="javascript:void(0);"><i class="fudao_bot_icon1"></i>可行性报告编写</a></p>
+                                    <p><a href="javascript:void(0);"><i class="fudao_bot_icon1"></i>商业计划书编写</a></p>
+                                    <p style="width: 150px;"><a href="javascript:void(0);"><i class="fudao_bot_icon1"></i>个性化制度文件编写</a></p>
+                                    <p><a href="javascript:void(0);"><i class="fudao_bot_icon1"></i>答辩PPT制作</a></p>
+                                    <p><a href="javascript:void(0);"><i class="fudao_bot_icon1"></i>高企统计报表填写</a></p>
+                                    <p style="width: 157px;"><a href="javascript:void(0);"><i class="fudao_bot_icon1"></i>科技项目（R&D）梳理</a></p>
+                                </div>
+                            </div>
+                            <div class="xian"></div>
+                            <h2>知识产权服务<i>优选知识产权服务商，更优选择</i><a href="javascript:void(0);">进入专题></a></h2>
+                            <div class="liduhua">
+                                <div class="liduhua_top2">
+                                    <a href="javascript:void(0);">
+                                        <h3 class="fudao_tit">专利常规服务<i style="margin-bottom: 2px;" class="comein"></i></h3>
+                                        <p style="padding-top: 5px;" class="fudao_p">保护产品专利，获得政府补贴</p>
+                                    </a>
+                                </div>
+                                <div class="liduhua_low clearfix">
+                                    <p><a href="javascript:void(0);"><i class="fudao_bot_icon1"></i>专利增值服务</a></p>
+                                    <p><a href="javascript:void(0);"><i class="fudao_bot_icon1"></i>版权服务</a></p>
+                                    <p><a href="javascript:void(0);"><i class="fudao_bot_icon1"></i>商标常规服务</a></p>
+                                    <p><a href="javascript:void(0);"><i class="fudao_bot_icon1"></i>商标增值服务</a></p>
+                                    <p><a href="javascript:void(0);"><i class="fudao_bot_icon1"></i>涉外商标</a></p>
+                                    <p><a href="javascript:void(0);"><i class="fudao_bot_icon1"></i>PCT申请</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="innovate3 fl">
+                            <h2>其他服务模块</h2>
+                            <div class="other_box box1">
+                                <div class="box-l">
+                                    <a href="javascript:void(0);">
+                                        <h2>
+                                            科技财税服务
+                                        </h2>
+                                        <p>进入专题></p>
+                                    </a>
+                                </div>
+                                <div class="box-r">
+                                    <p><a href="javascript:void(0);"><i class="fudao_bot_icon2"></i>税务代理和代理记账</a></p>
+                                    <p><a href="javascript:void(0);"><i class="fudao_bot_icon2"></i>财税顾问</a></p>
+                                    <p><a href="javascript:void(0);"><i class="fudao_bot_icon2"></i>资产评估</a></p>
+                                </div>
+                            </div>
+                            <div class="other_box box2">
+                                <div class="box-l">
+                                    <a href="javascript:void(0);">
+                                        <h2>人才双创服务</h2>
+                                        <p>进入专题></p>
+                                    </a>
+                                </div>
+                                <div class="box-r">
+                                    <p><a href="javascript:void(0);"><i class="fudao_bot_icon2"></i>人才引进与对接</a></p>
+                                    <p><a href="javascript:void(0);"><i class="fudao_bot_icon2"></i>人才评估与培育</a></p>
+                                    <p><a href="javascript:void(0);"><i class="fudao_bot_icon2"></i>人才政策咨询</a></p>
+                                </div>
+                            </div>
+                            <div class="other_box box3">
+                                <div class="box-l">
+                                    <a href="javascript:void(0);">
+                                        <h2>机构特色服务</h2>
+                                        <p>进入专题></p>
+                                    </a>
+                                </div>
+                                <div class="box-r">
+                                    <p><a href="javascript:void(0);"><i class="fudao_bot_icon2"></i>企业创新能力体检</a></p>
+                                    <p><a href="javascript:void(0);"><i class="fudao_bot_icon2"></i>财税小管家</a></p>
+                                    <p><a href="javascript:void(0);"><i class="fudao_bot_icon2"></i>高新技术企业托管</a></p>
+                                </div>
+                            </div>
+                            <div class="btn-a">
+                                <a href="javascript:void(0);">其他服务产品</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </section>
+            <!-- * 6 企业科技创新体系建设-->
+            <section class="system_wrap clearfix">
+                <div class="system">
+                    <h2><s class="icon_tiem"></s>企业科技创新体系建设</h2>
+                    <p>增强企业核心竞争力，助力区域创新能力提升<s class="icon_tiem_menu"></s></p>
+                    <div class="system_content clearfix">
+                        <div class="system_l">
+                            <div class="s1">
+                                科技财税管理体系
+                                <div class="round">
+                                    <div class="circle"></div>
+                                    <div class="circle_bottom animation "></div>
+                                    <div class="circle_bottom2 animation2 "></div>
+                                </div>
+                            </div>
+
+                            <div class="s2">研发团队管理体系
+                                <div class="round">
+                                    <div class="circle"></div>
+                                    <div class="circle_bottom animation "></div>
+                                    <div class="circle_bottom2 animation2 "></div>
+                                </div>
+                            </div>
+                            <div class="s3">科技成果管理体系
+                                <div class="round">
+                                    <div class="circle"></div>
+                                    <div class="circle_bottom animation "></div>
+                                    <div class="circle_bottom2 animation2 "></div>
+                                </div>
+                            </div>
+                            <div class="s4">科研立项管理体系
+                                <div class="round">
+                                    <div class="circle"></div>
+                                    <div class="circle_bottom animation "></div>
+                                    <div class="circle_bottom2 animation2 "></div>
+                                </div>
+                            </div>
+                            <div class="s5">知识产权管理体系
+                                <div class="round1">
+                                    <div class="circle"></div>
+                                    <div class="circle_bottom animation "></div>
+                                    <div class="circle_bottom2 animation2 "></div>
+                                </div>
+                            </div>
+                            <div class="s6">研发机构管理体系
+                                <div class="round1">
+                                    <div class="circle"></div>
+                                    <div class="circle_bottom animation "></div>
+                                    <div class="circle_bottom2 animation2 "></div>
+                                </div>
+                            </div>
+                            <div class="system_introduce">
+                                <h2>科技创新六大体系</h2>
+                                <p>全方位指导企业将科技创新提升到战略高度，发现企业科技创新中的短板，整合线下资源，把握行业发展趋势，制定规划，帮助企业建立以自身为主体、市场为导向、产学研相结合的创新体系，以提升核心竞争力和可持续发展。
+                                </p>
+                            </div>
+                        </div>
+                        <div class="system_r clearfix">
+                            <h2>企业体系化建设工具</h2>
+                            <p>以“科技创新六大体系”为导向，整合高企云线上线下资源，为企业提供定制化的创新工具</p>
+                            <img src="/statics/images/menu_icon2.jpg" alt="">
+                            <div class="system_details clearfix">
+                                <div>
+                                    <a target="_blank" href="http://g.hights.cn/beetl/sproject/index">了解详情<s class="system_details_icon"></s></a>
+                                    <h2>科研项目管理系统</h2>
+                                    <span>安全好用的数字化项目管控工具</span>
+                                    <p class="system_details_icon1"></p>
+                                </div>
+                                <div>
+                                    <a target="_blank" href="/ht-biz/inquire/physical/index">了解详情<s class="system_details_icon"></s></a>
+                                    <h2>创新能力体检诊疗系统</h2>
+                                    <span>专业的企业创新能力评估诊断工具</span>
+                                    <p class="system_details_icon2"></p>
+                                </div>
+                                <a href="http://p.qiao.baidu.com/cps/chat?siteId=11406523&userId=20408321" class="zixun clearfix">在线咨询我们</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- * 7 学习交流 -->
+            <!-- <section class="exchange_wrap clearfix">
+                <div class="exchange">
+                    <h2>学习交流</h2>
+                    <p>更加直观的视频指导，更加全面的互动交流</p>
+                    <div class="exchange_box clearfix">
+                        <div class="exchange1 clearfix">
+                            <h2><b>在线培训</b>·精品课程<a href="">查看更多>></a></h2>
+                            <div class="course clearfix">
+                                <div class="clearfix">
+                                    <a href="">
+                                        <p><img src="/statics/images/s1.jpg" alt=""></p>
+                                        <h3>高企申请材料准备之科技成果转化证明材料 第一节</h3>
+                                        <span>主讲人：孙老师</span>
+                                    </a>
+                                </div>
+                                <div class="clearfix">
+                                    <a href="">
+                                        <p><img src="/statics/images/s2.jpg" alt=""></p>
+                                        <h3>高企申请材料准备之科技成果转化证明材料 第一节</h3>
+                                        <span>主讲人：孙老师</span>
+                                    </a>
+                                </div>
+                                <div class="clearfix">
+                                    <a href="">
+                                        <p><img src="/statics/images/s3.jpg" alt=""></p>
+                                        <h3>高企申请材料准备之科技成果转化证明材料 第一节</h3>
+                                        <span>主讲人：孙老师</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="exchange2 clearfix">
+                            <h2>高企云社区<a href="">进入高企云社区></a></h2>
+                            <div class="community">
+                                <div>
+                                    <a href="">
+                                        <h2>中小企业创新专项项目提交资料是什么时候？</h2>
+                                        <p class="comment">
+                                            <span>九尺长剑</span>
+                                            <span>发表于 <i> 广东 / 广州 / 惠普政策</i></span>
+                                            <span><s class="comment_icon"></s>21</span>
+                                        </p>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <h2>中小企业创新专项项目提交资料是什么时候？</h2>
+                                        <p class="comment">
+                                            <span>九尺长剑</span>
+                                            <span>发表于 <i> 广东 / 广州 / 惠普政策</i></span>
+                                            <span><s class="comment_icon"></s>21</span>
+                                        </p>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <h2>中小企业创新专项项目提交资料是什么时候？</h2>
+                                        <p class="comment">
+                                            <span>九尺长剑</span>
+                                            <span>发表于 <i> 广东 / 广州 / 惠普政策</i></span>
+                                            <span><s class="comment_icon"></s>21</span>
+                                        </p>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <h2>中小企业创新专项项目提交资料是什么时候？</h2>
+                                        <p class="comment">
+                                            <span>九尺长剑</span>
+                                            <span>发表于 <i> 广东 / 广州 / 惠普政策</i></span>
+                                            <span><s class="comment_icon"></s>21</span>
+                                        </p>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <h2>中小企业创新专项项目提交资料是什么时候？</h2>
+                                        <p class="comment">
+                                            <span>九尺长剑</span>
+                                            <span>发表于 <i> 广东 / 广州 / 惠普政策</i></span>
+                                            <span><s class="comment_icon"></s>21</span>
+                                        </p>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <h2>中小企业创新专项项目提交资料是什么时候？</h2>
+                                        <p class="comment">
+                                            <span>九尺长剑</span>
+                                            <span>发表于 <i> 广东 / 广州 / 惠普政策</i></span>
+                                            <span><s class="comment_icon"></s>21</span>
+                                        </p>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <h2>中小企业创新专项项目提交资料是什么时候？</h2>
+                                        <p class="comment">
+                                            <span>九尺长剑</span>
+                                            <span>发表于 <i> 广东 / 广州 / 惠普政策</i></span>
+                                            <span><s class="comment_icon"></s>21</span>
+                                        </p>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <h2>中小企业创新专项项目提交资料是什么时候？</h2>
+                                        <p class="comment">
+                                            <span>九尺长剑</span>
+                                            <span>发表于 <i> 广东 / 广州 / 惠普政策</i></span>
+                                            <span><s class="comment_icon"></s>21</span>
+                                        </p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section> -->
+            <!--E=底部-->
+            <div th:replace="~{footer::copy}"></div>
+
+        </div>
+        <!-- 公共js部分 -->
+        <div th:replace="~{block/v4_index::copy}"></div>
+        <!-- over -->
+        <script type="text/javascript" th:src="@{/statics/js/component/mylogin.js?v=1.0.4}"></script>
+        <script type="text/javascript" th:src="@{/statics/js/index.js?v=0.1.1}"></script>
+        <script type="text/javascript" th:src="@{/statics/js/count.js?v=0.0.5}"></script>
+        <script type="text/javascript" th:src="@{/statics/js/morepolicy.js?v=0.1.0}"></script>
+        <script type="text/javascript" th:src="@{/statics/js/more1.js?v=0.1.0}"></script>
+        <script>
+            //点击启动轮播
+            $(".cityss>li>span").click(function(){$('.carousel').carousel({interval: 4000})})
+            $(".city-child>li>span").click(function(){$('.carousel').carousel({interval: 4000})})
+            //导航栏下拉框
+            $('.title_list>li').mouseover(function(e){
+                $('.title_list>li').removeClass('active');
+                $(this).addClass('active');
+                $(this).children().stop().siblings(".drop_down").animate({'top':'30px','opacity':'1',},200);
+            });
+            $('.title_list>li').mouseout(function(e){
+                $(this).children().stop().siblings(".drop_down").animate({'top':'-30px','opacity':'0'},200);
+            })
+            //微信二维码
+            $(".xcx_h").mouseover(function () {
+                $(".xcx").css({'visibility': 'visible'})
+            })
+            $(".xcx_h").mouseleave(function () {
+                $(".xcx").css({'visibility': 'visible'})
+            })
+            function techied() {
+                var timer = setTimeout(function () {
+                    $("#productServ option:first").prop("selected", 'selected');
+                    $("#guimo option:first").prop("selected", 'selected');
+                },1)
+            }
+        </script>
+        <th:block th:include="block/statistics :: copy" />
+    </body>
+
+    </html>

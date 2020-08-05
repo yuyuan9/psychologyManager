@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- 公共头部 -->
+    <th:block th:include="block/headlink :: test('服务商')" /> 
+    <!-- 结束 -->
+    <link rel="stylesheet" th:href="@{/statics/css/pick-pcc.min.1.0.1.css?v=0.0.1}">
+    <link rel="stylesheet" th:href="@{/statics/lib/jquery-city/css/thr-linkage.css?v=0.0.1}">
+    <link rel="stylesheet" th:href="@{/statics/css/footer.css?v=0.0.1}">
+    <link rel="stylesheet" th:href="@{/statics/css/service/index.css?v=0.0.3}">
+    <style>
+        .page_content{
+            background: #fff;
+        }
+        .pick-show{
+            padding-left: 12px!important;
+        }
+        .weizi>a{
+            color: #999999;
+        }
+        .ipt_r{line-height: 50px;}
+        footer .copyright{line-height: 25px;}
+    </style>
+</head>
+
+<body>
+    <!-- 头部 -->
+    <div id="user">
+        <div th:replace="~{user_head::copy}"></div>
+        <div th:replace="~{header::copy}"></div>
+    </div>
+    <!--  -->
+    <div class="wrap" id="box">
+        <section>
+            <div class="form_item clearfix">
+                <div class="form_tit">
+                    <h3 style="text-align: center;">服务商入驻</h3>
+                    <p class="clearfix">
+                        <span class="weizi fl">当前位置：<a href="/">首页</a> > <a href="/ht-biz/service/index/index">服务商入驻</a> > 信息编辑</span>
+                        <span>共创健康高效的科技服务生态体系和互动交易平台</span>
+                        <span class="fr">注册有问题，可在线咨询我们</span>
+                    </p>
+                </div>
+                <div class="form_content clearfix">
+                    <div class="form_box">
+                        <div class="form_tab clearfix">
+                            <p class="ipt_l fl"><i>*</i>入驻类型：</p>
+                            <p class="ipt_r fl">
+                                <span @click="type=1" :class="{active:type==1}">服务机构</span>
+                                <span @click="type=2" :class="{active:type==2}">个人</span>
+                            </p>
+                        </div>
+                        <div class="form_list code clearfix" v-show="type==1">
+                            <p class="ipt_l fl"><i>*</i>是否认证成为相关服务机构：</p>
+                            <p class="ipt_r fl">
+                                <label for="radio" @change="organizationCheck()">
+                                    <input type="radio" name="organization" value="1" id="organization1" v-model="organization">
+                                    <span>是<i>（需要在下方上传证明附件）</i></span>
+                                    <input type="radio" name="organization" value="0" id="organization2" v-model="organization">
+                                    <span>否</span>
+                                </label>
+                                <br/>
+                                <s class="radio-info">因各地政策差异，平台将创新劵服务机构、服务卷服务机构、中小企业公共服务平台统称为相关服务机构。</s>
+                            </p>
+                        </div>
+                        <div class="form_list code clearfix" v-show="type==1">
+                            <p class="ipt_l fl"><i>*</i>社会统一信用代码：</p>
+                            <p class="ipt_r fl">
+                                <input type="text" name="code" id="codeIpt" v-model="code"  placeholder="请输入公司的18位数字的社会统一信用代码">
+                            </p>
+                        </div>
+                        <!-- <div class="form_list type clearfix" v-show="type==1">
+                            <p class="ipt_l fl"><i>*</i>服务商类型：</p>
+                            <p class="ipt_r fl">
+                                <label for="typeA"><input type="checkbox"  value="1" id="typeA" v-model="serviceType1">全部</label>
+                                <label for="typeB"><input type="checkbox" name="manager" value="2" id="typeB" v-model="serviceType2">科技服务咨询</label>
+                                <label for="typeC"><input type="checkbox" name="manager" value="3" id="typeC" v-model="serviceType3">知识产权代理</label>
+                                <label for="typeD"><input type="checkbox" name="manager" value="4" id="typeD" v-model="serviceType4">会计事务所</label>
+                                <label for="typeE"><input type="checkbox" name="manager" value="5" id="typeE" v-model="serviceType5">其他</label>
+                            </p>
+                        </div> -->
+                        <div class="form_list name clearfix" v-show="type==1">
+                            <p class="ipt_l fl"><i>*</i>机构名称：</p>
+                            <p class="ipt_r fl">
+                                <input type="text" name="nameIpt" id="nameIpt" v-model="nameIpt" placeholder="请输入机构名称">
+                            </p>
+                        </div>
+                        <div class="form_list shopName clearfix" v-show="type==2">
+                            <p class="ipt_l fl"><i>*</i>真实名称：</p>
+                            <p class="ipt_r fl">
+                                <input type="text" name="netryname" v-model="netryname" id="netryname" placeholder="请输入真实名称">
+                            </p>
+                        </div>
+                        <div class="form_list shopName clearfix">
+                            <p class="ipt_l fl"><i>*</i>服务商铺名称：</p>
+                            <p class="ipt_r fl">
+                                <input type="text" name="shop" v-model="shopIpt" id="shopIpt" placeholder="请输入服务商铺名称">
+                            </p>
+                        </div>
+                        <div class="form_list address clearfix">
+                            <p class="ipt_l fl" v-show="type==1"><i>*</i>注册地址：</p>
+                            <p class="ipt_l fl" v-show="type==2"><i>*</i>常驻城市：</p>
+                            <p class="ipt_r fl">
+                                <a href="javascript:void(0)" class="pick-area pick-area4 fl" name="请选择省/请选择市/请选择区"></a>
+                                <!-- <input type="hidden" :value="usertown" class="pack-town"> -->
+                                <!-- <input type="text" placeholder="调用元素pick-area4，显示值的地方，方法在参数getVal中"> -->
+                               <br>
+                                <input type="text" name="detailed_address" v-model="detailed_address" id="detailed_address" placeholder="请输入详细地址" >
+                            </p>
+                        </div>
+                        
+                        <div class="form_list man clearfix">
+                            <p class="ipt_l fl"><i>*</i>联系人：</p>
+                            <p class="ipt_r fl">
+                                <input type="text" name="linkman" v-model="linkman" class="linkman" placeholder="请输入联系人名称">
+                            </p>
+                        </div>
+                        <div class="form_list phone clearfix">
+                            <p class="ipt_l fl"><i>*</i>手机号码：</p>
+                            <p class="ipt_r fl">
+                                <input type="text" name="phone" v-model="phone" placeholder="请输入联系人号码">
+                            </p>
+                        </div>
+                        <div class="form_list customer_service clearfix">
+                            <p class="ipt_l fl"><i>*</i>客服联系人：</p>
+                            <p class="ipt_r fl">
+                                <input type="text" name="customer" id="customerIpt" v-model="customerIpt" placeholder="请输入客服联系人">
+                            </p>
+                        </div>
+                        <div class="form_list qq clearfix">
+                            <p class="ipt_l fl"><i>*</i>客服QQ：</p>
+                            <p class="ipt_r fl">
+                                <input type="text" name="qq" class="qqIpt" v-model="qqIpt" placeholder="请输入客服QQ">
+                            </p>
+                        </div>
+                         <div class="form_list scope clearfix form-div" >
+                            <p class="ipt_l fl"><i>*</i>业务服务地区：</p>
+                            <p class="ipt_r fl">
+                                <input type="text" id="diqu" name="diqu" placeholder="请选择" style="width:290px;"/>
+                                <input type="button" value="选择" id="thisBind2"/>
+                            </p>
+                        </div> 
+                        <div class="form_list upload clearfix">
+                            <p class="ipt_l fl"><i>*</i>附件上传：</p>
+                            <div class="ipt_r fl">
+
+                                <div class="one stroe" v-show="type==1">
+                                    <div v-if="originalfile1 == ''" class="upload_btn1 fl"></div>
+                                    <div v-else class="upload_img fl">
+                                        <img :src="'http://47.92.70.12:9090' + originalfile1" alt="">
+                                    </div>
+                                    <input type="file" name="file" class="file_ipt1 fl" id="file1" @change="tirggerFile($event,'file1')">
+                                    <div class="upload_tit">
+                                        <h3><i>*</i>企业营业执照</h3>
+                                        <p>支持JPG、PNG、文件小于5M，请确保图片清晰</p>
+                                    </div>
+                                </div>
+                                <div v-show="fileName1 != ''" v-cloak class="one_path">
+                                    <p v-if="type==1">{{fileName1}}<i @click="fileName1='';originalfile1='';clearIpt1();">删除</i></p>
+                                </div>
+
+
+                                <div class="two stroe">
+                                    <div v-if="originalfile2 == ''" class="upload_btn1 fl" ></div>
+                                    <div v-else class="upload_img fl">
+                                        <img :src="'http://47.92.70.12:9090' + originalfile2" alt="">
+                                    </div>
+                                    <input type="file" name="file" class="file_ipt2 fl" id="file2" @change="tirggerFile($event,'file2')">
+                                    <div class="upload_tit">
+                                        <h3><i>*</i>联系人身份证正面</h3>
+                                        <p>支持JPG、PNG、文件小于5M，请确保图片清晰</p>
+                                    </div>
+                                </div>
+                                <div v-cloak class="two_path" v-show="fileName2 != ''">
+                                    <p>{{fileName2}}<i @click="fileName2='';originalfile2='';clearIpt2();">删除</i></p>
+                                </div>
+
+                                <div class="three stroe">
+                                    <div v-if="originalfile3 == ''" class="upload_btn1 fl" ></div>
+                                    <div v-else class="upload_img fl">
+                                        <img :src="'http://47.92.70.12:9090' + originalfile3" alt="">
+                                    </div>
+                                    <input type="file" name="file" class="file_ipt3 fl" id="file3" @change="tirggerFile($event,'file3')">
+                                    <div class="upload_tit">
+                                        <h3><i>*</i>联系人身份证反面</h3>
+                                        <p>支持JPG、PNG、文件小于5M，请确保图片清晰</p>
+                                    </div>
+                                </div>
+                                <div v-cloak class="three_path" v-show="fileName3 != ''">
+                                    <p>{{fileName3}}<i @click="fileName3='';originalfile3='';clearIpt3();">删除</i></p>
+                                </div>
+
+                                <div class="four stroe" v-if="organization == 1&&type==1">
+                                    <div v-if="originalfile4 == ''" class="upload_btn1 fl" ></div>
+                                    <div v-else class="upload_img fl">
+                                        <img :src="'http://47.92.70.12:9090' + originalfile4" alt="">
+                                    </div>
+                                    <input type="file" name="file" class="file_ipt4 fl" id="file4" @change="tirggerFile($event,'file4')">
+                                    <div class="upload_tit">
+                                        <h3><i>*</i>请上传认定创新劵/服务卷服务机构相关材料证明</h3>
+                                        <p>支持JPG、PNG、文件小于5M，请确保图片清晰</p>
+                                    </div>
+                                </div>
+                                <div v-cloak class="four_path" v-show="fileName4 != '' && organization == 1&&type==1">
+                                    <p>{{fileName4}}<i @click="fileName4='';originalfile4='';clearIpt4();">删除</i></p>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form_list agreeIpt">
+                            <input type="checkbox"  v-model="isProtocol" v-on:click="protocol" id="agree" name="agree"><span>我已同意并阅读<a href="#">高企云协议</a></span>
+                        </div>
+                        <div class="form_list submitBtn clearfix">                  
+                            <!-- <input type="button" class="bc" value="保存"  @click="settled(1)">          -->
+                            <input type="button" class="tj" id="submitReg" @click="settled(2)" value="提交信息">
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+        <section class="service_info0" style="display: none;">
+            <div class="pop-up">
+                <div class="pop_l fl">
+                    <i></i>
+                </div>
+                <div class="pop_r fl">
+                    <i @click="closeicon0" class="close_icon"></i>
+                    <h3>您的资料已提交保存</h3>
+                </div>
+            </div>
+        </section>
+        <section class="service_info1">
+            <div class="pop-up">
+                <div class="pop_l fl">
+                    <i></i>
+                </div>
+                <div class="pop_r fl">
+                    <i @click="closeicon4" class="close_icon"></i>
+                    <h3>您的资料已提交成功，请耐心等待审核</h3>
+                    <p>平台将在3个工作日内审核您的入驻资料，并在“个人云中心-消息提醒”中更新审核进度，感谢您对高企云的信任与主持！</p>
+                </div>
+            </div>
+        </section>
+        <section class="service_info2">
+            <div class="pop-up2">
+                <div class="pop_l fl">
+                    <i></i>
+                </div>
+                <div class="pop_r fl">
+                    <i @click="closeicon1" class="close_icon"></i>
+                    <h3>已注册成功，等待管理员审核</h3>
+                    <p>平台将在3个工作日内审核您的入驻资料，并在“个人云中心-消息提醒”中更新审核进度，感谢您对高企云的信任与主持！</p>
+                </div>
+            </div>
+        </section>
+        <section class="service_info3">
+            <div class="pop-up2">
+                <div class="pop_l fl">
+                    <i></i>
+                </div>
+                <div class="pop_r fl">
+                    <i @click="closeicon2" class="close_icon"></i>
+                    <h3 style="margin-left: 50px;">您已保存成功，点击回显</h3>
+                    <input type="button" value="回显" class="back" @click="backMessages">
+                </div>
+            </div>
+        </section>
+        <section class="service_info4">
+            <div class="pop-up2">
+                <div class="pop_l fl">
+                    <i class="fail_icon"></i>
+                </div>
+                <div class="pop_r fl">
+                    <i @click="closeicon3" class="close_icon"></i>
+                    <h3>入驻服务商失败，请修改。</h3>
+                    <p>拒绝原因：{{reason}}</p>
+                    <input type="button" value="回显表单" class="back1" @click="backMessages">
+                </div>
+            </div>
+        </section>
+        <!--E=底部-->
+        <footer>
+            <div class="copyright ac"><p>COPYRIGHT © 版本归属 广州高企云信息科技有限公司 粤ICP备16007486号-1</p></div>
+        </footer>
+        
+    </div>
+    <!-- 公共js部分 -->
+    <th:block th:include="block/footlink :: copy" /> 
+    <!-- over -->
+    <script type="text/javascript" th:src="@{/statics/js/pick-pcc.min.1.0.1.js?v=0.2.5}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/service/service_input.js?v=0.1.8}"></script>
+    <script type="text/javascript" th:src="@{/statics/lib/jquery-city/js/thr-linkage-1.0.js?v=0.1.10}"></script>
+	<script type="text/javascript" th:src="@{/statics/lib/jquery-city/js/areaData1.js?v=0.0.2}"></script>
+    <th:block th:include="block/service_each :: copy" />
+    
+    <script type="text/javascript">
+    $(function () {
+        var thisThr1 = $.linkAgeInit({
+            shade:0.4,
+            dataIndex:3,
+            dataModel:'data',
+            dataSource:app_area_data,
+            showSelectHtml:'<li data-id="{code}" data-route="{route}" class="">{area}</li>',
+            showCheckHtml:'<dd data-id="{code}" data-route="{route}" class="{_on_}">{area}</dd>',
+            dataOnePid:1,
+            dataIdKey:'code',
+            closeCallBack:function (data) {
+                console.log('你点击了关闭！' , data);
+            },
+            confirmCallBack:function (data) {
+                console.log('你点击了确定！' , data);
+            }
+        });
+
+        var thisThr2 = $.linkAgeInit({
+            shade:0.4,
+            dataIndex:2,
+            dataModel:'data',
+            dataSource:app_area_data,
+            showSelectHtml:'<li data-id="{code}" data-route="{route}" class="">{area}</li>',
+            showCheckHtml:'<dd data-id="{code}" data-route="{route}" class="{_on_}">{area}</dd>',
+            dataOnePid:1,
+            dataIdKey:'code',
+            closeCallBack:function (data) {
+                console.log('你点击了关闭！' , data);
+            },
+            confirmCallBack:function (data) {
+                var v = '';
+                for(i=0;i<data.length;i++){
+                    v=v+data[i].name+";";
+                }
+                $("#diqu").val(v);
+                console.log('你点击了确定！' , data);
+            }
+        });
+
+        $("#thisBind1").click(function () {
+            thisThr1.open('.form-div');
+        })
+        $("#thisBind2").click(function () {
+            
+            thisThr2.open('.form-div');
+        })
+        $("#thisBind3").click(function () {
+            thisThr1.set([
+                {id:442001001,name:'石岐区街道'},
+                {id:442001006,name:'五桂山街道'},
+                {id:442001004,name:'西区街道'}
+            ]);
+            thisThr1.open('.form-div');
+        })
+    })
+    </script>
+    <th:block th:include="block/statistics :: copy" />
+</body>
+
+</html>

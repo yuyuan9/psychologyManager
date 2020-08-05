@@ -1,0 +1,190 @@
+.app_login {
+    width: 100%;
+    height: 100vh;
+    background-color: #ffffff;
+}
+.l-r {
+    background-color: #f6f6f6;
+}
+.dib {
+    display: inline-block;
+}
+.w {
+    padding: 5.3333vw 4.2667vw 0vw 4.2667vw;
+}
+.login {
+    width: 100%;
+    height: 19.3333vw;
+    background: url("../../images/login/login_bg.png") no-repeat;
+    background-size: 100% 100%;
+}
+.to_q {
+    width: 2.1333vw;
+    height: 4vw;
+    background: url("../../images/yidong_icons/phone_icons.png") -32.2667vw -12.8333vw no-repeat;
+    background-size: 40vw 40vw;
+    margin-right: 2.1333vw;
+    /* vertical-align: middle; */
+}
+.login_tip {
+    font-size: 4.2667vw;
+    color: #ffffff;
+    margin-bottom: 3.2vw;
+}
+.register {
+    height: 13.0667vw;
+    line-height: 4vw;
+    background-color: #ffffff;
+    border-radius: 0.5333vw;
+    box-shadow:0px 10px 40px 0px rgba(70,70,70,0.08);
+}
+.tab {
+    width: 17.6vw;
+    font-size: 4.8vw;
+    color: #40485A;
+    text-align: center;
+}
+.tab-1 {
+    margin-left: 14.1333vw;
+    margin-right: 23.6667vw;
+    padding-top: 4.2667vw;
+    padding-bottom: 4.2667vw;
+}
+.tab-2 {
+    margin-right: 18.1333vw;
+    padding-top: 4.2667vw;
+    padding-bottom: 4.2667vw;
+}
+.active {
+    border-bottom: 0.8vw solid #4B88F8;
+    color: #417FF8;
+}
+.login-info {
+    font-size: 3.7333vw;
+    margin-top: 2.6667vw;
+    padding: 0;
+    background-color: #ffffff;
+}
+.phone>input {
+    color: #40485A;
+    font-size: 3.7333vw;
+}
+.login-title {
+    font-size: 3.7333vw;
+}
+.phone>input::-webkit-input-placeholder { 
+    color: #C1C1C1;
+} 
+.phone>input::-moz-placeholder { 
+    color: #C1C1C1;
+} 
+.phone>input:-ms-input-placeholder { 
+    color: #C1C1C1;
+}
+.login-icon {
+    display: inline-block;
+    color: #EA4040;
+    vertical-align: middle;
+}
+.login-title {
+    margin-right: 4.2667vw;
+}
+.phone {
+    height: 18.1333vw;
+    line-height: 22.9333vw;
+    /* padding: 0 4.2667vw; */
+    border-bottom: 0.13vw solid #DFE3EF;
+    margin: 0 4.2667vw;
+}
+.r_btn {
+    width: 91.4667vw;
+    height: 11.7333vw;
+    color: #ffffff;
+    font-size: 4.8vw;
+    text-align: center;
+    background-color: #4D89F8;
+    margin: 16vw 0 6.9333vw 4.2667vw;
+    border-radius: 1.3333vw;
+}
+.r_img {
+    width: 21.3333vw;
+    height: 8.5333vw;
+    margin-top: 6.9333vw;
+    background-color: #e3e2f0;
+}
+.r_code {
+    font-size: 3.7333vw;
+    color: #4B87F8;
+    background-color: #ffffff;
+}
+.psw {
+    display: block;
+    width: 4.8vw;
+    height: 2.6667vw;
+    margin-top: 10.8667vw;
+    background: url("../../images/yidong_icons/phone_icons.png") -1.9667vw -29.7333vw no-repeat;
+    background-size: 40vw 40vw;
+}
+.forget {
+    text-align: center;
+    margin-bottom: 10vw;
+}
+.forget>a {
+    color: #4d89f8;
+    font-size: 3.7333vw;
+}
+.reset {
+    background-color: #ffffff;
+}
+.reset_tip {
+    font-size: 3.7333vw;
+    color: #333333;
+    background-color: #ffffff;
+}
+.to_login {
+    width: 1.6vw;
+    height: 3.2vw;
+    background: url("../../images/yidong_icons/phone_icons.png") -35.8667vw -13.8vw no-repeat;
+    background-size: 40vw 40vw;
+    vertical-align: middle;
+    vertical-align: middle;
+    margin-right: 3.2vw;
+}
+.reset_s {
+    width: 12.8vw;
+    height: 12.8vw;
+    /* line-height: 5.8vw; */
+    background: url("../../images/yidong_icons/phone_icons.png") -20.1333vw -13.6vw no-repeat;
+    /* margin: 0 0 4.2667vw 26.6667vw; */
+    margin: 0.4667vw 0 0 26.6667vw;
+    /* padding-top: 7.4667vw; */
+}
+.reset_ts {
+    color: #4d8af8;
+    font-size: 3.7333vw;
+    text-align: center;
+    margin-bottom: 7.7333vw;
+}
+.reser_main {
+    width: 64.5333vw;
+    height: 48vw;
+    background-color: #ffffff;
+    margin: 0 auto;
+    position: fixed;
+    top: 56.2667vw;
+    left: 17.8vw;
+}
+.dl {
+    height: 13.3333vw;
+    line-height: 13.3333vw;
+    width: 100%;
+    background-color: #4d8af8;
+}
+.dl>a {
+    font-size: 3.7333vw;
+    color: #ffffff;
+    padding-left: 24vw;
+}
+.img_verify {
+    /* margin-right: 1.5333vw; */
+}

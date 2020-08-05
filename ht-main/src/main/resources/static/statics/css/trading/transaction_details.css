@@ -1,0 +1,463 @@
+.w{
+    width: 1200px;
+    margin: 0 auto;
+}
+.x {
+    border: 1px solid #DBDBDB;
+}
+.dib {
+    display: inline-block;
+}
+.current {
+    font-size: 12px;
+    margin: 16px 0;
+}
+.current>span {
+    color: #999999;
+}
+.current>span>a {
+    color: #666666;
+}
+.rending {
+    height:486px;
+    background-color: #ffffff;
+    margin-bottom: 12px;
+}
+.status_t {
+    margin-bottom: 30px;
+}
+.status {
+    width: 900px;
+    height:486px;
+    padding: 50px 50px 36px 50px;
+    border-right: 1px solid #DBDBDB;
+}
+.status_n {
+    color: #333333;
+    font-size: 24px;
+}
+.b_t {
+    width:4px;
+    height:20px;
+    background-color: #FF5B35;
+    margin-right: 14px;
+}
+.service_M {
+    width: 793px;
+    height: 52px;
+    line-height: 52px;
+    margin-bottom: 16px;
+    background-color: #FEF7F2;
+}
+.service_p {
+    color: #999999;
+    font-size: 14px;
+    padding-left: 36px;
+}
+.price {
+    font-size: 22px;
+    color: #FF5B35;
+    font-weight: bold;
+}
+.unit {
+    font-size: 14px;
+    color: #FF5B35;
+}
+.time {
+    font-size: 14px;
+    margin-left: 36px;
+}
+.time_n {
+    color: #999999;
+}
+.time_t {
+    color: #333333;
+    margin-right: 20px;
+}
+.jiezhi {
+    padding: 4px;
+    background-color: #18c18d;
+    color: #ffffff;
+}
+.area {
+    font-size: 14px;
+    margin-top: 30px;
+    margin-left: 8px;
+}
+.purchased {
+    font-size: 14px;
+    margin: 42px 0 18px 0;
+}
+.add {
+    width:180px;
+    height:36px;
+    line-height: 36px;
+    text-align: center;
+    color: #FF4C2C;
+    border: 1px solid #FF4C2C;
+    border-radius:4px;
+    margin: 0 8px 0 20px;
+    cursor: pointer;
+}
+.add_icon {
+    width:18px;
+    height:16px;
+    margin-right: 8px;
+    background: url("../../images/trading/details_ioncs1.png") -166px -45px no-repeat;
+}
+.orders {
+    padding: 9px 60px;
+    background:linear-gradient(90deg,rgba(255,74,43,1),rgba(255,125,74,1));
+    border-radius:4px;
+    color: #ffffff;
+    cursor: pointer;
+}
+.tips {
+    font-size: 12px;
+    color: #999999;
+    margin-left: 20px;
+}
+.d_line {
+    border-bottom: 1px dashed #DBDBDB;
+    padding: 15px 0;
+}
+.c_items {
+    width: 260px;
+    color: #999999;
+    margin-top: 30px;
+}
+.c_icons {
+    width:30px;
+    height:32px;
+    margin-right: 18px;
+    margin-top: 8px;
+    margin-left: 4px;
+}
+.c_icons1 {
+    background: url("../../images/trading/details_ioncs1.png") -48px -35px no-repeat;
+}
+.c_icons2 {
+    background: url("../../images/trading/details_ioncs1.png") -86px -35px no-repeat;
+}
+.c_icons3 {
+    background: url("../../images/trading/details_ioncs1.png") -128px -35px no-repeat;
+}
+.certificate {
+    font-size: 16px;
+}
+.cer_tips {
+    font-size: 12px;
+    margin-top: 6px;
+}
+.company {
+    width:298px;
+    height:165px;
+    border-bottom: 1px solid #DBDBDB;
+    background: url("../../images/trading/com_bg.jpg");
+}
+.locat_icon {
+    width:10px;
+    height:12px;
+    margin-right: 8px;
+    background: url("../../images/trading/details_ioncs1.png") -123px -9px no-repeat;
+}
+.zhang {
+    width:76px;
+    height:18px;
+    margin-left: 14px;
+    background: url("../../images/trading/details_ioncs1.png") -10px -6px no-repeat;
+}
+.jian {
+    width:14px;
+    height:14px;
+    margin-left: 4px;
+    background: url("../../images/trading/details_ioncs1.png") -101px -8px no-repeat;
+}
+.locat_icon,.zhang,.jian {
+    vertical-align: middle;
+}
+.c_head {
+    padding: 40px 12px 10px 16px;
+}
+.c_head>a>img{
+    width: 77px;
+    height: 77px;
+}
+.company_n {
+    width: 165px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size:18px;
+    padding-top: 54px;
+    color: #333333;
+    margin-bottom: 8px;
+}
+.moneytest{
+    display: inline-block;
+    width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+.levels {
+    margin-left: 16px;
+}
+.level,.mark,.classfy {
+    font-size: 12px;
+    color: #333333;
+}
+.mark,.level {
+    margin-right: 5px;
+}
+.marks {
+    color: #FF502F;
+}
+.level_i {
+    width:12px;
+    height:12px;
+    background: url("../../images/trading/details_ioncs1.png") -160px -8px no-repeat;
+}
+.contacts {
+    width:298px;
+    height: 104px;
+    text-align: center;
+    border-bottom: 1px solid #DBDBDB;
+}
+.customer {
+    margin: 24px 0 14px 0;
+    color: #FF4C2C;
+}
+.qq {
+    width:180px;
+    height:36px;
+    line-height: 36px;
+    background:linear-gradient(90deg,rgba(255,74,43,1),rgba(255,125,74,1));
+    border-radius:4px;
+    color: #ffffff;
+    margin: 0 auto;
+}
+.qq_icon {
+    width:12px;
+    height:14px;
+    margin-right: 8px;
+    background: url("../../images/trading/details_ioncs1.png") -138px -9px no-repeat;
+}
+.brief {
+    width:298px;
+    padding: 36px 25px 32px 37px; 
+}
+.c_brief {
+    font-size: 16px;
+    color: #666666;
+    margin-bottom: 18px;
+}
+.c_brief1 {
+    font-size: 12px;
+    line-height: 20px;
+    color: #333333;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display:-webkit-box; 
+    -webkit-box-orient:vertical; 
+    -webkit-line-clamp:5; 
+}
+.service_l {
+    width: 890px;
+    padding: 50px 36px 90px 52px;
+    background-color: #ffffff;
+}
+.bk {
+    border: 1px solid #DBDBDB;
+}
+.service_info {
+    /* height: 312px; */
+}
+.info_l {
+    /* height: 312px; */
+    width: 160px;
+    background-color: #5D8CEC;
+    text-align: center;
+}
+.info_l>p {
+    height: 52px;
+    line-height: 52px;
+    color: #ffffff;
+}
+.info_r>p {
+    width: 640px;
+    height: 52px;
+    line-height: 52px;
+    color: #333333;
+    padding-left: 64px;
+    border-bottom: 1px solid #F2F5F4;
+}
+.sv_t {
+    font-size:18px;
+    color: #333333;
+    margin-bottom: 14px;
+    font-weight: Bold;
+}
+.sv_icon {
+    width:9px;
+    height:9px;
+    margin-right: 14px;
+    background-color: #FB6A53;
+}
+.product_info {
+    height: 204px;
+}
+.product_l {
+    height: 204px;
+}
+.pd_icon {
+    margin-top: 38px;
+}
+.sv_img {
+    width: 800px;
+}
+.sv_tips {
+    /* padding-left: 32px; */
+    margin: 32px 0 30px 0;
+}
+.sv_tips1 {
+    /* padding-left: 70px; */
+    /* padding-top: 40px; */
+    width:800px;
+    /* height:150px; */
+    /* border: 1px solid #CEE9E9; */
+    /* background: url("../../images/trading/other_bg.jpg"); */
+}
+.sv_tips>p {
+    color: #303C3C;
+    font-size: 14px;
+    line-height: 24px;
+}
+.service_r {
+    width: 300px;
+    background-color: #ffffff;
+}
+.sv_logo {
+    height: 90px;
+    border-bottom: 1px solid #EAEEED;
+}
+.logo {
+    width:220px;
+    height:68px;
+    margin: 14px 0 0 24px;
+    background: url("../../images/trading/details_ioncs1.png") -7px -77px no-repeat;
+}
+.sv_pt {
+    height: 146px;
+    padding: 26px 24px;
+    border-bottom: 1px solid #EAEEED;
+}
+.sv_pt_t {
+    width: 252px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 16px;
+    color: #333333;
+    margin-bottom: 11px;
+}
+.sv_pts {
+    font-size: 12px;
+    margin-bottom: 28px;
+    width: 275px;
+}
+.sdb {
+    padding: 4px 8px;
+    color: #ffffff;
+    background-color: #18C18D;
+    margin-right: 3px;
+}
+.c_i {
+    width:1px;
+    height:12px;
+    background-color: #DBDBDB;
+    vertical-align: middle;
+    margin: 0 7px 0 8px;
+}
+.payment {
+    color: #FF4A2C;
+}
+.money {
+    font-size: 18px;
+    color: #FF4B2C;
+}
+.xq {
+    font-size: 12px;
+    color: #ffffff;
+    padding: 6px 9px;
+    background:linear-gradient(90deg,rgba(255,74,43,1),rgba(255,125,74,1));
+    border-radius:2px;
+    cursor: pointer;
+}
+.xq>a{
+    color: #fff;
+}
+.ts_bg {
+    margin-bottom: 56px;
+}
+.info_l1 {
+    height: 256px;
+}
+ /* 弹框 */
+.submitaudit {width:340px;height:230px;z-index:999;position: fixed;top:27%;left: 50%;margin-left:-170px;cursor: pointer;
+    -moz-box-shadow: 10px 10px 15px #888888; 
+box-shadow: 10px 10px 15px #888888;
+    /* display: none; */
+    background:#fff;
+}
+.submitaudit1 {
+    width:340px;height:230px;z-index:999;position: fixed;top:27%;left: 50%;margin-left:-170px;cursor: pointer;
+    -moz-box-shadow: 10px 10px 15px #888888; 
+box-shadow: 10px 10px 15px #888888;
+    /* display: none; */
+    background:#fff;
+}
+.submitaudit>h3{
+    width: 100%;
+    background: #fff;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 0;
+}
+.submitAuditHeader {width:340px;height:158px;background:#fff;position:relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+.submitAuditHeader i {width:18px;height:18px;display:inline-block;background:url("../../images/register_icon.png")-42px -3px;vertical-align:middle;position:absolute;top:4px;right:4px;cursor:pointer;}
+.submitAuditHeader s {margin-top:15px;width:165px;height:131px;display:inline-block;background:url("../../images/user/user_coin.png");vertical-align:middle;float: left;padding: 18px;box-sizing: border-box;margin-left: 23px;}
+.submitAuditHeader h3 {font-size:16px;color:#333333;float: left;margin-top: 20px;}
+.submitAuditHeader h3 {font-size:14px;color:#999999;margin-top: 5px;}
+/* ----------- */
+#submitRegs{
+    display: inline-block;
+    width: 125px;
+    height: 35px;
+    line-height: 35px;
+    background: #fff;
+    cursor: pointer;
+    color: #ff4c2c;
+    border: 1px solid #ff4c2c;
+    font-size: 16px;
+    margin: 10px 25px;
+    border-radius: 4px;
+}
+#submitRegs:hover {
+    background: -webkit-linear-gradient(left, #ff7d4a, #ff4a2b);
+    background: -o-linear-gradient(left, #ff7d4a, #ff4a2b);
+    background: -moz-linear-gradient(left, #ff7d4a, #ff4a2b);
+    background: linear-gradient(left, #ff7d4a, #ff4a2b);
+    color: #fff;
+}
+.sv_tips>p>img{width: 100%;}
+.time_nm{
+    color: #fff;
+}

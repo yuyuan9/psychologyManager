@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.biz.mapper.MainRosterMapper">
+
+
+<!-- 后台接口-->
+    <select id="sysfindallmainroster"    parameterType="com.ht.commons.utils.MyPage" resultType="com.ht.commons.utils.PageData">
+        select  * from t_smalltech_mainroster  where 1=1
+        <if test="pd.province != null and pd.province !=''">
+            and province LIKE CONCAT(CONCAT('%', #{pd.province}),'%')
+        </if>
+        <if test=" pd.year!=null and pd.year !='' ">
+            and year LIKE CONCAT(CONCAT('%', #{pd.year}),'%')
+        </if>
+        <if test="pd.type != null and pd.type !=''">
+            and type LIKE CONCAT(CONCAT('%', #{pd.type}),'%')
+        </if>
+        <if test="pd.batch != null and pd.batch !=''">
+            and batch LIKE CONCAT(CONCAT('%', #{pd.batch}),'%')
+        </if>
+    </select>
+
+</mapper>

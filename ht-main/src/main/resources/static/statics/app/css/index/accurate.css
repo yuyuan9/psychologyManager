@@ -1,0 +1,114 @@
+.app_accurate {
+    width: 100%;
+    height: 100vh;
+    background-color: #ffffff;
+}
+.accurates_bg {
+    width: 100%;
+    height: 26.1333vw;
+    background: url("../../images/login/login_bg.png") no-repeat;
+    background-size: 100% 100%;
+}
+.intellitg {
+    padding: 5.3333vw 4.2667vw 0 4.2667vw;
+    margin-bottom: 3.2vw;
+}
+.to_intelligent {
+    width: 2.1333vw;
+    height: 6vw;
+    background: url("../../images/yidong_icons/phone_icons.png") -32.2667vw -13.1333vw no-repeat;
+    background-size: 40vw 40vw;
+    margin-right: 2.1333vw;
+    vertical-align: middle;
+}
+.intelligent {
+    font-size: 4.2667vw;
+    color: #ffffff;
+    margin-right: 2.6667vw;
+}
+.rapid {
+    font-size: 2.6667vw;
+    color: #DBE7FD;
+}
+.matching {
+    width: 91.4667vw;
+    height: 13.0667vw;
+    margin: 0 auto;
+    display: flex;
+    background-color: #ffffff;
+    box-shadow:0px 10px 40px 0px rgba(70,70,70,0.08);
+}
+.initial,.exact {
+    font-size: 4.8vw;
+    line-height: 11.8667vw;
+    color: #40485A;
+    padding-bottom: 3.6vw;
+}
+.active {
+    color: #4B88F8;
+    border-bottom: 0.8vw solid #4B88F8;
+    font-weight: 800;
+}
+.tab-1 {
+    margin-right: 25.6vw;
+    margin-left: 13.8667vw;
+}
+.initial-info {
+    font-size: 3.7333vw;
+    padding: 0 4.2667vw;
+    margin-top: 2.6667vw;
+}
+.initial_title {
+    font-size: 3.7333vw;
+    color: #40485A;
+    margin-right: 4.2667vw;
+}
+.initial_title1 {
+    margin-left: 3.2vw;
+}
+.initial_input::-webkit-input-placeholder { 
+    color: #C1C1C1;
+    font-size: 3.7333vw;
+} 
+.initial_input::-moz-placeholder { 
+    color: #C1C1C1;
+    font-size: 3.7333vw;
+} 
+.initial_input:-ms-input-placeholder { 
+    color: #C1C1C1;
+    font-size: 3.7333vw;
+}
+.initial_input {
+    width: 50vw;
+    font-size: 3.7333vw;
+}
+.initial_input1 {
+    width: 47vw;
+}
+.company {
+    height: 11.6667vw;
+    padding-top: 9.8667vw;
+}
+.initial_icon {
+    font-size: 3.7333vw;
+    color: #EA4040;
+    vertical-align: middle;
+}
+.line {
+    border-bottom: 1px solid #DFE3EF;
+    margin-top: 4.8vw;
+}
+.r_btn {
+    width: 91.4667vw;
+    height: 11.7333vw;
+    margin: 0 auto;
+    font-size: 4.8vw;
+    color: #ffffff;
+    background-color: #4D89F8;
+    border-radius: 1.3333vw;
+    margin-top: 14.9333vw;
+}
+.choice {
+    font-size: 3.7333vw;
+    color: #4B87F8;
+}

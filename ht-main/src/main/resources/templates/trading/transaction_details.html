@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- 公共头部 -->
+    <th:block th:include="block/headlink :: test('产品详情')" />
+    <link rel="stylesheet" th:href="@{/statics/css/pick-pcc.min.1.0.1.css?v=0.0.1}">
+    <link rel="stylesheet" th:href="@{/statics/css/index.css?v=0.0.5}">
+    <link rel="stylesheet" th:href="@{/statics/css/style.css?v=0.0.3}">
+    <link rel="stylesheet" th:href="@{/statics/css/trading/transaction_details.css?v=0.0.8}">
+    <link rel="stylesheet" th:href="@{/statics/css/user/index.css?v=0.0.3}">
+    <link rel="stylesheet" th:href="@{/statics/css/inquire/msgbox.css?v=0.0.2}">
+    <style>
+        .next_page {
+            height: 711px;
+            margin-top: -355px;
+        }
+        .pick-show{
+            padding-left: 18px!important;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div class="institute"></div>
+    <div id="user">
+        <div th:replace="~{user_head::copy}"></div>
+        <div th:replace="~{header::copy}"></div>
+    </div>
+    <div class="wrap" id="box">
+        <section>
+            <div class="ts_bg clearfix">
+                <!-- 登录组件 -->
+                <mylogin :islogin="false" @close-login="isLogin=!false"></mylogin>
+                <!-- over -->
+                <div class=" clearfix">
+                    <div class="w clearfix">
+                        <!-- 当前位置 -->
+                        <div class="current">
+                            <span>您的位置：<a href="/">首页></a><a href="/currency/trading/index">交易中心></a><a href="#">产品详情</a></span>
+                        </div>
+                        <!-- 非粒度化产品详情 -->
+                        <div>
+                            <!-- 高新技术企业认定 -->
+                            <div class="rending x">
+                                <div class="status fl">
+                                    <div class="status_t">
+                                        <i class="b_t dib"></i>
+                                        <h3 class="status_n dib" th:text="${productinfo.productname}">高新技术企业认定</h3>
+                                    </div>
+                                    <p class="service_M">
+                                        <!-- pricetype;//价格类型 1:一口价 2：区级价  3：面议 -->
+                                        <span class="service_p">服务费用：</span>
+
+                                        <span class="price" th:switch="${productinfo.pricetype}">
+                                            <i th:case="1" th:text="${productinfo.price+'元'}"></i>
+                                            <i th:case="2"> <span th:text="${productinfo.price+'元'}"></span>-
+                                                <span th:text="${productinfo.pricetwo+'元'}"></span></i>
+                                            <i th:case="3" th:text="面议"></i>
+                                        </span>
+                                    </p>
+
+                                    <p class="time" th:switch="${productinfo.stype}">
+                                        <span class="time_n" th:case="2">申报时间：全年申报</span>
+                                        <span class="time_n" th:case="3">申报时间：
+                                                <s th:text="${#dates.format(productinfo.begintime,'yyyy-MM-dd')}"></s>至
+                                                <s th:text="${#dates.format(productinfo.endtime,'yyyy-MM-dd')}"></s>
+                                                <span class="jiezhi">申报中&nbsp;截止日期还剩<span th:text="${productinfo.remainingdate}"></span>天</span>
+
+                                        </span>
+                                        <span class="time_n" th:case="1">完成时间：<i th:text="${productinfo.finishtime } ==null? 0:${productinfo.finishtime }"></i></span>
+                                        <span class="time_n" th:case="4">申报时间：
+                                                <s th:text="${#dates.format(productinfo.begintime,'yyyy-MM-dd')}"></s>至
+                                                <s th:text="${#dates.format(productinfo.endtime,'yyyy-MM-dd')}"></s>
+                                                <span class="jiezhi">申报已截止</span>
+                                        </span>
+
+                                    </p>
+                                    <p class="area">
+                                        <span class="time_n">产品所属区域：</span>
+                                        <span class="time_t">
+                                            <i th:text="${productinfo.provice}"></i>
+                                            <i th:text="${productinfo.city}"></i>
+                                            <i th:text="${productinfo.area}"></i>
+                                        </span>
+                                    </p>
+                                    <p class="purchased">
+                                        <span class="add dib" 
+                                        th:onclick="'javascript:getInfo(\''+${productinfo.id}+'\',\''+${productinfo.createid}+'\');'">
+                                        <i class="add_icon dib"></i>加入购物车</span>
+                                        <span th:onclick="'javascript:placeOrderlist(\''+${productinfo.productname}+'\',\''+${productinfo.pricetype}+'\',\''+${productinfo.price}+'\',\''+${productinfo.pricetwo}+'\');'"
+                                        class="orders">立即下单</span>
+                                    </p>
+                                    <p class="tips">价格说明：服务展示的为参考价，提交订单后不需要实际付款，由服务商线下商议具体服务</p>
+                                    <p class="d_line"></p>
+                                    <div>
+                                        <ul>
+                                            <li class="c_items dib">
+                                                <i class="dib fl c_icons c_icons1"></i>
+                                                <p class="certificate">商家资质认证</p>
+                                                <p class="cer_tips">严筛服务商，提供品质服务</p>
+                                            </li>
+                                            <li class="c_items dib">
+                                                <i class="dib fl c_icons c_icons2"></i>
+                                                <p class="certificate">交易安全放心</p>
+                                                <p class="cer_tips">平台全程交易监管</p>
+                                            </li>
+                                            <li class="c_items dib">
+                                                <i class="dib fl c_icons c_icons3"></i>
+                                                <p class="certificate">专业服务解答</p>
+                                                <p class="cer_tips">资深服务专员在线解答疑问</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="fl">
+                                    <div class="company clearfix">
+                                        <div class="clearfix">
+                                            <div class="c_head fl">
+                                                <a th:href="'/ht-biz/product/getlistprobyshop?id='+${serverinfo.id}">
+                                                    <img th:if="${serverinfo.shopimg != ''}" th:src="'http://47.92.70.12:9090'+${serverinfo.shopimg}" alt="" class="shop_l_img">
+                                                    <img th:if="${serverinfo.shopimg == ''||serverinfo.shopimg == null}" src="/statics/images/service/defaultlogo.png" alt="" class="shop_l_img">
+                                                </a>
+                                            </div>
+                                            <div class="company_r fl">
+                                                <a th:href="'/ht-biz/product/getlistprobyshop?id='+${serverinfo.id}">
+                                                    <p class="company_n" th:text="${serverinfo.shopname}"></p>
+                                                    <p>
+                                                        <span>
+                                                            <i class="dib locat_icon"></i><s th:text="${serverinfo.pronice}"></s>
+                                                            <!-- <s th:text="${serverinfo.city}"></s>
+                                                            <s th:text="${serverinfo.area}"></s> -->
+                                                        </span>
+                                                        <i th:if="${serverinfo.isbond == true}"   class="zhang dib"></i>
+                                                        <i th:if="${serverinfo.isagency == true}"  class="jian dib"></i>
+                                                        <!-- <i th:text="${serverinfo.isagency == true}"  class="jian dib"></i> -->
+
+                                                    </p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="levels clearfix">
+                                            <span class="level">等级：
+                                                <!-- 星级组件 -->
+                                                <star-rating :max="5" :current="value"></star-rating>
+                                                <!-- over -->
+                                            </span>
+                                            <span class="mark">评分：<span class="marks" th:text="${serverinfo.grade}">9.8</span></span>
+
+                                            <span class="classfy">类型：
+                                                <span th:if="${serverinfo.netrytype == 1}" class="marks">服务机构</span>
+                                                <span th:if="${serverinfo.netrytype == 2}" class="marks">个人</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="contacts">
+                                        <p class="customer" >联系客服:<i th:text="${serverinfo.phone}"></i></p>
+                                        <p class="qq">
+                                            <a style="color: #fff;" th:href="'tencent://message/?uin='+${serverinfo.customerqq}+'&Site=Sambow&Menu=yes'"><i class="dib qq_icon"></i>QQ咨询</a>
+                                        </p>
+                                    </div>
+                                    <!-- 公司简介 -->
+                                    <div class="brief">
+                                        <h3 class="c_brief">公司简介</h3>
+                                        <p class="c_brief1" th:text="${serverinfo.introduction}">
+                                            畅欣知识产权有限公司是国家工商行政管理总局备案的代理机构，专业办理软件著作权、专利申请、商标注册；现已在全国众多城市设立了分支机构,
+                                            砺炼了一批具有10年经验队伍，热线400-880-3590</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 服务信息 -->
+                            <div class="service">
+                                <div class="service_l fl">
+                                    <!-- 服务信息 -->
+                                    <div>
+                                        <h3 class="sv_t"><i class="sv_icon dib"></i>服务信息</h3>
+                                        <div class="service_info bk">
+                                            <div class="info_l fl">
+                                                <p>产品名称</p>
+                                                <p>产品类型</p>
+                                                <p th:if="${productinfo.isscience == true}">产品级别</p>
+                                                <p>产品所属区域</p>
+                                                <p>产品价格</p>
+                                                <p th:if="${productinfo.isscience == true}">申报时间</p>
+                                                <p th:if="${productinfo.isscience == false}">完成时间</p>
+                                            </div>
+                                            <div class="info_r fr">
+                                                <p th:text="${productinfo.productname}"></p>
+                                                <p>
+                                                    <i th:text="${productinfo.producttypeonename}"></i>/
+                                                    <i th:text="${productinfo.producttypetwoname}"></i>/
+                                                    <i th:text="${productinfo. producttypethreename}"></i>
+                                                </p>
+                                                <p th:if="${productinfo.isscience == true}" th:text="${productinfo.plevelname}"></p>
+                                                <p>
+                                                    <i th:if="${productinfo.provice != ''}"><s th:text="${productinfo.provice}"></s></i>
+                                                    <i th:if="${productinfo.city != ''}">-<s th:text="${productinfo.city}"></s></i>
+                                                    <i th:if="${productinfo.area != ''}">-<s th:text="${productinfo.area}"></s></i>
+                                                    
+                                                </p>
+                                                <p>
+                                                    <span class="price" th:switch="${productinfo.pricetype}">
+                                                        <i th:case="1" th:text="${productinfo.price+'元'}"></i>
+                                                        <i th:case="2"> 
+                                                            <span th:text="${productinfo.price+'元'}"></span>-
+                                                            <span th:text="${productinfo.pricetwo+'元'}"></span></i>
+                                                        <i th:case="3" th:text="面议"></i>
+                                                    </span>
+                                                </p>
+                                                <!-- <p th:text="${productinfo.productname}">全年申报</p> -->
+                                                        <!--<p th:if="${productinfo.isscience == false}"  class="price" th:switch="${productinfo.applytimetype}">-->
+                                                            <!--<i th:case="1" >-->
+                                                                <!--<s th:text="${#dates.format(productinfo.begintime,'yyyy-MM-dd')}"></s>- -->
+                                                                <!--<s th:text="${ #dates.format(productinfo.endtime,'yyyy-MM-dd')}"></s>-->
+                                                            <!--</i>-->
+                                                            <!--<i th:case="2">-->
+                                                                <!--<s th:text="全年申报"></s>-->
+                                                            <!--</i>-->
+                                                        <!--</p>-->
+
+                                                <!--<p th:if="${productinfo.isscience == true}"  class="price">-->
+                                                    <!--<i th:text="${productinfo.finishtime}"></i>天-->
+                                                <!--</p>-->
+                                                <p th:switch="${productinfo.stype}">
+                                                    <i class="time_n" th:case="2">全年申报</i>
+                                                    <i class="time_n" th:case="3">
+                                                        <s th:text="${#dates.format(productinfo.begintime,'yyyy-MM-dd')}"></s>至
+                                                        <s th:text="${#dates.format(productinfo.endtime,'yyyy-MM-dd')}"></s>
+                                                    </i>
+                                                    <i class="time_n" th:case="1"><i th:text="${productinfo.finishtime } ==null? 0:${productinfo.finishtime }"></i></i>
+                                                    <i class="time_n" th:case="4">
+                                                        <s th:text="${#dates.format(productinfo.begintime,'yyyy-MM-dd')}"></s>至
+                                                        <s th:text="${#dates.format(productinfo.endtime,'yyyy-MM-dd')}"></s>
+
+                                                    </i>
+
+                                                </p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 产品信息 -->
+                                    <div th:if="${productinfo.isscience == true}">
+                                        <h3 class="sv_t"><i class="sv_icon pd_icon dib"></i>产品信息</h3>
+                                        <div class="product_info bk">
+                                            <div class="info_l product_l fl">
+                                                <p >申报对象</p>
+                                                <p >支持方式</p>
+                                                <p>主管部门</p>
+                                                <p>项目补助金额</p>
+                                            </div>
+                                            <div class="info_r fr">
+                                                <p>
+                                                    <i th:text="${productinfo.provice}"></i>内注册企业
+                                                </p>
+                                                <p>
+                                                    <i th:text="${productinfo.supportmode}"></i>
+                                                </p>
+                                                <p>
+                                                    <i th:text="${productinfo.departmet}"></i>
+                                                </p>
+                                                <p>
+                                                    <i th:text="${productinfo.subsidy}"></i>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 申报好处 -->
+                                    <div  th:if="${productinfo.isscience == true}">
+                                        <h3 class="sv_t"><i class="sv_icon pd_icon dib"></i>申报好处</h3>
+                                        <!-- 后台返回图片 -->
+                                        <div class="sv_tips" th:utext="${productinfo.applybenefit}">
+                                        </div>
+                                    </div>
+                                    <!-- 产品介绍 -->
+                                    <div  th:if="${productinfo.isscience == true}">
+                                        <h3 class="sv_t"><i class="sv_icon pd_icon dib"></i>产品介绍</h3>
+                                        <!-- 后台返回图片 -->
+                                        <div class="sv_tips" th:utext="${productinfo.productinfo}">
+                                        </div>
+                                    </div>
+                                    <!-- 服务内容 -->
+                                    <div>
+                                        <h3 class="sv_t"><i class="sv_icon pd_icon dib"></i>服务内容</h3>
+                                        <!-- 后台返回图片 -->
+                                        <div class="sv_tips" th:utext="${productinfo.servicecontent}">
+                                        </div>
+                                    </div>
+                                    <!-- 其他 -->
+                                    <div class="sv_other">
+                                        <h3 class="sv_t"><i class="sv_icon pd_icon dib"></i>其他</h3>
+                                        <div class="sv_tips sv_tips1" th:utext="${productinfo.other}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="service_r fr">
+
+                                    <div class="sv_logo">
+                                        <div class="logo"></div>
+                                    </div>
+                                    <div class="sv_pt" th:each="user:${promote}">
+                                        <p class="sv_pt_t" th:text="${user.productname}"></p>
+                                        <p class="sv_pts">
+                                            <span class="sdb" th:switch="${user.stype}">   
+                                                <span class="time_nm" th:case="2">全年申报</span>
+                                                <span class="time_nm" th:case="3">
+                                                    <span class="timee">还剩<span th:text="${user.remainingdate}"></span>天</span>
+                                                </span>
+                                                <span class="time_nm" th:case="1">完成时间：<i th:text="${user.finishtime } ==null? 0:${user.finishtime }"></i></span>
+                                            </span>
+                                            <span th:if="${user.plevel == 1}" class="country">国家级<i class="dib c_i"></i></span>
+                                            <span th:if="${user.plevel == 2}" class="country">省级<i class="dib c_i"></i></span>
+                                            <span th:if="${user.plevel == 3}" class="country">市级<i class="dib c_i"></i></span>
+                                            <span th:if="${user.plevel == 4}" class="country">区级<i class="dib c_i"></i></span>
+                                            <span class="city" th:text="${user.provice}">广州市</span>
+                                            <span th:if="${user.subsidy != ''}" class="payment"><i class="dib c_i"></i><s class="moneytest" th:text="${user.subsidy}==''?'': '补助 :'+${user.subsidy}"></s></span>
+                                        </p>
+                                        <p>
+                                            <span class="money fl" th:switch="${user.pricetype}">
+                                                <i th:case="1" th:text="${user.price}+'元'"></i>
+                                                <i th:case="2">
+                                                    <span th:text="${user.price}+'元'"></span>-
+                                                    <span th:text="${user.pricetwo}+'元'"></span></i>
+                                                <i th:case="3" th:text="面议"></i>
+                                            </span>
+                                            <span class="xq fr">
+                                                <a th:href="'/ht-biz/product/toproseroder?id='+${user.id}">查看详情</a>
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section v-cloak>
+            <div v-cloak class="contract_mask" v-show="reminder"></div>
+            <div v-cloak class="read_over" v-show="reminder">
+                <div id="look" class="next_page">
+                    <div class="table_top">
+                        <p>产品下单<i>（产品下单目前不需要付款）</i></p>
+                        <s class="fa close_login fr" @click="reminder=false"></s>
+                    </div>
+                    <div class="table_bottom_box1 overbooking">
+                        <p>
+                            <span>下单产品：</span>
+                            {{productname}}
+                        </p>
+                        <p class="price">
+                            <span>单价：</span>
+                            <s>{{priceOrder}}</s><i v-if="priceOrder!='面议'">元</i>
+                        </p>
+                    </div>
+                    <div class="table_bottom_box1">
+                        <p class="other_info" @click="userOrder()">
+                            使用其他企业信息下单>>
+                        </p>
+                        <p>
+                            <span><i>*</i>数量：</span>
+                            <input type="text" name="number" v-model="number" id="shuliang" @blur="compute()" placeholder="请输入数量">
+                        </p>
+                        <p>
+                            <span><i>*</i>企业名字：</span>
+                            <input type="text" name="companyName" v-model="companyName" placeholder="请输入企业名字">
+                        </p>
+                        <p class="clearfix">
+                            <span class="fl"><i>*</i>所在地区：</span>
+                            <a href="javascript:void(0)" style="width: 200px;" class="pick-area1 pick-area5 fl" name="请选择省/请选择市/请选择区"></a>
+                        </p>
+                        <p><span><i>*</i>联系人：</span><input type="text" name="name" v-model="name" placeholder="请填写您的姓名"></p>
+                        <p><span><i>*</i>手机号码：</span><input type="text" name="phone" v-model="phone" placeholder="请输入手机号码"></p>
+                        <p><span class="beizhu_s"><i></i>备注：</span>
+                            <textarea name="beizhu" id="beizhu" v-model="beizhu" maxlength="300" rows="20" placeholder="填写个人基本信息"></textarea>
+                        </p>
+                    </div>
+                    <div class="table_bottom_box1 overbooking-top">
+                        <p class="price">
+                            <span>总价：</span>
+                            <s>{{needMoney}}</s><i v-if="priceOrder!='面议'">元</i>
+                        </p>
+                    </div>
+                    <div class="table_bottom_s ac">   
+                        <div class="table_bottom_box">
+                            <input type="button" id="submitRegs" class="use_honey ac dddd" @click="compute();Overbooking()" value="确认">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div v-cloak class="contract_mask" v-show="userOrderInfo" style="z-index:1003;"></div>
+            <div v-cloak class="read_over" v-show="userOrderInfo">
+                <div id="look" class="next_page2">
+                    <div class="table_top">
+                        <p>历史企业信息</p>
+                        <s class="fa close_login fr" @click="userOrderInfo=false"></s>
+                    </div>
+                    <div class="accessory1 clearfix">
+                        <div class="info-company-box">
+                            <div  v-for="(list,index) in orderList" class="clearfix">
+                                <div class="company-tit2 fl"  @click="mun=list.id;choiceDefault(list.companyName,list.province,list.city,list.area,list.phone,list.linkman,list.remark)" :class="{active:mun==list.id}">
+                                    <h2>{{list.companyName}}</h2>
+                                    <p><span>
+                                        <i v-if="list.province != ''">{{list.province}}/</i>
+                                        <i v-if="list.city != ''">{{list.city}}/</i>
+                                        <i v-if="list.area != ''">{{list.area}}</i>
+                                    </span> <i>{{list.linkman}}</i>|<i>{{list.phone}}</i></p>
+                                </div>
+                                <div class="control2 fl">
+                                    <p @click="deleteOrder(list.id)">删除</p>
+                                    <p @click="setDefault(list.id)">设为默认</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+        <!-- 加入购物车成功 -->
+        <div v-cloak class="submitaudit submitaudit1" v-show="auditframe">
+            <div class="submitAuditHeader clearfix">
+                <i @click="auditframe=false"></i>
+                <s></s>
+            </div>
+            <h3>加入购物车成功</h3>
+        </div>
+        <!-- 下单成功 -->
+        <div v-cloak class="submitaudit submitaudit1" v-show="auditframe1">
+            <div class="submitAuditHeader clearfix">
+                <i @click="auditframe1=false"></i>
+                <s></s>
+            </div>
+            <h3>下单成功</h3>
+        </div>
+        <!--E=底部-->
+        <footer>
+            <div class="copyright ac">
+                <p>COPYRIGHT © 版本归属 广州高企云信息科技有限公司 粤ICP备16007486号-1</p>
+            </div>
+        </footer>
+    </div>
+    <!-- 公共js部分 -->
+    
+    <div th:replace="~{block/footlink::copy}"></div>
+    <script type="text/javascript" th:src="@{/statics/js/component/mylogin.js?v=1.0.3}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/pick-pcc.min.1.0.1.js?v=0.0.3}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/component/star.js?v=0.0.3}"></script>
+    <script type="text/x-template" id="star-rating">
+        <div class="star-rating">
+            <span v-for="n in max">&star;</span>
+            <div class="star-rating__current" :style="{width: getRating + '%'}">
+            <span v-for="n in max">&starf;</span>
+            </div>
+        </div>
+    </script>
+    <script type="text/javascript" th:src="@{/statics/js/trading/transaction_details.js?v=0.0.6}"></script>
+
+    <!-- over -->
+    <script th:inline="javascript">
+        $(function(){
+            var timer=setTimeout(function(){
+                $(".sv_tips>p").children("img").attr("style","");
+            },500);
+        })
+        $(".xcx_h").mouseover(function () {
+            $(".xcx").css({
+                'visibility': 'visible'
+            })
+        })
+        $(".xcx_h").mouseleave(function () {
+            $(".xcx").css({
+                'visibility': 'hidden'
+            })
+        })
+        function getInfo(id,createid){
+            box.addCart(id,createid);
+        };
+        function placeOrderlist(productname, pricetype,price1,price2){
+            box.getorders(productname, pricetype,price1,price2);
+            
+        }
+    </script>
+    <th:block th:include="block/statistics :: copy" />
+</body>
+
+</html>

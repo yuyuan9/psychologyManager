@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- 公共头部 -->
+    <th:block th:include="block/headlink :: test('上传文档')" /> 
+    <!-- 结束 -->
+    <link rel="stylesheet" th:href="@{/statics/css/library/library.css?v=0.0.3}">
+</head>
+
+<body>
+    <div id="user">
+        <div th:replace="~{user_head::copy}"></div>
+    </div>
+    <div class="wrap" id="box" @click.stop="isProvince=false;isCity=false;isArea=false" v-cloak>
+        <section class="head clearfix">
+            <div th:replace="~{library_nav::copy}"></div>
+        </section>
+        <section class="library_details clearfix">
+            <div class="library_upload_content clearfix">
+                <div class="navigation clearfix">
+                    <p class="bread_nav fl clearfix">
+                        <a>当前位置：</a> 
+                        <a href="/">首页</a> &gt; <a href="/ht-biz/library/index?curPolicy=8">高企云文库</a> &gt; <a href="/ht-biz/library/upload">上传文档</a>
+                    </p>
+                </div>
+                <div class="upload_content clearfix">
+                    <span class="upload_info" @mouseenter="enter()" @mouseleave="leave()"><i class="upload_info_icon"></i>发布须知
+                        <div class="info_img"><img src="/statics/images/library/upload2.png" alt=""></div>
+                    </span>
+                    <div class="upload_class clearfix">
+                        <div class="upload_author clearfix">
+                            <span>上传作者：</span>
+                            <p v-if="userType != 'SERVICE_PROVIDER'">{{username}}</p>
+                            <p v-else-if="userType == 'SERVICE_PROVIDER'">{{shopIpt}}</p>
+                        </div>
+                        <div class="upload_document clearfix" v-if="originalfile == ''">
+                            <span><b>*</b>添加文档：</span>
+                            <div class="doc_con">
+                                <form>
+                                    <h3>文档上传成功后，通过人工审核即可获取金币奖励，</h3>
+                                    <h3>1金币=1元，根据文档质量最高奖励200金币</h3>
+                                    <div class="upload_btn" @click="openfile()"><i></i>点击上传</div>
+                                    <input type="file" name="file" class="file_ipt" id="file" @change="tirggerFile($event)">
+                                    <p class="geshi">支持格式：<i></i></p>
+                                </form>
+                                
+                            </div>
+                            
+                        </div>
+                        <div class="library_upload_foot clearfix" v-if="originalfile != ''">
+                            <div class="upload_add clearfix" v-show="boxShow">
+                                <span><b>*</b>添加文档：</span>
+                                <div class="add_box">
+                                    <i></i>
+                                    <s>{{fileName}}</s>
+                                </div>
+                                <s class="delete fl" @click="originalfile ='';pdfpath ='';clearIpt();">删除</s>
+                            </div>
+                        </div>
+
+                        <div class="upload_title clearfix">
+                            <span><b>*</b>文章标题：</span>
+                            <input type="text" name="title">
+                        </div>
+                        <div class="upload_region clearfix">
+                            <span><b>*</b>政策地区：</span>
+                            <div class="choice region lib_area_t">
+                                <!-- 省级 -->
+                                <span v-cloak class="choice_content upload_regin" :class="{active:isRegion==2}" @click.stop.prevent="isProvince=true;" >
+                                    <s id="province_text">{{province}}</s><i class="arrow"></i>
+                                    <ul v-cloak class="province upload_province" v-show="isProvince">
+                                        <li v-cloak v-for="(region, index) in regionData"
+                                            @click.stop.prevent="province=region.n;isProvince=false;isRegion=2;city='市级';isCityActive=0;area='区级';isAreaActive=0;">
+                                            {{region.n}}</li>
+                                    </ul>
+                                </span>
+                                <!-- 市级 -->
+                                <span v-cloak class="choice_content upload_regin" :class="{active:isCityActive==1}" @click.stop.prevent="getCityData();">
+                                    {{city}}<i class="arrow"></i>
+                                    <ul v-cloak class="city upload_city" v-show="isCity">
+                                        <li v-cloak v-for="(c, index) in cityData"
+                                            @click.stop.prevent="choseCity(c.n);">{{c.n}}</li>
+                                    </ul>
+                                </span>
+                                <!-- 区级 -->
+                                <span v-cloak class="choice_content upload_regin" @click.stop.prevent="stopThings();" :class="{active:isAreaActive==1}" v-show="showArea">
+                                    {{area}}<i class="arrow"></i>
+                                    <ul v-cloak class="area upload_area" v-show="isArea">
+                                        <li v-for="(a, index) in areaData"
+                                            @click.stop.prevent="area = a.n;isArea=false;if(isCityActive==1){isAreaActive=1};">
+                                            {{a.n}}</li>
+                                    </ul>
+                                </span>
+                            </div>
+                            
+                        </div>
+                        <div class="upload_keyword clearfix">
+                            <span>搜索关键字：</span>
+                            <input type="text" class="keyword_ipt" name="keyword" placeholder="请输入文档的搜索关键词，如“高新技术企业”">
+                        </div>
+                        
+                        <div class="upload_classify clearfix">
+                            <span>项目分类：</span>
+                            <select name="natureList" id="nature">
+                                <option value="">全部</option>
+                                <option value="0">高新技术企业</option>
+                                <option value="1">研发机构</option>
+                                <option value="2">科研立项</option>
+                                <option value="3">科技成果</option>
+                                <option value="4">知识产权</option>
+                                <option value="5">科技财金</option>
+                                <option value="6">人才团队</option>
+                                <option value="7">其他</option>
+                            </select>
+                        </div>
+
+                        <div class="upload_classify clearfix">
+                            <span>性质分类：</span>
+                            <select name="policyList" id="policy">  
+                                <option value="全部">全部</option>
+                                <option value="政策解读">政策解读</option>
+                                <option value="模板范文">模板范文</option>
+                                <option value="培训资料">培训资料</option>
+                                <option value="申报通知">申报通知</option>
+                                <option value="公示名录">公示名录</option>
+                                <option value="政策文件">政策文件</option>
+                                <option value="产业报告">产业报告</option>
+                                <option value="其他">其他</option>
+                            </select>
+                        </div>
+                        <!-- <div class="upload_classify clearfix">
+                            <span>技术分类：</span>
+                            <select name="technologyList" id="technology">
+                                <option value="0">全部</option>
+                                <option value="1">电子信息</option>
+                                <option value="2">生物与新医药</option>
+                                <option value="3">航空航天</option>
+                                <option value="4">新材料</option>
+                                <option value="5">高技术服务</option>
+                                <option value="6">新能源与节能</option>
+                                <option value="7">资源与环境</option>
+                                <option value="8">先进制造与自动化</option>
+                            </select>
+                        </div> -->
+                        <div class="upload_honey clearfix">
+                            <span>honey值售价：</span>
+                            <input type="text" name="priceList" id="price"><i class="hy">honey</i>
+                        </div>
+                        <div class="submit_btn">
+                            <input type="submit" class="submit" name="submit" @click="submitForm" value="确认上传">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="library_upload_foot clearfix">
+                <div class="upload_add clearfix" v-show="boxShow">
+                    <span><b>*</b>添加文档：</span>
+                    <div class="add_box">
+                        <i></i>
+                        <s>{{fileName}}</s>
+                    </div>
+                </div>
+            </div> -->
+        </section>
+
+        <footer>
+            <p>COPYRIGHT © 版权归属 广州高企云信息科技有限公司 粤ICP备16007486号-1</p>
+        </footer>
+
+    </div>
+
+    <!-- 公共js部分 -->
+    <th:block th:include="block/liblink :: copy" />
+    <!-- over -->
+
+    <script type="text/javascript" th:src="@{/statics/js/library/library_upload.js?v=0.0.6}"></script>
+    <script>
+        $(".xcx_h").mouseover(function () {
+            $(".xcx").css({
+                'visibility': 'visible'
+            })
+        })
+        $(".xcx_h").mouseleave(function () {
+            $(".xcx").css({
+                'visibility': 'hidden'
+            })
+        })
+    </script>
+    <th:block th:include="block/statistics :: copy" />
+</body>
+
+</html>

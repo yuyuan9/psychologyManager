@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+</head>
+<body>
+    <div th:fragment="copy">
+        <header>
+            <div class="title">
+                <div class="tit_left">
+                    <div class="map_drop">
+                        <span>
+                            <a href="javascript:void(0);"><s class="place"></s>
+                                <span class="c1" v-cloak v-if="tap==1">{{myName}}</span>
+                                <span class="c2" v-cloak v-else-if="tap==2">
+                                    <i v-if="cityName!=''&&cityName1==''">{{cityName}}</i>
+                                    <i v-else>{{cityName1}}</i>
+                                </span>
+                            </a>[切换省市]
+                        </span>
+                        <div class="map">
+                            <h2>切换站点：</h2>
+                            <div class="mapbox">
+                                <div class="Mbox1">
+                                    <h3 class="Mbox1_tit fl">全国站：</h3>
+                                    <ul class="cityss clearfix">
+                                        <li v-cloak >
+                                            <span :class="{actives:mycity==1}" @click="mycity=1;tap=1;showChild('33','全国');getCity('33','全国');">全国</span>
+                                        </li>
+                                    </ul> 
+                                </div>
+                                <div class="Mbox1">
+                                    <h3 class="Mbox1_tit fl">省级站：</h3>
+                                    <ul class="cityss clearfix">
+                                        <li v-cloak v-for="(list,index) in cityOption" v-if="list.name!='全国'">
+                                            <span :class="{actives:mycity==index+'city1'}" @click="mycity=index+'city1';tap=1;showChild(list.id,list.name);getCity(list.id,list.name);">{{list.name}}</span>
+                                        </li>
+                                    </ul> 
+                                </div>
+                                
+                                <div class="Mbox2">
+                                    <h3 class="Mbox2_tit fl">市级站：</h3>
+                                    <ul class="city-child clearfix">
+                                        <li v-cloak v-for="(childData,index) in cityChild" v-if="childData.name!='全国'">
+                                            <span :class="{actives:mycity==index+'city2'}" @click="mycity=index+'city2';tap=1;getChild(childData.id,childData.name);">{{childData.name}}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                    <div><span>咨询热线：400-166-3308</span></div>
+                    <div><span><a target="_blank" href="/help/help/index">帮助中心</a></span></div>
+                </div>
+                <div class="tit_right">
+                    <a v-cloak v-if="code!=10000" target="_blank" href="/ht-biz/login/login"><s class="register_icon"></s>登录</a>
+                    <a v-cloak target="_blank" v-else-if="username!=null&&username!=''" href="/ht-biz/usercenter/user/index"><s
+                            class="register_icon"></s>{{username}}</a>
+                    <a v-if="code!=10000" target="_blank" href="/ht-biz/login/register">免费注册</a>
+                    <a v-if="code==10000" @click="quitRegister()" href="javascript:void(0);">退出</a>
+                    <a v-if="code==10000" target="_blank" href="/ht-biz/usercenter/user/index">个人云中心</a>
+                    <a target="_blank" href="/ht-biz/service/index/index">服务商入驻</a>
+                    <a  class="xcx_h" href="javascript:void(0);">掌上政策通
+                        <div class="xcx f1 xcx-code">
+                            <s></s>
+                            <img src="/statics/images/xcx.png" alt="" class="img-code" >
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </header>
+    </div>
+    <script>
+    </script>
+</body>
+
+</html>

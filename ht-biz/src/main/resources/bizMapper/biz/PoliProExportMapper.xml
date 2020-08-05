@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.biz.mapper.PoliProExportMapper">
+	<select id="selectCounts" parameterType="com.ht.commons.utils.PageData" resultType="java.lang.Integer">
+		select sum(counts) from t_poli_pro_export t
+		where t.createid=#{createid}
+		and t.local=#{local}
+		and t.createdate LIKE CONCAT(CONCAT('%', #{createdate}),'%')
+	</select>
+</mapper>

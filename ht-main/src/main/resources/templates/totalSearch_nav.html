@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+</head>
+<style>
+</style>
+
+<body>
+    <div th:fragment="copy">
+        <div class="search clearfix">
+            <div class="search_l fl clearfix">
+                <div class="search_logo fl">
+                    <a href="/">
+                        <img src="/statics/images/logo_head1.png" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="search_r fl clearfix">
+                <div class="search_ipt fl clearfix">
+                    <div class="search_ipt_bottom fl clearfix">
+                        <span class="fl">全站搜索</span>
+                        <input class="fl" v-model="keyword" type="text" name="keyword" @keyup.enter="havechiose=1;key = 1;allSearch(0);" placeholder="高新技术企业">
+                        <s class="fl" @click="havechiose=1;key = 1;allSearch(0);" >立即查询
+                        </s>
+                    </div>
+                    <!-- 提取片段 -->
+                    <div th:replace="~{block/hot_word::totalSearch_qz}"></div>
+                    <!-- over -->
+                </div>
+                <div class="search_xcx fl clesrfix">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

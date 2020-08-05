@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.biz.mapper.EvaluateMapper">
+
+    <select id="findEvaluatByTargetId" parameterType="com.ht.commons.utils.MyPage" resultType="com.ht.entity.biz.comment.EvaluateWeb">
+        SELECT
+            t.*, u.PHONE AS userName,
+            u.headImg AS headImg
+        FROM
+            t_evaluate_web t
+        LEFT JOIN t_sys_user u ON t.userId = u.USER_ID
+        WHERE
+            t.targetId = #{pd.targetId} and t.exception=0  order by t.createdate desc
+    </select>
+
+    <select id="sysfindall" parameterType="com.ht.commons.utils.MyPage" resultType="com.ht.commons.utils.PageData">
+       select t.id,t.createdate,u.PHONE phone,u.trueName,t.exception,t.className,t.content,
+          CASE t.className
+              WHEN 'com.fh.entity.system.Library' THEN lib.title
+              WHEN 'com.ht.entity.biz.library.ResourcePage'THEN  rpage.`name`
+              ELSE '其他'
+              END as title,
+          CASE t.className
+              WHEN 'com.fh.entity.system.Library' THEN '文库'
+              WHEN 'com.ht.entity.biz.library.ResourcePage'THEN  '资源包'
+              ELSE '其他'
+              END as class
+        from   t_evaluate_web t
+        LEFT JOIN t_sys_user u  on u.USER_ID=t.userId
+        LEFT JOIN t_library lib  on lib.id=t.targetId
+        LEFT JOIN t_resource_page rpage  on rpage.id=t.targetId
+        where 1=1
+        <if test="pd.phone != null and pd.phone !=''">
+          and  u.PHONE LIKE CONCAT(CONCAT('%', #{pd.phone}),'%')
+        </if>
+        <if test="pd.className != null and pd.className !=''">
+          and  t.className= #{pd.className}
+        </if>
+        <if test="pd.title != null and pd.title !=''">
+            and  title LIKE CONCAT(CONCAT('%', #{pd.title}),'%')
+        </if>
+
+        <if test="pd.statrtime != null and pd.statrtime !=''">
+            and  t.createdate <![CDATA[ >= ]]> #{pd.statrtime}
+        </if>
+        <if test="pd.endtime != null and pd.endtime !=''">
+            and  t.createdate <![CDATA[ <= ]]> #{pd.endtime}
+        </if>
+        order  by  t.createdate desc
+    </select>
+
+    <select id="getgroup" resultType="com.ht.commons.utils.PageData">
+           select t.className,
+           CASE t.className
+                        WHEN 'com.fh.entity.system.Library' THEN '文库'
+                        WHEN 'com.ht.entity.biz.library.ResourcePage' THEN '资源包'
+                        ELSE '其他'
+                        END as class
+         from t_evaluate_web t GROUP BY t.className
+    </select>
+
+    <update id="updatebyId" parameterType="com.ht.commons.utils.PageData">
+           UPDATE t_evaluate_web t
+            SET t.exception=#{exception}
+          WHERE id=#{id}
+    </update>
+</mapper>

@@ -1,0 +1,2743 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+ <product>
+    <property name="type" >number</property>
+    <property name="name" >序号</property>
+    <property name="foundTime">return 1;</property>
+    <property name="techField">return 2;</property>
+    <property name="persForm">return 3;</property>
+    <property name="rdCost">return 4;</property>
+    <property name="hincome">return 5;</property>
+    <property name="cop">return 6;</property>
+    <property name="intelProp">return 7;</property>
+    <property name="stach">return 8;</property>
+    <property name="rdManag">return 9;</property>
+    <property name="compGrowth">return 10;</property>
+  </product>
+  
+ <product>
+    <property name="type" >quota</property>
+    <property name="name" >指标</property>
+    <property name="foundTime">return "成立时间";</property>
+    <property name="techField">return "技术领域";</property>
+    <property name="persForm">return "人员构成";</property>
+    <property name="rdCost">return "研发费用";</property>
+    <property name="hincome">return "高品收入";</property>
+    <property name="cop">return "合规运营";</property>
+    <property name="intelProp">return "知识产权";</property>
+    <property name="stach">return "科技成果";</property>
+    <property name="rdManag">return "研发管理";</property>
+    <property name="compGrowth">return "企业成长性";</property>
+  </product>
+<!-- 淮安 -->
+  <product>
+    <property name="type">gaoqi_introduce</property>
+    <property name="name">高企认定</property>
+    <property name="foundTime">return "申请认定时须注册成立一年以上";</property>
+    <property name="techField">return "对主要（产品/服务）发挥核心作用的技术属于《国家重点支持的高新技术领域》 规定的范围";</property>
+    <property name="persForm">return "科技人员 10%";</property>
+    <property name="rdCost">return "①销售收入≤5000万，≥5%；②5000万＜销售收入≤2亿，≥4%；③销售收入＞2亿，≥3%";</property>
+    <property name="hincome">return "占企业当年总收入的比例≥60%";</property>
+    <property name="cop"><![CDATA[return "企业申请认定<font color='red'>前一年</font>内未发生重大安全、 重大质量事故或严重环境违法行为";]]></property>
+    <property name="intelProp">return "30分，通过自主研发、 受让、 受赠、 并购等方式，拥有知识产权，1项发明或6项实用新型或6项软著";</property>
+    <property name="stach">return "30分，近三年科技成果转化≥5项/年";</property>
+    <property name="rdManag">return "20分，管理制度、 研发机构、 产学研、 科技成果、 人员培育、 创新创业平台";</property>
+    <property name="compGrowth">return "20分，净资产增长率+销售收入增长率";</property>
+  </product>
+  
+  <product>
+    <property name="type" >peiyu_introduce</property>
+    <property name="name" >高企培育入库</property>
+    <property name="foundTime"><![CDATA[return "申请认定时须注册成立一年以上<font color='red'>，非高企</font>";]]></property>
+    <property name="techField">return "对主要（产品/服务）发挥核心支持作用的技术属于《国家重点支持的高新技术领域》 规定的范围";</property>
+    <property name="persForm">return "科技人员 5%";</property>
+    <property name="rdCost">return "近两个会计年度的研究开发费用总额占销售收入总额的比例不低于3%，中国境内研究开发费用比例不低于60%";</property>
+    <property name="hincome">return "占企业当年总收入的50%以上";</property>
+    <property name="cop">return "企业申请入库前一年内未发生重大安全、重大质量事故或严重环境违法行为";</property>
+    <property name="intelProp">return "30分，通过自主研发、 受让、受赠、并购等方式，拥有知识产权，1项发明或1项实用新型或1项软著";</property>
+    <property name="stach">return "30分，近两年科技成果转化≥5项/年";</property>
+    <property name="rdManag">return "20分，管理制度、研发机构、产学研、科技成果、人员培育、创新创业平台";</property>
+    <property name="compGrowth">return "20分，净资产增长率+销售收入增长率";</property>
+  </product>
+   <product>
+    <property name="type" >qiye_detail</property>
+    <property name="name" >企业实际情况（A）</property>
+   <property name="foundTime"><![CDATA[
+        def endTime = new Date();
+		def startTime=root.regDate;
+		
+		def year = DateUtil.getDiffYearByDate(startTime,endTime);
+		
+		return "企业成立<font color='red'>"+year+"</font>年；";
+		
+	 ]]>
+    </property>
+    <property name="techField"><![CDATA[
+		def productServ=root.productServ;
+		return "主营产品技术领域为"+productServ;
+	 ]]></property>
+    <property name="persForm"><![CDATA[
+        def developmentTotal=root.developmentTotal;
+        def workerTotal=root.workerTotal;
+		def d1=developmentTotal*1.0/workerTotal;
+		java.math.BigDecimal b1 = new java.math.BigDecimal(d1);
+		d1=b1.setScale(2, java.math.BigDecimal.ROUND_HALF_DOWN).doubleValue()*100;
+		d1=java.lang.Double.valueOf(java.lang.String.format("%.0f", d1));
+		return "科技人员占比为"+d1+"%";
+	 ]]></property>
+    <property name="rdCost"><![CDATA[
+		def saleyfrate=root.saleyfrate;
+		if("A"==saleyfrate){
+		   return "研究开发费用总额占销售收入总额的比例为>=5%";
+		}else if("B"==saleyfrate){
+		   return "研究开发费用总额占销售收入总额的比例为>=4%";
+		}else if("C"==saleyfrate){
+		  return "研究开发费用总额占销售收入总额的比例为>=3%";
+		}else if("D"==saleyfrate){
+		  return "研究开发费用总额占销售收入总额的比例为>=3%";
+		}else{
+		  return "研究开发费用总额占销售收入总额的比例为<3%";
+		};
+	 ]]></property>
+    <property name="hincome"><![CDATA[
+		def prodrate=root.prodrate;
+		if("A"==prodrate){
+		    return "高品收入占比为>=60%";
+		}else if("B"==prodrate){
+			return "高品收入占比为>=50%";
+		}else{
+		   return "高品收入占企业当年总收入<50%";
+		};
+	 ]]></property>
+    <property name="cop"><![CDATA[
+		def compop=root.compop;
+		return "申请认定前一年内未发生重大安全、重大质量事故或严重环境违法行为";
+	 ]]></property>
+    <property name="intelProp"><![CDATA[
+		def x1self=root.x1self;
+		def x1eg=root.x1eg;
+		def y1self=root.y1self;
+		def y1eg=root.y1eg;
+		def y2self=root.y2self;
+		def y2eg=root.y2eg;
+		def y3self=root.y3self;
+		def y3eg=root.y3eg;
+		
+		return (x1self+x1eg)+"项；实用新型专利"+(y1self+y1eg)+"项；外观设计专利"+(y2self+y2eg)+"项；软件著作权"+(y3self+y3eg)+"项";
+		
+	 ]]></property>
+    <property name="stach"><![CDATA[
+		def thirdfruit=root.thirdfruit;
+		return "年平均科技成果转化"+thirdfruit+"项/年";
+	 ]]></property>
+    <property name="rdManag"><![CDATA[
+		return "企业已建立了相关制度";
+	 ]]></property>
+    <property name="compGrowth"><![CDATA[
+	     def a1=netasset;
+		 def a2=salesrevenue;
+		 return "企业净资产得分为"+a1+"，销售收入得分为"+a2;
+	 ]]></property>
+  </product>
+  
+   <product>
+    <property name="type" >huaian_gaopei_yes_no</property>
+    <property name="name">高培</property>
+    <property name="foundTime"><![CDATA[
+		def endTime = new Date();
+		def startTime=root.regDate;
+		def cog2008=root.cog2008;
+		
+		def year = DateUtil.getDiffYearByDate(startTime,endTime);
+		if(year>=1){
+		    if(cog2008){
+		       return "<s class='sign wrong'></s>";
+		    }else{
+		       return "<s class='sign right'></s>";
+		    }
+		}else{
+		   return "<s class='sign wrong'></s>";
+		};
+	 ]]>
+    </property>
+    <property name="techField"><![CDATA[
+		def cog2008=root.cog2008;
+		
+		return cog2008?"":"<s class='sign right'></s>";
+	 ]]></property>
+    <property name="persForm"><![CDATA[
+    	def cog2008=root.cog2008;
+		def developmentTotal=root.developmentTotal;
+        def workerTotal=root.workerTotal;
+		
+		def d2=developmentTotal*1.0/workerTotal;
+		
+		java.math.BigDecimal b2 = new java.math.BigDecimal(d2);
+		
+		d2=b2.setScale(2, java.math.BigDecimal.ROUND_HALF_DOWN).doubleValue()*100;
+		d2=java.lang.Double.valueOf(java.lang.String.format("%.0f", d2));
+		if(d2>=5){
+		    return cog2008?"":"<s class='sign right'></s>";
+		}else if(d2<5){
+		   	return cog2008?"":"<s class='sign wrong'></s>";
+		}else{
+		    return cog2008?"":"<s class='sign wrong'></s>";
+		};
+		
+	 ]]></property>
+    <property name="rdCost"><![CDATA[
+		def saleyfrate=root.saleyfrate;
+		def cog2008=root.cog2008;
+		if("A"==saleyfrate){
+		   return cog2008?"":"<s class='sign right'></s>";   
+		}else if("B"==saleyfrate){
+			return cog2008?"":"<s class='sign right'></s>";
+		}else if("C"==saleyfrate){
+			return cog2008?"":"<s class='sign right'></s>";
+		}else if("D"==saleyfrate){
+			return cog2008?"":"<s class='sign right'></s>";
+		}else{
+		    return cog2008?"":"<s class='sign wrong'></s>";
+		};
+	 ]]></property>
+    <property name="hincome"><![CDATA[
+		def prodrate=root.prodrate;
+		def cog2008=root.cog2008;
+		if("A"==prodrate){
+		   return cog2008?"":"<s class='sign right'></s>";   
+		}else if("B"==prodrate ){
+		   return cog2008?"":"<s class='sign right'></s>";   
+		}else{
+		   return cog2008?"":"<s class='sign wrong'></s>";
+		};
+	 ]]></property>
+    <property name="cop"><![CDATA[
+		def compop=root.compop;
+		def cog2008=root.cog2008;
+		if(compop){
+			return cog2008?"":"<s class='sign right'></s>";
+		}else{
+		    return cog2008?"":"<s class='sign wrong'></s>";
+		};
+	 ]]></property>
+    <property name="intelProp"><![CDATA[
+    	return "";
+	 ]]></property>
+    <property name="stach"><![CDATA[
+    	return "";
+	 ]]></property>
+    <property name="rdManag"><![CDATA[
+		return "";
+	 ]]></property>
+    <property name="compGrowth"><![CDATA[
+		return "";
+	 ]]></property>
+  </product>
+  
+  <product>
+    <property name="type" >huaian_gaoqi_yes_no</property>
+    <property name="name" >高企</property>
+    <property name="foundTime"><![CDATA[
+		def endTime = new Date();
+		def startTime=root.regDate;
+		def cog2008=root.cog2008;
+		
+		def retval="";
+		
+		def year = DateUtil.getDiffYearByDate(startTime,endTime);
+		
+		if(year>=1){
+		    root.highCity=root.highCity+"企业成立<font color='red'>"+year+"</font>年；";
+		    root.yearToString="<s class='sign right'></s>本企业符合工商注册成立一年以上条件,其申报技术与国家支持的领域相符；";
+		    return "<s class='sign right'></s>";
+		}else{
+		   root.highCity=root.highCity+ "企业成立不足1年，存在一票否决项，建议"+(DateUtil.year()+1)+"年申报市高和高企；";
+		   root.suggest=root.suggest+"企业成立不足1年，存在一票否决项，建议"+(DateUtil.year()+1)+"年申报市高和高企；";
+		   root.yearToString="<s class='sign wrong'></s>企业成立时间不足1年，不符合要求,其申报技术与国家支持的领域相符；";
+		   return "<s class='sign wrong'></s>";
+		};
+	 ]]>
+    </property>
+    <property name="techField"><![CDATA[
+		def cog2008=root.cog2008;
+		root.highCity=root.highCity+"主营产品技术领域满足《国家重点支持的高新技术领域》规定的范围；";
+		return "<s class='sign right'></s>"; 
+	 ]]></property>
+    <property name="persForm"><![CDATA[
+		def cog2008=root.cog2008;
+		def developmentTotal=root.developmentTotal;
+        def workerTotal=root.workerTotal;
+        
+		def d2=developmentTotal*1.0/workerTotal;
+		
+		java.math.BigDecimal b2 = new java.math.BigDecimal(d2);
+		
+		d2=b2.setScale(2, java.math.BigDecimal.ROUND_HALF_DOWN).doubleValue()*100;
+		d2=java.lang.Double.valueOf(java.lang.String.format("%.0f", d2));
+		if(d2>=10){
+			root.highCity=root.highCity+"科技人员占比"+d2+"%;";
+			root.personToString="<s class='sign right'></s>"+"科技人员占比"+d2+"%;";
+		    return "<s class='sign right'></s>";
+		}else{
+		   root.highCity=root.highCity+"企业科技人员占比不符合要求，有申报风险，建议优化人员结构;";
+		   root.suggest=root.suggest+"目前高品收入占比不符合要求，建议重新归集高新技术产品收入;"; 
+		   root.personToString="<s class='sign wrong'></s>"+"科技人员占比"+d2+"%;";
+		   return "<s class='sign wrong'></s>";
+		};
+		
+	 ]]></property>
+    <property name="rdCost"><![CDATA[
+		def saleyfrate=root.saleyfrate;
+		def cog2008=root.cog2008;
+		if("A"==saleyfrate){
+		   root.costToString="<s class='sign right'></s>研发费用总额占比为>=5%;";
+		   return "<s class='sign right'></s>";   
+		}else if("B"==saleyfrate){
+			root.costToString="<s class='sign right'></s>研发费用总额占比为>=4%;";
+			return "<s class='sign right'></s>";
+		}else if("C"==saleyfrate){
+			root.costToString="<s class='sign right'></s>研发费用总额占比为>=3%;";
+			return "<s class='sign right'></s><s class='sign right'></s>";
+		}else if("D"==saleyfrate){
+			root.costToString="<s class='sign right'></s>研发费用总额占比为>=3%;";
+			root.suggest=root.suggest+"目前研发费用总额占比不符合要求，建议重点梳理、归集研发费用，做好研发费用辅助账；";
+			return "<s class='sign right'></s>";
+		}else{
+		   root.costToString="<s class=\"sign wrong\"></s>研发费用总额占比不符合要求，建议重点梳理、归集研发费用，做好研发费用辅助账";
+		   root.suggest=root.suggest+"目前研发费用总额占比不符合要求，建议重点梳理、归集研发费用，做好研发费用辅助账；";
+		   return "<s class='sign wrong'></s>";
+		};
+	 ]]></property>
+    <property name="hincome"><![CDATA[
+		def prodrate=root.prodrate;
+		def cog2008=root.cog2008;
+		if("A"==prodrate){
+		   root.highCity=root.highCity+"高品收入占比为>=60%；";
+		   root.incomeToString="<s class='sign right'></s>高品收入占比为>=60%；";
+		   return "<s class='sign right'></s>";   
+		}else if("B"==prodrate ){
+		   root.highCity=root.highCity+"高品收入占比为>=50%；";
+		   root.incomeToString="<s class='sign right'></s>高品收入占比为>=50%；";
+		   return "<s class='sign right'></s>";   
+		}else{
+		   root.highCity=root.highCity+"高品收入占比不符合要求，建议重新归集高新技术产品收入；";
+		   root.suggest=root.suggest+"目前高品收入占比不符合要求，建议重新归集高新技术产品收入；";
+		   root.incomeToString="<s class='sign wrong'></s>高品收入占比不符合要求，建议重新归集高新技术产品收入；";
+		   return "<s class='sign wrong'></s>";
+		};
+	 ]]></property>
+    <property name="cop"><![CDATA[
+		def compop=root.compop;
+		def cog2008=root.cog2008;
+		if(compop){
+			root.highCity=root.highCity+"上一年度合规运营。";
+			root.compopToString="<s class='sign right'></s>上一年度合规运营。";
+			return "<s class='sign right'></s>"
+		}else{
+			root.highCity=root.highCity+"企业上一年度未能合规运营，存在一票否决项，建议"+(DateUtil.year()+1)+"年申报高企认定和高企培育入库";
+			root.suggest=root.suggest+"企业上一年度未能合规运营，存在一票否决项，建议"+(DateUtil.year()+1)+"年申报市高和国家高新技术企业。";
+		    root.compopToString="<s class='sign wrong'></s>企业上一年度未能合规运营，存在一票否决项，建议"+(DateUtil.year()+1)+"年申报高企认定和高企培育入库";
+		    return "<s class='sign wrong'></s>";
+		};
+	 ]]></property>
+    <property name="intelProp"><![CDATA[
+        def score=root.intellectualProperty;
+        def a=root.xselftotal+root.xegTotal;
+        def b=root.yselftotal+root.yegtotal;
+        if(a>=1 || b>=5){
+           root.intellectualPropertyGrade="您已具备申请高新技术企业的条件。知识产权数量已达标，建议持续申请与主营产品相关的知识产权，为三年后的重新认定准备，增加知识产权的方式有购买/转让/自主申请";
+        }else if(a==0 && (b>2 && b<5)){
+           root.intellectualPropertyGrade="可申请高企，但知识产权数量不够导致评分不高，建议申请市高或增加知识产权数量至1个I类知识产权或5个及以上Ⅱ类知识产权后申请高企（注：知识产权要与企业主营产品相关）";
+        }else if(a==0 && (b>0 && b<3)){
+           root.intellectualPropertyGrade="建议先申请市高或增加知识产权数量至1个I类知识产权或5个及以上Ⅱ类知识产权再申请高企；增加知识产权的方式有购买/转让/自主申请（注：知识产权要与企业主营产品相关）";
+        }else if(a==0 && b==0){
+           root.intellectualPropertyGrade="知识产权数量为0，建议先申请1个I类知识产权或5个及以上Ⅱ类知识产权再申请国高；增加知识产权的方式有购买/转让/自主申请（注：知识产权要与企业主营产品相关）";
+        }else{
+           root.intellectualPropertyGrade="";
+        };
+        def xtotal=root.xselftotal+root.xegTotal;
+        def ytotal=root.yselftotal+root.yegtotal;
+        def y1total=root.y1eg+root.y1self;
+        def y2total=root.y2eg+root.y2self;
+        def y3total=root.y3eg+root.y3self;
+        def d=0;
+        for(int i=0;i<=1;i++){
+			if(xtotal==0&&ytotal==0){
+				d=d+0;
+			};
+			if(xtotal==0&&y1total==0&&y3total==0&&y2total>0){
+				d=d+1;
+			};
+			if(xtotal==0&&y1total==0&&y3total>0){
+				d=d+3;
+			};
+			if(xtotal==0&&y1total>0){
+				d=d+4;
+			};
+			if(xtotal==1){
+				d=d+5;
+			};
+			if(xtotal>1&&xtotal<=5){
+				d=d+6;
+			};
+			if(xtotal>5){
+				d=d+7;
+			};
+		};
+		if(xtotal==0&&ytotal==0){
+			d=d+0;
+		};
+		if(xtotal==0&&ytotal>0&&ytotal<3){
+			d=d+1;
+		};
+		if(xtotal==0&&ytotal>2&&ytotal<5){
+			d=d+3;
+		};
+		if(xtotal==0&&ytotal>4){
+			d=d+5;
+		};
+		if(xtotal==1){
+			d=d+7;
+		};
+		if(xtotal>1){
+			d=d+7.5;
+		};
+		def xself=root.x1self+root.x2self+root.x3self+root.x4self+root.x5self+root.x6self;
+		def yself=root.y1self+root.y2self+root.y3self;
+		def xeg=root.x1eg+root.x2eg+root.x3eg+root.x4eg+root.x5eg+root.x6eg;
+		def yeg=root.y1eg+root.y2eg+root.y3eg;
+		if(xtotal==0&&ytotal==0){
+			d=d+0;
+		};
+		if(xself==0&&yself==0&&yeg==1){
+			d=d+0.5;
+		};
+		if(xself==0&&yself==0&&yeg==2){
+			d=d+1;
+		};
+		if(xself==0&&yself==0&&yeg==3){
+			d=d+1.5;
+		};
+		if(xself==0&&yself==0&&yeg==4){
+			d=d+2;
+		};
+		if(xself==0&&yself==0&&yeg>=5){
+			d=d+2.5;
+		};
+		if(xself==0&&yself==0&&xeg>=1){
+			d=d+2.5;
+		};
+		if(xself==0&&yself==1){
+			d=d+1.5;
+		};
+		if(xself==0&&yself==2){
+			d=d+2.5;
+		};
+		if(xself==0&&yself==3){
+			d=d+3.5;
+		};
+		if(xself==0&&yself==4){
+			d=d+4.5;
+		};
+		if(xself==0&&yself>=4){
+			d=d+5.5;
+		};
+		if(xself>=1){
+			d=d+5.5;
+		};
+		if(root.other){
+			d=d+1;
+		};
+		score=d;
+		root.intellectualProperty=score;    
+        return String.format("%s分~%s分", score+"",score+2+"");
+	 ]]></property>
+    <property name="stach"><![CDATA[
+		def score = root.resultTransformation;
+		def thirdfruit=root.thirdfruit;
+    	if(thirdfruit>=6){
+    		score=27;
+    	}else if(thirdfruit==5){
+    		score=25;
+    	}else if(thirdfruit==4){
+    		score=20;
+    	}else if(thirdfruit==3){
+    		score=16;
+    	}else if(thirdfruit==2){
+    		score=10;
+    	}else if(thirdfruit==1){
+    		score=4;
+    	}else if(thirdfruit==0){
+    		score=0;
+    	};
+		java.math.BigDecimal rtf = new java.math.BigDecimal(score);
+		score=rtf.setScale(2, java.math.BigDecimal.ROUND_HALF_DOWN).doubleValue();
+		
+		if(score>=25&&score<=27){
+			root.resultTransformationGrade="转化能力强，通过丰富证明材料强化科技成果转化质量（证明材料：知识产权证书、销售合同、销售发票、用户使用报告、成果查新、产品检测报告、产品说明书等）";
+		}else if(score>=15&&score<=20){
+			root.resultTransformationGrade="转化能力较强，建议通过丰富证明材料强化科技成果转化质量（证明材料：知识产权证书、销售合同、销售发票、用户使用报告、成果查新、产品检测报告、产品说明书等）";
+		}else if(score==10){
+			root.resultTransformationGrade="转化能力一般，归集科技成果，包括新产品、新技术、新工艺、新服务、样品样机等，并通过丰富证明材料强化科技成果转化质量（证明材料：知识产权证书、销售合同、销售发票、用户使用报告、成果查新、产品检测报告、产品说明书等）；";
+		}else if(score>=0&&score<=5){
+			root.resultTransformationGrade="转化能力较弱，归集科技成果，包括新产品、新技术、新工艺、新服务、样品样机等，并通过丰富证明材料强化科技成果转化质量（证明材料：知识产权证书、销售合同、销售发票、用户使用报告、成果查新、产品检测报告、产品说明书等）；";
+		}else{
+			root.resultTransformationGrade="转化能力较弱，归集科技成果，包括新产品、新技术、新工艺、新服务、样品样机等，并通过丰富证明材料强化科技成果转化质量（证明材料：知识产权证书、销售合同、销售发票、用户使用报告、成果查新、产品检测报告、产品说明书等）；";
+		};
+		root.resultTransformation=score;
+		def val=String.format("%s分~%s分", score+"",score+2+"");
+		return val;
+	 ]]></property>
+    <property name="rdManag"><![CDATA[
+		def score = root.researchDevelopment;
+		def a=0;
+    	def b=0;
+    	def c=0;
+    	def d=0;
+    	if(root.compsys=="A"){
+    		a=5.5;
+    	}else if(root.compsys=="B"){
+    		a=3.5;
+    	}else if(root.compsys=="C"){
+    		a=1.5;
+    	}else if(root.compsys=="D"){
+    		a=0;
+    	};
+    	if(root.cooper=="A"){
+    		b=5.5;
+    	}else if(root.cooper=="B"){
+    		b=3.5;
+    	}else if(root.cooper=="C"){
+    		b=0;
+    	};
+    	if(root.platform=="A"){
+    		c=3.5;
+    	}else if(root.platform=="B"){
+    		c=2;
+    	}else if(root.platform=="C"){
+    		c=0;
+    	};
+    	if(root.personnel=="A"){
+    		d=3.5;
+    	}else if(root.personnel=="B"){
+    		d=0;
+    	};
+    	score =a+b+c+d;
+		java.math.BigDecimal rtf = new java.math.BigDecimal(score);
+		score=rtf.setScale(2, java.math.BigDecimal.ROUND_HALF_DOWN).doubleValue();
+		
+		if(score>=16&&score<=20){
+			root.researchDevelopmentGrade="建议加强企业研发机构建设①完善研发管理制度等；②研发场地、设备设施等配套";
+		}else if(score>=10&&score<16){
+			root.researchDevelopmentGrade="建议加强企业研发机构建设①完善研发管理制度等；②研发场地、设备设施等配套；④研发机构获得第三方认定或挂牌等；⑤开放式创新创业平台";
+		}else if(score>=6&&score<10){
+			root.researchDevelopmentGrade="建议加强企业研发机构建设①完善研发管理制度等；②研发场地、设备设施等配套；③加强与科研院校合作";
+		}else if(score>=0&&score<6){
+			root.researchDevelopmentGrade="建议加强企业研发机构建设①完善研发管理制度等；②研发场地、设备设施等配套；③加强与科研院校合作；④研发机构获得第三方认定或挂牌等";
+		}else{
+			root.researchDevelopmentGrade="";
+		};
+		root.researchDevelopment=score;
+		return String.format("%s分~%s分", score+"",score+2+"");
+	 ]]></property>
+    <property name="compGrowth"><![CDATA[
+		def score = root.totalAssets;
+		def total = root.total;
+		def compop=root.compop;
+		def cog2008=root.cog2008;
+		com.ht.biz.service.impl.hisself.FinanceCalculation fc =new com.ht.biz.service.impl.hisself.FinanceCalculation(root);
+		 def a=fc.calcValue(fc.KEY_NET_ASSET);
+		 def b=fc.calcValue(fc.KEY_SALES_REVENUE);
+		 score=a+b;
+		root.totalAssets=a+b;
+		def endTime = new Date();
+		def startTime=root.regDate;
+		def year = DateUtil.getDiffYearByDate(startTime,endTime);
+		root.total=root.intellectualProperty+root.resultTransformation+root.researchDevelopment+root.totalAssets;
+		if(total<=60){
+			root.applySuggest="建议申报高新技术培育入库";
+		}else if(year<1||compop){
+			root.applySuggest="建议申报高新技术培育入库";
+		}else{
+			root.applySuggest="建议申报高新技术企业";
+		};
+		if(cog2008){
+			root.applySuggest="建议申报高新技术企业";
+		};
+		if(score>=16&&score<=20){
+			root.totalAssetsGrade="成长性得分为"+score+"分（销售收入增长率得分为"+b+"，净资产增长率得分为"+a+"），财务增长性好";
+		 }else if(score>=10&&score<16){
+			root.totalAssetsGrade="成长性得分为"+score+"分（销售收入增长率得分为"+b+"，净资产增长率得分为"+a+"），财务增长性较好";
+		 }else if(score>=6&&score<10){
+			root.totalAssetsGrade="成长性得分为"+score+"分（销售收入增长率得分为"+b+"，净资产增长率得分为"+a+"），财务增长性一般";
+		 }else if(score>=0&&score<6){
+			root.totalAssetsGrade="成长性得分为"+score+"分（销售收入增长率得分为"+b+"，净资产增长率得分为"+a+"），财务增长性差";
+		 }else{
+			root.totalAssetsGrade="成长性得分为"+score+"分（销售收入增长率得分为"+b+"，净资产增长率得分为"+a+"），财务增长性差";
+		 };
+		
+		return String.format("%s分", score);
+	 ]]></property>
+  </product>
+  <!-- 淮安 -->
+  
+  <!-- 金华配置 -->
+  <product>
+  	<property name="type" >jinhua_shigaorending</property>
+    <property name="name" >市高认定</property>
+    <property name="foundTime"><![CDATA[return "申请认定时须注册成立一年以上<font color='red'>，非高企</font>";]]></property>
+    <property name="techField">return "对主要（产品/服务）发挥核心支持作用的技术属于《国家重点支持的高新技术领域》 规定的范围";</property>
+    <property name="persForm">return "大专以上学历的科技人员占比≥15%，其中，研发人员占比7%";</property>
+    <property name="rdCost">return "近1年的研究开发费用总额占销售收入总额的比例≥3%";</property>
+    <property name="hincome">return "占企业当年销售收入的50%以上";</property>
+    <property name="cop">return "申请认定前一年内企业在产品研发、生产经营过程中，环保达标，三年内无违法生产经营记录和知识产权纠纷";</property>
+    <property name="intelProp">return "主要产品（服务）拥有自主知识产权（已授权、登记）";</property>
+    <property name="stach">return "近1年科技成果转化";</property>
+    <property name="rdManag">return "管理制度、研发机构、产学研、科技成果、人员培育、创新创业平台";</property>
+    <property name="compGrowth">return "近1年净资产；近1年销售收入";</property>
+  </product>
+  <product>
+    <property name="type" >jinhua_qiye_detail</property>
+    <property name="name" >企业实际（A）</property>
+   <property name="foundTime"><![CDATA[
+        def endTime = new Date();
+		def startTime=root.regDate;
+		
+		def year = DateUtil.getDiffYearByDate(startTime,endTime);
+		
+		return "企业成立<font color='red'>"+year+"</font>年";
+		
+	 ]]>
+    </property>
+    <property name="techField"><![CDATA[
+		def productServ=root.productServ;
+		return "主营产品技术领域为"+productServ;
+	 ]]></property>
+    <property name="persForm"><![CDATA[
+        def juniorTechTotal=root.juniorTechTotal;
+        def developmentTotal=root.developmentTotal;
+        def workerTotal=root.workerTotal;
+		def d1=(juniorTechTotal*1.0/workerTotal)*100;
+		java.math.BigDecimal b1 = new java.math.BigDecimal(d1);
+		def d2=(developmentTotal*1.0/workerTotal)*100;
+		java.math.BigDecimal b2 = new java.math.BigDecimal(d1);
+		d1=java.lang.Double.valueOf(java.lang.String.format("%.0f", d1));
+		d2=java.lang.Double.valueOf(java.lang.String.format("%.0f", d2));
+		return "大专以上学历科技人员占比为"+d1+"%，其中，研发人员占比为"+d2+"%";
+	 ]]></property>
+    <property name="rdCost"><![CDATA[
+		def saleyfrate=root.saleyfrate;
+		if("A"==saleyfrate){
+		   return "研究开发费用总额占销售收入总额的比例为>=5%";
+		}else if("B"==saleyfrate){
+		   return "研究开发费用总额占销售收入总额的比例为>=4%";
+		}else if("C"==saleyfrate){
+		  return "研究开发费用总额占销售收入总额的比例为>=3%";
+		}else{
+		  return "研究开发费用总额占销售收入总额的比例为<3%";
+		};
+	 ]]></property>
+    <property name="hincome"><![CDATA[
+		def prodrate=root.prodrate;
+		if("A"==prodrate){
+		    return "近1年高新技术产品（服务）收入占当年总收入比例>=50%，达到要求";
+		}else if("B"==prodrate){
+			return "近1年高新技术产品（服务）收入占当年总收入比例>=50%，达到要求";
+		}else{
+		   return "近1年高新技术产品（服务）收入占当年总收入比例<50%，不符合要求";
+		};
+	 ]]></property>
+    <property name="cop"><![CDATA[
+		def compop=root.compop;
+		return "申请认定前一年内企业在产品研发、生产经营过程中，环保达标，三年内无违法生产经营记录和知识产权纠纷";
+	 ]]></property>
+    <property name="intelProp"><![CDATA[
+		def x1self=root.x1self;
+		def x1eg=root.x1eg;
+		def y1self=root.y1self;
+		def y1eg=root.y1eg;
+		def y2self=root.y2self;
+		def y2eg=root.y2eg;
+		def y3self=root.y3self;
+		def y3eg=root.y3eg;
+		
+		return "发明专利"+(x1self+x1eg)+"项；实用新型专利"+(y1self+y1eg)+"项；外观设计专利"+(y2self+y2eg)+"项；软件著作权"+(y3self+y3eg)+"项";
+		
+	 ]]></property>
+    <property name="stach"><![CDATA[
+		def thirdfruit=root.thirdfruit;
+		return "年平均科技成果转化"+thirdfruit+"项/年";
+	 ]]></property>
+    <property name="rdManag"><![CDATA[
+		return "企业已建立了相关制度";
+	 ]]></property>
+    <property name="compGrowth"><![CDATA[
+	     def a1=root.assetThirdValue;
+		 def a2=root.saleThirdValue;
+		 return "近1年企业净资产为"+a1+"万，销售收入为"+a2+"万";
+	 ]]></property>
+  </product>
+     <product>
+    <property name="type" >jinhua_shigao_yes_no</property>
+    <property name="name">市高</property>
+    <property name="foundTime"><![CDATA[
+		def endTime = new Date();
+		def startTime=root.regDate;
+		def cog2008=root.cog2008;
+		
+		def year = DateUtil.getDiffYearByDate(startTime,endTime);
+		if(year>=1){
+		    if(cog2008){
+		       return "<s class='sign wrong'></s>";
+		    }else{
+		       return "<s class='sign right'></s>";
+		    }
+		}else{
+		   return "<s class='sign wrong'></s>";
+		};
+	 ]]>
+    </property>
+    <property name="techField"><![CDATA[
+		def cog2008=root.cog2008;
+		
+		return cog2008?"":"<s class='sign right'></s>";
+	 ]]></property>
+    <property name="persForm"><![CDATA[
+    	def cog2008=root.cog2008;
+		def juniorTechTotal=root.juniorTechTotal;
+		def developmentTotal=root.developmentTotal;
+        def workerTotal=root.workerTotal;
+		def d1=juniorTechTotal*1.0/workerTotal;
+		def d2=developmentTotal*1.0/workerTotal;
+		
+		
+		if(d1>=0.15&&d2>=0.07){
+		    return cog2008?"":"<s class='sign right'></s>";
+		}else if(d1>=0.15&&d2<0.07){
+		   	return cog2008?"":"<s class='sign wrong'></s>";
+		}else{
+		    return cog2008?"":"<s class='sign wrong'></s>";
+		};
+		
+	 ]]></property>
+    <property name="rdCost"><![CDATA[
+		def saleyfrate=root.saleyfrate;
+		def cog2008=root.cog2008;
+		if("A"==saleyfrate){
+		    return cog2008?"":"<s class='sign right'></s>";   
+		}else if("B"==saleyfrate){
+			return cog2008?"":"<s class='sign right'></s>";
+		}else if("C"==saleyfrate){
+			return cog2008?"":"<s class='sign right'></s>";
+		}else{
+		    return cog2008?"":"<s class='sign wrong'></s>";
+		};
+	 ]]></property>
+    <property name="hincome"><![CDATA[
+		def prodrate=root.prodrate;
+		def cog2008=root.cog2008;
+		if("A"==prodrate){
+		   return cog2008?"":"<s class='sign right'></s>";   
+		}else if("B"==prodrate ){
+		   return cog2008?"":"<s class='sign right'></s>";   
+		}else{
+		   return cog2008?"":"<s class='sign wrong'></s>";
+		};
+	 ]]></property>
+    <property name="cop"><![CDATA[
+		def compop=root.compop;
+		def cog2008=root.cog2008;
+		if(compop){
+			return cog2008?"":"<s class='sign right'></s>"
+		}else{
+		    return cog2008?"":"<s class='sign wrong'></s>";
+		};
+	 ]]></property>
+    <property name="intelProp"><![CDATA[
+    	def cog2008=root.cog2008;
+		return cog2008?"":"<s class='sign right'></s>";
+	 ]]></property>
+    <property name="stach"><![CDATA[
+    	def cog2008=root.cog2008;
+		return cog2008?"":"<s class='sign right'></s>";
+	 ]]></property>
+    <property name="rdManag"><![CDATA[
+    	def cog2008=root.cog2008;
+		return cog2008?"":"<s class='sign right'></s>";
+	 ]]></property>
+    <property name="compGrowth"><![CDATA[
+    	def cog2008=root.cog2008;
+		return cog2008?"":"<s class='sign right'></s>";
+	 ]]></property>
+  </product>
+  <product>
+    <property name="type" >jinhua_guogao_yes_no</property>
+    <property name="name" >国高</property>
+    <property name="foundTime"><![CDATA[
+		def endTime = new Date();
+		def startTime=root.regDate;
+		def cog2008=root.cog2008;
+		
+		def retval="";
+		
+		def year = DateUtil.getDiffYearByDate(startTime,endTime);
+		
+		if(year>=1){
+		    root.highCity=root.highCity+"企业成立<font color='red'>"+year+"</font>年；";
+		    root.yearToString="<s class='sign right'></s>本企业符合工商注册成立一年以上条件,其申报技术与国家支持的领域相符；";
+		    return "<s class='sign right'></s>";
+		}else{
+		   root.highCity=root.highCity+ "企业成立不足1年，存在一票否决项，建议"+(DateUtil.year()+1)+"年申报市高和高企；";
+		   root.suggest=root.suggest+"企业成立不足1年，存在一票否决项，建议"+(DateUtil.year()+1)+"年申报市高和高企；";
+		   root.yearToString="<s class='sign wrong'></s>企业成立时间不足1年，不符合要求,其申报技术与国家支持的领域相符；";
+		   return "<s class='sign wrong'></s>";
+		};
+	 ]]>
+    </property>
+    <property name="techField"><![CDATA[
+		def cog2008=root.cog2008;
+		root.highCity=root.highCity+"主营产品技术领域满足《国家重点支持的高新技术领域》规定的范围；";
+		return "<s class='sign right'></s>"; 
+	 ]]></property>
+    <property name="persForm"><![CDATA[
+		def cog2008=root.cog2008;
+		def developmentTotal=root.developmentTotal;
+        def workerTotal=root.workerTotal;
+        def juniorTechTotal=root.juniorTechTotal;
+        def d1=juniorTechTotal*1.0/workerTotal;
+		def d2=developmentTotal*1.0/workerTotal;
+		java.math.BigDecimal b1 = new java.math.BigDecimal(d1);
+		java.math.BigDecimal b2 = new java.math.BigDecimal(d2);
+		d1=b1.setScale(2, java.math.BigDecimal.ROUND_HALF_DOWN).doubleValue()*100;
+		d2=b2.setScale(2, java.math.BigDecimal.ROUND_HALF_DOWN).doubleValue()*100;
+		d1=java.lang.Double.valueOf(java.lang.String.format("%.0f", d1));
+		d2=java.lang.Double.valueOf(java.lang.String.format("%.0f", d2));
+		if(d1>=15&&d2>=7){
+			root.highCity=root.highCity+"大专以上学历科技人员占企业职工总数的比例为"+d1+"%，其中，研发人员占比为"+d2+"%";
+			root.personToString="<s class='sign right'></s>"+"大专以上学历科技人员占企业职工总数的比例为"+d1+"%，其中，研发人员占比为"+d2+"%；";
+		    return "<s class='sign right'></s>";
+		}else if(d1>=15&&d2<7){
+			root.highCity=root.highCity+"大专以上学历科技人员占企业职工总数的比例为"+d1+"%，其中，研发人员占比为"+d2+"%，不符合要求；";
+		    root.suggest=root.suggest+"目前科技人员占比不符合要求，有申报风险，建议优化人员结构；"; 
+		    root.personToString="<s class='sign wrong'></s>"+"大专以上学历科技人员占企业职工总数的比例为"+d1+"%，其中，研发人员占比为"+d2+"%，不符合要求；";
+		   	return "<s class='sign wrong'></s>";
+		}else{
+			root.highCity=root.highCity+"大专以上学历科技人员占企业职工总数的比例为"+d1+"%，其中，研发人员占比为"+d2+"%，不符合要求；";
+		    root.suggest=root.suggest+"目前科技人员占比不符合要求，有申报风险，建议优化人员结构；"; 
+		    root.personToString="<s class='sign wrong'></s>"+"大专以上学历科技人员占企业职工总数的比例为"+d1+"%，其中，研发人员占比为"+d2+"%，不符合要求；";
+		    return "<s class='sign wrong'></s>";
+		};
+	 ]]></property>
+    <property name="rdCost"><![CDATA[
+		def saleyfrate=root.saleyfrate;
+		def cog2008=root.cog2008;
+		if("A"==saleyfrate){
+			root.highCity=root.highCity+"研发费用总额占比为>=5%，达到要求；";
+		    root.costToString="<s class='sign right'></s>研发费用总额占比为>=5%，达到要求；";
+		    return "<s class='sign right'></s>";   
+		}else if("B"==saleyfrate){
+			root.highCity=root.highCity+"研发费用总额占比为>=4%，达到要求；";
+			root.costToString="<s class='sign right'></s>研发费用总额占比为>=4%，达到要求；";
+			return "<s class='sign right'></s>";
+		}else if("C"==saleyfrate){
+			root.highCity=root.highCity+"研发费用总额占比为>=3%，达到要求；";
+			root.costToString="<s class='sign right'></s>研发费用总额占比为>=3%，达到要求；";
+			return "<s class='sign right'></s>";
+		}else{
+			root.highCity=root.highCity+"研发费用总额占比为<=3%，不符合要求；";
+		    root.costToString="<s class=\"sign wrong\"></s>研发费用总额占比不符合要求，建议重点梳理、归集研发费用，做好研发费用辅助账";
+		    root.suggest=root.suggest+"目前研发费用总额占比不符合要求，建议重点梳理、归集研发费用，做好研发费用辅助账；";
+		    return "<s class='sign wrong'></s>";
+		};
+	 ]]></property>
+    <property name="hincome"><![CDATA[
+		def prodrate=root.prodrate;
+		def cog2008=root.cog2008;
+		if("A"==prodrate){
+		   root.highCity=root.highCity+"近1年高新技术产品（服务）收入占当年总收入比例>=50%，达到要求；";
+		   root.incomeToString="<s class='sign right'></s>近1年高新技术产品（服务）收入占当年总收入比例>=50%，达到要求；";
+		   return "<s class='sign right'></s>";   
+		}else if("B"==prodrate ){
+		   root.highCity=root.highCity+"近1年高新技术产品（服务）收入占当年总收入比例>=50%，达到要求；";
+		   root.incomeToString="<s class='sign right'></s>近1年高新技术产品（服务）收入占当年总收入比例>=50%，达到要求；";
+		   return "<s class='sign right'></s>";   
+		}else{
+		   root.highCity=root.highCity+"近1年高新技术产品（服务）收入占当年总收入比例<50%，不符合要求；";
+		   root.suggest=root.suggest+"目前高品收入占比不符合要求，建议重新归集高新技术产品收入；";
+		   root.incomeToString="<s class='sign wrong'></s>近1年高新技术产品（服务）收入占当年总收入比例<50%，不符合要求；";
+		   return "<s class='sign wrong'></s>";
+		};
+	 ]]></property>
+    <property name="cop"><![CDATA[
+		def compop=root.compop;
+		def cog2008=root.cog2008;
+		if(compop){
+			root.highCity=root.highCity+"满足上一年度合规性运营要求。";
+			root.compopToString="<s class='sign right'></s>满足上一年度合规性运营要求。";
+			return "<s class='sign right'></s>"
+		}else{
+			root.highCity=root.highCity+"不满足合规性运营要求。";
+			root.suggest=root.suggest+"企业上一年度未能合规运营，存在一票否决项，建议"+(DateUtil.year()+1)+"年申报市高和国家高新技术企业。";
+		    root.compopToString="<s class='sign wrong'></s>不满足上一年度合规性运营要求。";
+		    return "<s class='sign wrong'></s>";
+		};
+	 ]]></property>
+    <property name="intelProp"><![CDATA[
+        def score=root.intellectualProperty;
+        def a=root.xselftotal+root.xegTotal;
+        def b=root.yselftotal+root.yegtotal;
+        if(a>=1 || b>=5){
+           root.intellectualPropertyGrade="您已具备申请高新技术企业的条件。知识产权数量已达标，建议持续申请与主营产品相关的知识产权，为三年后的重新认定准备，增加知识产权的方式有购买/转让/自主申请";
+        }else if(a==0 && (b>2 && b<5)){
+           root.intellectualPropertyGrade="可申请高企，但知识产权数量不够导致评分不高，建议申请市高或增加知识产权数量至1个I类知识产权或5个及以上Ⅱ类知识产权后申请高企（注：知识产权要与企业主营产品相关）";
+        }else if(a==0 && (b>0 && b<3)){
+           root.intellectualPropertyGrade="建议先申请市高或增加知识产权数量至1个I类知识产权或5个及以上Ⅱ类知识产权再申请高企；增加知识产权的方式有购买/转让/自主申请（注：知识产权要与企业主营产品相关）";
+        }else if(a==0 && b==0){
+           root.intellectualPropertyGrade="知识产权数量为0，建议先申请1个I类知识产权或5个及以上Ⅱ类知识产权再申请国高；增加知识产权的方式有购买/转让/自主申请（注：知识产权要与企业主营产品相关）";
+        }else{
+           root.intellectualPropertyGrade="";
+        };
+        def xtotal=root.xselftotal+root.xegTotal;
+        def ytotal=root.yselftotal+root.yegtotal;
+        def y1total=root.y1eg+root.y1self;
+        def y2total=root.y2eg+root.y2self;
+        def y3total=root.y3eg+root.y3self;
+        def d=0;
+        for(int i=0;i<=1;i++){
+			if(xtotal==0&&ytotal==0){
+				d=d+0;
+			};
+			if(xtotal==0&&y1total==0&&y3total==0&&y2total>0){
+				d=d+1;
+			};
+			if(xtotal==0&&y1total==0&&y3total>0){
+				d=d+3;
+			};
+			if(xtotal==0&&y1total>0){
+				d=d+4;
+			};
+			if(xtotal==1){
+				d=d+5;
+			};
+			if(xtotal>1&&xtotal<=5){
+				d=d+6;
+			};
+			if(xtotal>5){
+				d=d+7;
+			};
+		};
+		if(xtotal==0&&ytotal==0){
+			d=d+0;
+		};
+		if(xtotal==0&&ytotal>0&&ytotal<3){
+			d=d+1;
+		};
+		if(xtotal==0&&ytotal>2&&ytotal<5){
+			d=d+3;
+		};
+		if(xtotal==0&&ytotal>4){
+			d=d+5;
+		};
+		if(xtotal==1){
+			d=d+7;
+		};
+		if(xtotal>1){
+			d=d+7.5;
+		};
+		def xself=root.x1self+root.x2self+root.x3self+root.x4self+root.x5self+root.x6self;
+		def yself=root.y1self+root.y2self+root.y3self;
+		def xeg=root.x1eg+root.x2eg+root.x3eg+root.x4eg+root.x5eg+root.x6eg;
+		def yeg=root.y1eg+root.y2eg+root.y3eg;
+		if(xtotal==0&&ytotal==0){
+			d=d+0;
+		};
+		if(xself==0&&yself==0&&yeg==1){
+			d=d+0.5;
+		};
+		if(xself==0&&yself==0&&yeg==2){
+			d=d+1;
+		};
+		if(xself==0&&yself==0&&yeg==3){
+			d=d+1.5;
+		};
+		if(xself==0&&yself==0&&yeg==4){
+			d=d+2;
+		};
+		if(xself==0&&yself==0&&yeg>=5){
+			d=d+2.5;
+		};
+		if(xself==0&&yself==0&&xeg>=1){
+			d=d+2.5;
+		};
+		if(xself==0&&yself==1){
+			d=d+1.5;
+		};
+		if(xself==0&&yself==2){
+			d=d+2.5;
+		};
+		if(xself==0&&yself==3){
+			d=d+3.5;
+		};
+		if(xself==0&&yself==4){
+			d=d+4.5;
+		};
+		if(xself==0&&yself>=4){
+			d=d+5.5;
+		};
+		if(xself>=1){
+			d=d+5.5;
+		};
+		if(root.other){
+			d=d+1;
+		};
+		score=d;
+		root.intellectualProperty=score;
+        return String.format("%s分~%s分", score+"",score+2+"");
+	 ]]></property>
+    <property name="stach"><![CDATA[
+		def score = root.resultTransformation;
+		def thirdfruit=root.thirdfruit;
+    	if(thirdfruit>=6){
+    		score=27;
+    	}else if(thirdfruit==5){
+    		score=25;
+    	}else if(thirdfruit==4){
+    		score=20;
+    	}else if(thirdfruit==3){
+    		score=16;
+    	}else if(thirdfruit==2){
+    		score=10;
+    	}else if(thirdfruit==1){
+    		score=4;
+    	}else if(thirdfruit==0){
+    		score=0;
+    	};
+		java.math.BigDecimal rtf = new java.math.BigDecimal(score);
+		score=rtf.setScale(2, java.math.BigDecimal.ROUND_HALF_DOWN).doubleValue();
+		
+		if(score>=25&&score<=27){
+			root.resultTransformationGrade="转化能力强，通过丰富证明材料强化科技成果转化质量（证明材料：知识产权证书、销售合同、销售发票、用户使用报告、成果查新、产品检测报告、产品说明书等）";
+		}else if(score>=15&&score<=20){
+			root.resultTransformationGrade="转化能力较强，建议通过丰富证明材料强化科技成果转化质量（证明材料：知识产权证书、销售合同、销售发票、用户使用报告、成果查新、产品检测报告、产品说明书等）";
+		}else if(score==10){
+			root.resultTransformationGrade="转化能力一般，归集科技成果，包括新产品、新技术、新工艺、新服务、样品样机等，并通过丰富证明材料强化科技成果转化质量（证明材料：知识产权证书、销售合同、销售发票、用户使用报告、成果查新、产品检测报告、产品说明书等）；";
+		}else if(score>=0&&score<=5){
+			root.resultTransformationGrade="转化能力较弱，归集科技成果，包括新产品、新技术、新工艺、新服务、样品样机等，并通过丰富证明材料强化科技成果转化质量（证明材料：知识产权证书、销售合同、销售发票、用户使用报告、成果查新、产品检测报告、产品说明书等）；";
+		}else{
+			root.resultTransformationGrade="转化能力较弱，归集科技成果，包括新产品、新技术、新工艺、新服务、样品样机等，并通过丰富证明材料强化科技成果转化质量（证明材料：知识产权证书、销售合同、销售发票、用户使用报告、成果查新、产品检测报告、产品说明书等）；";
+		};
+		root.resultTransformation=score;
+		def val=String.format("%s分~%s分", score+"",score+2+"");
+		return val;
+	 ]]></property>
+    <property name="rdManag"><![CDATA[
+		def score = root.researchDevelopment;
+		def a=0;
+    	def b=0;
+    	def c=0;
+    	def d=0;
+    	if(root.compsys=="A"){
+    		a=5.5;
+    	}else if(root.compsys=="B"){
+    		a=3.5;
+    	}else if(root.compsys=="C"){
+    		a=1.5;
+    	}else if(root.compsys=="D"){
+    		a=0;
+    	};
+    	if(root.cooper=="A"){
+    		b=5.5;
+    	}else if(root.cooper=="B"){
+    		b=3.5;
+    	}else if(root.cooper=="C"){
+    		b=0;
+    	};
+    	if(root.platform=="A"){
+    		c=3.5;
+    	}else if(root.platform=="B"){
+    		c=2;
+    	}else if(root.platform=="C"){
+    		c=0;
+    	};
+    	if(root.personnel=="A"){
+    		d=3.5;
+    	}else if(root.personnel=="B"){
+    		d=0;
+    	};
+    	score=a+b+c+d;
+		java.math.BigDecimal rtf = new java.math.BigDecimal(score);
+		score=rtf.setScale(2, java.math.BigDecimal.ROUND_HALF_DOWN).doubleValue();
+		
+		if(score>=16&&score<=20){
+			root.researchDevelopmentGrade="建议加强企业研发机构建设①完善研发管理制度等；②研发场地、设备设施等配套";
+		}else if(score>=10&&score<16){
+			root.researchDevelopmentGrade="建议加强企业研发机构建设①完善研发管理制度等；②研发场地、设备设施等配套；④研发机构获得第三方认定或挂牌等；⑤开放式创新创业平台";
+		}else if(score>=6&&score<10){
+			root.researchDevelopmentGrade="建议加强企业研发机构建设①完善研发管理制度等；②研发场地、设备设施等配套；③加强与科研院校合作";
+		}else if(score>=0&&score<6){
+			root.researchDevelopmentGrade="建议加强企业研发机构建设①完善研发管理制度等；②研发场地、设备设施等配套；③加强与科研院校合作；④研发机构获得第三方认定或挂牌等";
+		}else{
+			root.researchDevelopmentGrade="";
+		};
+		root.researchDevelopment=score;
+		return String.format("%s分~%s分", score+"",(score+2)+"");
+	 ]]></property>
+    <property name="compGrowth"><![CDATA[
+		def score = root.totalAssets;
+		def total = root.total;
+		def compop=root.compop;
+		
+		com.ht.biz.service.impl.hisself.FinanceCalculation fc =new com.ht.biz.service.impl.hisself.FinanceCalculation(root);
+		 def a=fc.calcValue(fc.KEY_NET_ASSET);
+		 def b=fc.calcValue(fc.KEY_SALES_REVENUE);
+		 score=a+b;
+		root.totalAssets=a+b;
+		def endTime = new Date();
+		def startTime=root.regDate;
+		def year = DateUtil.getDiffYearByDate(startTime,endTime);
+		
+		def suggest=root.suggest;
+		if(org.apache.commons.lang.StringUtils.isBlank(suggest)){
+			root.applySuggest="建议申报";
+		}else{
+			root.applySuggest="";
+		};
+		
+		if(score>=16&&score<=20){
+			root.totalAssetsGrade="成长性得分为"+score+"分（销售收入增长率得分为"+b+"，净资产增长率得分为"+a+"），财务增长性好";
+		 }else if(score>=10&&score<16){
+			root.totalAssetsGrade="成长性得分为"+score+"分（销售收入增长率得分为"+b+"，净资产增长率得分为"+a+"），财务增长性较好";
+		 }else if(score>=6&&score<10){
+			root.totalAssetsGrade="成长性得分为"+score+"分（销售收入增长率得分为"+b+"，净资产增长率得分为"+a+"），财务增长性一般";
+		 }else if(score>=0&&score<6){
+			root.totalAssetsGrade="成长性得分为"+score+"分（销售收入增长率得分为"+b+"，净资产增长率得分为"+a+"），财务增长性差";
+		 }else{
+			root.totalAssetsGrade="成长性得分为"+score+"分（销售收入增长率得分为"+b+"，净资产增长率得分为"+a+"），财务增长性差";
+		 };
+		root.total=root.intellectualProperty+root.resultTransformation+root.researchDevelopment+root.totalAssets;
+		return String.format("%s分", score);
+	 ]]></property>
+  </product>
+    <!-- 金华配置 -->
+  
+<!-- 广州配置 -->
+   <product>
+    <property name="type" >xiaojuren_yes_no</property>
+    <property name="name" >科技小巨人</property>
+    <property name="foundTime"><![CDATA[
+		def endTime = new Date();
+		def startTime=root.regDate;
+		def cog2008=root.cog2008;
+		
+		def fmt = defaultSFT;
+		
+		def year_fmt=yearSFT;
+		
+		def kjyear="";
+		if(!org.apache.commons.lang.StringUtils.contains(fmt.format(startTime),"01-01")){
+			kjyear=(Integer.valueOf(year_fmt.format(startTime))+1)+"-01-01";
+		}else{
+			kjyear=kjyear=fmt.format(startTime);
+		};
+		
+		def year=0;
+		try {
+			year = (int) (((endTime.getTime() - fmt.parse(kjyear).getTime()) / (1000 * 60 * 60 * 24))/ 365);
+			
+		} catch (Exception e) {
+			year=0;
+		};
+		def year2 = DateUtil.getDiffYearByDate(startTime,endTime);
+		if(year2>=1){
+			if(year<1){
+				return "<s class='sign wrong'></s>";
+			}else if(year>=1&&!cog2008){
+				root.highCity=root.highCity+"本企业符合工商注册成立一年以上条件;";
+				root.yearToString="<s class='sign right'></s>本企业符合工商注册成立一年以上条件；";
+				return "<s class='sign right'></s>";
+			}else{
+				root.highCity=root.highCity+"本企业符合工商注册成立一年以上，但不满足成立一个会计年度以上的要求;";
+				root.yearToString="<s class='sign right'></s>本企业符合工商注册成立一年以上，但不满足成立一个会计年度以上的要求;";
+				root.suggest="企业目前成立时间不满一个会计年度，不符合入库科技创新小巨人条件，建议先申请高企认定;";
+				return "<s class='sign wrong'></s>";
+			}
+		}else{
+			root.highCity=root.highCity+"企业成立时间不足1年，不符合要求;";
+			root.yearToString="<s class='sign wrong'></s>企业成立时间不足1年，不符合要求;";
+			root.suggest="企业目前成立时间不足一年，存在一票否决项，建议"+(DateUtil.year()+1)+"年申报小巨人入库和高企;";
+			return "<s class='sign wrong'></s>";
+		};
+	 ]]>
+    </property>
+    <property name="techField"><![CDATA[
+		root.highCity=root.highCity+"其申报技术与国家支持的领域相符;";
+		return "<s class='sign right'></s>";
+	 ]]></property>
+    <property name="persForm"><![CDATA[
+    	def cog2008=root.cog2008;
+		def developmentTotal=root.developmentTotal==null?0:root.developmentTotal;
+        def workerTotal=root.workerTotal==null?0:root.workerTotal;
+        def juniorTechTotal=root.juniorTechTotal==null?0:root.juniorTechTotal;
+		def d1=juniorTechTotal*1.0/workerTotal;
+		def d2=developmentTotal*1.0/workerTotal;
+		java.math.BigDecimal b1 = new java.math.BigDecimal(d1);
+		java.math.BigDecimal b2 = new java.math.BigDecimal(d2);
+		d1=b1.setScale(2, java.math.BigDecimal.ROUND_HALF_DOWN).doubleValue()*100;
+		d2=b2.setScale(2, java.math.BigDecimal.ROUND_HALF_DOWN).doubleValue()*100;
+		d1=java.lang.Double.valueOf(java.lang.String.format("%.0f", d1));
+		d2=java.lang.Double.valueOf(java.lang.String.format("%.0f", d2));
+		if(d1>15 && d2>=5){
+			root.highCity=root.highCity+"大专以上学历科技人员占企业职工总数的比例为"+d1+"%，其中，研发人员占比为"+d2+"%，符合要求;";
+		    root.personToString="<s class='sign right'></s>大专以上学历科技人员占企业职工总数的比例为"+d1+"%，其中，研发人员占比为"+d2+"%，符合要求;";
+		    return "<s class='sign right'></s>";
+		}else if(d1>15 && d2<5){
+			root.highCity=root.highCity+"大专以上学历科技人员占企业职工总数的比例为"+d1+"%，其中，研发人员占比为"+d2+"%，不符合要求;";
+		    root.personToString="<s class='sign wrong'></s>大专以上学历科技人员占企业职工总数的比例为"+d1+"%，其中，研发人员占比为"+d2+"%，不符合要求;";
+		    root.suggest="目前科技人员占比不符合要求，有申报风险，建议优化人员结构;";
+		    return "<s class='sign wrong'></s>";
+		}else if(d1<15){
+			root.highCity=root.highCity+"大专以上学历科技人员占企业职工总数的比例为"+d1+"%，其中，研发人员占比为"+d2+"%，不符合要求;";
+		    root.personToString="<s class='sign wrong'></s>大专以上学历科技人员占企业职工总数的比例为"+d1+"%，其中，研发人员占比为"+d2+"%，不符合要求;";
+		    root.suggest="目前科技人员占比不符合要求，有申报风险，建议优化人员结构;";
+		    return "<s class='sign wrong'></s>";
+		}else{
+		   return "<s class='sign wrong'></s>";
+		};
+	 ]]></property>
+    <property name="rdCost"><![CDATA[
+		def saleyfrate=root.saleyfrate;
+		def cog2008=root.cog2008;
+		if("A"==saleyfrate){
+			root.highCity=root.highCity+"研发费用总额占比为≥5%，达到要求;";
+			root.costToString="<s class='sign right'></s>研发费用总额占比为≥5%，达到要求;";
+		    return "<s class='sign right'></s>";   
+		}else if("B"==saleyfrate){
+			root.highCity=root.highCity+"研发费用总额占比为≥4%，达到要求;";
+			root.costToString="<s class='sign right'></s>研发费用总额占比为≥4%，达到要求;";
+		    return "<s class='sign right'></s>";  
+		}else if("C"==saleyfrate){
+			root.highCity=root.highCity+"研发费用总额占比为≥3%，达到要求;";
+			root.costToString="<s class='sign right'></s>研发费用总额占比为≥3%，达到要求;";
+		    return "<s class='sign right'></s>";
+		}else{
+			root.highCity=root.highCity+"研发费用总额占比为<3%，不符合要求;";
+		    root.costToString="<s class='sign wrong'></s>研发费用总额占比为<3%，不符合要求;";
+		    root.suggest="目前研发费用总额占比不符合要求，建议重点梳理、归集研发费用，做好研发费用辅助账;";
+			return "<s class='sign wrong'></s>";
+		};
+	 ]]></property>
+    <property name="hincome"><![CDATA[
+		def prodrate=root.prodrate;
+		def cog2008=root.cog2008;
+		if("A"==prodrate){
+			root.highCity=root.highCity+"近1年高新技术产品（服务）收入占当年总收入比例为≥60%，达到要求;";
+		    root.incomeToString="<s class='sign right'></s>近1年高新技术产品（服务）收入占当年总收入比例为≥60%，达到要求;";
+		    return "<s class='sign right'></s>";   
+		}else if("B"==prodrate){
+			root.highCity=root.highCity+"近1年高新技术产品（服务）收入占当年总收入比例为≥40%，达到要求;";
+			root.incomeToString="<s class='sign right'></s>近1年高新技术产品（服务）收入占当年总收入比例为≥40%，达到要求;";
+		    return "<s class='sign right'></s>";
+		}else{
+			root.highCity=root.highCity+"近1年高新技术产品（服务）收入占当年总收入比例为＜40%，不符合要求;";
+			root.incomeToString="<s class='sign wrong'></s>近1年高新技术产品（服务）收入占当年总收入比例为＜40%，达到要求;";
+		    root.suggest="目前高品收入占比不符合要求，建议重新归集高新技术产品收入;";
+			return "<s class='sign wrong'></s>";
+		};
+	 ]]></property>
+    <property name="cop"><![CDATA[
+		def compop=root.compop;
+		def cog2008=root.cog2008;
+		if(compop){
+			root.highCity=root.highCity+"满足上一年度合规性运营要求;";
+			root.compopToString="<s class='sign right'></s>满足上一年度合规性运营要求;";
+			return "<s class='sign right'></s>"
+		}else{
+			root.highCity=root.highCity+"不满足合规性运营要求;";
+			root.compopToString="<s class='sign wrong'></s>不满足合规性运营要求;";
+			root.suggest="企业上一年度未能合规运营，存在一票否决项，建议"+(DateUtil.year()+1)+"年申报高企认定;";
+		    return "<s class='sign wrong'></s>";
+		};
+	 ]]></property>
+    <property name="intelProp"><![CDATA[
+        def a=root.xselftotal+root.xegTotal;
+        def b=root.yselftotal+root.yegtotal;
+        if(a>=1 || b>=5){
+           root.intellectualPropertyGrade="您已具备申请高新技术企业的条件。知识产权数量已达标，建议持续申请与主营产品相关的知识产权，为三年后的重新认定准备，增加知识产权的方式有购买/转让/自主申请；";
+        }else if(a==0 && (b>2 && b<5)){
+           root.intellectualPropertyGrade="可申请高企，但知识产权数量不够导致评分不高，建议申请市小巨人或增加知识产权数量至1个I类知识产权或5个及以上Ⅱ类知识产权后申请高企（注：知识产权要与企业主营产品相关）；";
+        }else if(a==0 && (b>0 && b<3)){
+           root.intellectualPropertyGrade="建议先增加知识产权数量至1个I类知识产权或5个及以上Ⅱ类知识产权再申请高企；增加知识产权的方式有购买/转让/自主申请（注：知识产权要与企业主营产品相关）；";
+        }else if(a==0 && b==0){
+           root.intellectualPropertyGrade="知识产权数量为0，建议先申请1个I类知识产权或5个及以上Ⅱ类知识产权再申请国高；增加知识产权的方式有购买/转让/自主申请（注：知识产权要与企业主营产品相关）；";
+        }else{
+           root.intellectualPropertyGrade="知识产权数量为0，建议先申请1个I类知识产权或5个及以上Ⅱ类知识产权再申请国高；增加知识产权的方式有购买/转让/自主申请（注：知识产权要与企业主营产品相关）；";
+        };
+        def x1total=root.x1self+root.x1eg;
+        def y1total=root.y1eg+root.y1self;
+        def y2total=root.y2eg+root.y2self;
+        def y3total=root.y3eg+root.y3self;
+        def y=y1total+y2total+y3total;
+        println("x1total============="+x1total);
+        println("y1total============="+y1total);
+        println("y2total============="+y2total);
+        println("y3total============="+y3total);
+        println("y============="+y);
+        def retval="";
+        def endTime = new Date();
+		def startTime=root.regDate;
+		def year2 = DateUtil.getDiffYearByDate(startTime,endTime);
+        if(x1total>=1){
+        	root.highCity=root.highCity+"拥有符合条件的知识产权";
+        	if(year2>=1){
+        		root.applySuggest="建议申报";
+        	}else{
+        		root.applySuggest="不建议申报";
+        	};
+        	retval="<s class='sign right'></s>";
+        }else if(x1total==0&&y>=5){
+        	root.highCity=root.highCity+"拥有符合条件的知识产权";
+        	if(year2>=1){
+        		root.applySuggest="建议申报";
+        	}else{
+        		root.applySuggest="不建议申报";
+        	};
+        	retval="<s class='sign right'></s>";
+        }else if(x1total==0&&y1total<2&&y2total>=3&&y3total<=5){
+        	if(year2>=1){
+        		root.applySuggest="建议申报";
+        	}else{
+        		root.applySuggest="不建议申报";
+        	};
+        	root.highCity=root.highCity+"拥有一定数量的知识产权，其中发明专利"+x1total+"项；实用新型专利"+y1total+"项；外观设计专利"+y2total+"项；软件著作权"+y3total+"项";
+        	retval="<s class='sign right'></s>";
+        }else if(x1total==0&&y1total<5&&y1total>=2){
+        	if(year2>=1){
+        		root.applySuggest="建议申报";
+        	}else{
+        		root.applySuggest="不建议申报";
+        	};
+        	root.highCity=root.highCity+"拥有一定数量的知识产权，其中发明专利"+x1total+"项；实用新型专利"+y1total+"项；外观设计专利"+y2total+"项；软件著作权"+y3total+"项";
+        	retval="<s class='sign right'></s>";
+        }else if(x1total==0&&y1total<2&&y2total>0&&y3total<3){
+        	root.applySuggest="不建议申报";
+        	root.highCity=root.highCity+"拥有一定数量的知识产权，其中发明专利"+x1total+"项；实用新型专利"+y1total+"项；外观设计专利"+y2total+"项；软件著作权"+y3total+"项";
+        	retval="<s class='sign wrong'></s>";
+        }else if(x1total==0&&y==0){
+        	root.applySuggest="不建议申报";
+        	root.highCity=root.highCity+"拥有知识产权数量为0，不符合条件";
+        	retval="<s class='sign wrong'></s>";
+        }else{
+        	root.applySuggest="不建议申报";
+        	root.highCity=root.highCity+"拥有知识产权数量为0，不符合条件";
+        	retval="<s class='sign wrong'></s>";
+        };
+		return retval;
+	 ]]></property>
+    <property name="stach"><![CDATA[
+    	def score=root.resultTransformation;
+        def thirdfruit=root.thirdfruit;
+        def retval="";
+        if(thirdfruit>=5){
+        	root.resultTransformationGrade="";
+            retval="<s class='sign right'></s>";
+        }else {
+        	root.resultTransformationGrade="";
+            retval="<s class='sign wrong'></s>";
+        };
+        if(thirdfruit>=6){
+    		score=27;
+    	}else if(thirdfruit==5){
+    		score=25;
+    	}else if(thirdfruit==4){
+    		score=20;
+    	}else if(thirdfruit==3){
+    		score=16;
+    	}else if(thirdfruit==2){
+    		score=10;
+    	}else if(thirdfruit==1){
+    		score=4;
+    	}else if(thirdfruit==0){
+    		score=0;
+    	};
+        println("成果转化score="+score);
+        root.resultTransformation=score;
+        if(score>=25){
+        	root.resultTransformationGrade="转化能力强，通过丰富证明材料强化科技成果转化质量（证明材料：知识产权证书、销售合同、销售发票、用户使用报告、成果查新、产品检测报告、产品说明书等）；";
+        }else if(score>=15 && score<=20){
+        	root.resultTransformationGrade="转化能力较强，建议通过丰富证明材料强化科技成果转化质量（证明材料：知识产权证书、销售合同、销售发票、用户使用报告、成果查新、产品检测报告、产品说明书等）；";
+        }else if(score>=6 && score<=10){
+        	root.resultTransformationGrade="转化能力一般，归集科技成果，包括新产品、新技术、新工艺、新服务、样品样机等，并通过丰富证明材料强化科技成果转化质量（证明材料：知识产权证书、销售合同、销售发票、用户使用报告、成果查新、产品检测报告、产品说明书等）；";
+        }else if(score>=0 && score<=5){
+        	root.resultTransformationGrade="转化能力较弱，归集科技成果，包括新产品、新技术、新工艺、新服务、样品样机等，并通过丰富证明材料强化科技成果转化质量（证明材料：知识产权证书、销售合同、销售发票、用户使用报告、成果查新、产品检测报告、产品说明书等）；";
+        }else{
+        	root.resultTransformationGrade="";
+        };
+		return retval;
+	 ]]></property>
+    <property name="rdManag"><![CDATA[
+    	def score=root.researchDevelopment;
+    	def a=0;
+    	def b=0;
+    	def c=0;
+    	def d=0;
+    	if(root.compsys=="A"){
+    		a=5.5;
+    	}else if(root.compsys=="B"){
+    		a=3.5;
+    	}else if(root.compsys=="C"){
+    		a=1.5;
+    	}else if(root.compsys=="D"){
+    		a=0;
+    	};
+    	if(root.cooper=="A"){
+    		b=5.5;
+    	}else if(root.cooper=="B"){
+    		b=3.5;
+    	}else if(root.cooper=="C"){
+    		b=0;
+    	};
+    	if(root.platform=="A"){
+    		c=3.5;
+    	}else if(root.platform=="B"){
+    		c=2;
+    	}else if(root.platform=="C"){
+    		c=0;
+    	};
+    	if(root.personnel=="A"){
+    		d=3.5;
+    	}else if(root.personnel=="B"){
+    		d=0;
+    	};
+    	score=a+b+c+d;
+    	root.researchDevelopment=score;
+    	if(score>=16 && score<=20){
+    		root.researchDevelopmentGrade="建议加强企业研发机构建设①完善研发管理制度等；②研发场地、设备设施等配套；";
+    	}else if(score>=10 && score<16){
+    		root.researchDevelopmentGrade="建议加强企业研发机构建设①完善研发管理制度等；②研发场地、设备设施等配套；④研发机构获得第三方认定或挂牌等；<font colr='red'>⑤开放式创新创业平台</font>";
+    	}else if(score>=6 && score<10){
+    		root.researchDevelopmentGrade="建议加强企业研发机构建设①完善研发管理制度等；②研发场地、设备设施等配套；③加强与科研院校合作；";
+    	}else if(score>=0 && score<6){
+    		root.researchDevelopmentGrade="建议加强企业研发机构建设①完善研发管理制度等；②研发场地、设备设施等配套；③加强与科研院校合作；④研发机构获得第三方认定或挂牌等；";
+    	}else{
+    		root.researchDevelopmentGrade="";
+    	};
+		return "<s class='sign right'></s>";
+	 ]]></property>
+    <property name="compGrowth"><![CDATA[
+        def score=root.totalAssets;
+        def a1=netasset;
+		def a2=salesrevenue;
+		com.ht.biz.service.impl.hisself.FinanceCalculation fc =new com.ht.biz.service.impl.hisself.FinanceCalculation(root);
+		def a=fc.calcValue(fc.KEY_NET_ASSET);
+		def b=fc.calcValue(fc.KEY_SALES_REVENUE);
+		score=a+b;
+		root.totalAssets=a+b;
+    	if(score>=16&&score<=20){
+			root.totalAssetsGrade="成长性得分为"+score+"分（销售收入增长率得分为"+b+"，净资产增长率得分为"+a+"），财务增长性好";
+		}else if(score>=10&&score<=15){
+			root.totalAssetsGrade="成长性得分为"+score+"分（销售收入增长率得分为"+b+"，净资产增长率得分为"+a+"），财务增长性较好";
+		}else if(score>=6&&score<=9){
+			root.totalAssetsGrade="成长性得分为"+score+"分（销售收入增长率得分为"+b+"，净资产增长率得分为"+a+"），财务增长性一般";
+		}else if(score>=0&&score<=5){
+			root.totalAssetsGrade="成长性得分为"+score+"分（销售收入增长率得分为"+b+"，净资产增长率得分为"+a+"），财务增长性差";
+		}else{
+			root.totalAssetsGrade="成长性得分为"+score+"分（销售收入增长率得分为"+b+"，净资产增长率得分为"+a+"），财务增长性差";
+		};
+    	root.total=root.intellectualProperty+root.resultTransformation+root.researchDevelopment+root.totalAssets;
+		return "<s class='sign right'></s>";
+	 ]]></property>
+  </product>
+  
+      <product>
+    <property name="type" >guangzhou_gaoqirending_yes_no</property>
+    <property name="name">高企认定</property>
+    <property name="foundTime"><![CDATA[
+		def endTime = new Date();
+		def startTime=root.regDate;
+		def cog2008=root.cog2008;
+		
+		def year = DateUtil.getDiffYearByDate(startTime,endTime);
+		if(year>=1){
+		   return "<s class='sign right'></s>";
+		}else{
+		   return "<s class='sign wrong'></s>";
+		};
+	 ]]>
+    </property>
+    <property name="techField"><![CDATA[
+		return "<s class='sign right'></s>";
+	 ]]></property>
+    <property name="persForm"><![CDATA[
+		def juniorTechTotal=root.juniorTechTotal==null?0:root.juniorTechTotal;
+		def developmentTotal=root.developmentTotal==null?0:root.developmentTotal;
+        def workerTotal=root.workerTotal==null?0:root.workerTotal;
+		def d1=juniorTechTotal*1.0/workerTotal;
+		def d2=developmentTotal*1.0/workerTotal;
+		
+		
+		if(d1>=0.15&&d2>=0.05){
+		    return "<s class='sign right'></s>";
+		}else if(d1>=0.15&&d2<0.05){
+		   	return "<s class='sign right'></s>";
+		}else{
+		    return "<s class='sign wrong'></s>";
+		};
+		
+	 ]]></property>
+    <property name="rdCost"><![CDATA[
+		def saleyfrate=root.saleyfrate;
+		if("A"==saleyfrate){
+		    return "<s class='sign right'></s>";   
+		}else if("B"==saleyfrate){
+			return "<s class='sign right'></s>";
+		}else if("C"==saleyfrate){
+			return "<s class='sign right'></s>";
+		}else{
+		    return "<s class='sign wrong'></s>";
+		};
+	 ]]></property>
+    <property name="hincome"><![CDATA[
+		def prodrate=root.prodrate;
+		if("A"==prodrate){
+		   return "<s class='sign right'></s>";   
+		}else if("B"==prodrate ){
+		   return "<s class='sign right'></s>";   
+		}else{
+		   return "<s class='sign wrong'></s>";
+		};
+	 ]]></property>
+    <property name="cop"><![CDATA[
+		def compop=root.compop;
+		if(compop){
+			return "<s class='sign right'></s>"
+		}else{
+		    return "<s class='sign wrong'></s>";
+		};
+	 ]]></property>
+    <property name="intelProp"><![CDATA[
+    	def score=root.intellectualProperty;
+    	def xtotal=root.xselftotal+root.xegTotal;
+        def ytotal=root.yselftotal+root.yegtotal;
+        def y1total=root.y1eg+root.y1self;
+        def y2total=root.y2eg+root.y2self;
+        def y3total=root.y3eg+root.y3self;
+        def d=0;
+        for(int i=0;i<=1;i++){
+			if(xtotal==0&&ytotal==0){
+				d=d+0;
+			};
+			if(xtotal==0&&y1total==0&&y3total==0&&y2total>0){
+				d=d+1;
+			};
+			if(xtotal==0&&y1total==0&&y3total>0){
+				d=d+3;
+			};
+			if(xtotal==0&&y1total>0){
+				d=d+4;
+			};
+			if(xtotal==1){
+				d=d+5;
+			};
+			if(xtotal>1&&xtotal<=5){
+				d=d+6;
+			};
+			if(xtotal>5){
+				d=d+7;
+			};
+		};
+		if(xtotal==0&&ytotal==0){
+			d=d+0;
+		};
+		if(xtotal==0&&ytotal>0&&ytotal<3){
+			d=d+1;
+		};
+		if(xtotal==0&&ytotal>2&&ytotal<5){
+			d=d+3;
+		};
+		if(xtotal==0&&ytotal>4){
+			d=d+5;
+		};
+		if(xtotal==1){
+			d=d+7;
+		};
+		if(xtotal>1){
+			d=d+7.5;
+		};
+		def xself=root.x1self+root.x2self+root.x3self+root.x4self+root.x5self+root.x6self;
+		def yself=root.y1self+root.y2self+root.y3self;
+		def xeg=root.x1eg+root.x2eg+root.x3eg+root.x4eg+root.x5eg+root.x6eg;
+		def yeg=root.y1eg+root.y2eg+root.y3eg;
+		if(xtotal==0&&ytotal==0){
+			d=d+0;
+		};
+		if(xself==0&&yself==0&&yeg==1){
+			d=d+0.5;
+		};
+		if(xself==0&&yself==0&&yeg==2){
+			d=d+1;
+		};
+		if(xself==0&&yself==0&&yeg==3){
+			d=d+1.5;
+		};
+		if(xself==0&&yself==0&&yeg==4){
+			d=d+2;
+		};
+		if(xself==0&&yself==0&&yeg>=5){
+			d=d+2.5;
+		};
+		if(xself==0&&yself==0&&xeg>=1){
+			d=d+2.5;
+		};
+		if(xself==0&&yself==1){
+			d=d+1.5;
+		};
+		if(xself==0&&yself==2){
+			d=d+2.5;
+		};
+		if(xself==0&&yself==3){
+			d=d+3.5;
+		};
+		if(xself==0&&yself==4){
+			d=d+4.5;
+		};
+		if(xself==0&&yself>=4){
+			d=d+5.5;
+		};
+		if(xself>=1){
+			d=d+5.5;
+		};
+		if(root.other){
+			d=d+1;
+		};
+		score=d;
+		return String.format("%s分~%s分", score+"",score+2+"");
+	 ]]></property>
+    <property name="stach"><![CDATA[
+    	def score = root.resultTransformation;
+    	def thirdfruit=root.thirdfruit;
+    	if(thirdfruit>=6){
+    		score=27;
+    	}else if(thirdfruit==5){
+    		score=25;
+    	}else if(thirdfruit==4){
+    		score=20;
+    	}else if(thirdfruit==3){
+    		score=16;
+    	}else if(thirdfruit==2){
+    		score=10;
+    	}else if(thirdfruit==1){
+    		score=4;
+    	}else if(thirdfruit==0){
+    		score=0;
+    	};
+		java.math.BigDecimal rtf = new java.math.BigDecimal(score);
+		score=rtf.setScale(2, java.math.BigDecimal.ROUND_HALF_DOWN).doubleValue();
+		def val=String.format("%s分~%s分", score+"",score+2+"");
+		return val;
+	 ]]></property>
+    <property name="rdManag"><![CDATA[
+    	def score = root.researchDevelopment;
+    	def a=0;
+    	def b=0;
+    	def c=0;
+    	def d=0;
+    	if(root.compsys=="A"){
+    		a=5.5;
+    	}else if(root.compsys=="B"){
+    		a=3.5;
+    	}else if(root.compsys=="C"){
+    		a=1.5;
+    	}else if(root.compsys=="D"){
+    		a=0;
+    	};
+    	if(root.cooper=="A"){
+    		b=5.5;
+    	}else if(root.cooper=="B"){
+    		b=3.5;
+    	}else if(root.cooper=="C"){
+    		b=0;
+    	};
+    	if(root.platform=="A"){
+    		c=3.5;
+    	}else if(root.platform=="B"){
+    		c=2;
+    	}else if(root.platform=="C"){
+    		c=0;
+    	};
+    	if(root.personnel=="A"){
+    		d=3.5;
+    	}else if(root.personnel=="B"){
+    		d=0;
+    	};
+    	score=a+b+c+d;
+		java.math.BigDecimal rtf = new java.math.BigDecimal(score);
+		score=rtf.setScale(2, java.math.BigDecimal.ROUND_HALF_DOWN).doubleValue();
+		return String.format("%s分~%s分", score+"",score+2+"");
+	 ]]></property>
+    <property name="compGrowth"><![CDATA[
+    	def score = root.totalAssets;
+    	com.ht.biz.service.impl.hisself.FinanceCalculation fc =new com.ht.biz.service.impl.hisself.FinanceCalculation(root);
+		def a=fc.calcValue(fc.KEY_NET_ASSET);
+		def b=fc.calcValue(fc.KEY_SALES_REVENUE);
+		score=a+b;
+		return String.format("%s分", score);
+	 ]]></property>
+  </product> 
+    <product>
+    <property name="type">guangzhou_xiaojuren_ruku</property>
+    <property name="name">科技小巨人入库</property>
+    <property name="foundTime"><![CDATA[return "申请认定时须注册成立<font color='red'>一个会计年度以上，非高企</font>";]]></property>
+    <property name="techField"><![CDATA[return "<font color='red'>企业主营业务或产品属于国家重点支持高新技术领域，或企业已通过整合创新形式形成了一定创新模式</font>";]]></property>
+    <property name="persForm"><![CDATA[return "大专以上学历的科技人员（A1）占比≥15%，其中，研发人员（A2）占比<font color='red'>5%</font>";]]></property>
+    <property name="rdCost"><![CDATA[return "<font color='red'>近2年</font>的研究开发费用总额占销售收入总额的比例≥3%";]]></property>
+    <property name="hincome"><![CDATA[return "占销售收入的比例≥<font color='red'>40%</font>";]]></property>
+    <property name="cop"><![CDATA[return "";]]></property>
+    <property name="intelProp"><![CDATA[return "<font color='red'>近3年内，获得1项发明或2项实用新型或3项软件著作权或3项外观专利</font>";]]></property>
+    <property name="stach">return "近2年科技成果转化";</property>
+    <property name="rdManag">return "管理制度、研发机构、产学研、科技成果、人员培育、创新创业平台";</property>
+    <property name="compGrowth"><![CDATA[return "<font color='red'>销售收入增长率≥40%</font>";]]></property>
+  </product>
+    <product>
+    <property name="type" >guangzhou_qiye_detail</property>
+    <property name="name" >企业实际（A）</property>
+   <property name="foundTime"><![CDATA[
+        def endTime = new Date();
+		def startTime=root.regDate;
+		def cog2008=root.cog2008;
+		def fmt = defaultSFT;
+		def year_fmt=yearSFT;
+		def kjyear="";
+		if(!org.apache.commons.lang.StringUtils.contains(fmt.format(startTime),"01-01")){
+			kjyear=(Integer.valueOf(year_fmt.format(startTime))+1)+"-01-01";
+		}else{
+			kjyear=fmt.format(startTime);
+		};
+		def year=0;
+		try {
+			year = (int) (((endTime.getTime() - fmt.parse(kjyear).getTime()) / (1000 * 60 * 60 * 24))/ 365);
+			
+		} catch (Exception e) {
+			year=0;
+		};
+		println("year============"+year);
+		def year2 = DateUtil.getDiffYearByDate(startTime,endTime);
+		if(year2>=1){
+			if(year>=1){
+				return "企业成立<font color='red'>"+year2+"</font>年，<font color='red'>满一个会计年度</font>";
+			}else{
+				return "企业成立<font color='red'>"+year2+"</font>年，<font color='red'>不满一个会计年度</font>";
+			}
+		}else{
+			return "企业成立<font color='red'>"+year2+"</font>年，<font color='red'>不满一个会计年度</font>";
+		};
+		
+	 ]]>
+    </property>
+    <property name="techField"><![CDATA[
+		def productServ=root.productServ;
+		return "主营产品技术领域为"+productServ;
+	 ]]></property>
+    <property name="persForm"><![CDATA[
+        def juniorTechTotal=root.juniorTechTotal==null?0:root.juniorTechTotal;
+        def developmentTotal=root.developmentTotal==null?0:root.developmentTotal;
+        def workerTotal=root.workerTotal==null?0:root.workerTotal;
+		def d1=(juniorTechTotal*1.0/workerTotal)*100;
+		java.math.BigDecimal b1 = new java.math.BigDecimal(d1);
+		def d2=(developmentTotal*1.0/workerTotal)*100;
+		java.math.BigDecimal b2 = new java.math.BigDecimal(d2);
+		d1=java.lang.Double.valueOf(java.lang.String.format("%.0f", b1));
+		d2=java.lang.Double.valueOf(java.lang.String.format("%.0f", b2));
+		return "大专以上学历科技人员占比为"+d1+"%，其中，研发人员占比为"+d2+"%";
+	 ]]></property>
+    <property name="rdCost"><![CDATA[
+		def saleyfrate=root.saleyfrate;
+		if("A"==saleyfrate){
+		   return "研究开发费用总额占销售收入总额的比例为>=5%";
+		}else if("B"==saleyfrate){
+		   return "研究开发费用总额占销售收入总额的比例为>=4%";
+		}else if("C"==saleyfrate){
+		  return "研究开发费用总额占销售收入总额的比例为>=3%";
+		}else{
+		  return "研究开发费用总额占销售收入总额的比例为<3%";
+		};
+	 ]]></property>
+    <property name="hincome"><![CDATA[
+		def prodrate=root.prodrate;
+		if("A"==prodrate){
+		    return "高品收入占企业当年总收入的>=60%，达到要求；";
+		}else if("B"==prodrate){
+			return "高品收入占企业当年总收入的>=50%，达到要求；";
+		}else{
+		   return "高品收入占企业当年总收入的<40%，不符合要求；";
+		};
+	 ]]></property>
+    <property name="cop"><![CDATA[
+		def compop=root.compop;
+		return "申请认定前一年内企业在产品研发、生产经营过程中，环保达标，三年内无违法生产经营记录和知识产权纠纷";
+	 ]]></property>
+    <property name="intelProp"><![CDATA[
+		def x1self=root.x1self;
+		def x1eg=root.x1eg;
+		def y1self=root.y1self;
+		def y1eg=root.y1eg;
+		def y2self=root.y2self;
+		def y2eg=root.y2eg;
+		def y3self=root.y3self;
+		def y3eg=root.y3eg;
+		
+		return "发明专利"+(x1self+x1eg)+"项；实用新型专利"+(y1self+y1eg)+"项；外观设计专利"+(y2self+y2eg)+"项；软件著作权"+(y3self+y3eg)+"项";
+		
+	 ]]></property>
+    <property name="stach"><![CDATA[
+		def thirdfruit=root.thirdfruit;
+		def onefruit=root.onefruit;
+		return "近3年科技成果转化数"+thirdfruit+"个近2年成果转化数"+onefruit+"个";
+	 ]]></property>
+    <property name="rdManag"><![CDATA[
+		return "企业已建立了相关制度";
+	 ]]></property>
+    <property name="compGrowth"><![CDATA[
+		 com.ht.biz.service.impl.hisself.FinanceCalculation fc =new com.ht.biz.service.impl.hisself.FinanceCalculation(root);
+		 def b=fc.calcValue(fc.KEY_SALES_REVENUE);
+		 return "销售收入得分为"+b+"%";
+	 ]]></property>
+  </product>
+  <product>
+    <property name="type" >xiaojuren_introduce</property>
+    <property name="name" >科技小巨人入库</property>
+    <property name="foundTime"><![CDATA[return "申请认定时须注册成立一个会计年度以上<font color='red'>，非高企</font>";]]></property>
+    <property name="techField">return "企业主营业务或产品属于国家重点支持高新技术领域，或企业已通过整合创新形式形成了一定创新模式";</property>
+    <property name="persForm">return "大专以上学历的科技人员（A1）占比≥15%，其中，研发人员（A2）占比5%";</property>
+    <property name="rdCost">return "近2年的研究开发费用总额占销售收入总额的比例≥3%";</property>
+    <property name="hincome">return "占销售收入的比例≥40%";</property>
+    <property name="cop">return "/";</property>
+    <property name="intelProp">return "近3年内，获得1项发明或2项实用新型或3项软件著作权或3项外观专利";</property>
+    <property name="stach">return "近2年科技成果转化</property>
+    <property name="rdManag">return "管理制度、研发机构、产学研、科技成果、人员培育、创新创业平台";</property>
+    <property name="compGrowth">return "销售收入增长率≥40%（不是必要条件）";</property>
+  </product>
+  <!-- 广州配置 -->
+  <!-- 苏州配置 -->
+  <product>
+    <property name="type" >suzhou_number</property>
+    <property name="name" >序号</property>
+    <property name="foundTime">return "1.成立时间";</property>
+    <property name="techField">return "2.技术领域";</property>
+    <property name="persForm">return "3.人员结构";</property>
+    <property name="rdCost">return "4.研发经费";</property>
+    <property name="hincome">return "5.高品收入";</property>
+    <property name="cop">return "6.合规运营";</property>
+    <property name="intelProp">return "7.知识产权";</property>
+    <property name="stach">return "8.科技成果";</property>
+    <property name="rdManag">return "9.研发管理";</property>
+    <property name="compGrowth">return "10.企业成长性";</property>
+  </product>
+  <product>
+    <property name="type" >suzhou_gaoqirending</property>
+    <property name="name" >高企认定</property>
+    <property name="foundTime">return "申请认定时须注册成立一年以上";</property>
+    <property name="techField">return "对主要（产品/服务）发挥核心作用的技术属于《国家重点支持的高新技术领域》 规定的范围";</property>
+    <property name="persForm">return "科技人员 10%";</property>
+    <property name="rdCost">return "①上年销售收入≤5000万，近三年研发费用占比≥5%； ②上年5000万＜销售收入≤2亿，近三年研发费用占比≥4%；③上年销售收入＞2亿，近三年研发费用占比≥3%";</property>
+    <property name="hincome">return "占企业当年总收入的60%以上";</property>
+    <property name="cop">return "企业申请认定前一年内未发生重大安全、 重大质量事故或严重环境违法行为";</property>
+    <property name="intelProp">return "30分，通过自主研发、 受让、 受赠、 并购等方式，拥有知识产权，1项发明或6项实用新型或6项软著";</property>
+    <property name="stach">return "30分，近三年科技成果转化≥5项/年";</property>
+    <property name="rdManag">return "20分，管理制度、 研发机构、 产学研、 科技成果、 人员培育、 创新创业平台";</property>
+    <property name="compGrowth">return "20分，净资产增长率和销售收入增长率";</property>
+  </product>
+  <product>
+    <property name="type" >suzhou_gaopeiruku</property>
+    <property name="name" >高培入库</property>
+    <property name="foundTime">return "申请认定时须注册成立一年以上，非高企";</property>
+    <property name="techField">return "对主要（产品/服务）发挥核心支持作用的技术属于《国家重点支持的高新技术领域》 规定的范围";</property>
+    <property name="persForm">return "科技人员 5%";</property>
+    <property name="rdCost">return "近两个会计年度的研究开发费用总额占销售收入总额的比例不低于3%，中国境内研究开发费用比例不低于60%";</property>
+    <property name="hincome">return "占企业当年总收入的50%以上";</property>
+    <property name="cop">return "企业申请入库前一年内未发生重大安全、重大质量事故或严重环境违法行为";</property>
+    <property name="intelProp">return "30分，通过自主研发、 受让、受赠、并购等方式，拥有知识产权，1项发明或1项实用新型或1项软著";</property>
+    <property name="stach">return "30分，近两年科技成果转化≥5项/年";</property>
+    <property name="rdManag">return "20分，管理制度、研发机构、产学研、科技成果、人员培育、创新创业平台";</property>
+    <property name="compGrowth">return "20分，净资产增长率和销售收入增长率";</property>
+  </product>
+  <product>
+    <property name="type" >suzhou_qiye_detail</property>
+    <property name="name" >企业实际</property>
+   <property name="foundTime"><![CDATA[
+        def year = DateUtil.getDiffYearByDate(root.regDate,new Date());
+		return "企业成立"+year+"年";
+	 ]]>
+    </property>
+    <property name="techField"><![CDATA[
+		def productServ=root.productServ;
+		return "主营产品技术领域为"+productServ;
+	 ]]></property>
+    <property name="persForm"><![CDATA[
+        def developmentTotal=root.developmentTotal==null?0:root.developmentTotal;
+        def workerTotal=root.workerTotal==null?0:root.workerTotal;
+		def d2=developmentTotal*1.0/workerTotal;
+		java.math.BigDecimal b2 = new java.math.BigDecimal(d2);
+		d2=java.lang.Double.valueOf(java.lang.String.format("%.0f", d2*100));
+		return "企业科技人员占企业职工总数的比例为"+d2+"%";
+	 ]]></property>
+    <property name="rdCost"><![CDATA[
+        def val="";
+		def saleyfrate=root.saleyfrate;
+		if("A"==saleyfrate){
+		   val=val+"研究开发费用总额占销售收入总额的比例为>=5%";
+		}else if("B"==saleyfrate){
+		   val=val+"研究开发费用总额占销售收入总额的比例为>=4%";
+		}else if("C"==saleyfrate){
+		   val=val+"研究开发费用总额占销售收入总额的比例为>=3%";
+		}else{
+		   val=val+"研究开发费用总额占销售收入总额的比例为<3%";
+		};
+		def jnyfrate=root.jnyfrate;
+		if(jnyfrate=="A"){
+		   val=val+"中国境内研究开发费用比例为≥60%";
+		}else{
+		   val=val+"中国境内研究开发费用比例为<60%";
+		};
+		return val;
+	 ]]></property>
+    <property name="hincome"><![CDATA[
+		def prodrate=root.prodrate;
+		if("A"==prodrate){
+		    return "高品收入占企业当年总收入的不低于60%";
+		}else if("B"==prodrate){
+			return "高品收入占企业当年总收入的不低于50%";
+		}else{
+		   return "高品收入占企业当年总收入的高于50%但低于60%";
+		};
+	 ]]></property>
+    <property name="cop"><![CDATA[
+		def compop=root.compop;
+		return "企业申请入库前一年内未发生重大安全、重大质量事故或严重环境违法行为";
+	 ]]></property>
+    <property name="intelProp"><![CDATA[
+		def x1self=root.x1self;
+		def x1eg=root.x1eg;
+		def y1self=root.y1self;
+		def y1eg=root.y1eg;
+		def y2self=root.y2self;
+		def y2eg=root.y2eg;
+		def y3self=root.y3self;
+		def y3eg=root.y3eg;
+		
+		return "发明专利"+(x1self+x1eg)+"项；实用新型专利"+(y1self+y1eg)+"项；外观设计专利"+(y2self+y2eg)+"项；软件著作权"+(y3self+y3eg)+"项";
+		
+	 ]]></property>
+    <property name="stach"><![CDATA[
+		def thirdfruit=root.thirdfruit;
+		return "年平均科技成果转化"+thirdfruit+"个";
+	 ]]></property>
+    <property name="rdManag"><![CDATA[
+		return "企业已建立了相关制度";
+	 ]]></property>
+    <property name="compGrowth"><![CDATA[
+		 def a1=netasset;
+		 def a2=salesrevenue;
+		 return "其中，净资产增长率得分为"+a1+"，销售增长率得分为"+a2;
+	 ]]></property>
+  </product>
+  <product>
+    <property name="type" >suzhou_gaoqi</property>
+    <property name="name" >高企</property>
+   <property name="foundTime"><![CDATA[
+        def year = DateUtil.getDiffYearByDate(root.regDate,new Date());
+		def cog2008 = root.cog2008;
+		if(year>=1 ){
+			return "<s class='sign right'></s>";
+		}else{
+		    return "<s class='sign wrong'></s>";
+		};
+	 ]]>
+    </property>
+    <property name="techField"><![CDATA[
+		return "<s class='sign right'></s>";
+	 ]]></property>
+    <property name="persForm"><![CDATA[
+        def developmentTotal=root.developmentTotal==null?0:root.developmentTotal;
+        def workerTotal=root.workerTotal==null?0:root.workerTotal;
+		def d2=developmentTotal*1.0/workerTotal;
+		java.math.BigDecimal b2 = new java.math.BigDecimal(d2);
+		if(b2>=0.1){
+			return "<s class='sign right'></s>";
+		}else if(b2>=0.05&&b2<0.1){
+			return "<s class='sign wrong'></s>";
+		}else{
+			return "<s class='sign wrong'></s>";
+		};
+	 ]]></property>
+    <property name="rdCost"><![CDATA[
+		def saleyfrate=root.saleyfrate;
+		if("A"==saleyfrate){
+		   return "<s class='sign right'></s>";
+		}else if("B"==saleyfrate){
+		   return "<s class='sign right'></s>";
+		}else if("C"==saleyfrate){
+		   return "<s class='sign right'></s>";
+		}else{
+		   return "<s class='sign wrong'></s>";
+		};
+	 ]]></property>
+    <property name="hincome"><![CDATA[
+		def prodrate=root.prodrate;
+		if("A"==prodrate){
+		    return "<s class='sign right'></s>";
+		}else if("B"==prodrate){
+			return "<s class='sign right'></s>";
+		}else{
+		   return "<s class='sign right'></s>";
+		};
+	 ]]></property>
+    <property name="cop"><![CDATA[
+		def compop=root.compop;
+		if(compop){
+			return "<s class='sign right'></s>";
+		}else{
+			return "<s class='sign wrong'></s>";
+		};
+	 ]]></property>
+    <property name="intelProp"><![CDATA[
+    	def a=0;
+    	def b=0;
+    	def c=0;
+    	def d=0;
+    	def e=0;
+		def x_total=root.x1+root.x2+root.x3+root.x4+root.x5+root.x6;
+		def x_self_total=root.x1self+root.x2self+root.x3self+root.x4self+root.x5self+root.x6self;
+		def x_eg_total=root.x1eg+root.x2eg+root.x3eg+root.x4eg+root.x5eg+root.x6eg;
+		def y_total=root.y1+root.y2+root.y3;
+		def y_self_total=root.y1self+root.y2self+root.y3self;
+		def y_eg_total=root.y1eg+root.y2eg+root.y3eg;
+		def y1=root.y1;
+		def y2=root.y2;
+		def y3=root.y3;
+		if(x_total==0 && y_total==0){
+			 a=0;
+		 }else if(x_total==0 && y1==0 && y3==0 && y2>0){
+			 a=1;
+		 }else if(x_total==0 && y1==0 && y3>0){
+			 a=3;
+		 }else if(x_total==0 && y1>0){
+			 a=4;
+		 }else if(x_total==1){
+			 a=5;
+		 }else if(x_total>1 && x_total<=5){
+			 a=6;
+		 }else if(x_total>5){
+			 a=7;
+		 };
+		 if(x_total==0 && y_total==0){
+			 b=0;
+		 }else if(x_total==0 && y1==0 && y3==0 && y2>0){
+			 b=1;
+		 }else if(x_total==0 && y1==0 && y3>0){
+			 b=3;
+		 }else if(x_total==0 && y1>0){
+			 b=4;
+		 }else if(x_total==1){
+			 b=5;
+		 }else if(x_total>1 && x_total<=5){
+			 b=6;
+		 }else if(x_total>5){
+			 b=7;
+		 };
+		 if(x_total==0 && y_total==0){
+			 c=0;
+		 }else if(x_total==0 && y_total>0 && y_total<3){
+			 c=1;
+		 }else if(x_total==0 && y_total>2 && y_total<5){
+			 c=3;
+		 }else if(x_total==0 && y_total>4){
+			 c=5;
+		 }else if(x_total==1){
+			 c=7;
+		 }else if(x_total>1){
+			 c=7.5;
+		 };
+		 if(x_total==0 && y_total==0){
+			 d=0;
+		 }else if(x_self_total==0 && y_self_total==0 && y_eg_total==1){
+			 d=0.5;
+		 }else if(x_self_total==0 && y_self_total==0 && y_eg_total==2){
+			 d=1;
+		 }else if(x_self_total==0 && y_self_total==0 && y_eg_total==3){
+			 d=1.5;
+		 }else if(x_self_total==0 && y_self_total==0 && y_eg_total==4){
+			 d=2;
+		 }else if(x_self_total==0 && y_self_total==0 && y_eg_total>=5){
+			 d=2.5;
+		 }else if(x_self_total==0 && y_self_total==0 && x_eg_total>=1){
+			 d=2.5;
+		 }else if(x_self_total==0 && y_self_total==1){
+			 d=1.5;
+		 }else if(x_self_total==0 && y_self_total==2){
+			 d=2.5;
+		 }else if(x_self_total==0 && y_self_total==3){
+			 d=3.5;
+		 }else if(x_self_total==0 && y_self_total==4){
+			 d=4.5;
+		 }else if(x_self_total==0 && y_self_total>=5){
+			 d=5.5;
+		 }else if(x_self_total>=1){
+			 d=5.5;
+		 };
+		 if(root.other!=null && root.other){
+			 e=1;
+		 };
+		return String.format("%s分~%s分", (a+b+c+d+e)+"",(a+b+c+d+e+2)+"");
+	 ]]></property>
+    <property name="stach"><![CDATA[
+    	def thirdfruit=root.thirdfruit;
+    	def score=0;
+    	if(thirdfruit>=6){
+    		score=27;
+    	}else if(thirdfruit==5){
+    		score=25;
+    	}else if(thirdfruit==4){
+    		score=20;
+    	}else if(thirdfruit==3){
+    		score=16;
+    	}else if(thirdfruit==2){
+    		score=10;
+    	}else if(thirdfruit==1){
+    		score=4;
+    	}else if(thirdfruit==0){
+    		score=0;
+    	};
+		return String.format("%s分~%s分", (score)+"",(score)+"");
+	 ]]></property>
+    <property name="rdManag"><![CDATA[
+    	def a=0;
+    	def b=0;
+    	def c=0;
+    	def d=0;
+    	if(root.compsys=="A"){
+    		a=5.5;
+    	}else if(root.compsys=="B"){
+    		a=3.5;
+    	}else if(root.compsys=="C"){
+    		a=1.5;
+    	}else if(root.compsys=="D"){
+    		a=0;
+    	};
+    	if(root.cooper=="A"){
+    		b=5.5;
+    	}else if(root.cooper=="B"){
+    		b=3.5;
+    	}else if(root.cooper=="C"){
+    		b=0;
+    	};
+    	if(root.platform=="A"){
+    		c=3.5;
+    	}else if(root.platform=="B"){
+    		c=2;
+    	}else if(root.platform=="C"){
+    		c=0;
+    	};
+    	if(root.personnel=="A"){
+    		d=3.5;
+    	}else if(root.personnel=="B"){
+    		d=0;
+    	};
+		return String.format("%s分~%s分", (a+b+c+d)+"",(a+b+c+d+2)+"");
+	 ]]></property>
+    <property name="compGrowth"><![CDATA[
+		 com.ht.biz.service.impl.hisself.FinanceCalculation fc =new com.ht.biz.service.impl.hisself.FinanceCalculation(root);
+		 def a=fc.calcValue(fc.KEY_NET_ASSET);
+		 def b=fc.calcValue(fc.KEY_SALES_REVENUE);
+		 return a+b;
+	 ]]></property>
+  </product>
+  <product>
+    <property name="type" >suzhou_gaopei</property>
+    <property name="name" >高培</property>
+   <property name="foundTime"><![CDATA[
+        def year = DateUtil.getDiffYearByDate(root.regDate,new Date());
+		def cog2008 = root.cog2008;
+		if(year>=1 ){
+			root.yearToString="<s class='sign right'></s>本企业符合成立一年以上条件";
+			if(cog2008){
+				return "<s class='sign wrong'></s>";
+			}else{
+				return "<s class='sign right'></s>";
+			}
+		}else{
+			root.yearToString="<s class='sign wrong'></s>本企业不符合成立一年以上条件";
+		    return "<s class='sign wrong'></s>";
+		};
+	 ]]>
+    </property>
+    <property name="techField"><![CDATA[
+    	def cog2008 = root.cog2008;
+    	root.techToString="<s class='sign right'></s>核心技术属于《国家支持的高新技术领域》规定的范围";
+		return cog2008?"":"<s class='sign right'></s>";
+	 ]]></property>
+    <property name="persForm"><![CDATA[
+        def developmentTotal=root.developmentTotal==null?0:root.developmentTotal;
+        def workerTotal=root.workerTotal==null?0:root.workerTotal;
+		def d2=developmentTotal*1.0/workerTotal;
+		def cog2008 = root.cog2008;
+		java.math.BigDecimal b2 = new java.math.BigDecimal(d2);
+		if(b2>=0.1){
+			return cog2008?"":"<s class='sign right'></s>";
+		}else if(b2>=0.05&&b2<0.1){
+			return cog2008?"":"<s class='sign wrong'></s>";
+		}else{
+			return cog2008?"":"<s class='sign wrong'></s>";
+		};
+	 ]]></property>
+    <property name="rdCost"><![CDATA[
+		def saleyfrate=root.saleyfrate;
+		def cog2008 = root.cog2008;
+		if("A"==saleyfrate){
+			root.costToString="<s class='sign right'></s>研发费用总额占比为>=5%，达到要求；";
+		   return cog2008?"":"<s class='sign right'></s>";
+		}else if("B"==saleyfrate){
+			root.costToString="<s class='sign right'></s>研发费用总额占比为>=4%，达到要求；";
+		   return cog2008?"":"<s class='sign right'></s>";
+		}else if("C"==saleyfrate){
+			root.costToString="<s class='sign right'></s>研发费用总额占比为>=3%，达到要求；";
+		   return cog2008?"":"<s class='sign right'></s>";
+		}else{
+		root.costToString="<s class='sign wrong'></s>研发费用总额占比为<3%，不符合要求；";
+		   return cog2008?"":"<s class='sign wrong'></s>";
+		};
+	 ]]></property>
+    <property name="hincome"><![CDATA[
+		def prodrate=root.prodrate;
+		def cog2008 = root.cog2008;
+		if("A"==prodrate){
+			root.incomeToString="<s class='sign right'></s>近一年高新技术产品（服务）收入占同期总收入比例（>=60%）符合条件";
+		    return cog2008?"":"<s class='sign right'></s>";
+		}else if("B"==prodrate){
+			root.incomeToString="<s class='sign wrong'></s>近一年高新技术产品（服务）收入占同期总收入比例不符合条件";
+			return cog2008?"":"<s class='sign right'></s>";
+		}else{
+			root.incomeToString="<s class='sign wrong'></s>近一年高新技术产品（服务）收入占同期总收入比例不符合条件";
+		    return cog2008?"":"<s class='sign right'></s>";
+		};
+	 ]]></property>
+    <property name="cop"><![CDATA[
+		def compop=root.compop;
+		def cog2008 = root.cog2008;
+		if(compop){
+			return cog2008?"":"<s class='sign right'></s>";
+		}else{
+			return cog2008?"":"<s class='sign wrong'></s>";
+		};
+	 ]]></property>
+    <property name="intelProp"><![CDATA[
+    	def cog2008 = root.cog2008;
+    	def a=0;
+    	def b=0;
+    	def c=0;
+    	def d=0;
+    	def e=0;
+		def x_total=root.x1+root.x2+root.x3+root.x4+root.x5+root.x6;
+		def x_self_total=root.x1self+root.x2self+root.x3self+root.x4self+root.x5self+root.x6self;
+		def x_eg_total=root.x1eg+root.x2eg+root.x3eg+root.x4eg+root.x5eg+root.x6eg;
+		x_total=x_self_total+x_eg_total;
+		def y_total=root.y1+root.y2+root.y3;
+		def y_self_total=root.y1self+root.y2self+root.y3self;
+		def y_eg_total=root.y1eg+root.y2eg+root.y3eg;
+		y_total=y_self_total+y_eg_total;
+		def y1=root.y1;
+		def y2=root.y2;
+		def y3=root.y3;
+		if(x_total==0 && y_total==0){
+			 a=0;
+		 }else if(x_total==0 && y1==0 && y3==0 && y2>0){
+			 a=1;
+		 }else if(x_total==0 && y1==0 && y3>0){
+			 a=3;
+		 }else if(x_total==0 && y1>0){
+			 a=4;
+		 }else if(x_total==1){
+			 a=5;
+		 }else if(x_total>1 && x_total<=5){
+			 a=6;
+		 }else if(x_total>5){
+			 a=7;
+		 };
+		 if(x_total==0 && y_total==0){
+			 b=0;
+		 }else if(x_total==0 && y1==0 && y3==0 && y2>0){
+			 b=1;
+		 }else if(x_total==0 && y1==0 && y3>0){
+			 b=3;
+		 }else if(x_total==0 && y1>0){
+			 b=4;
+		 }else if(x_total==1){
+			 b=5;
+		 }else if(x_total>1 && x_total<=5){
+			 b=6;
+		 }else if(x_total>5){
+			 b=7;
+		 };
+		 if(x_total==0 && y_total==0){
+			 c=0;
+		 }else if(x_total==0 && y_total>0 && y_total<3){
+			 c=1;
+		 }else if(x_total==0 && y_total>2 && y_total<5){
+			 c=3;
+		 }else if(x_total==0 && y_total>4){
+			 c=5;
+		 }else if(x_total==1){
+			 c=7;
+		 }else if(x_total>1){
+			 c=7.5;
+		 };
+		 if(x_total==0 && y_total==0){
+			 d=0;
+		 }else if(x_self_total==0 && y_self_total==0 && y_eg_total==1){
+			 d=0.5;
+		 }else if(x_self_total==0 && y_self_total==0 && y_eg_total==2){
+			 d=1;
+		 }else if(x_self_total==0 && y_self_total==0 && y_eg_total==3){
+			 d=1.5;
+		 }else if(x_self_total==0 && y_self_total==0 && y_eg_total==4){
+			 d=2;
+		 }else if(x_self_total==0 && y_self_total==0 && y_eg_total>=5){
+			 d=2.5;
+		 }else if(x_self_total==0 && y_self_total==0 && x_eg_total>=1){
+			 d=2.5;
+		 }else if(x_self_total==0 && y_self_total==1){
+			 d=1.5;
+		 }else if(x_self_total==0 && y_self_total==2){
+			 d=2.5;
+		 }else if(x_self_total==0 && y_self_total==3){
+			 d=3.5;
+		 }else if(x_self_total==0 && y_self_total==4){
+			 d=4.5;
+		 }else if(x_self_total==0 && y_self_total>=5){
+			 d=5.5;
+		 }else if(x_self_total>=1){
+			 d=5.5;
+		 };
+		 if(root.other!=null && root.other){
+			 e=1;
+		 };
+		 if(x_total>=1||y_total>=5){
+		 	root.intellectualPropertyGrade="您已具备申请高新技术企业的条件。知识产权数量已达标，建议持续申请与主营产品相关的知识产权，为三年后的重新认定，增加知识产权的方式有购买/转让/自主申请；";
+		 }else if(x_total==0 && (y_total>2 && y_total<5)){
+		 	root.intellectualPropertyGrade="可申请高企，但知识产权数量不够导致评分不高，建议申请高企培育或增加知识产权数量至1个I类知识产权或5个及以上Ⅱ类知识产权后申请高企（注：知识产权与企业主营产品相关）；";
+		 }else if(x_total==0 && y_total>0 && y_total<3){
+		 	root.intellectualPropertyGrade="建议先申请高企培育或增加知识产权数量至1个I类知识产权或5个及以上Ⅱ类知识产权再申请高企；增加知识产权的方 式有购买/转让/自主申请（注：知识产权与企业主营产品相关）；";
+		 }else{
+		 	root.intellectualPropertyGrade="知识产权数量为0，建议先申请1个I类知识产权或5个及以上Ⅱ类知识产权再申请高企培育或高企；增加知识产权的方式有购买/转让/自主申请（注：知识产权与企业主营产品相关）；";
+		 };
+		 def totals=x_total+y_total;
+		 if(totals>0){
+		 	root.nologyToString="<s class='sign right'></s>有获得符合条件的知识产权";
+		 }else{
+		 	root.nologyToString="<s class='sign wrong'></s>没有获得符合条件的知识产权";
+		 };
+		 root.intellectualProperty=a+b+c+d+e;
+		return cog2008?"":String.format("%s分~%s分", (a+b+c+d+e)+"",(a+b+c+d+e+2)+"");
+	 ]]></property>
+    <property name="stach"><![CDATA[
+    	def cog2008 = root.cog2008;
+    	def thirdfruit=root.thirdfruit;
+    	def score=0;
+    	if(thirdfruit>=6){
+    		score=27;
+    	}else if(thirdfruit==5){
+    		score=25;
+    	}else if(thirdfruit==4){
+    		score=20;
+    	}else if(thirdfruit==3){
+    		score=16;
+    	}else if(thirdfruit==2){
+    		score=10;
+    	}else if(thirdfruit==1){
+    		score=4;
+    	}else if(thirdfruit==0){
+    		score=0;
+    	};
+    	root.resultTransformation=score;
+    	root.resultTransformationGrade="建议通过丰富证明材料强化科技成果转化质量（证明材料：销售合同、销售发票、用户使用报告、成果查新、产品检测报告、产品说明书等）；";
+		return cog2008?"":String.format("%s分~%s分", (score)+"",(score+2)+"");
+	 ]]></property>
+    <property name="rdManag"><![CDATA[
+    	def cog2008 = root.cog2008;
+    	def a=0;
+    	def b=0;
+    	def c=0;
+    	def d=0;
+    	if(root.compsys=="A"){
+    		a=5.5;
+    	}else if(root.compsys=="B"){
+    		a=3.5;
+    	}else if(root.compsys=="C"){
+    		a=1.5;
+    	}else if(root.compsys=="D"){
+    		a=0;
+    	};
+    	if(root.cooper=="A"){
+    		b=5.5;
+    	}else if(root.cooper=="B"){
+    		b=3.5;
+    	}else if(root.cooper=="C"){
+    		b=0;
+    	};
+    	if(root.platform=="A"){
+    		c=3.5;
+    	}else if(root.platform=="B"){
+    		c=2;
+    	}else if(root.platform=="C"){
+    		c=0;
+    	};
+    	if(root.personnel=="A"){
+    		d=3.5;
+    	}else if(root.personnel=="B"){
+    		d=0;
+    	};
+    	def total=a+b+c+d;
+    	if(total>22.5 && total<=30){
+    		root.researchDevelopmentGrade="建议加强企业研发机构建设①完善研发管理制度等；②研发场地、设备设施等配套；";
+    	}else if(total>15 && total<=22.5){
+    		root.researchDevelopmentGrade="建议加强企业研发机构建设①完善研发管理制度等；②研发场地、设备设施等配套；③研发机构获得第三方认定或挂牌等；④建立开放式的创新创业平台；";
+    	}else if(total>7.5 && total<=15){
+    		root.researchDevelopmentGrade="建议加强企业研发机构建设①完善研发管理制度等；②研发场地、设备设施等配套；③加强与科研院校合作；";
+    	}else if(total>0 && total<=7.5){
+    		root.researchDevelopmentGrade="建议加强企业研发机构建设①完善研发管理制度等；②研发场地、设备设施等配套；③加强与科研院校合作；④研发机构获得第三方认定或挂牌等；";
+    	}else{
+    		root.researchDevelopmentGrade="建议加强企业研发机构建设①完善研发管理制度等；②研发场地、设备设施等配套；③加强与科研院校合作；④研发机构获得第三方认定或挂牌等；";
+    	};
+    	root.researchDevelopment=a+b+c+d;
+		return cog2008?"":String.format("%s分~%s分", (a+b+c+d)+"",(a+b+c+d+2)+"");
+	 ]]></property>
+    <property name="compGrowth"><![CDATA[
+    	 def cog2008 = root.cog2008;
+		 com.ht.biz.service.impl.hisself.FinanceCalculation fc =new com.ht.biz.service.impl.hisself.FinanceCalculation(root);
+		 def a=fc.calcValue(fc.KEY_NET_ASSET);
+		 def b=fc.calcValue(fc.KEY_SALES_REVENUE);
+		 def score=a+b;
+		 root.totalAssets=a+b;
+		 root.total=root.intellectualProperty+root.resultTransformation+root.researchDevelopment+root.totalAssets;
+		 /*root.totalAssetsGrade="成长性模块获得为"+score+"分（总分"+score+"分，其中，净资产增长率得分"+a+",销售增长率得分"+b+"）。";*/
+		 def x_total=root.x1+root.x2+root.x3+root.x4+root.x5+root.x6;
+		 def y_total=root.y1+root.y2+root.y3;
+		 if(root.total<60){
+		 	root.applySuggest="申报高新技术企业培育";
+		 }else if((x_total==0 && (y_total>=0 && y_total<3))){
+		 	root.applySuggest="申报高新技术企业培育";
+		 }else{
+		 	root.applySuggest="申报高新技术企业";
+		 };
+		 if(score>=16&&score<=20){
+			root.totalAssetsGrade="成长性得分为"+score+"分（销售收入增长率得分为"+b+"，净资产增长率得分为"+a+"），财务增长性好";
+		 }else if(score>=10&&score<16){
+			root.totalAssetsGrade="成长性得分为"+score+"分（销售收入增长率得分为"+b+"，净资产增长率得分为"+a+"），财务增长性较好";
+		 }else if(score>=6&&score<10){
+			root.totalAssetsGrade="成长性得分为"+score+"分（销售收入增长率得分为"+b+"，净资产增长率得分为"+a+"），财务增长性一般";
+		 }else if(score>=0&&score<6){
+			root.totalAssetsGrade="成长性得分为"+score+"分（销售收入增长率得分为"+b+"，净资产增长率得分为"+a+"），财务增长性差";
+		 }else{
+			root.totalAssetsGrade="成长性得分为"+score+"分（销售收入增长率得分为"+b+"，净资产增长率得分为"+a+"），财务增长性差";
+		 };
+		 return cog2008?"":(a+b);
+	 ]]></property>
+  </product>
+  <!-- 苏州配置 -->
+  <!-- 全国配置 -->
+  		  <product>
+    <property name="type" >quanguo_gaopei</property>
+    <property name="name" >高培</property>
+   <property name="foundTime"><![CDATA[
+        def year = DateUtil.getDiffYearByDate(root.regDate,new Date());
+		def cog2008 = root.cog2008;
+		if(year>=1 ){
+			root.yearToString="<s class='sign right'></s>本企业符合成立一年以上条件";
+			if(cog2008){
+				return "<s class='sign wrong'></s>";
+			}else{
+				return "<s class='sign right'></s>";
+			}
+		}else{
+			root.yearToString="<s class='sign wrong'></s>本企业不符合成立一年以上条件";
+		    return "<s class='sign wrong'></s>";
+		};
+	 ]]>
+    </property>
+    <property name="techField"><![CDATA[
+    	def cog2008 = root.cog2008;
+    	root.techToString="<s class='sign right'></s>核心技术属于《国家支持的高新技术领域》规定的范围";
+		return cog2008?"":"<s class='sign right'></s>";
+	 ]]></property>
+    <property name="persForm"><![CDATA[
+        def developmentTotal=root.developmentTotal==null?0:root.developmentTotal;
+        def workerTotal=root.workerTotal==null?0:root.workerTotal;
+		def d2=developmentTotal*1.0/workerTotal;
+		def cog2008 = root.cog2008;
+		java.math.BigDecimal b2 = new java.math.BigDecimal(d2);
+		if(b2>=0.1){
+			return "<s class='sign right'></s>";
+		}else if(b2>=0.05&&b2<0.1){
+			return "<s class='sign wrong'></s>";
+		}else{
+			return "<s class='sign wrong'></s>";
+		};
+	 ]]></property>
+    <property name="rdCost"><![CDATA[
+		def saleyfrate=root.saleyfrate;
+		def cog2008 = root.cog2008;
+		if("A"==saleyfrate){
+		   root.costToString="<s class='sign right'></s>研发费用总额占比为>=5%，达到要求；";
+		   return cog2008?"":"<s class='sign right'></s>";
+		}else if("B"==saleyfrate){
+			root.costToString="<s class='sign right'></s>研发费用总额占比为>=4%，达到要求；";
+		   return cog2008?"":"<s class='sign right'></s>";
+		}else if("C"==saleyfrate){
+			root.costToString="<s class='sign right'></s>研发费用总额占比为>=3%，达到要求；";
+		   return cog2008?"":"<s class='sign right'></s>";
+		}else{
+			root.costToString="<s class='sign wrong'></s>研发费用总额占比为<=3%，不符合要求；";
+		   return cog2008?"":"<s class='sign wrong'></s>";
+		};
+	 ]]></property>
+    <property name="hincome"><![CDATA[
+		def prodrate=root.prodrate;
+		def cog2008 = root.cog2008;
+		if("A"==prodrate){
+			root.incomeToString="<s class='sign right'></s>近一年高新技术产品（服务）收入占同期总收入比例（>=60%）符合条件";
+		    return cog2008?"":"<s class='sign right'></s>";
+		}else if("B"==prodrate){
+			root.incomeToString="<s class='sign wrong'></s>近一年高新技术产品（服务）收入占同期总收入比例不符合条件";
+			return cog2008?"":"<s class='sign wrong'></s>";
+		}else{
+			root.incomeToString="<s class='sign wrong'></s>近一年高新技术产品（服务）收入占同期总收入比例不符合条件";
+		   return cog2008?"":"<s class='sign wrong'></s>";
+		};
+	 ]]></property>
+    <property name="cop"><![CDATA[
+		def compop=root.compop;
+		def cog2008 = root.cog2008;
+		if(compop){
+			return cog2008?"":"<s class='sign right'></s>";
+		}else{
+			return cog2008?"":"<s class='sign wrong'></s>";
+		};
+	 ]]></property>
+    <property name="intelProp"><![CDATA[
+    	def cog2008 = root.cog2008;
+    	def a=0;
+    	def b=0;
+    	def c=0;
+    	def d=0;
+    	def e=0;
+		def x_total=root.x1+root.x2+root.x3+root.x4+root.x5+root.x6;
+		def x_self_total=root.x1self+root.x2self+root.x3self+root.x4self+root.x5self+root.x6self;
+		def x_eg_total=root.x1eg+root.x2eg+root.x3eg+root.x4eg+root.x5eg+root.x6eg;
+		x_total=x_self_total+x_eg_total;
+		def y_total=root.y1+root.y2+root.y3;
+		def y_self_total=root.y1self+root.y2self+root.y3self;
+		def y_eg_total=root.y1eg+root.y2eg+root.y3eg;
+		y_total=y_self_total+y_eg_total;
+		def y1=root.y1;
+		def y2=root.y2;
+		def y3=root.y3;
+		def totals=x_total+y_total;
+		if(x_total==0 && y_total==0){
+			 a=0;
+		 }else if(x_total==0 && y1==0 && y3==0 && y2>0){
+			 a=1;
+		 }else if(x_total==0 && y1==0 && y3>0){
+			 a=3;
+		 }else if(x_total==0 && y1>0){
+			 a=4;
+		 }else if(x_total==1){
+			 a=5;
+		 }else if(x_total>1 && x_total<=5){
+			 a=6;
+		 }else if(x_total>5){
+			 a=7;
+		 };
+		 if(x_total==0 && y_total==0){
+			 b=0;
+		 }else if(x_total==0 && y1==0 && y3==0 && y2>0){
+			 b=1;
+		 }else if(x_total==0 && y1==0 && y3>0){
+			 b=3;
+		 }else if(x_total==0 && y1>0){
+			 b=4;
+		 }else if(x_total==1){
+			 b=5;
+		 }else if(x_total>1 && x_total<=5){
+			 b=6;
+		 }else if(x_total>5){
+			 b=7;
+		 };
+		 if(x_total==0 && y_total==0){
+			 c=0;
+		 }else if(x_total==0 && y_total>0 && y_total<3){
+			 c=1;
+		 }else if(x_total==0 && y_total>2 && y_total<5){
+			 c=3;
+		 }else if(x_total==0 && y_total>4){
+			 c=5;
+		 }else if(x_total==1){
+			 c=7;
+		 }else if(x_total>1){
+			 c=7.5;
+		 };
+		 if(x_total==0 && y_total==0){
+			 d=0;
+		 }else if(x_self_total==0 && y_self_total==0 && y_eg_total==1){
+			 d=0.5;
+		 }else if(x_self_total==0 && y_self_total==0 && y_eg_total==2){
+			 d=1;
+		 }else if(x_self_total==0 && y_self_total==0 && y_eg_total==3){
+			 d=1.5;
+		 }else if(x_self_total==0 && y_self_total==0 && y_eg_total==4){
+			 d=2;
+		 }else if(x_self_total==0 && y_self_total==0 && y_eg_total>=5){
+			 d=2.5;
+		 }else if(x_self_total==0 && y_self_total==0 && x_eg_total>=1){
+			 d=2.5;
+		 }else if(x_self_total==0 && y_self_total==1){
+			 d=1.5;
+		 }else if(x_self_total==0 && y_self_total==2){
+			 d=2.5;
+		 }else if(x_self_total==0 && y_self_total==3){
+			 d=3.5;
+		 }else if(x_self_total==0 && y_self_total==4){
+			 d=4.5;
+		 }else if(x_self_total==0 && y_self_total>=5){
+			 d=5.5;
+		 }else if(x_self_total>=1){
+			 d=5.5;
+		 };
+		 if(root.other!=null && root.other){
+			 e=1;
+		 };
+		 if(x_total>=1||y_total>=5){
+		 	root.intellectualPropertyGrade="您已具备申请高新技术企业的条件。知识产权数量已达标，建议持续申请与主营产品相关的知识产权，为三年后的重新认定，增加知识产权的方式有购买/转让/自主申请；";
+		 }else if(x_total==0 && (y_total>2 && y_total<5)){
+		 	root.intellectualPropertyGrade="可申请高企，但知识产权数量不够导致评分不高，建议申请高企培育或增加知识产权数量至1个I类知识产权或5个及以上Ⅱ类知识产权后申请高企（注：知识产权与企业主营产品相关）；";
+		 }else if(x_total==0 && y_total>0 && y_total<3){
+		 	root.intellectualPropertyGrade="建议先申请高企培育或增加知识产权数量至1个I类知识产权或5个及以上Ⅱ类知识产权再申请高企；增加知识产权的方 式有购买/转让/自主申请（注：知识产权与企业主营产品相关）；";
+		 }else if(x_total==0 && y_total==0){
+		 	root.intellectualPropertyGrade="知识产权数量为0，建议先申请1个I类知识产权或5个及以上Ⅱ类知识产权再申请高企培育或高企；增加知识产权的方式有购买/转让/自主申请（注：知识产权与企业主营产品相关）；";
+		 }else{
+		 	root.intellectualPropertyGrade="知识产权数量为0，建议先申请1个I类知识产权或5个及以上Ⅱ类知识产权再申请高企培育或高企；增加知识产权的方式有购买/转让/自主申请（注：知识产权与企业主营产品相关）；";
+		 };
+		 if(totals>0){
+		 	root.nologyToString="<s class='sign right'></s>有获得符合条件的知识产权";
+		 }else{
+		 	root.nologyToString="<s class='sign wrong'></s>没有获得符合条件的知识产权";
+		 };
+		 root.intellectualProperty=a+b+c+d+e;
+		return cog2008?"":String.format("%s分~%s分", (a+b+c+d+e)+"",(a+b+c+d+e+2)+"");
+	 ]]></property>
+    <property name="stach"><![CDATA[
+    	def cog2008 = root.cog2008;
+    	def thirdfruit=root.thirdfruit;
+    	def score=0;
+    	if(thirdfruit>=6){
+    		score=27;
+    	}else if(thirdfruit==5){
+    		score=25;
+    	}else if(thirdfruit==4){
+    		score=20;
+    	}else if(thirdfruit==3){
+    		score=16;
+    	}else if(thirdfruit==2){
+    		score=10;
+    	}else if(thirdfruit==1){
+    		score=4;
+    	}else if(thirdfruit==0){
+    		score=0;
+    	};
+    	root.resultTransformation=score;
+    	root.resultTransformationGrade="建议通过丰富证明材料强化科技成果转化质量（证明材料：销售合同、销售发票、用户使用报告、成果查新、产品检测报告、产品说明书等）；";
+		return cog2008?"":String.format("%s分~%s分", (score)+"",(score)+"");
+	 ]]></property>
+    <property name="rdManag"><![CDATA[
+    	def cog2008 = root.cog2008;
+    	def a=0;
+    	def b=0;
+    	def c=0;
+    	def d=0;
+    	if(root.compsys=="A"){
+    		a=5.5;
+    	}else if(root.compsys=="B"){
+    		a=3.5;
+    	}else if(root.compsys=="C"){
+    		a=1.5;
+    	}else if(root.compsys=="D"){
+    		a=0;
+    	};
+    	if(root.cooper=="A"){
+    		b=5.5;
+    	}else if(root.cooper=="B"){
+    		b=3.5;
+    	}else if(root.cooper=="C"){
+    		b=0;
+    	};
+    	if(root.platform=="A"){
+    		c=3.5;
+    	}else if(root.platform=="B"){
+    		c=2;
+    	}else if(root.platform=="C"){
+    		c=0;
+    	};
+    	if(root.personnel=="A"){
+    		d=3.5;
+    	}else if(root.personnel=="B"){
+    		d=0;
+    	};
+    	def total=a+b+c+d;
+    	if(total>22.5 && total<=30){
+    		root.researchDevelopmentGrade="建议加强企业研发机构建设①完善研发管理制度等；②研发场地、设备设施等配套；";
+    	}else if(total>15 && total<=22.5){
+    		root.researchDevelopmentGrade="建议加强企业研发机构建设①完善研发管理制度等；②研发场地、设备设施等配套；③研发机构获得第三方认定或挂牌等；④建立开放式的创新创业平台；";
+    	}else if(total>7.5 && total<=15){
+    		root.researchDevelopmentGrade="建议加强企业研发机构建设①完善研发管理制度等；②研发场地、设备设施等配套；③加强与科研院校合作；";
+    	}else if(total>0 && total<=7.5){
+    		root.researchDevelopmentGrade="建议加强企业研发机构建设①完善研发管理制度等；②研发场地、设备设施等配套；③加强与科研院校合作；④研发机构获得第三方认定或挂牌等；";
+    	}else{
+    		root.researchDevelopmentGrade="建议加强企业研发机构建设①完善研发管理制度等；②研发场地、设备设施等配套；③加强与科研院校合作；④研发机构获得第三方认定或挂牌等；";
+    	};
+    	root.researchDevelopment=a+b+c+d;
+		return cog2008?"":String.format("%s分~%s分", (a+b+c+d)+"",(a+b+c+d+2)+"");
+	 ]]></property>
+    <property name="compGrowth"><![CDATA[
+    	 def cog2008 = root.cog2008;
+    	 println("totalAssets="+root.totalAssets);
+		 com.ht.biz.service.impl.hisself.FinanceCalculation fc =new com.ht.biz.service.impl.hisself.FinanceCalculation(root);
+		 def a=fc.calcValue(fc.KEY_NET_ASSET);
+		 def b=fc.calcValue(fc.KEY_SALES_REVENUE);
+		 def score=a+b;
+		 root.totalAssets=a+b;
+		 println("totalAssets="+root.totalAssets);
+		 root.total=root.intellectualProperty+root.resultTransformation+root.researchDevelopment+root.totalAssets;
+		 /*root.totalAssetsGrade="成长性模块获得为"+score+"分（总分"+score+"分，其中，净资产增长率得分"+a+",销售增长率得分"+b+"）。";*/
+		 def x_total=root.x1+root.x2+root.x3+root.x4+root.x5+root.x6;
+		 def y_total=root.y1+root.y2+root.y3;
+		 if(root.total<60){
+		 	root.applySuggest="申报高新技术企业培育";
+		 }else if((x_total==0 && (y_total>=0 && y_total<3))){
+		 	root.applySuggest="申报高新技术企业培育";
+		 }else{
+		 	root.applySuggest="申报高新技术企业";
+		 };
+		 if(score>=16&&score<=20){
+			root.totalAssetsGrade="成长性得分为"+score+"分（销售收入增长率得分为"+b+"，净资产增长率得分为"+a+"），财务增长性好";
+		 }else if(score>=10&&score<16){
+			root.totalAssetsGrade="成长性得分为"+score+"分（销售收入增长率得分为"+b+"，净资产增长率得分为"+a+"），财务增长性较好";
+		 }else if(score>=6&&score<10){
+			root.totalAssetsGrade="成长性得分为"+score+"分（销售收入增长率得分为"+b+"，净资产增长率得分为"+a+"），财务增长性一般";
+		 }else if(score>=0&&score<6){
+			root.totalAssetsGrade="成长性得分为"+score+"分（销售收入增长率得分为"+b+"，净资产增长率得分为"+a+"），财务增长性差";
+		 }else{
+			root.totalAssetsGrade="成长性得分为"+score+"分（销售收入增长率得分为"+b+"，净资产增长率得分为"+a+"），财务增长性差";
+		 };
+		 return cog2008?"":(a+b);
+	 ]]></property>
+  </product>
+  <!-- 全国配置 -->
+</root>

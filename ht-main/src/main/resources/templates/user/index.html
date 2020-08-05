@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- 公共头部 -->
+    <th:block th:include="block/headlink :: test('个人云中心')" /> 
+    <!-- 结束 -->
+    <link rel="stylesheet" th:href="@{/statics/css/user/pagination.css}">
+    <link rel="stylesheet" th:href="@{/statics/css/user/index.css?v=0.0.2}">
+    <style>
+        .page-bar-ul {
+            position: relative;
+            left: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="user">
+        <div th:replace="~{user_head::copy}"></div>
+        <div th:replace="~{header::copy}"></div>
+    </div>
+    <div class="wrap" id="box">
+        <section>
+            <div class="user_content clearfix">
+                <div class="user_list fl clearfix">
+                    <div th:replace="~{user_part::copy}"></div>
+                </div>
+                <div class="user_details fl">
+                    <a class="user_banner" v-if="userInfoType == 'SERVICE_PROVIDER' "  href="/ht-biz/usercenter/user/safeguard">
+                        <img src="/statics/images/user/user_banner.png" alt="">
+                    </a>
+                    <div class="inform">
+                        <div class="inform_head clearfix">
+                            <div v-cloak class="msg message fl" @click="curInfo=0" :class="{active:curInfo==0}">消息通知</div>
+                            <!-- <div v-cloak class="msg unread fl" @click="curInfo=1" :class="{active:curInfo==1}">未读消息（0）（{{page.totalResult}}）</div> -->
+                            <div class="more fr clearfix" v-show="curInfo==0">
+                                <p v-cloak class="fl">共<i>{{page.totalResult}}</i>条信息 </p>
+                                <!-- <a class="fl" href="">查看更多></a> -->
+                            </div>
+                            <div v-cloak class="more fr clearfix" v-show="curInfo==1">
+                                <p class="fl">共<i>0</i>条信息 </p>
+                                <!-- <a class="fl" href="">查看更多></a> -->
+                            </div>
+                        </div>
+                        <div v-cloak class="inform_content" v-show="curInfo==0">
+                            <ul v-cloak class="inform_ul">
+                                <li v-cloak v-for="(list,index) in content" @mouseover="deleteShow=(index+1);" @mouseleave="deleteShow='';">
+                                    <p><i>{{index+1}}</i><s></s><span class="s1">信息</span>
+                                        <span class="s2 1" v-if="list.code == 'server_check_fail'" v-html="list.content" @click="reject(list.regionid)"></span>
+                                        <span class="s2 2" v-if="list.code == 'doc_check_fail'" v-html="list.content" @click="reject(list.regionid)"></span>
+                                        <span class="s2 3" v-if="list.code == 'gold_cash_check_fail'" v-html="list.content" @click="reject(list.regionid)"></span>
+                                        <span class="s2 4" v-if="list.code == 'gold_cash_accounts_fail'" v-html="list.content" @click="reject(list.regionid)"></span>
+                                        <span class="s2 5" v-if="list.code == 'product_offline'" v-html="list.content" @click="reject(list.regionid)"></span>
+                                        <span class="s2 7" v-if="list.code == 'product_check_unpass'" v-html="list.content" @click="reject(list.regionid)"></span>
+                                        <span class="s2 6" 
+                                        v-if="list.code != 'server_check_fail' && list.code != 'doc_check_fail' && list.code != 'gold_cash_check_fail' && list.code != 'gold_cash_accounts_fail' && list.code != 'product_offline' && list.code != 'product_check_unpass'" 
+                                        v-html="list.content"></span>
+                                        <span class="last"> <s :id="list.id" class="delete" v-show="deleteShow==(index+1)" @click="deleteShowInfo($event)">删除</s>{{list.createdate|date1}}<i></i></span></p>
+                                </li>
+                            </ul>
+                            <!-- 分页 -->
+                            <div class="page_box ac">
+                                <mypagenation :page="page" @btn-click="clickPage"></mypagenation>
+                                <!-- <div class="target_goto">
+                                    <span>输入页码</span>
+                                    <input type="text" v-model:value="targetData">
+                                    <s @click="clickPage();">确认</s>
+                                </div> -->
+                            </div>
+                            <!-- 分页 -->
+                        </div>
+                        <div class="inform_content" v-cloak v-show="curInfo==1">
+                            <ul v-cloak class="inform_ul">
+                                <!-- <li @mouseover="deleteShow2=1;" @mouseleave="deleteShow2='';">
+                                    <p><i>1</i><s></s><span class="s1">申报通知</span><span
+                                            class="s2">2019年广东省高新技术企业认定已经开始啦！</div><span class="last"><s class="delete"
+                                                v-show="deleteShow2==1">删除</s>2019年03月24日<i></i></span></p>
+                                </li> -->
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="recommend">
+                        <div class="recommend_head clearfix">
+                            <div class="border_b clearfix">
+                                <div class="recommend_head_l fl">
+                                    <i></i>
+                                </div>
+                                <div class="recommend_head_r fr">
+                                    <!-- <p class="fl">更精细政策匹配?</p> -->
+                                    <a class="fl" href="/ht-biz/policydig/index">查看更多></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="recommend_con">
+                            <ul class="recommend_ul">
+                                <li v-cloak v-for="(contentData, index) in contentDatas">
+                                    <h3>{{contentData.title}}</h3>
+                                    <p class="re_p1">
+                                        <span v-if="contentData.status > -1" class="re_span1">申报中&nbsp;截止日期还剩{{contentData.status}}天</span>
+                                        <span v-else-if="contentData.status < 0" class="re_span2">已截止</span>
+                                        <i>申报时间：{{contentData.beginDate | date1}}-{{contentData.endDate | date2}}</i>
+                                        <!-- <i>{{contentData.endDate-todayDate}}</i> -->
+                                    </p>
+                                    <p class="re_p2 clearfix">
+                                        <span class="region"><i></i>{{contentData.companyProvince}}{{contentData.companyCity}}{{contentData.city}}</span>
+                                        <span class="time"><i></i>{{contentData.datetime | date}}</span>
+                                        <span class="browse"><i></i>{{contentData.browsecount}}</span>
+                                        <a :href="'/ht-biz/policydig/details?id='+contentData.id"  target="_blank">立即申报</a>
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer>
+            <div>COPYRIGHT © 版权归属 广州高企云信息科技有限公司 粤ICP备16007486号-1</div>
+        </footer>
+    </div>
+    <!-- 公共js部分 -->
+    <th:block th:include="block/footlink :: copy" /> 
+    <!-- over -->
+    <script type="text/javascript" th:src="@{/statics/js/user/index.js?v=0.0.5}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/user/part_tab.js?v=0.0.4}"></script>
+    <th:block th:include="block/statistics :: copy" />
+    <script>
+        $(function(){
+            var timer = setTimeout(function(){
+                var user = vm.userType;
+                if(user != "SERVICE_PROVIDER"){
+                    $(".user_content>.user_list").css({
+                        'height': '1027px', 
+                    })
+                }else{
+                    $(".user_content>.user_list").css({
+                        'height': '1118px', 
+                    })
+                }
+            },1500)
+            
+        })
+    </script>
+</body>
+
+</html>

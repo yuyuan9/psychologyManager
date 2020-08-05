@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- 公共头部 -->
+    <th:block th:include="block/headlink :: test('商铺')" /> 
+    <!-- 结束 -->
+    <link rel="stylesheet" th:href="@{/statics/css/service/index.css?v=0.0.2}">
+    <link rel="stylesheet" th:href="@{/statics/css/style.css?v=0.0.1}">
+    <link rel="stylesheet" th:href="@{/statics/css/user/pagination.css}">
+    <link rel="stylesheet" th:href="@{/statics/css/service/business_shops.css?v=0.0.3}">
+    <style>
+        .page-bar-ul {
+            left: 0;
+        }
+        .page-bar>ul {
+            margin-top: 0px;
+        }
+        .p_level{width: 275px;}
+        .bz{display: inline-block;width: 73px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;vertical-align: middle;margin-bottom: 5px;}
+    </style>
+</head>
+
+<body>
+    <div id="user">
+        <div th:replace="~{user_head::copy}"></div>
+    </div>
+    <div class="wrap" id="box">
+        <div th:replace="~{header::copy}"></div>
+        <section>
+            <div class="shops_content clearfix">
+                <!-- 公司类型的店铺基本信息 -->
+                <div class="business_infos clearfix">
+                    <div class="infos_bg">
+                        <!-- 为公司类型时展示的服务商基本信息 -->
+                        <div class="infos_in">
+                            <div class="fl in_l">
+                                <div class="fl shop_l">
+                                    <img th:if="${serviceProvider.shopimg == ''||serviceProvider.shopimg == null}" src="/statics/images/inquire/qzcx.png" alt="" class="shop_l_img">
+                                    <img th:if="${serviceProvider.shopimg != ''}" th:src="'http://47.92.70.12:9090'+${serviceProvider.shopimg}" alt="" class="shop_l_img">
+                                </div>
+                                <div class="fr shop_r">
+                                    <div class="sn">
+                                        <i class="sign hk"></i>
+                                        <span class="hk shop_name" th:text="${serviceProvider.shopname}"></span>
+                                        <i th:if="${serviceProvider.isbond}" class="hk baozhang"></i>
+                                        <i th:if="${serviceProvider.isagency}" class="hk rz"></i>
+                                    </div>
+                                    <div class="sn1">
+                                        <div>
+                                            <span class="basic_one">等级：
+                                                <i th:text="${serviceProvider.serverstars}"></i>
+                                                <!-- 星级组件 -->
+                                                <star-rating :max="5" th::current="value"></star-rating>
+                                                <!-- over -->
+                                            </span>
+                                            <i class="one_h1 hk"></i>
+                                            <span class="basic_one">评分：
+                                                <span th:text="${serviceProvider.grade}" class="grade"></span>
+                                            </span>
+                                            <i class="one_h1 hk"></i>
+                                            <span class="basic_one">类型：
+                                                <span th:if="${serviceProvider.netrytype== 1}" class="grade">服务机构</span>
+                                                <span th:if="${serviceProvider.netrytype== 2 }" class="grade">个人</span>
+                                            </span>
+                                            <i class="one_h1 hk"></i> 
+                                            <span class="basic_one">
+                                                <i class="locat hk"></i>
+                                                <span>
+                                                    <i th:text="${serviceProvider.pronice}"></i>-<i th:text="${serviceProvider.city}"></i>-<i th:text="${serviceProvider.area}"></i>
+                                                </span>
+                                            </span>
+                                        </div>
+                                        <div class="sn1">
+                                            <span class="basic_one">服务范围：<span th:text="${serviceProvider.businesscope}"></span></span>
+                                        </div>
+                                    </div>
+                                    <!-- 公司简介-为公司类型时显示 -->
+                                    <div class="comj">
+                                        <p class="basic_one">公司简介：</p>
+                                        <p class="basic_one sn1 sn2" th:text="${serviceProvider.introduction}"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 联系电话-为公司类型时显示 -->
+                            <div class="contacts fr">
+                                <p class="phone1"><i class="phone hk"></i></p>
+                                <p class="tel" th:text="${serviceProvider.phone}"></p>
+                                <p class="consult1">
+                                    <a style="color: #fff;" th:href="'tencent://message/?uin='+${serviceProvider.customerqq}+'&Site=Sambow&Menu=yes'"><i class="dib qq_icon"></i>QQ咨询</a>
+                                </p>
+                                <p>客服联系人：<span th:text="${serviceProvider.contacts}"></span></p>
+                                <p class="qq">客服QQ：<span th:text="${serviceProvider.customerqq}"></span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 项目类型 -->
+                <div class="clearfix project">
+                    <div class="project_lx w">
+                        <div class="project_t clearfix">
+                            <div class="project_t_l fl">项目类型：</div>
+                            <div class="project_t_r fr">
+                                <ul class="hn">
+                                    <li class="hn lxs twoNames"
+                                    th:each="user:${protypenum}" 
+                                    th:onclick="'javascript:getquery(\''+${user.typeid}+'\',\''+${serviceProvider.createid}+'\');'"
+                                    th:text="${user.name} +'(' +${user.num}+')'"></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="clearfix">
+                            <p class="b_l"></p>
+                        </div>
+                        <div class="project_b clearfix">
+                            <ul class="p_details">
+                                <li v-for="(list,index) in proList" class="lxs_details fl">
+                                    <p class="p_n">{{list.productname}}</p>
+                                    <p class="p_level">
+                                        <span  class="sb hk" v-cloak v-if="list.stype == 1">完成时间：{{list.finishtime}}</span>
+                                        <span  class="sb hk" v-cloak v-else-if="list.stype == 2">全年申报</span>
+                                        <span  class="sb hk" v-cloak v-else-if="list.stype == 3">剩下{{list.remainingdate}}天</span>
+                                        <span  class="hk hui" v-cloak v-else >申报截止</span>
+
+                                        <i v-if="list.producttypeone==28">
+                                            <i v-cloak v-if="list.plevel == 1">国家级</i>
+                                            <i v-cloak v-if="list.plevel == 2">省级</i>
+                                            <i v-cloak v-if="list.plevel == 3">市级</i>
+                                            <i v-cloak v-if="list.plevel == 4">区级</i>
+                                        </i>
+
+                                        <i v-if="list.provice !=''">
+                                            <s v-if="list.city == '' && list.area == ''" v-html="list.provice"></s>
+                                            <s v-if="list.area == ''" v-html="list.city"></s>
+                                            <s v-if="list.area != ''" v-html="list.area"></s>
+                                        </i>
+                                        <i v-if="list.producttypeone==28" class="bz">补助:{{list.subsidy}}</i>
+                                    </p>
+                                    <p>
+                                        <span class="price hk">
+                                            <i v-if="list.pricetype == 1">￥{{list.price}} 元</i>
+                                            <i v-if="list.pricetype == 2">￥{{list.price}} 元 - {{list.price2}} 元</i>
+                                            <i v-if="list.pricetype == 3">面议</i>
+                                        </span>
+                                        <span class="p_xq hk active_bg">
+                                            <a target="_blank" :href="'/ht-biz/product/toproseroder?id=' + list.id">查看详情</a>
+                                        </span>
+                                    </p>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <!-- 分页 -->
+                        <div class="page_box ac clearfix">
+                            <mypagenation :page="page" @btn-click="clickPage"></mypagenation>
+                        </div>
+                        <!-- 分页 -->
+                    </div>
+                </div>
+                <!-- 服务流程 -->
+                <div class="clearfix">
+                    <div class="w s_process">
+                        <div class="fl s_process_l">
+                            <!-- 服务流程 -->
+                            <div class="process_w_w">
+                                <div class="process_t"><i class="process_i hk"></i>服务流程</div>
+                                <!-- 服务流程图-后台返回 -->
+                                <!-- <div class="process_img">
+                                    <img src="/statics/images/service/exchange_test/service_process.png" alt="" class="pimg">
+                                </div> -->
+                                <div  class="process_tt" th:utext="${serviceProvider.serviceflow}">
+                                    
+                                </div>
+                            </div>
+                            <!-- 服务案列 -->
+                            <div class="process_w_w">
+                                <div class="process_t"><i class="process_i hk"></i>服务案列</div>
+                                <!-- 服务案列图-后台返回 -->
+                                <!-- <div class="process_img">
+                                    <img src="/statics/images/service/exchange_test/service_process.png" alt="" class="pimg">
+                                </div> -->
+                                <div  class="process_tt" th:utext="${serviceProvider.servicecase}">
+                                </div>
+                            </div>
+                            <!-- 服务团队 为个人类型时不显示服务案例-->
+                            <div class="process_w_w" th:if="${serviceProvider.netrytype== 1 }">
+                                <div class="process_t"><i class="process_i hk"></i>服务团队</div>
+                                <!-- 服务团队图-后台返回 -->
+                                <!-- <div class="process_img">
+                                    <img src="/statics/images/service/exchange_test/sevice_tuandui.png" alt="" class="pimg">
+                                </div> -->
+                                <div  class="process_tt" th:utext="${serviceProvider.servicetame}">
+                                </div>
+                            </div>
+                            <!-- 服务保障 -->
+                            <div class="process_w_w">
+                                <div class="process_t"><i class="process_i hk"></i>服务保障</div>
+                                <div  class="process_tt" th:utext="${serviceProvider.serviceensure}">
+                                </div>
+                            </div>
+                            <!-- 其他 -->
+                            <div class="process_w_w">
+                                <div class="process_t"><i class="process_i hk"></i>其他</div>
+                                <div  class="process_tt" th:utext="${serviceProvider.other}">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 荣誉资质 -->
+                        <div class="fr s_process_r">
+                           <div>
+                                <div class="process_t"><i class="process_i process_i1 hk"></i>荣誉资质</div>
+                                <div class="honor">
+                                    <!-- 营业执照图-后台返回 -->
+                                    <div class="process_img process_img1" th:utext="${serviceProvider.honor}"></div>
+                                    <div th:if="${serviceProvider.netrytype== 1 }" class="process_img process_img1"><img th:src="'http://47.92.70.12:9090'+${serviceProvider.businesslicense}" alt=""></div>
+                                    
+                                    <p th:if="${serviceProvider.netrytype== 1 }" class="process_it process_it1">营业执照</p>
+                                </div>
+                                <div  class="honor" th:if="${serviceProvider.agencyimg}!=''">
+                                    <!-- 荣誉资质图-后台返回 -->
+                                    <div th:if="${serviceProvider.netrytype== 1 }" class="process_img process_img1" >
+                                        <img th:src="'http://47.92.70.12:9090'+${serviceProvider.agencyimg}" alt="">
+                                    </div>
+                                    <p th:if="${serviceProvider.netrytype== 1 }" class="process_it process_it1">服务机构认证</p>
+                                </div>
+                           </div>
+                           <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer>
+            <div class="copyright ac">
+                <p>COPYRIGHT © 版本归属 广州高企云信息科技有限公司 粤ICP备16007486号-1</p>
+            </div>
+        </footer>
+    </div>
+    <!-- 公共js部分 -->
+    <th:block th:include="block/footlink :: copy" />
+    <!-- over -->
+    <script type="text/javascript" th:src="@{/statics/js/component/star.js?v=0.0.3}"></script>
+    <script type="text/x-template" id="star-rating">
+        <div class="star-rating">
+            <span v-for="n in max">&star;</span>
+            <div class="star-rating__current" :style="{width: getRating + '%'}">
+            <span v-for="n in max">&starf;</span>
+            </div>
+        </div>
+    </script>
+    <script type="text/javascript" th:src="@{/statics/js/trading/business_shops.js?v=0.0.6}"></script>
+    
+    <script>
+        $(function(){
+            var timer=setTimeout(function(){
+                $(".process_text>p").children("img").attr("style","");
+                $(".process_tt>p").children("img").attr("style","");
+                $(".process_img>p").children("img").attr("style","");
+            },500);
+        })
+         $(".xcx_h").mouseover(function () {
+            $(".xcx").css({
+                'visibility': 'visible'
+            })
+        })
+        $(".xcx_h").mouseleave(function () {
+            $(".xcx").css({
+                'visibility': 'hidden'
+            })
+        })
+        $(function(){
+            $(".process_img>p").children("img").attr("style","");
+        })
+    </script>
+    <script th:inline="javascript">
+         
+        $(function(){
+            var proid = [[${serviceProvider.createid}]];
+            box.proid = proid;
+            box.getService();
+        })
+        function getquery(id,ids){
+            var proid = [[${serviceProvider.createid}]];
+            box.proid = proid;
+            box.id = id;
+            box.ids = ids;
+            box.getService();
+
+        }
+        $(".hn>li").click(function(){
+           // 修改tab标签样式
+           $(this).siblings().removeClass("active");
+           $(this).addClass("active");
+           
+       })
+    </script>
+    <th:block th:include="block/statistics :: copy" />
+</body>
+
+</html>

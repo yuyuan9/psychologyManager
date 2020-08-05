@@ -1,0 +1,87 @@
+.i_details {
+    width: 100%;
+    height: 100vh;
+    background-color: #ffffff;
+}
+.skip {
+    padding: 4.2667vw 4.2667vw 7.4667vw 4.2667vw;
+}
+.items {
+    width: 2.1333vw;
+    height: 3.6vw;
+    background: url("../../images/yidong_icons/phone_icons.png") -35.2667vw -13.5333vw no-repeat;
+    background-size: 40vw 40vw;
+    margin-right: 2.1333vw;
+}
+.items_details {
+    font-size: 4.2667vw;
+    color: #333333;
+}
+.details {
+    padding: 0 4.2667vw 17vw 4.2667vw;
+    background-color: #ffffff;
+}
+.items_name {
+    font-size: 4.5333vw;
+    font-weight:800;
+    color: #4B87F8;
+    padding-bottom: 3.7333vw;
+    border-bottom: 0.5333vw solid #4B87F8;
+}
+.cell {
+    margin-top: 4.8vw;
+}
+.cell_title,.cell_titles {
+    font-size: 3.4667vw;
+    color: #666666;
+    vertical-align: top;
+    text-align: right;
+}
+.cell_title {
+    width: 18.9333vw;
+}
+.cell_titles {
+    width: 24.9333vw;
+}
+.cell_content,.cell_contents {
+    font-size: 3.4667vw;
+    color: #333333;
+}
+.cell_contents {
+    width: 65.4vw;
+}
+.cell_content {
+    width: 64.4vw;
+}
+.expresss_bt {
+    width: 100%;
+    height: 12.8vw;
+    border-top: 1px solid #E2E2E2;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+}
+.go_back {
+    flex: 2;
+    font-size: 4.2667vw;
+    color: #4B87F8;
+    text-align: center;
+    line-height: 12.8vw;
+    background-color: #ffffff;
+}
+.consult {
+    flex: 5;
+    font-size: 4.2667vw;
+    color: #ffffff;
+    background-color: #4B87F8;
+    text-align: center;
+    line-height: 12.8vw;
+}
+.consult_icon {
+    width: 4.8vw;
+    height: 4.2667vw;
+    background: url("../../images/yidong_icons/consult.png") no-repeat;
+    background-size: 4.8vw 4.2667vw;
+    vertical-align: middle;
+    margin-right: 3.2vw;
+}

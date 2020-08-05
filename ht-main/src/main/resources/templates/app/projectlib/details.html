@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+<link rel="stylesheet" th:href="@{/statics/app/css/reset.css}">
+<link rel="stylesheet" th:href="@{/statics/app/css/index/policy_details.css}">
+
+<head>
+   
+<style>
+    [v-cloak] {
+        display: none;
+    }
+</style>
+</head>
+<body>
+    <div id="app-details" v-cloak>
+        <div class="main_bg">
+            <div class="details_hd">
+                <!-- <a href="javascript:history.back();"> -->
+                <a href="javascript:void(0)" @click="toback">
+                    <i class="to_zc_result dib"></i>
+                    <span class="zc_dt">立项详情</span>
+                </a>
+            </div>
+            <!-- 详情 -->
+            <div>
+                <h3 class="com_name">{{entity.companyName}}</h3><i class="line"></i>
+                <p class="zc_item">
+                    <span class="item_n dib">项目名称:</span>
+                    <span class="item_xq dib">{{entity.name}}</span>
+                <p class="zc_item">
+                    <span class="item_n dib">政策地区:</span>
+                    <span class="item_xq">{{entity.province}}{{entity.city}}{{entity.area}}</span>
+                </p>
+                <p class="zc_item">
+                    <span class="item_n dib">项目类别:</span>
+                    <span class="item_xq">{{entity.type}}</span>
+                </p>
+                <p class="zc_item">
+                    <span class="item_n dib">立项年份:</span>
+                    <span class="item_xq dib">{{entity.yearProject}}</span>
+                </p>
+                <p class="zc_item">
+                    <span class="item_n dib">立项额度:</span>
+                    <span class="item_xq dib">{{entity.quota}}</span></li>
+                </p>
+                <p class="zc_item">
+                    <span class="item_n dib">主管单位:</span>
+                    <span class="item_xq dib">{{entity.directorUnit}}</span></li>
+                </p>
+                <p class="zc_item">
+                    <span class="item_n dib">项目负责人:</span>
+                    <span class="item_xq dib">{{entity.project_leader}}</span>
+                </p>
+                <p class="zc_item">
+                    <span class="item_n dib">批次:</span>
+                    <span class="item_xq dib">{{entity.batch}}</span>
+                </p>
+                <p class="zc_item">
+                    <span class="item_n dib">专项专题:</span>
+                    <span class="item_xq dib">{{entity.special}}</span>
+                </p>
+                <p class="zc_item">
+                    <span class="item_n dib">立项编号:</span>
+                    <span class="item_xq dib">{{entity.project_number}}</span>
+                </p>
+                <p class="zc_item">
+                    <span class="item_n dib">合作单位:</span>
+                    <span class="item_xq dib">{{entity.unit}}</span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" th:src="@{/statics/app/js/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/vue.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/layer.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/htajax.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/projectlib/details.js?v=0.01}"></script>
+</body>
+
+</html>

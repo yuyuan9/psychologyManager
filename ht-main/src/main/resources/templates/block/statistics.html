@@ -1,0 +1,42 @@
+
+<!-- 页面统计代码 -->
+<div th:fragment="copy">
+    <!--[if lt IE 9]>
+    <div class="compatibility-box">
+        <div class="suppport_title">您的浏览器版本太低</div>
+        <div class="suppport_title" style="margin-top: 0;">为了给您良好的用户体验</div>
+        <div class="suppport_sub_title">强烈建议使用以下版本浏览器</div>
+        <div class="support_images animated zoomIn">
+            <a target="_blank" href="https://browser.360.cn/ee/"><img src="/statics/images/360.png" width="15%"></a>
+            <a target="_blank" href="https://www.google.cn/intl/zh-CN/chrome/"><img src="/statics/images/ch.png" width="20%"></a>
+            <a target="_blank" href="http://www.firefox.com.cn/"><img src="/statics/images/ff.jpg" width="15%"></a>
+        </div>
+    </div>
+    <![endif]-->
+    <script async src="https://s95.cnzz.com/z_stat.php?id=1258557238&web_id=1258557238" language="JavaScript"></script>
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?33b5f85349e1071d13e98f93debf5719";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    
+        $('.title_list>li').mouseover(function(e){
+                $('.title_list>li').removeClass('active');
+                $(this).addClass('active');
+                $(this).children().stop().siblings(".drop_down").animate({
+                    'top':'30px',
+                    'opacity':'1',
+                },200);
+            });
+            $('.title_list>li').mouseout(function(e){
+                $(this).children().stop().siblings(".drop_down").animate({
+                    'top':'-30px',
+                    'opacity':'0'
+                },200);
+            })
+    </script>
+</div>
+    

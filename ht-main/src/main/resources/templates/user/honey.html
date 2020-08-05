@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- 公共头部 -->
+    <th:block th:include="block/headlink :: test('个人云中心-honey值记录')" /> 
+    <!-- 结束 -->
+    <link rel="stylesheet" th:href="@{/statics/css/user/pagination.css}">
+    <link rel="stylesheet" th:href="@{/statics/css/user/index.css?v=0.0.1}">
+    <style>
+        .user_content>.user_list {
+            width: 210px;
+            height: 846px;
+            background: #fff;
+        }
+        .user_content>.user_details {
+            width: 973px;
+            height: 100%;
+            margin-left: 15px;
+        }
+        .page_box{
+            height: 96px;
+        }
+        .listW{
+            width:150px;
+            height: 37px;
+            margin: 0 auto;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+         }
+         .bgh{
+            background: #cbcbcb!important;
+            color: #fff!important;
+         }
+         .btnw{
+            font-size: 14px!important;
+            margin-top: 23px;
+            margin-right: 24px;
+            }
+        .cz{    
+            position: relative;
+            left: -23px;
+        }
+        .page-bar-ul {
+            position: relative;
+            left: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="user">
+        <div th:replace="~{user_head::copy}"></div>
+        <div th:replace="~{header::copy}"></div>
+    </div>
+    <div class="wrap" id="box">
+        <section>
+            <div class="user_content clearfix">
+                <div class="user_list fl clearfix">
+                    <div th:replace="~{user_part::copy}"></div>
+                </div>
+                <div class="user_details fl">
+                    <div class="honey">
+                        <div class="honey_head clearfix">
+                            <div class="h_l fl clearfix">
+                                <p><i></i></p>
+                                <div>
+                                    <span class="box_info">honey值总余额
+                                        <span class="upload_info"  @mouseenter="enter()" @mouseleave="leave()">
+                                            <i class="upload_info_icon"></i>
+                                            <div class="info_img">
+                                                <s class="info_top"></s>
+                                                <div class="info-box">
+                                                    <h3>honey值用途说明：</h3>
+                                                    <p>1、可用于文库文档（包括资源包的下载）；</p>
+                                                    <p>2、可用于高企云系统工具（如政策查、立项查等）的使用；</p>
+                                                    <p>3、可用于导出查询数据；</p>
+                                                    <p>4、可通过购买进行充值，1元=10honey。</p>
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </span>
+                                    <i class="userHoney">{{userHoney}}</i>
+                                </div>
+                                <p>
+                                    <a href="/ht-biz/usercenter/user/pay_honey">honey充值></a>
+                                </p>
+                            </div>
+                            <!-- <div class="h_r fl" v-show = 'honeyTab==0'>
+                                <p><i></i></p>
+                                <p>
+                                    <span>金币余额（可在文库上传文档获取）</span>
+                                    <i>{{money}}</i>
+                                </p>
+                                <h3>金币须知：</h3>
+                                <p>1、通过高企云文库上传文档，审核通过后可获得金币；</p>
+                                <p>2、金币可兑换为honey值在平台使用；</p>
+                                <p>3、服务商金币（>=2000）可申请提现；</p>
+                                <p>4、1金币=1honey，金币不可通过购买进行充值。</p>
+                            </div> -->
+                            <div class="h_r fl">
+                                <p><i></i></p>
+                                <div>
+                                    <span class="box_info">金币余额
+                                        <span class="upload_info" style="left: 87px;" @mouseenter="enter1()" @mouseleave="leave1()">
+                                            <i class="upload_info_icon"></i>
+                                            <div class="info_img1">
+                                                <s class="info_top"></s>
+                                                <div class="info-box">
+                                                    <h3>金币须知：</h3>
+                                                    <p>1、通过高企云文库上传文档，审核通过后可获得金币；</p>
+                                                    <p>2、金币可兑换为honey值在平台使用；</p>
+                                                    <p>3、服务商金币（>=2000）可申请提现；</p>
+                                                    <p>4、1金币=1honey，金币不可通过购买进行充值。</p>
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </span>
+                                    <i v-cloak class="userHoney">{{money}}</i>
+                                </div>
+                                <p>
+                                    <a v-cloak v-if="money>0" href="/ht-biz/usercenter/user/exchange_coin">兑换honey值</a>
+                                    <!-- <a v-cloak class="bgh" v-else href="javascript:void(0);">兑换honey值</a> -->
+                                    <button v-cloak v-if="money <= 0" type="button" class="bgh btn btn-default btn-sm btnw" disabled="disabled">兑换honey值</button>
+                                </p>
+                                <p>
+                                    <a v-cloak v-if="money>2000 && userInfoType == 'SERVICE_PROVIDER'" href="/ht-biz/usercenter/user/withdraw">金币提现</a>
+                                    <!-- <a class="bgh disabled" v-else href="javascript:void(0);">金币提现</a> -->
+                                    <button v-cloak v-if="money < 2000 && userInfoType == 'SERVICE_PROVIDER'" type="button" class="bgh btn btn-default btn-sm btnw" disabled="disabled">金币提现</button>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="honey_tit clearfix">
+                            <h3 @click="honeyTab=0;getWater()" :class="{active:honeyTab==0}"><i></i>honey记录</h3>
+                            <h3 @click="honeyTab=1;getMoneyWater();" :class="{active:honeyTab==1}"><i></i>金币记录</h3>
+                            <!-- <a href="">问题反馈</a> -->
+                        </div>
+                        <div class="honey_list">
+                            <div class="honey_title clearfix" v-show = 'honeyTab==0'>
+                                <ul>
+                                    <li class="cz">操作</li>
+                                    <li>具体详情</li>
+                                    <li>honey明细</li>
+                                    <li>时间</li>
+                                </ul>
+                            </div>
+                            <div class="honey_title_code clearfix" v-show = 'honeyTab==1'>
+                                <ul>
+                                    <li>操作</li>
+                                    <li>具体详情</li>
+                                    <li>金币</li>
+                                    <li>流水单号</li>
+                                    <li>时间</li>
+                                </ul>
+                            </div>
+                            <div class="honey_con" v-show = 'honeyTab==0'>
+                               <ul class="honey_ul clearfix" v-for="(list,index) in userBill">
+                                    <li>
+                                        <p><s></s><i></i>{{list.name}}</p>
+                                    </li>
+                                    <li>
+                                        <p class="listW">{{list.name}}</p>
+                                    </li>
+                                    <li>
+                                        <p v-if="list.point < 0" style="color: #ff4f2e;">{{list.point}} honey</p>
+                                        <p v-if="list.point >= 0" style="color: #247ce9;">{{list.point}} honey</p>
+                                    </li>
+                                    <li>
+                                        <p>{{list.createdate | date}}</p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="honey_con" v-show = 'honeyTab==1'>
+                                <ul class="honey_ul honey_code clearfix" v-for="(list,index) in userBill1">
+                                     <li>
+                                         <p><s></s><i></i>{{list.name}}</p>
+                                     </li>
+                                     <li>
+                                             <!-- <p>{{list.name}}</p> -->
+                                         <p class="listW">{{list.name}}</p>
+                                     </li>
+                                     <li>
+                                        <p v-if="list.golds < 0" style="color: #ff4f2e;">{{list.golds}}</p>
+                                        <p v-if="list.golds >= 0" style="color: #247ce9;">{{list.golds}}</p>
+                                     </li>
+                                     <li>
+                                         <p style="width: 187px;height: 40px;">
+                                             {{list.flowcode}}
+                                         </p>
+                                     </li>
+                                     <li>
+                                        <p class="date">{{list.createdate|date}}</p>
+                                    </li>
+                                 </ul>
+                             </div>
+                         <!-- 分页 -->
+                         <div class="page_box ac">
+                            <mypagenation :page="page" @btn-click="clickPage"></mypagenation>
+                            <!-- <div class="target_goto">
+                                <span>输入页码</span>
+                                <input type="text" v-model:value="targetData">
+                                <s @click="getWater();">确认</s>
+                            </div> -->
+                        </div>
+                        <!-- 分页 -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer>
+            <div>COPYRIGHT © 版权归属 广州高企云信息科技有限公司 粤ICP备16007486号-1</div>
+        </footer>
+    </div>
+    <!-- 公共js部分 -->
+    <th:block th:include="block/footlink :: copy" /> 
+    <!-- over -->
+    <script type="text/javascript" th:src="@{/statics/js/user/honey.js?v=0.0.2}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/user/part_tab.js?v=0.0.2}"></script>
+    <th:block th:include="block/statistics :: copy" />
+</body>
+
+</html>

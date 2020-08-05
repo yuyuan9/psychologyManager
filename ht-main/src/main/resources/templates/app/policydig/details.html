@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+<link rel="stylesheet" th:href="@{/statics/app/css/reset.css}">
+<link rel="stylesheet" th:href="@{/statics/app/css/index/zcsd_details.css?v=0.01}">
+
+<head>
+   <title>政策详情</title>
+<style>
+     [v-cloak] {
+         display: none;
+     }
+</style>
+</head>
+<body>
+    <div id="app-details" class="app_expresss">
+        <div class="express_pbg">
+            <div class="express_t" @click="back">
+                <i class="dib to_express"></i>
+                <span class="zc_express">政策详情</span>
+            </div>
+            <!-- 速递基本信息 -->
+            <div class="express_info">
+                <h3 class="express_title" v-cloak>{{entity.title}}</h3>
+                <p class="sb_info">
+                    <span class="sb_address" v-cloak>{{entity.province}}{{entity.city}}{{entity.area}}</span>
+                    <span class="sb_time" v-cloak>{{entity.datetime|date}}</span>
+                    <!-- 非申报通知无正在申报和截止剩下日期 -->
+                    <span class="being" v-if="entity.nature==1 && entity.status>=0" v-cloak>正在申报</span>
+                    <span class="rest" v-if="entity.nature==1 && entity.status>=0" v-cloak>截止日期还剩{{entity.status}}天</span>
+                </p>
+                <p class="source">
+                    <span>政策来源：</span>
+                    <span v-cloak>{{entity.source}}</span>
+                </p>
+            </div>
+            <!-- 速递内容 -->
+            <div class="content" v-html="entity.content" v-cloak>
+                   {{entity.content}}
+            </div>
+        </div>
+        <div class="expresss_bt">
+            <span class="go_back" @click="back">返回</span>
+            <a href="http://p.qiao.baidu.com/cps/chat?siteId=11406523&userId=20408321" class="consult">
+                <span><i class="dib consult_icon"></i>政策咨询</span>
+            </a>
+        </div>
+    </div>
+<script type="text/javascript" th:src="@{/statics/app/js/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/statics/app/js/layer.js}"></script>
+<script type="text/javascript" th:src="@{/statics/app/js/htajax.js}"></script>
+<script type="text/javascript" th:src="@{/statics/app/js/moment.min.js}"></script>
+<script type="text/javascript" th:src="@{/statics/app/js/vue.js}"></script>
+<script type="text/javascript" th:src="@{/statics/app/js/policydig/details.js?v=0.04}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,265 @@
+.app-companys,.a_projectcx,.policy_cx  {
+    width: 100%;
+    height: 100vh;
+    background-color: #ffffff;
+}
+/* 政策 */
+.main_bg {
+    width: 100%;
+    height: 31.4667vw;
+    background: url("../../images/yidong_icons/zhengche1.jpg") no-repeat;
+    background-size: 100% 100%;
+}
+.zccx {
+    font-size: 4.2667vw;
+    color: #ffffff;
+    margin-right: 2.1333vw;
+}
+.zc_hd {
+    padding: 6.6vw 4.2667vw 0 4.2667vw;
+    margin-bottom: 3.2vw;
+}
+.zc_t {
+    font-size: 2.6667vw;
+    color: #ffffff;
+}
+.zc_icom {
+    display: flex;
+    align-items: center;
+    width: 92vw;
+    height: 11vw;
+    margin: 0 auto 3.7333vw;
+    border-radius: 6vw;
+    background-color:  #ffffff;
+}
+.zc_input,.pj_input,.gq_input {
+    width: 72.5333vw;
+    margin-left: 1.3333vw;
+    padding-left: 4.8vw;
+    height: 4.2667vw;
+    font-size: 3.2vw;
+}
+.zc_search {
+    width: 5.8667vw;
+    height: 5.8667vw;
+    background: url("../../images/yidong_icons/phone_icons.png") -0.6vw -21.7333vw no-repeat;
+    background-size: 40vw 40vw;
+    margin: 0 0 0 3.8vw;
+}
+.to_zc {
+    width: 2.1333vw;
+    height: 3.2vw;
+    background: url("../../images/yidong_icons/phone_icons.png") -32.2667vw -13.6333vw no-repeat;
+    background-size: 40vw 40vw;
+    margin-right: 1.6vw;
+    /* vertical-align: middle; */
+}
+.to_zc1 {
+    width: 2.1333vw;
+    height: 3.2vw;
+    background: url("../../images/yidong_icons/phone_icons.png") -32.2667vw -13.6333vw no-repeat;
+    background-size: 40vw 40vw;
+    margin-right: 1.6vw;
+}
+.zc_icom>input::-webkit-input-placeholder { 
+    color: #84a7f8;
+    font-size: 3.2vw;
+} 
+.zc_icom>input::-moz-placeholder { 
+    color: #84a7f8;
+    font-size: 3.2vw;
+} 
+.zc_icom>input:-ms-input-placeholder { 
+    color: #84a7f8;
+    font-size: 3.2vw;
+}
+/* 搜索结果 */
+.search_r {
+    background-color: #ffffff;
+}
+.result {
+    display: flex;
+    width: 91.4667vw;
+    height: 11.2vw;
+    line-height: 11.2vw;
+    margin: 0 auto;
+    border-bottom: 0.1333vw solid #DBDBDB;
+}
+.total {
+    flex: 5;
+    font-size: 3.2vw;
+    color: #999999;
+}
+.r_total {
+    font-size: 3.2vw;
+    color: #F33838;
+    margin: 0 1.0667vw;
+}
+.line {
+    padding: 0 4.2667vw;
+}
+.c_name {
+    width: 79.7333vw;
+    font-size: 3.7333vw;
+    color: #333333;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    margin: 3.2vw 0 1.6667vw 0;
+}
+.zc_item {
+    margin: 0 4.2667vw;
+    border-bottom: 0.1333vw solid #DBDBDB;
+}
+.c_details {
+    width: 2.6vw;
+    height: 5.9vw;
+    background: url("../../images/yidong_icons/phone_icons.png") -33.2667vw -9.1333vw no-repeat;
+    background-size: 40vw 40vw;
+    margin-left: 7.8vw;
+}
+.c_b {
+    font-size: 2.6667vw;
+    color: #666666;
+    padding-bottom: 3.2vw;
+}
+.sbtj {
+    width: 46.6667vw;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    margin-right: 9.6vw;
+}
+.peitao {
+    width: 23.4667vw;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+.diqu,.year {
+    flex: 2;
+    font-size: 3.2vw;
+    color: #252C3C;
+}
+.year {
+    padding-right: 2.6vw;
+}
+.diqu {
+    flex: 3;
+    /* margin-right: 4.8vw; */
+    text-align: right;
+}
+.pull {
+    flex: 1.2;
+    width: 1.8667vw;
+    height: 1.8667vw;
+    background: url(../../images/yidong_icons/phone_icons.png) -33vw -17.7333vw no-repeat;
+    background-size: 51vw 48vw;
+    margin-top: 4.3333vw;
+}
+/* 无结果页 */
+.hasno {
+    background-color: #ffffff;
+}
+.no_result {
+    width: 100%;
+    height: 52vw;
+    background: url("../../images/yidong_icons/nones.png") no-repeat;
+    background-size: 100% 100%;
+}
+.N {
+    font-size: 3.7333vw;
+    color: #18394e;
+    text-align: center;
+    margin-bottom: 2.1333vw;
+}
+.huan {
+    color: #666666;
+    font-size: 2.6667vw;
+    text-align: center;
+}
+/* 三级联动 */
+.browser {
+    /* width: 100%; */
+}
+/* 立项 */
+.project_bg {
+    width: 100%;
+    height: 31.4667vw;
+    background: url("../../images/yidong_icons/lixiang1.jpg") no-repeat;
+    background-size: 100% 100%;
+}
+.pj_input::-webkit-input-placeholder {
+    color: #3189bc;
+    font-size: 3.2vw;
+}
+.pj_input>input::-moz-placeholder { 
+    color: #3189bc;
+    font-size: 3.2vw;
+} 
+.pj_input>input:-ms-input-placeholder { 
+    color: #3189bc;
+    font-size: 3.2vw;
+}
+.sbtj1 {
+    width: 53.6667vw;
+    margin-right: 7.6vw;
+}
+.peitao1 {
+    width: 25.4667vw;
+}
+/* 高企查询 */
+.r_year,.city,.classfy {
+    margin-right: 4.8vw;
+}
+.gq_name {
+    width: 91.2vw;
+}
+.gqcx_bg {
+    width: 100%;
+    height: 31.4667vw;
+    background: url("../../images/yidong_icons/gaoqi.jpg") no-repeat;
+    background-size: 100% 100%;
+}
+.gq_input::-webkit-input-placeholder {
+    color: #686CF5;
+    font-size: 3.2vw;
+}
+.gq_input>input::-moz-placeholder { 
+    color: #686CF5;
+    font-size: 3.2vw;
+} 
+.gq_input>input:-ms-input-placeholder { 
+    color: #686CF5;
+    font-size: 3.2vw;
+}
+.gq_search {
+    width: 5.8667vw;
+    height: 5.8667vw;
+    background: url(../../images/yidong_icons/phone_icons.png) -0.6vw -21.7333vw no-repeat;
+    background-size: 40vw 40vw;
+    margin: 0 0 0 3.8vw;
+}
+.c_b1 {
+    display: flex;
+}
+.r_year1,.city1,.classfy1,.bacth1 {
+    margin-right: 0;
+}
+.r_year1 {
+    flex: 5;
+}
+.city1 {
+    flex: 4;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+    white-space: nowrap;
+    margin-right: 3.2vw;
+}
+.classfy1 {
+    flex: 4;
+}
+.bacth1 {
+    flex: 4;
+    text-align: right;
+}

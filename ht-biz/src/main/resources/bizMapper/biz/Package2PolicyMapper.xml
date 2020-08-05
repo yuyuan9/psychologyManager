@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.biz.mapper.Package2PolicyMapper">
+	<select id="findByPackageId" parameterType="java.lang.String" resultType="com.ht.commons.utils.PageData">
+		select p.*,IFNULL(t.title,'--')title,
+			 t.id titleid,
+			 IFNULL(t.source,'--')source, 
+			 IFNULL(t.province,'--')province, 
+			 IFNULL(t.city,'--')city, 
+			 IFNULL(t.area,'--')area, 
+			 IFNULL(t.datetime,null)datetime
+		from t_policy_dig t inner join t_package2_policy p on t.id=p.policyDigId 
+		where p.packageId=#{pd.packageId}
+	</select>
+	<delete id="deleteByPackageId" parameterType="java.lang.String">
+		delete from t_package2_policy where packageId=#{packageId}
+	</delete>
+	<select id="findByIdAndPackageId" parameterType="com.ht.entity.policydig.Package2Policy" resultType="com.ht.entity.policydig.Package2Policy">
+		select * from t_package2_policy t where t.policyDigId=#{policyDigId} and t.packageId=#{packageId}
+	</select>
+</mapper>

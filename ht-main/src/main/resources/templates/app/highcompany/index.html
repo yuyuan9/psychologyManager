@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+<link rel="stylesheet" th:href="@{/statics/app/css/reset.css}">
+<link rel="stylesheet" th:href="@{/statics/app/css/style.css}">
+<link rel="stylesheet" th:href="@{/statics/app/css/index/policyzx.css}">
+<link rel="stylesheet" th:href="@{/statics/app/css/vant_common.css}">
+
+<head>
+   
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+        .van-dropdown-menu__title {
+            font-size: 3.2vw;
+        }
+    </style>
+</head>
+<body>
+    <div id="app-company" class="app-companys" v-cloak>
+        <div class="gqcx_bg">
+            <div class="zc_hd">
+                <a href="/ht-biz/app/index/index?refer=3">
+                    <i class="to_zc1 dib"></i>
+                    <span class="zccx">高企查询</span>
+                    <span class="zc_t">免费提供全国36个省市有效期内的高企数据</span>
+                </a>
+            </div>
+            <div class="zc_icom">
+                <input type="text" name="keyword" v-model="keyword" id="keyword" placeholder="请输入企业名称..."  class="gq_input dib">
+                <i class="gq_search dib" @click="projectData(1)"></i>
+            </div>
+        </div>
+        <!-- 查找结果 -->
+        <div class="search_r">
+            <div class="result">
+                <div class="total dib">已为您匹配<span class="r_total">{{total}}</span>条结果</div>
+                <!-- 地区选择 -->
+                <div class="dib diqu" @click="showPopup">{{area || city || province}}</div><i class="pull" @click="showPopup"></i>
+                <!-- 年份 -->
+                <div class="dib year">
+                    <van-dropdown-menu style="height: 10.6vw;">
+                        <van-dropdown-item v-model="value1" :options="option1" @change="yearchange"></van-dropdown-item>
+                    </van-dropdown-menu>
+                </div>
+            </div>
+            <div>
+                <van-list v-model="loading" :finished="finished" finished-text="没有更多了"  :error.sync="error" error-text="请求失败，点击重新加载" @load="projectData" > 
+                    <div class="zc_item" v-for="list in companyList">
+                        <a href="#">
+                            <p class="c_name gq_name dib">{{list.companyname}}</p>
+                        </a>
+                        <p class="c_b c_b1">
+                            <span class="dib r_year r_year1">认定年份：<span>{{list.year}}</span></span>
+                            <span class="dib city city1">地区：<span>{{list.province}}{{list.city}}</span></span>
+                            <span class="dib classfy classfy1">认定类型：<span>{{list.type}}</span></span>
+                            <span class="dib bacth bacth1">批次：<span>{{list.batch}}</span></span>
+                        </p>
+                    </div>
+                </van-list>
+            </div>
+            <!-- 无结果页 -->
+            <div class="hasno" style="display: none;">
+                <div class="no_result"></div>
+                <p class="N">无搜索结果</p>
+                <p class="huan">试试换一下关键词或搜索条件吧</p>
+            </div>
+            <!-- 地区弹窗 -->
+            <threelink :show.sync="show" @comfirm="queren" @cancel="btn"></threelink>
+        </div>
+    </div>
+    <script type="text/javascript" th:src="@{/statics/app/js/vue.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/vant.min.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/jquery.area.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/layer.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/htajax.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/component/threeLink.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/highcompany/highcompany.js?v=0.0.9}"></script>
+</body>
+
+</html>

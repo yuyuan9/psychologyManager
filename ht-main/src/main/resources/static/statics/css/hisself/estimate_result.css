@@ -1,0 +1,622 @@
+.estimate {
+  margin-right: 20px;
+  letter-spacing: 1px;
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+.estimate .estimate_l {
+  width: 860px;
+  position: relative;
+}
+.estimate .estimate_l .estimate_pic {
+  position: absolute;
+  right: 0;
+  top: 24px;
+}
+.estimate .estimate_l_t {
+  width: 100%;
+  height: 60px;
+  border-bottom: 1px solid #dbdbdb;
+  line-height: 60px;
+  background: #fff;
+}
+.estimate .estimate_l_t .line {
+  display: inline-block;
+  width: 4px;
+  height: 18px;
+  border-radius: 2px;
+  background-color: #fe8910;
+  vertical-align: middle;
+  margin-top: -5px;
+  margin-right: 10px;
+  margin-left: 20px;
+}
+.estimate .estimate_l_t p {
+  display: inline-block;
+  font-size: 16px;
+  color: #999;
+}
+.estimate .estimate_l_t p span {
+  font-size: 18px;
+  color: #fe8910;
+  font-weight: 800;
+  margin-right: 15px;
+}
+.estimate .estimate_l_c {
+  width: 100%;
+  padding: 40px 60px 50px 60px;
+}
+.estimate .estimate_l_c .situation,
+.estimate .estimate_l_c p {
+  font-size: 16px;
+  color: #666;
+  margin-top: 30px;
+}
+.estimate .estimate_l_c .situation span,
+.estimate .estimate_l_c p span {
+  font-weight: 800;
+}
+.estimate .estimate_l_c .company {
+  margin-top: 0;
+}
+.estimate .estimate_l_c .score .detail {
+  display: inline-block;
+  width: 195px;
+  height: 41px;
+  line-height: 41px;
+  font-size: 14px;
+  color: #999;
+  background: url("../../images/hisself/video.png") -8px -162px;
+  vertical-align: middle;
+  margin-top: -9px;
+  margin-left: 22px;
+}
+.estimate .estimate_l_c .score .detail a {
+  color: #fe8910;
+}
+.estimate .estimate_l_c .score .detail a:hover {
+  text-decoration: underline;
+}
+.estimate .estimate_l_c .situation p {
+  margin-top: 20px;
+  line-height: 28px;
+}
+.estimate .estimate_l_c b {
+  font-size: 24px;
+  color: #fe8910;
+}
+.estimate .estimate_l_b {
+  padding-left: 60px;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  border-top: 1px dashed #dbdbdb;
+  border-bottom: 1px dashed #dbdbdb;
+  background: #fff;
+}
+.estimate .estimate_l_b p {
+  font-size: 16px;
+  color: #fa5546;
+}
+.estimate .estimate_l_b p span {
+  color: #666;
+  font-weight: 800;
+}
+.estimate .report {
+  height: 60px;
+  padding-right: 30px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  font-size: 14px;
+  color: #999;
+  line-height: 24px;
+}
+.estimate .bottom_btn {
+  height: 100px;
+  text-align: center;
+  line-height: 100px;
+}
+.estimate .bottom_btn a {
+  display: inline-block;
+  border-radius: 4px;
+  color: #fff;
+  line-height: 50px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 800;
+}
+.estimate .bottom_btn .consult {
+  width: 160px;
+  height: 50px;
+  background: url("../../images/hisself/upload_btn.png") repeat-x;
+}
+.estimate .bottom_btn .order {
+  width: 220px;
+  height: 50px;
+  background: url("../../images/hisself/loading_button.png") repeat-x;
+  margin-left: 20px;
+}
+.estimate .bottom_btn .go {
+  display: inline-block;
+  width: 26px;
+  height: 26px;
+  background: url("../../images/hisself/vip-icons.png") -346px -95px;
+  vertical-align: middle;
+  margin-top: -4px;
+  margin-right: 10px;
+}
+#box .estimate .bottom_btn .order_contact{
+  background-color: #4acd43;
+  color: #fff;
+}
+.estimate .order_l_c {
+  background: #fff;
+  padding-bottom: 30px;
+}
+.estimate .order_l_b {
+  border-top: none;
+}
+.estimate .server_type {
+  padding-left: 50px;
+  line-height: 60px;
+}
+.estimate .server_type span {
+  font-size: 16px;
+  color: #666;
+}
+.estimate .server_type input {
+  margin-left: 100px;
+  vertical-align: middle;
+  margin-top: -3px;
+  margin-right: 7px;
+}
+.estimate .server_type label {
+  margin-bottom: 0;
+  font-weight: normal;
+}
+.estimate .server_type label span {
+  font-size: 14px;
+  color: #333;
+}
+.estimate .server_batch {
+  border-bottom: 1px dashed #dbdbdb;
+  border-top: 1px dashed #dbdbdb;
+}
+.estimate .server_batch input {
+  margin-left: 134px;
+}
+.estimate .online_way {
+  width: 600px;
+  height: 116px;
+  background-color: #f5f5f5;
+  margin: 0 auto;
+  border: 1px dashed#dbdbdb;
+  padding-top: 20px;
+}
+.estimate .online_way .btn {
+  width: 160px;
+  height: 40px;
+  line-height: 27px;
+  color: #fff;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 800;
+}
+.estimate .online_way .upload {
+  background: url("../../images/hisself/upload_btn.png") repeat-x;
+}
+.estimate .online_way .upload s {
+  display: inline-block;
+  width: 26px;
+  height: 26px;
+  background: url("../../images/hisself/policy_myht.png") -61px -129px;
+  margin-right: 5px;
+  vertical-align: middle;
+  margin-top: -2px;
+}
+.estimate .online_way .consult {
+  width: 60px;
+  background-color: #fe8910;
+  margin-left: 20px;
+}
+.estimate .online_way .download {
+  color: #fe8910;
+  text-decoration: underline;
+}
+.estimate .inline_way {
+  padding-left: 50px;
+}
+.estimate .inline_way label {
+  margin-bottom: 0;
+  font-weight: normal;
+  font-size: 14px;
+  color: #666;
+}
+.estimate .inline_way input {
+  margin-left: 100px;
+  vertical-align: middle;
+  margin-top: -3px;
+  margin-right: 7px;
+}
+.estimate .inline_way .sure {
+  width: 600px;
+  height: 120px;
+  margin-left: 100px;
+  margin-top: 20px;
+  padding-top: 30px;
+  border: 1px dashed #dbdbdb;
+  background-color: #f5f5f5;
+}
+.estimate .inline_way .sure .touch {
+  color: #666;
+  font-size: 16px;
+  margin-left: 30px;
+}
+.estimate .inline_way .sure .touch span {
+  font-size: 20px;
+  color: #fe8910;
+}
+.estimate .inline_way .sure .touch .edit_input {
+  margin-left: 30px;
+  height: 30px;
+  width: 160px;
+  font-size: 16px;
+  border: 1px solid #dbdbdb;
+  padding-left: 10px;
+}
+.estimate .inline_way .sure .touch a {
+  background-color: #dbdbdb;
+  display: inline-block;
+  width: 50px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 14px;
+  color: #999;
+  margin-left: 10px;
+}
+.estimate .inline_way .sure .warn {
+  margin-right: 20px;
+  margin-top: 30px;
+  font-size: 12px;
+}
+.estimate .inline_way .sure .warn s {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  color: #fff;
+  border-radius: 7px;
+  background-color: #999;
+  font-size: 14px;
+  line-height: 16px;
+  margin-right: 5px;
+  vertical-align: middle;
+  margin-top: -2px;
+}
+.estimate .inline_way .noSure {
+  height: 140px;
+  padding-top: 20px;
+  padding-left: 20px;
+  font-size: 14px;
+  color: #666;
+}
+.estimate .inline_way .noSure input {
+  margin-left: 20px;
+  width: 170px;
+  height: 30px;
+  padding-left: 10px;
+  line-height: 30px;
+  background-color: #fff;
+  border-radius: 4px;
+  border: 1px solid #dbdbdb;
+}
+.estimate .inline_way .noSure button {
+  width: 170px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 4px;
+  background-color: #45c922;
+  color: #fff;
+  margin-left: 81px;
+  margin-top: 15px;
+}
+.estimate .inline_way .noSure .warn {
+  margin-top: 20px;
+}
+.estimate .inline_way .noSure .warn a {
+  color: #fe8910;
+  text-decoration: underline;
+}
+.estimate .inline_order .noOrder {
+  width: 160px;
+  height: 50px;
+  line-height: 50px;
+  color: #fff;
+  background-color: #dbdbdb;
+}
+.estimate .inline_order .noOrder:hover {
+  background-color: #fe8910;
+}
+.win {
+  display: none;
+  width: 260px;
+  height: 180px;
+  background-color: #fff;
+  box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.2);
+  padding-top: 10px;
+  padding-bottom: 20px;
+  position: fixed;
+  left: 50%;
+  margin-left: -130px;
+  z-index: 100;
+  /*bottom: 500px;*/
+}
+
+
+.win .order_success {
+  display: inline-block;
+  width: 70px;
+  height: 70px;
+  background: url("../../images/hisself/video.png") -19px -86px;
+}
+.noSure_win .order_success{
+  margin-top: 24px;
+  display: inline-block;
+  width: 41px;
+  height: 42px;
+  background: url("../../images/hisself/expertLibrary.png") -80px -41px;
+}
+#box .noSure_win p span{
+  color: #fe8910;
+  cursor: pointer;
+}
+#box .noSure_win p span:hover{
+  text-decoration: underline;
+}
+.noSure_win .success_title{
+  margin-top: 12px;
+}
+.win p {
+  color: #999;
+  font-size: 14px;
+}
+.win p a {
+  color: #45c922;
+}
+.win p a:hover {
+  text-decoration: underline;
+}
+.win p:nth-of-type(2) {
+  margin-top: 5px;
+}
+.win .success_title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #666;
+}
+.check_win{
+  padding-top: 20px;
+}
+.check_win input{
+  width: 190px;
+  height: 40px;
+  line-height: 40px;
+  margin-top: 10px;
+}
+.check_win .check_phone{
+  border: 1px solid #dbdbdb;
+  font-size: 18px;
+  color: #fe8910;
+  font-weight: 800;
+}
+.check_win .check_sure{
+  font-size: 18px;
+  color: #fff;
+  background: url(../../images/hisself/loading_button.png) repeat-x;
+  border-radius: 4px;
+  font-weight: 800;
+}
+/*你可能感兴趣*/
+.ht_interest {
+  /*height: 750px;*/
+  width: 320px;
+  background-color: #fff;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+}
+.ht_interest .interest_t {
+  width: 100%;
+  height: 40px;
+  color: #010832;
+  font-size: 18px;
+  font-weight: bold;
+  border-bottom: 1px solid #dbdbdb;
+}
+.ht_interest .interest_t s.line {
+  display: inline-block;
+  width: 4px;
+  height: 20px;
+  background-color: #fe8910;
+  line-height: 60;
+  margin-right: 20px;
+  border-radius: 4px;
+  margin-top: 1px;
+}
+.ht_interest .interest_t .change a {
+  cursor: pointer;
+  color: #fe8910;
+  font-size: 16px;
+  vertical-align: middle;
+  font-weight: normal;
+}
+.ht_interest .interest_t .change:hover a {
+  text-decoration: underline;
+}
+.ht_interest .interest_t span {
+  display: inline-block;
+}
+.ht_interest .interest_b ul li {
+  width: 100%;
+  height: 90px;
+  border-bottom: 1px dashed #dbdbdb;
+  font-size: 16px;
+}
+.ht_interest .interest_b ul li .interest_b_l {
+  width: 20px;
+  height: 90px;
+}
+.ht_interest .interest_b ul li s.dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 3px;
+  background-color: #808080;
+  margin-top: 20px;
+}
+.ht_interest .interest_b ul li .interest_b_r {
+  width: 260px;
+  height: 90px;
+  line-height: 25px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  position: relative;
+}
+.ht_interest .interest_b ul li .interest_b_r .title {
+  display: inline-block;
+  margin-left: 5px;
+  width: 240px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+
+}
+.ht_interest .interest_b ul li .interest_b_r .title:hover {
+  text-decoration: underline;
+}
+.ht_interest .interest_b ul li .interest_b_r .date {
+  font-size: 16px;
+  color: #999;
+  position: absolute;
+  bottom: 5px;
+}
+.ht_interest .interest_b li:last-child {
+  border: none;
+}
+
+.mask{
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.1);
+  background-color: #000000;
+  filter: alpha(opacity=10);
+  opacity: 0.1;
+  top: 0;
+}
+
+.sit_contrast .sign{
+  display: inline-block;
+  vertical-align: middle;
+  width: 22px;
+  height: 20px;
+  background: url("../../images/hisself/free_sign.png") -8px -7px;
+  margin-right: 8px;
+  margin-top: -5px;
+}
+.sit_contrast .wrong{
+  background-position: -45px -7px;
+}
+
+
+/*企业项目初步匹配*/
+.project_match{
+  background: #fff;
+  margin-top: 20px;
+}
+.project_match h2{
+  height: 80px;
+  line-height: 80px;
+  font-size: 24px;
+  color: #333;
+  font-weight: bold;
+}
+.project_match_li{
+  font-size: 14px;
+  color: #666;
+  border-bottom: 1px solid #dbdbdb;
+}
+.project_match_li:first-of-type{
+  border-top: 1px solid #dbdbdb;
+}
+.project_match_li .project_match_li_content{
+  padding: 20px 60px;
+}
+.project_match_li_content h3{
+  font-size: 20px;
+  color: #333;
+  font-weight: bold;
+}
+.project_match_li_content p span{
+  padding-right: 80px;
+}
+.project_match_li_content p span a{
+  color: #5a92e6;
+}
+.project_match_li_content p span a i.search_icon{
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: url("../../images/hisself/icon.png") -17px 0 no-repeat;
+  vertical-align: middle;
+  margin-left: 5px;
+}
+.project_match_li_content p:first-of-type{
+  padding: 15px 0;
+}
+.project_match_li_content p:nth-of-type(2),.project_match_li_content p:nth-of-type(3){
+  margin-bottom: 25px;
+}
+.project_match_bottom{
+  position: relative;
+  padding: 50px 0;
+}
+.page-bar .active a {
+	background-color: #657eba;
+}
+.page-bar a{
+	color: #657eba;
+}
+.page-bar a:hover{
+	background-color: #657eba;
+}
+a.export_results {
+  display: block;
+  position: absolute;
+  top: 50px;
+  right: 20px;
+  border: 1px solid #657eba;
+  padding: 5px 10px;
+  color: #657eba;
+}
+.export_results i{
+  display: inline-block;
+  width: 13px;
+  height: 15px;
+  background: url(../../images/hisself/bigData.png) -36px -34px;
+  vertical-align: middle;
+  margin-right: 5px;
+  margin-top: -5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+

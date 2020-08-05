@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+<link rel="stylesheet" th:href="@{/statics/app/css/reset.css}">
+<link rel="stylesheet" th:href="@{/statics/app/css/layer.css}">
+<link rel="stylesheet" th:href="@{/statics/app/css/index/index.css}">
+<link rel="stylesheet" th:href="@{/statics/app/css/vant_common.css}">
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@2.2/lib/index.css"> -->
+
+<head>
+<title>首页</title>
+   
+<style>
+     [v-cloak] {
+        display: none;
+    }
+</style>
+</head>
+<body>
+    <div id="app-index" class="app_index" v-cloak>
+        <div class=""></div>
+        <div class="main_comtain" v-if="refer==1"></div>
+        <div class="main_comtain1" v-if="refer==2"></div>
+        <div class="main_comtain2" v-if="refer==3"></div>
+        <div class="main_c">
+            <div class="main_t clearfix">
+                <div class="main_logo fl"></div>
+                <div class="main_locat fr">
+                    <i class="dib locat_icon"></i>
+                    <span class="main_a" v-cloak  @click="showPopup">{{area || city || province}}</span>
+                </div>
+            </div>
+            <!-- 三大查询tab栏 -->
+            <div class="refer clearfix">
+                <div class="tab tab-1 fl" :class="{active:refer==1}" @click="tabclick(1)">
+                    <span class="dib refer_title">政策查询</span>
+                    <i class="bt_icon" v-if="refer==1"></i>
+                </div>
+                <div class="tab tab-2 fl" :class="{active:refer==2}"  @click="tabclick(2)">
+                    <span class="dib refer_title">立项查询</span>
+                    <i class="bt_icon" v-if="refer==2"></i>
+                </div>
+                <div class="tab tab-2 fl" :class="{active:refer==3}"  @click="tabclick(3)">
+                    <span class="dib refer_title">高企查询</span>
+                    <i class="bt_icon" v-if="refer==3"></i>
+                </div>
+            </div>
+            <!-- 政策查询 -->
+            <div>
+                <!-- 搜索框 -->
+                <div class="policy">
+                    <div class="policy_input">
+                        <input type="text" name="policySearchKey" v-if="refer==1" v-model="policySearchKey" id="policySearchKey"  placeholder="项目政策、区域政策、产业政策·全面评估规划" class="p_input"><i v-if="refer==1" class="p_search dib" @click="policySearch"></i>
+                        <input type="text" name="projectSearchKey" v-if="refer==2" v-model="projectSearchKey" id="projectSearchKey"  placeholder="企业立项检索.政策应用规范.同行标杆参考" class="p_input"><i v-if="refer==2" class="p_search1 dib"  @click="projectSearch"></i>
+                        <input type="text" name="companySearchKey" v-if="refer==3" v-model="companySearchKey" id="companySearchKey"  placeholder="免费提供全国36个省市有效期内的高企数据" class="p_input"><i v-if="refer==3" class="p_search2 dib" @click="companySearch"></i>
+
+                    </div>
+                </div>
+            </div>
+            <!-- 政策速递，智能匹配 -->
+            <div class="mate">
+                <!-- 政策速递 -->
+                <a href="#" @click="to_policydig">
+                    <div class="P fl">
+                        <p class="sd">政策速递</p>
+                        <p>
+                            <span class="t_new">最新政策</span>
+                            <span class="reach">·一触即达</span>
+                        </p>
+                    </div>
+                </a>
+                
+                <!-- 智能匹配 -->
+                <a href="#">
+                    <div class="mate_r fr">
+                        <p class="zn" @click="clickurl('/ht-biz/app/policymatch/index')">智能匹配</p>
+                        <p class="ks" >快速匹配适合企业的项目</p>
+                    </div>
+                </a>
+            </div>
+            <!-- 最新政策 -->
+            <div class="new">
+                <div class="new_t">
+                    <i class="dib new_icom1"></i>
+                    <span class="new_one">最新政策</span>
+                    <span class="new_all" @click="policydigclick">全部</span>
+                    <i class="dib to_all fr"></i>
+                </div>
+                <!-- <p class="line1"></p> -->
+                <!-- 政策列表 -->
+                <div class="new_b">
+                    <ul class="new_nav">
+                        <li class="new_item" v-for="(list,index) in policyDigList">
+
+                            <p class="item_name">
+                                <i class="item_index">{{index+1}}</i>
+                                <span class="item_title"><a :href="'/ht-biz/app/policydig/details?id='+ list.id+'&index=0'">{{list.title}}</a></span>
+                            </p>
+
+                            <p class="item_b clearfix">
+                                <span class="item_l">{{list.province}}{{list.city}}{{list.area}}</span>
+                                <span class="itwm_ts">{{list.datetime|date}}</span>
+                                <span class="item_sb dib" v-if="list.status>0">正在申报</span>
+                                <span class="item_sb item_sb1 dib" v-else>已截止申报</span>
+                            </p>
+                            <!-- <p class="line"></p> -->
+                        </li>
+                    </ul>
+                </div>
+                <!-- 底部 -->
+                <div class="b_b">
+                    <div class="shouye">
+                        <p class="sy_icom"></p>
+                        <p class="sy_tip"><a href="/ht-biz/app/index/index" class="choice">首页</a></p>
+                    </div>
+                    <div class="personage">
+                        <p class="ps_icom"></p>
+                        <p class="ps_tip"><a href="/ht-biz/app/usercenter/personage">个人中心</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+        <!-- 地区弹窗 -->
+        <threelink :show="show" @comfirm="queren" @cancel="btn"></threelink>
+    </div>
+    <script type="text/javascript" th:src="@{/statics/app/js/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/htajax.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/layer.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/vue.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/vant.min.js}"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vant@2.2/lib/vant.min.js"></script> -->
+    <script type="text/javascript" th:src="@{/statics/app/js/moment.min.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/component/threeLink.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/index/index.js?v=0.0.9}"></script>
+</body>
+
+</html>

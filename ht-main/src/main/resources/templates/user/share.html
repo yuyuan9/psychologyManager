@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- 公共头部 -->
+    <th:block th:include="block/headlink :: test('个人云中心-分享')" /> 
+    <!-- 结束 -->
+    <link rel="stylesheet" th:href="@{/statics/css/user/index.css?v=0.0.1}">
+    <style>
+        .share_recommend{
+            height: 520px;
+        }
+        .user_content>.user_details{
+            height: 100%;
+        }
+        .user_content>.user_list {
+            height: 730px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="user">
+        <div th:replace="~{user_head::copy}"></div>
+        <div th:replace="~{header::copy}"></div>
+    </div>
+    <div class="wrap" id="box">
+        <section>
+            <div class="user_content clearfix">
+                <div class="user_list fl clearfix">
+                    <div th:replace="~{user_part::copy}"></div>
+                </div>
+                <div class="user_details fl">
+                    <div class="share">
+                        <div class="share_banner">
+                            <img src="/statics/images/user/share.png" alt="">
+                        </div>
+                        <div class="share_ipt">
+                            <span><i></i>注册推荐链接</span>
+                            <input type="text" id="copyId"  readonly="readonly" :value="'https://www.hights.cn/ht-shiro/loginuser/register?key=' + userId">
+                            <s @click="copyLink">复制链接</s>
+                        </div>
+                        <div class="share_recommend">
+                            <div class="share_recommend_head">
+                                <h3><i></i>推荐记录</h3>
+                            </div>
+                            <div class="share_title clearfix">
+                                <ul>
+                                    <li>推荐公司</li>
+                                    <li>注册手机</li>
+                                    <li>奖励（honey）</li>
+                                    <li>注册时间</li>
+                                </ul>
+                            </div>
+                            <div class="share_con">
+                               <ul class="share_ul clearfix" v-for="(list,index) in shareData">
+                                    <li>
+                                        <p><s></s><i></i>{{list.type}}</p>
+                                    </li>
+                                    <li>{{list.phone}}</li>
+                                    <li>
+                                        <!-- <p style="color: #ff4f2e;">-400 honey</p> -->
+                                        <p style="color: #247ce9;">{{list.honey}} honey</p>
+                                    </li>
+                                    <li>
+                                        <p>{{list.createdate|date}}</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <footer>
+            <div>COPYRIGHT © 版权归属 广州高企云信息科技有限公司 粤ICP备16007486号-1</div>
+        </footer>
+    </div>
+    <!-- 公共js部分 -->
+    <th:block th:include="block/footlink :: copy" /> 
+    <!-- over -->
+    <script type="text/javascript" th:src="@{/statics/js/user/share.js?v=0.0.2}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/user/part_tab.js?v=0.0.2}"></script>
+    <th:block th:include="block/statistics :: copy" />
+</body>
+
+</html>

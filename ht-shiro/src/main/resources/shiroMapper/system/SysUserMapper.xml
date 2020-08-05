@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.shiro.mapper.SysUserMapper">
+
+   <update id="cancelUser" parameterType="java.lang.String">
+      update t_sys_user t set t.active=0 ,t.lastmodified=now() where USER_ID=#{userid}
+   </update>
+   
+   
+   
+   <select id="findList" parameterType="com.ht.commons.utils.MyPage" resultType="com.ht.vo.shiro.UserVO">
+	   select u.USER_ID as userId,
+	   u.username as username,
+	   u.headImg as headimg,
+	   u.trueName as trueName,
+	   u.email as email,
+	   u.regip as regip,
+	   u.ip as lastip,
+	   u.active as active,
+	   u.login_count as logincount,
+	   u.regcity as regcity,
+	   u.regProvince as regprovince,
+	   u.phone as phone,
+	   u.linkman as linkman,
+	   u.userType as userType,
+	   u.createdate as createdate,
+	   u.create_id as createId,
+	   u.remark as remark,
+	   c.id as companyid,
+	   c.`name` as cname ,
+	   sysrole.role as rolename,
+	   u.ROLE_ID, u.regarec,
+	   vu.point as honey
+	   from t_sys_user u left join t_sys_role sysrole on u.ROLE_ID = sysrole.id left join t_region_company c on u.companyid=c.id
+	   LEFT JOIN t_view_userwater vu  on vu.userId = u.USER_ID
+		where 1=1  /*and u.userType='REGION_COMPANY'*/
+		<if test="pd.username!=null and pd.username!=''">
+			and(u.trueName LIKE CONCAT('%', #{pd.username},'%')
+				or u.phone LIKE CONCAT('%', #{pd.username},'%')
+			)
+		</if>
+		<if test="pd.userType!=null and pd.userType!=''">
+		    and u.userType=#{pd.userType}
+		</if>
+		<if test="pd.companyid!=null and pd.companyid!=''">
+		 	 and companyid=#{pd.companyid}
+		</if>
+	   <if test="pd.roleid!=null and pd.roleid!=''">
+		   and  u.ROLE_ID=#{pd.roleid}
+	   </if>
+		order by u.createdate desc
+		
+		
+   </select>
+	
+</mapper>

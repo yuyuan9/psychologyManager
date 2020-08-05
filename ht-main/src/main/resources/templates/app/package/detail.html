@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="keyword" content="${keywords}" />
+<meta name="description" content="${description}" />
+<meta name="applicable-device" content="mobile">
+<meta name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+<!-- 是否启动webapp功能，会删除默认的苹果工具栏和菜单栏。 -->
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<!-- 这个主要是根据实际的页面设计的主体色为搭配来进行设置。 -->
+<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+<!-- 忽略页面中的数字识别为电话号码,email识别 -->
+<meta name="format-detection" content="telephone=no, email=no"/>
+<!-- 启用360浏览器的极速模式(webkit) -->
+<meta name="renderer" content="webkit">
+<!-- 避免IE使用兼容模式 -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- 针对手持设备优化，主要是针对一些老的不识别viewport的浏览器，比如黑莓 -->
+<meta name="HandheldFriendly" content="true">
+<!-- 微软的老式浏览器 -->
+<meta name="MobileOptimized" content="320">
+<!-- uc强制竖屏 -->
+<meta name="screen-orientation" content="portrait">
+<!-- QQ强制竖屏 -->
+<meta name="x5-orientation" content="portrait">
+<!-- UC强制全屏 -->
+<meta name="full-screen" content="yes">
+<!-- QQ强制全屏 -->
+<meta name="x5-fullscreen" content="true">
+<!-- UC应用模式 -->
+<meta name="browsermode" content="application">
+<!-- QQ应用模式 -->
+<meta name="x5-page-mode" content="app">
+<!-- windows phone 点击无高光 -->
+<meta name="msapplication-tap-highlight" content="no">
+    <title>${title}</title>
+    <link rel="shortcut icon" href="${ctx}/static/ht/v3/images/favicon.ico">
+    <link rel="icon" href="${ctx}/static/ht/v3/images/favicon.ico" type="image/x-icon" />
+    <link rel="Bookmark" href="${ctx}/static/ht/v3/images/favicon.ico">
+    <link rel="SHORTCUT ICON" href="${ctx}/static/ht/v3/images/favicon.ico"/>
+    <link rel="stylesheet" href="${ctx}/static/ht/v3/app/css/mobilereset.css?v=1.0.2"/>
+    <link rel="stylesheet" href="${ctx}/static/ht/v3/app/css/common.css?v=1.0.2"/>
+    <link rel="stylesheet" href="${ctx}/static/ht/v3/app/css/library_detail.css?v=1.0.2"/>
+    <style>
+        #box{
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="useobj"></div>
+<div id="box" v-cloak>
+    <div class="header_top ac">
+        <a href="javascript:history.go(-1)" class="left fl">
+            <s class="back fl"></s>
+        </a>
+        <span style="margin-left:-322px;">阅读量：<span style="color:#fe8910;">{{pdfData.browsecount}}</span>次</span>
+
+        <div class="operate fr">
+            <a v-cloak v-if="loginInfo.code==0" href="javascript:void(0)" class="downLoad fl" @click="downloadFile()"><s></s></a>
+            <a v-cloak v-else :href="'/beetl/app/vo_login.html?returnUrl='+returnurl" class="downLoad fl" @click="downloadFile()"><s></s></a>
+            <a v-cloak v-if="loginInfo.code==0" href="javascript:void(0)" class="downLoad collect fl" @click="doCheckCollection()"><s></s></a>
+            <a v-cloak v-else :href="'/beetl/app/vo_login.html?returnUrl='+returnurl" class="downLoad collect fl" @click="doCheckCollection()"><s></s></a>
+            <!--<a href="javascript:void(0)" class="downLoad share fl"><s></s></a>-->
+        </div>
+    </div>
+
+    <div class="pdfView">
+        <iframe width="100%" height="100%" :src="'${ctx}/plugins/generic/web/viewer.html?file='+pdfData.pdfpath"></iframe>
+    </div>
+</div>
+<footer class="footer ac">
+        高企云咨询:400-166-3308
+</footer>
+<script src="${ctx}/static/ht/v3/lib/jquery/jquery.min.js"></script>
+<script src="${ctx}/static/ht/v3/app/js/reset.js?v=1.0.2"></script>
+<script src="${ctx}/static/ht/v3/vue/vue.js"></script>
+<script src="${ctx}/static/ht/js/layer/layer.js"></script>
+<script src="${ctx}/static/ht/v3/vue/moment.min.js"></script>
+<script src="${ctx}/static/ht/v3/js/htajax.js"></script>
+<script src="${ctx}/static/ht/v3/app/vue/component/myuser.js"></script>
+<script src="${ctx}/static/ht/v3/app/vue/controller/library_detail.js?v=1.0.4"></script>
+<div style="display:none;"><script async src="http://s95.cnzz.com/z_stat.php?id=1258557238&web_id=1258557238" language="JavaScript"></script></div>
+<div style="display:none;"><script async src="https://s22.cnzz.com/z_stat.php?id=1263265470&web_id=1263265470" language="JavaScript"></script></div>
+<div style="display:none;">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?33b5f85349e1071d13e98f93debf5719";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div>
+
+</body>
+</html>

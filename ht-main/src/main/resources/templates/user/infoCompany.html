@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- 公共头部 -->
+    <th:block th:include="block/headlink :: test('个人云中心-公司信息')" /> 
+    <!-- 结束 -->
+    <link rel="stylesheet" th:href="@{/statics/css/user/index.css?v=0.0.1}">
+    <style>
+        .user_content>.user_list {
+            height: 1132px;
+        }
+
+        .user_content>.user_details {
+            height: 100%;
+        }
+        .bot{
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="user">
+        <div th:replace="~{user_head::copy}"></div>
+        <div th:replace="~{header::copy}"></div>
+    </div>
+    <div class="wrap" id="box">
+        <section>
+            <div class="user_content clearfix">
+                <div class="user_list fl clearfix">
+                    <div th:replace="~{user_part::copy}"></div>
+                </div>
+                <div class="user_details fl">
+                    <div class="info">
+                        <div class="info_head">
+                            <div class="user_headImg fl">
+                                <img src="/statics/images/user/head.png" alt="">
+                            </div>
+                            <div class="user_name fl">
+                                <h3>欢迎您</h3>
+                                <p v-cloak>{{username}}</p>
+                            </div>
+                            <div class="material fl" id="app">
+                                <h3>资料完善度<i></i></h3>
+                                <p v-cloak class="p1">{{progressBar}}%</p>
+                                <p class="p2">
+                                    <el-progress :percentage="progressBar"></el-progress>
+                                </p>
+                            </div>
+                            <div class="grade fl">
+                                <h3>账号等级<i></i></h3>
+                                <p v-cloak>{{userCode}}</p>
+                            </div>
+                            <div class="compile fl">
+                                <span @click="personInfo">编辑信息</span>
+                                <!-- <span @click="enterpriseInfo">编辑企业信息</span> -->
+                            </div>
+                        </div>
+                        <div class="info_detail">
+                            <div class="person_info"></div>
+                            <div class="company_info">
+                                <ul>
+                                    <li>
+                                        <i>企业名称：</i>
+                                        <p v-cloak>{{companyname}}</p>
+                                        <span>公司工商注册名称</span>
+                                    </li>
+                                    <li>
+                                        <i>社会统一信用代码：</i>
+                                        <p v-cloak>{{compregcode}}</p>
+                                        <span>18位数字的法人和其他组织统一社会信用代码</span>
+                                    </li>
+                                    <li>
+                                        <i>注册时间：</i>
+                                        <p v-cloak>{{regdate|date}}</p>
+                                        <span>企业工商注册时间</span>
+                                    </li>
+                                    <li>
+                                        <i>注册城市：</i>
+                                        <p v-cloak>{{province}}{{city}}{{area}}{{addr}}</p>
+                                        <span>企业工商注册地址</span>
+                                    </li>
+                                    <li>
+                                        <i>企业网址：</i>
+                                        <p v-cloak>{{weburl}}</p>
+                                        <span>企业介绍官网</span>
+                                    </li>
+                                    <li>
+                                        <i>主营产品：</i>
+                                        <p v-cloak>{{mainproduct}}</p>
+                                        <span></span>
+                                    </li>
+                                    <li>
+                                        <i>产品技术领域：</i>
+                                        <p v-cloak>{{techfield}}</p>
+                                        <span>主要产品所属技术领域</span>
+                                    </li>
+                                    <li class="last_li">
+                                        <i>企业简介：</i>
+                                        <p v-cloak>{{remark}}</p>
+                                        <span></span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="bank_card clearfix">
+                            <h3>银行账户信息<span>在平台上传高企云文库内容可获取现金奖励，填写银行信息可直接提现</span></h3>
+                            <div class="card clearfix">
+                                <div>
+                                    <h4 class="bank">——&nbsp;中国建设银行</h4>
+                                    <h3 class="name">银行账户：</h3>
+                                    <h2 class="num">3511 **** **** 3215</h2>
+                                    <h1 class="person">收款人：徐渭熊</h1>
+                                    <i class="money_bg"></i>
+                                </div>
+                                <div>
+                                    <h4 class="bank">——&nbsp;中国建设银行</h4>
+                                    <h3 class="name">银行账户：</h3>
+                                    <h2 class="num">3511 **** **** 3215</h2>
+                                    <h1 class="person">收款人：徐渭熊</h1>
+                                    <i class="money_bg"></i>
+                                </div>
+                                <div>
+                                    <h4 class="bank">——&nbsp;中国建设银行</h4>
+                                    <h3 class="name">银行账户：</h3>
+                                    <h2 class="num">3511 **** **** 3215</h2>
+                                    <h1 class="person">收款人：徐渭熊</h1>
+                                    <i class="money_bg"></i>
+                                </div>
+                            </div>
+                            <div class="operation_card">
+                                <p>添加银行卡</p>
+                                <p>删除银行卡</p>
+                            </div>
+                        </div>
+                        <div class="accessory clearfix">
+                            <h3>企业信息附件</h3>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <td>序号</td>
+                                        <td>附件名称</td>
+                                        <td>操作</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>社会统一信用代码</td>
+                                        <td><a target="_blank"
+                                                :href="'http://47.92.70.12:9090' + billpath">查看</a><span>删除</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>联系人身份证正面</td>
+                                        <td><a target="_blank"
+                                                :href="'http://47.92.70.12:9090' + businesspath">查看</a><span>删除</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>联系人身份证反面</td>
+                                        <td><span>查看</span><span>删除</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>开户许可证</td>
+                                        <td><span>查看</span><span>删除</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>企业开票资料</td>
+                                        <td><span>查看</span><span>删除</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="operation_tab">
+                                <p>添加附件</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div id="ids1">
+                <h3>请输入手机号码</h3>
+                <input type="text" v-model="newPhoneNumber" placeholder="输入手机号码">
+                <p class="submitPhone">确定</p>
+            </div>
+
+            <div id="ids2">
+                <h3>手机号</h3>
+                <p>{{userInfoPhone}}</p>
+                <h3>请输入密码</h3>
+                <input type="text" v-model="newPhoneNumber" placeholder="请输入密码">
+                <p class="submitPhone">确定</p>
+            </div>
+            <div id="ids3">
+                <div class="company_info">
+                      <ul>
+                        <li>
+                            <i>企业名称：</i>
+                            <p v-cloak>
+                                <input type="text" name="alterCompanyname" :value="companyname" id="alterCompanyname">
+                            </p>
+                            <span>公司工商注册名称</span>
+                        </li>
+                       <li>
+                            <i>注册时间：</i>
+                            <p v-cloak>
+                                <input type="text" name="alterRegdate" :value="regdate|date" id="alterRegdate">
+                            </p>
+                            <span>企业工商注册时间</span>
+                        </li>
+                        <li>
+                            <i>注册城市：</i>
+                            <p v-cloak>
+                                <input type="text" name="alterAddr" :value="addr" id="alterAddr">
+                            </p>
+                            <span>企业工商注册地址</span>
+                        </li>
+                        <li>
+                            <i>企业网址：</i>
+                            <p v-cloak>
+                                <input type="text" name="alterWeburl" :value="weburl" id="alterWeburl">
+                            </p>
+                            <span>企业介绍官网</span>
+                        </li>
+                        <li>
+                            <i>主营产品：</i>
+                            <p v-cloak>
+                                <input type="text" name="alterMainproduct" :value="mainproduct" id="alterMainproduct">
+                            </p>
+                            <span></span>
+                        </li>
+                        <li>
+                            <i>产品技术领域：</i>
+                            <p v-cloak>
+                                <input type="text" name="alterTechfield" :value="techfield" id="alterTechfield">
+                            </p>
+                            <span>主要产品所属技术领域</span>
+                        </li>
+                        <li class="last_li">
+                            <i>企业简介：</i>
+                            <textarea name="alterRemark" v-model="alterRemark" id="alterRemark"></textarea>
+                            <span></span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bot">
+                    <div @click="submitAlter">提交</div>
+                    <div class="layui-layer-close">取消</div>
+                </div>
+            </div>
+        </section>
+        <footer>
+            <div>COPYRIGHT © 版权归属 广州高企云信息科技有限公司 粤ICP备16007486号-1</div>
+        </footer>
+    </div>
+    <!-- 公共js部分 -->
+    <th:block th:include="block/footlink :: copy" /> 
+    <!-- over -->
+    <script type="text/javascript" th:src="@{/statics/js/user/infoCompany.js?v=0.0.2}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/user/part_tab.js?v=0.0.2}"></script>
+    <th:block th:include="block/statistics :: copy" />
+</body>
+
+</html>

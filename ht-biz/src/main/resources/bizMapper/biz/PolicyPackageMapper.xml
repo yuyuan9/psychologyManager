@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.biz.mapper.PolicyPackageMapper">
+<resultMap type="com.ht.entity.policydig.PolicyPackage" id="PolicyPackageResultMap">
+<id column="id" property="id"/>
+<result column="name" property="name"/>
+<result column="templateMsgId" property="templateMsgId"/>
+<result column="templateEmailId" property="templateEmailId"/>
+<result column="email" property="email"/>
+<result column="msg" property="msg"/>
+<result column="send" property="send"/>
+<result column="sendTime" property="sendTime"/>
+<result column="province" property="province"/>
+<result column="city" property="city"/>
+<result column="area" property="area"/>
+<result column="shortUrl" property="shortUrl"/>
+<result column="status" property="status"/>
+<result column="createdate" property="createdate"/>
+<result column="createid" property="createid"/>
+<result column="lastmodified" property="lastmodified"/>
+<result column="regionid" property="regionid"/>
+</resultMap>
+<select id="findlistPage" parameterType="com.ht.commons.utils.MyPage" resultMap="PolicyPackageResultMap">
+			select 
+			t.id,
+			IFNULL(t.name,'--') name, 
+			IFNULL(t.email,'--') email,
+			t.msg msg,
+			IFNULL(s.USERNAME,'--') createid,
+			IFNULL(t.sendTime,null) sendTime,
+			IFNULL(t.province,'--') province,
+			IFNULL(t.city,'--') city,
+			IFNULL(t.area,'--') area,
+			IFNULL(t.send,'--') send,
+			t.status status
+		from t_policy_package t 
+		left join t_sys_user s on t.createid=s.USER_ID
+		where 1=1 
+	<if test="pd.keyword!= null and pd.keyword != ''">
+			and
+			(
+			    t.name LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+			)
+         </if>
+	 <if test="pd.province!=null and pd.province!=''">
+	 	and t.province=#{pd.province}
+	 </if>
+	 <if test="pd.city!=null and pd.city!=''">
+	 	and t.city=#{pd.city}
+	 </if>
+	 <if test="pd.area!=null and pd.area!=''">
+	 	and t.area=#{pd.area}
+	 </if>
+	 <if test="pd.status!=null and pd.status!=''">
+	 	and t.status=#{pd.status}
+	 </if>
+</select>
+</mapper>

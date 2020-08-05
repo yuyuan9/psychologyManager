@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- 公共头部 -->
+    <th:block th:include="block/headlink :: test('交易中心查询')" />
+    <!-- 结束 -->
+    <link rel="stylesheet" th:href="@{/statics/css/user/pagination.css}">
+    <link rel="stylesheet" th:href="@{/statics/css/footer.css?v=0.0.2}">
+    <link rel="stylesheet" th:href="@{/statics/css/service/index.css?v=0.0.2}">
+    <link rel="stylesheet" th:href="@{/statics/css/trading/transaction.css?v=0.0.3}">
+    <style>
+        .page_content {background: #fff;}
+        .copyright {padding-top: 0;}
+        .page-bar-ul{left: 0;}
+        .transation_banner {width: 100%;height: 140px;background: url("/statics/images/trading/trading.png")center repeat-x;}
+        .transation_banner>h2{position: relative;top: -29px;}
+    </style>
+</head>
+
+<body>
+    <div id="user">
+        <div th:replace="~{user_head::copy}"></div>
+    </div>
+    <div class="wrap" id="box"  @click.stop="isProvince=false;isCity=false;isArea=false;">
+        <!-- 登录组件 -->
+        <mylogin :islogin="false" @close-login="isLogin=!false"></mylogin>
+        <!-- over -->
+        <div th:replace="~{header::copy}"></div>
+
+        <section>
+            <div class="transation_banner">
+                <h2>交易中心查询</h2>
+                <div class="search_ipt_top fl clearfix">
+                    <input class="fl" type="text" v-model="keyWords" @keyup.enter="havechiose=1;getproductResult(1,1);" placeholder="请输入产品关键字，如“高新技术企业”">
+                    <s class="fl" @click="havechiose=1;getproductResult(1,1)">
+                        <i></i>
+                    </s>    
+                </div>
+            </div>
+            <div class="transation_option">
+                <div class="trans_nav">
+                    <h3>当前位置：
+                        <a href="/">首页</a>&gt;
+                        <a href="/currency/trading/index">交易中心</a>&gt;
+                        <a href="javascript:void(0);">搜索结果</a>
+                    </h3>
+                </div>
+                <div class="transation_option_tit">
+                    <!-- ! 条件筛选 -->
+                    <div class="transation_choice clearfix">
+                        <div class="transation_choice_bg">
+                            <p>条件筛选：</p>
+                        </div>
+                        <div class="transation_choice_text">
+                            <!--地区范围-->
+                            <div class="choice region competents fl">
+                                <span class="choice_title">产品所属区域：</span>
+                                <span class="choice_content" :class="{active:isRegion==1}"
+                                    @click="havechiose=1;isRegion=1;province='省级'; city='市级';isCityActive=0;area='区级';showArea=true;isAreaActive=0;pitchCity='';pitchArea='';getPitchData();">全国</span>
+                                <!-- 省级 -->
+                                <span v-cloak class="choice_content region_modify" :class="{active:isRegion==2}"
+                                    @click.stop.prevent="havechiose=1;isProvince=true;">
+                                    <s v-cloak id="province_text">{{province}}</s><i class="arrow"></i>
+                                    <ul v-cloak class="province" v-show="isProvince">
+                                        <li v-cloak v-for="(region, index) in regionData" @click.self="toggleBox"
+                                            @click.stop.prevent="havechiose=1;province = region.n;isProvince=false;isRegion=2;city='市级';pitchCity='';isCityActive=0;area='区级';pitchArea='';isAreaActive=0;getPitchData();">
+                                            {{region.n}}</li>
+                                    </ul>
+                                </span>
+                                <!-- 市级 -->
+                                <span v-cloak class="choice_content region_modify" :class="{active:isCityActive==1}"
+                                    @click.stop.prevent="havechiose=1;getCityData();">
+                                    <s v-cloak>{{city}}</s><i class="arrow"></i>
+                                    <ul v-cloak class="city" v-show="isCity">
+                                        <li v-cloak v-for="(c, index) in cityData"
+                                            @click.stop.prevent="havechiose=1;choseCity(c.n);getPitchData();">
+                                            {{c.n}}</li>
+                                    </ul>
+                                </span>
+                                <!-- 区级 -->
+                                <span v-cloak class="choice_content region_modify" @click.stop.prevent="stopThings()"
+                                    :class="{active:isAreaActive==1}" v-show="showArea">
+                                    <s v-cloak>{{area}}</s><i class="arrow"></i>
+                                    <ul v-cloak class="area" v-show="isArea">
+                                        <li v-cloak v-for="(a, index) in areaData"
+                                            @click.stop.prevent="havechiose=1;area = a.n;isArea=false;if(isCityActive==1){isAreaActive=1};getPitchData();">
+                                            {{a.n}}</li>
+                                    </ul>
+                                </span>
+                            </div>
+                            <div class="tier fl">
+                                <span class="choice_title fl">产品层级：</span>
+                                <div v-cloak class="choice_ipt countrys fl">
+                                    <label for="" @change="havechiose=1;getPitchData();place1 = '不限'">
+                                        <input type="radio" value="5" v-model="plevel" name="plevel">
+                                    </label>
+                                    <span>不限</span>
+                                </div>
+                                <div v-cloak class="choice_ipt countrys fl">
+                                    <label for="" @change="havechiose=1;getPitchData();place2 = '国家'">
+                                        <input type="radio" value="1" v-model="plevel" name="plevel">
+                                    </label>
+                                    <span>国家</span>
+                                </div>
+                                <div v-cloak class="choice_ipt provinces fl">
+                                    <label for="" @change="havechiose=1;getPitchData();place3 = '省级'">
+                                        <input type="radio" value="2" v-model="plevel" name="plevel">
+                                    </label>
+                                    <span>省级</span>
+                                </div>
+                                <div v-cloak class="choice_ipt citys fl">
+                                    <label for="" @change="havechiose=1;getPitchData();place4 = '市级'">
+                                        <input type="radio" value="3" v-model="plevel" name="plevel">
+                                    </label>
+                                    <span>市级</span>
+                                </div>
+                                <div v-cloak class="choice_ipt areas fl">
+                                    <label for="" @change="havechiose=1;getPitchData();place5 = '区级'">
+                                        <input type="radio" value="4" v-model="plevel" name="plevel">
+                                    </label>
+                                    <span>区级</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="have_choice_ss" v-if="havechiose==1">
+                    <div class="library_show clearfix">
+                        <p class="tiaojian fl">已选条件：</p>
+                        <div class="have_chosen">
+                            <span v-cloak class="have_chosen_content" v-if="pitchDataRegion!=''">
+                                {{pitchDataRegion}}
+                                <i class="close ac"
+                                    @click="pitchDataRegion='';province='省级';city='市级';area='区';pitchCity='';pitchArea='';getproductResult();"></i>
+                            </span>
+
+                            <span v-cloak class="have_chosen_content" v-if="pitchCity!=''">{{pitchCity}}
+                                <i class="close ac" @click="pitchCity='';city='市级';pitchArea='';area='区级';isAreaActive=0;getproductResult();"></i>
+                            </span>
+
+                            <span v-cloak class="have_chosen_content" v-if="pitchArea!=''">
+                                {{pitchArea}}
+                                <i class="close ac" @click="pitchArea='';area='区级';isAreaActive=0;getproductResult();"></i>
+                            </span>
+                            <!-- 政策级别 -->
+                            <!-- <span v-cloak class="have_chosen_content condition" v-if="place1 != ''">
+                                {{place1}}
+                                <i class="close ac" @click="place1='';"></i>
+                            </span>
+                            <span v-cloak class="have_chosen_content" v-if="place2 != ''">
+                                {{place2}}
+                                <i class="close ac" @click="place2='';"></i>
+                            </span>
+                            <span v-cloak class="have_chosen_content" v-if="place3 != ''">
+                                {{place3}}
+                                <i class="close ac" @click="place3='';"></i>
+                            </span>
+                            <span v-cloak class="have_chosen_content" v-if="place4 != ''">
+                                {{place4}}
+                                <i class="close ac" @click="place4='';"></i>
+                            </span>
+                            <span v-cloak class="have_chosen_content" v-if="place5 != ''">
+                                {{place5}}
+                                <i class="close ac" @click="place5='';"></i>
+                            </span> -->
+                            <span v-cloak class="have_chosen_content" v-if="plevel == 1">
+                                国家
+                                <i class="close ac" @click="plevel='';getproductResult();"></i>
+                            </span>
+                            <span v-cloak class="have_chosen_content" v-if="plevel == 2">
+                                省
+                                <i class="close ac" @click="plevel='';getproductResult();"></i>
+                            </span>
+                            <span v-cloak class="have_chosen_content" v-if="plevel == 3">
+                                市
+                                <i class="close ac" @click="plevel='';getproductResult();"></i>
+                            </span>
+                            <span v-cloak class="have_chosen_content" v-if="plevel == 4">
+                                区
+                                <i class="close ac" @click="plevel='';getproductResult();"></i>
+                            </span>
+                            <span v-cloak class="have_chosen_content" v-if="plevel == 5">
+                                不限
+                                <i class="close ac" @click="plevel='';getproductResult();"></i>
+                            </span>
+
+                            <span v-if="words!=''" v-cloak class="have_chosen_content">“{{words}}”</span>
+
+                            <s>共为您查询<i style="color: #eb5836">{{page.totalResult}}</i>条结果</s>
+                            <!-- <span class="fr">
+                                <label for="" @change="getPitchData();">
+                                    <input type="checkbox" v-model="declare" name="declare">
+                                </label>
+                                <i>只显示申报中产品</i>
+                            </span> -->
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="transation_content clearfix" style="margin-top:10px">
+                   
+                    <div v-for="(list,index) in proResult">
+                        <a target="_blank" :href="'/ht-biz/product/toproseroder?id=' + list.id +'&createid='+list.createid">
+                            <h3 v-cloak>{{list.productname}}</h3>
+                        </a>
+                        
+                        <p>          
+                           
+                            <span v-cloak v-if="list.stype == 1">完成时间：{{list.finishtime}}</span>
+                            <span v-cloak v-else-if="list.stype == 2">全年申报</span>
+                            <span v-cloak v-else-if="list.stype == 3">剩下{{list.remainingdate}}天</span>
+                            <span v-cloak v-else class="hui">申报截止</span>
+                            <s class="border-right">
+                                <i v-if="list.provice != ''">
+                                    <i v-cloak v-if="list.city == '' && list.area == ''"><s v-html="list.provice"></s></i>
+                                    <i v-cloak v-if="list.area == ''" ><s v-html="list.city"></s></i>
+                                    <i v-cloak v-if="list.area != ''" ><s v-html="list.area"></s></i>
+                                </i>
+                                <i v-if="list.producttypeone==28">
+                                    <i v-cloak v-if="list.plevel == 1">国家级</i>
+                                    <i v-cloak v-if="list.plevel == 2">省级</i>
+                                    <i v-cloak v-if="list.plevel == 3">市级</i>
+                                    <i v-cloak v-if="list.plevel == 4">区级</i>
+                                </i>
+                                <i class="moneytext" v-if="list.producttypeone==28" v-cloak>补助:{{list.subsidy}}</i>
+                            </s>
+                        </p>
+                        <div class="pro_detalis clearfix">
+                            <p v-cloak v-if="list.pricetype == 1">￥{{list.price}}元</p>
+                            <p v-cloak v-if="list.pricetype == 2">￥{{list.price}}元 - {{list.pricetwo}}元</p>
+                            <p v-cloak v-if="list.pricetype == 3">面议</p>
+
+                            <a target="_blank" :href="'/ht-biz/product/toproseroder?id=' + list.id +'&createid='+list.createid">查看详情</a>
+                        </div>
+                        <div class="store">
+                            <p>
+                                <a target="_blank" :href="'/ht-biz/product/getlistprobyshop?id='+list.serid">
+                                    <img v-if="list.shopimg==''||list.shopimg==undefined" src="/statics/images/service/defaultlogo.png" alt="">
+                                    <img v-if="list.shopimg!=''" :src="'http://47.92.70.12:9090' + list.shopimg" alt="">
+                                </a>
+                            </p>
+                            <div>
+                                <a target="_blank" :href="'/ht-biz/product/getlistprobyshop?id='+list.serid">
+                                    <h3 v-cloak>{{list.shopname}}</h3>
+                                    <span v-cloak> 
+                                        <i v-if="list.netrytype == 1">服务机构</i>
+                                        <i v-if="list.netrytype == 2">个人</i>
+                                        <i>评分：{{list.grade}}</i>
+                                        <i v-if="list.isbond == 1" class="bao"></i>
+                                        <i v-if="list.isagency == 1" class="jian"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div v-cloak v-if="notfind == 1" class="not-find">
+                    <p></p>
+                </div>
+                <!-- 分页 -->
+                <div class="page_box ac" v-if="notfind != 1">
+                    <mypagenation :page="page" @btn-click="clickPage"></mypagenation>
+                </div>
+                <!-- 分页 -->
+            </div>
+        </section>
+
+        <!--E=底部-->
+        <footer>
+            <div class="copyright ac">
+                <p>COPYRIGHT © 版本归属 广州高企云信息科技有限公司 粤ICP备16007486号-1</p>
+            </div>
+        </footer>
+
+
+    </div>
+    <!-- 公共js部分 -->
+    <th:block th:include="block/footlink :: copy" />
+    <!-- over -->
+    <script type="text/javascript" th:src="@{/statics/js/component/mylogin.js?v=1.0.3}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/trading/transaction_list.js?v=0.0.7}"></script>
+
+    <script type="text/javascript" th:src="@{/statics/js/user/part_tab.js?v=0.0.3}"></script>
+    <th:block th:include="block/statistics :: copy" />
+</body>
+
+</html>

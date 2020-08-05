@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- 公共头部 -->
+    <th:block th:include="block/headlink :: test('关于我们')" /> 
+    <!-- 结束 -->
+    <link rel="stylesheet" th:href="@{/statics/css/footer.css?v=0.0.1}">
+    <link rel="stylesheet" th:href="@{/statics/css/user/index.css?v=0.0.3}">
+    <link rel="stylesheet" th:href="@{/statics/css/help/about_us.css?v=0.0.2}">
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+        footer>div {
+            line-height: 20px;
+            color: #808080;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="user">
+        <div th:replace="~{user_head::copy}"></div>
+        <div th:replace="~{header::copy}"></div>
+    </div>
+    <div id="box">
+        <div class="about_banner">
+            <div class="contain">
+                <p>高企云</p>
+    
+                <p>一站式高企培育平台</p>
+            </div>
+        </div>
+        <!--E=banner图-->
+        <!--S=高企云介绍-->
+        <section class="intro ac">
+            <div class="contain">
+                <p class="ht_intro">高企云介绍</p>
+    
+                <div class="intro_info ac">
+                    <p>高企云服务平台（www.hights.cn）是由广州高企云信息科技有限公司推出的，
+                        国内首家集交易与服务一体的高企培育平台，旨在为高新技术企业的培育与认定
+                        提供在线评估、在线交易、过程管控、在线培训等专业服务。</p>
+                </div>
+                <div class="intro_step clearfix">
+                    <div class="step step1 step_first ac fl">
+                        <s class="num one"></s>
+    
+                        <p class="title">在线评估</p>
+    
+                        <p class="text">科学评测、综合分析</p>
+    
+                        <p class="text">发现问题、补齐短板</p>
+                    </div>
+                    <div class="step step1 ac fl">
+                        <s class="num two"></s>
+    
+                        <p class="title">在线交易</p>
+    
+                        <p class="text">一键下单、即时响应</p>
+    
+                        <p class="text">专业服务商任您挑选</p>
+                    </div>
+                    <div class="step step1 ac fl">
+                        <s class="num three"></s>
+    
+                        <p class="title">过程管控</p>
+    
+                        <p class="text">全程监管、风险可控</p>
+    
+                        <p class="text">实时查询、进度透明</p>
+                    </div>
+                    <div class="step step1 ac fl">
+                        <s class="num four"></s>
+    
+                        <p class="title">在线培育</p>
+    
+                        <p class="text">海量视频、政策解读</p>
+    
+                        <p class="text">资讯发布、创新交流</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--E=高企云介绍-->
+        <!--S=高企云介绍视频-->
+        <section class="intro_video clearfix">
+            <div class="contain">
+                <p class="video ac">高企云介绍视频</p>
+    
+                <div onclick="playPause('video1')" class="fl" style="height:300px;width: 550px;">
+                    <video id="video1" class="video_enterprise" width="550px" height="300"
+                            poster="/statics/images/ht1.jpg" preload="none" controls="controls">
+                        <source src="/statics/htVideo/government.mp4"/>
+                    </video>
+                </div>
+                <!--<div >  -->
+                <div onclick="playPause('video2')" class="fr" style="height:300px;width: 550px;">
+                    <video id="video2" class="video_government" width="550px" height="300"
+                            poster="/statics/images/ht2.jpg" preload="none" controls="controls">
+                        <source src="/statics/htVideo/enterprise.mp4"/>
+                    </video>
+                </div>
+            </div>
+        </section>
+            
+        <!--E=高企云介绍视频-->
+        <!--S=我们的服务优势-->
+        <section class="about_advantage clearfix">
+            <div class="contain ac">
+                <p class="server_advantage">服务优势</p>
+    
+                <div class="man fr">
+                    <p><span>众包优势</span>服务过程模块化，有专业的服务商跟进，可优先推荐与培养企业内部人员服务</p>
+    
+                    <p><span>服务可视</span>全程公开透明，服务进度可视可控，倒计时提醒，登录平台账号或移动端可随时查看服务进度</p>
+    
+                    <p><span>专家预审</span>聚合团队专家资源，对申请材料严格审核把关，助力提高通过率</p>
+    
+                    <p><span>线下支撑</span>线下整合了100多家技术转移、投融资、知识产权、会计师事务所等服务机构，为企业高企培育、创新发展提供全方位服务</p>
+                </div>
+            </div>
+        </section>
+        <!--E=底部-->
+        <div th:replace="~{footer::copy}"></div>
+    </div>
+    <!-- 公共js部分 -->
+    <div th:replace="~{block/footlink::copy}"></div>
+    <!-- over -->
+
+    <script type="text/javascript">
+        function playPause(id) {
+            var myVideo = document.getElementById(id);
+            if (myVideo.paused){
+                myVideo.play();
+            } else{
+                myVideo.pause();
+            }
+        }
+        $('.title_list>li').mouseover(function(e){
+            $('.title_list>li').removeClass('active');
+            $(this).addClass('active');
+            $(this).children().stop().siblings(".drop_down").animate({
+                'top':'30px',
+                'opacity':'1',
+            },200);
+        });
+        $('.title_list>li').mouseout(function(e){
+            $(this).children().stop().siblings(".drop_down").animate({
+                'top':'-30px',
+                'opacity':'0'
+            },200);
+        })
+        $(".xcx_h").mouseover(function () {
+        $(".xcx").css({
+            'visibility': 'visible'
+        })
+        })
+        $(".xcx_h").mouseleave(function () {
+            $(".xcx").css({
+                'visibility': 'hidden'
+            })
+        })
+    </script>
+</body>
+
+</html>

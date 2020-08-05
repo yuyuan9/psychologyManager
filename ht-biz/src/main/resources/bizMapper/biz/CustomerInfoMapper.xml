@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.biz.mapper.CustomerInfoMapper">
+<resultMap type="com.ht.entity.policydig.CustomerInfo" id="CustomerInfoResultMap">
+<id column="id" property="id"/>
+<result column="name" property="name"/>
+<result column="orgcode" property="orgcode"/>
+<result column="leadingPerson" property="leadingPerson"/>
+<result column="deptName" property="deptName"/>
+<result column="duty" property="duty"/>
+<result column="fixedphone" property="fixedphone"/>
+<result column="phone" property="phone"/>
+<result column="qq" property="qq"/>
+<result column="weixin" property="weixin"/>
+<result column="linkemail" property="linkemail"/>
+<result column="province" property="province"/>
+<result column="city" property="city"/>
+<result column="area" property="area"/>
+<result column="addr" property="addr"/>
+<result column="field" property="field"/>
+<result column="industry" property="industry"/>
+<result column="managesscope" property="managesscope"/>
+<result column="signOrder" property="signOrder"/>
+<result column="customerRecordId" property="customerRecordId"/>
+<result column="deleted" property="deleted"/>
+<result column="createdate" property="createdate"/>
+<result column="createid" property="createid"/>
+<result column="lastmodified" property="lastmodified"/>
+<result column="regionid" property="regionid"/>
+</resultMap>
+
+<select id="findlistPage" resultMap="CustomerInfoResultMap" parameterType="com.ht.commons.utils.MyPage">
+ select * from t_customer_info t where 1=1 
+ 	<if test="pd.keyword!= null and pd.keyword != ''">
+			and
+			(
+			    name LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+			    or
+				orgcode LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+				or
+				leadingPerson LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+				or
+				phone LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+				or
+				qq LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+				or
+				weixin LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+				or
+				field LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+				or
+				industry LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+			)
+         </if>
+ 	<if test="pd.name != null and pd.name !=''">
+ 		and t.name LIKE CONCAT(CONCAT('%', #{pd.name}),'%')
+ 	</if>
+ 	<if test="pd.province != null and pd.province !=''">
+ 		and t.province LIKE CONCAT(CONCAT('%', #{pd.province}),'%')
+ 	</if>
+ 	<if test="pd.city != null and pd.city !=''">
+ 		and t.city LIKE CONCAT(CONCAT('%', #{pd.city}),'%')
+ 	</if>
+ 	<if test="pd.area != null and pd.area !=''">
+ 		and t.area LIKE CONCAT(CONCAT('%', #{pd.area}),'%')
+ 	</if>
+ 	<if test="pd.field != null and pd.field !=''">
+ 		and t.field LIKE CONCAT(CONCAT('%', #{pd.field}),'%')
+ 	</if>
+ and t.deleted=0 order by t.createdate desc 
+</select>
+<select id="findByNameAndOrgcode" parameterType="com.ht.entity.policydig.CustomerInfo" resultMap="CustomerInfoResultMap">
+	select * from t_customer_info t where t.name=#{name} and t.orgcode=#{orgcode}
+</select>
+<delete id="deleteByCustomerRecordId" parameterType="java.lang.String">
+	delete from t_customer_info where customerRecordId=#{id}
+</delete>
+</mapper>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+</head>
+
+<body>
+    <div th:fragment="copy">
+        <section v-cloak class="page_content">
+            <div class="contain">
+                <div class="page_nav clearfix">
+                    <div v-cloak class="nav_l fl">
+                        <div class="flip">
+                            <div class="flip-box">
+                                <a href="/" target="_blank" class="flip-item flip-item-front">
+                                    <img src="/statics/images/logo_head1.png" alt="">
+                                </a>
+                                <a href="/" target="_blank" class="flip-item flip-item-back">
+                                    <div class="flip-item-bling"></div>
+                                    <img src="/statics/images/logo_head2.png" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div v-cloak class="nav_r fr">
+                        <div class="nav_list fl">
+                            <ul class="title_list">
+                                <li class="active"><a href="/">首页</s></a></li>
+                                <li><a href="/ht-biz/policydig/index" target="_blank">政策速递<s class="hot_tit_icon"></s></a></li>
+                                <li>
+                                    <a href="/ht-biz/library/index?curPolicy=8" class="drop_menu" target="_blank">高企云文库<s class="tit_icon"></s></a>
+                                    <ul class="drop_down">
+                                        <li>
+                                            <a href="/ht-biz/library/package" target="_blank">政策汇编</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="/ht-biz/inquire/index?theme=0" target="_blank">企政查<s class="tit_icon"></s></a>
+                                    <ul class="drop_down">
+                                        <li><a href="/ht-biz/inquire/index?theme=0" target="_blank">高企查询</a></li>
+                                        <li><a href="/ht-biz/inquire/index?theme=1" target="_blank">政策查询</a></li>
+                                        <li><a href="/ht-biz/inquire/index?theme=2" target="_blank">立项查询</a></li>
+                                        <li><a href="/ht-biz/inquire/index?theme=3" target="_blank">中小企业查询</a></li>
+                                    </ul>
+                                </li>
+                                <!-- <li><a href="/currency/trading/index" target="_blank" >交易中心<s class="hot_tit_icon"></s></a></li> -->
+                                <li><a href="/ht-biz/service/index/index" target="_blank">服务商入驻</a></li>
+                                <!-- <li><a href="http://g.hights.cn/beetl/online_training/index.html" >云学院</a></li> -->
+                            </ul>
+                        </div>
+                        <div class="search_area fl">
+                            <input type="text" id="searchWord" placeholder="全站搜索" class="fl search_input"
+                                v-model="allkeyword" @keyup.enter="allSearch();">
+                            <button class="search_btn fl"  @click="allSearch"><s class="icon"></s></button>
+                        </div>
+                        <!-- <div class="xcx f1 xcx-code">
+                            <s></s>
+                            <img src="/statics/images/xcx.png" alt="" class="img-code">
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>

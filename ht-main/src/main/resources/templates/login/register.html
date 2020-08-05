@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+     <!-- 公共头部 -->
+     <th:block th:include="block/headlink :: test('注册')" /> 
+     <!-- 结束 -->
+    <link rel="stylesheet" th:href="@{/statics/css/register.css?v=0.1}">
+    <style>
+        .autoLogin {margin-top: 10px!important;}
+    </style>
+</head>
+
+<body>
+
+    <div class="wrap" id="box">
+        <header>
+            <div class="register_logo">
+                <div class="register_l">
+                    <a href="/"><img src="/statics/images/logo_head.png" alt=""></a>
+                </div>
+                <div class="register_r">
+                    <a href="">咨询电话：400-166-3308</a>
+                </div>
+            </div>
+        </header>
+        <div class="register_box">
+            <div class="register_content">
+                <h4 class="turn">
+                    <a href="/">
+                        &lt;返回首页
+                    </a> 
+                </h4> 
+                <div class="login">
+                    <div class="login_l">
+                        <img src="/statics/images/register.jpg" alt="">
+                        <p class="login_other clearfix">
+                            <a href="/ht-biz/service/index/index">注册成为服务商></a>
+                            <a href="javascript:alert('敬请期待...');">注册成为平台专家></a>
+                        </p>
+                    </div>
+                    <div class="login_r">
+
+                        <div class="login_cont">
+                            <div class="loginicon_r clearfix">
+                                <a href="/ht-biz/login/login">
+                                    <p>登录</p>
+                                </a>
+                            </div>
+                            <ul class="login_tit clearfix">
+                                <li :class="{active:isActive==0}" @click="isActive=0;" class="l_tit">
+                                    <span class="login_text">个人注册</span>
+                                </li>
+                                <li :class="{active:isActive==1}" @click="isActive=1;" class="l_tit" style="display: none">
+                                    <span class="login_text">企业注册</span>
+                                </li>
+                            </ul>
+                            <div class="login_main">
+                                <div v-cloak v-show="isActive==0" class="login1 login_margin">
+                                    <ul class="login_con">
+                                        <li class="mb_10 clearfix">
+                                            <input type="text" name="phone" v-model="phone" id="phone" placeholder="请输入手机号码" class="login_input form-control ">
+                                        </li>
+                                        <li class="mb_10 clearfix">
+                                            <input type="text" id="imgCode" name="imgCode" v-model="imgCode" @focus="valistdata()" placeholder="请输入图形验证码" class="code_ipt">
+                                            <div class="code_r" @click="changeCode">
+                                                <img id="codeImg" alt="" src="">
+                                            </div>
+                                        </li>
+                                        <li class="mb_10 clearfix">
+                                            <input type="text" name="code" v-model="code" placeholder="请输入短信验证码" class="code_ipt">
+                                            <div class="code_r">
+                                                <button class="code_r" @click="getcode" id="sendCode">获取验证码</button>
+                                            </div>
+                                        </li>
+                                        <li class="mb_10">
+                                            <input type="password" name="password" v-model="password" placeholder="请设置6-12位数字或字母组合" class="login_input form-control ">
+                                        </li>
+                                        <li class="mb_10">
+                                            <input type="password" name="repassword" v-model="repassword" placeholder="请再次确认密码" class="login_input form-control ">
+                                        </li>
+                                        <li>
+                                            <input type="button" id="submitReg" :class="{button_active: isChoose==0}" v-on:click="submitReg" value="立即注册" class="login_btn">
+                                        </li>
+                                        <li class="autoLogin">
+                                            <input type="checkbox" v-model="isProtocol" checked="checked" v-on:click="protocol" class="login_checked" id="a2">
+                                            <label for="a2" id="a2">我已阅读并同意<a href="http://g.hights.cn/beetl/help/rule_detail.html?type=104">高企云服务条款</a><label>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div v-cloak v-show="isActive==1" class="login1" style="display: none">
+                                    <ul class="login_con">
+                                        <li class="mb_10">
+                                            <input type="text" name="companyName" v-model="companyNameData" placeholder="请输入您的公司名称" class="login_input form-control ">
+                                        </li>
+                                        <li class="mb_10">
+                                            <input type="text" name="eCreditCode" v-model="eCreditCode" id="eCreditCode"  placeholder="请输入公司18位数的组织信用代码" class="login_input form-control ">
+                                        </li>
+                                        <li class="mb_10">
+                                            <input type="text" name="ePhone" v-model="ePhone" id="ePhone" placeholder="请输入手机号码" class="login_input form-control ">
+                                        </li>
+                                        <li class="mb_10 clearfix">
+                                            <input type="text" name="eImgCode" id="eImgCode" v-model="eImgCode"  placeholder="请输入图形验证码" class="code_ipt">
+                                            <div class="code_r">
+                                                <img id="eCodeImg" @click="eChangeCode" alt="" src="">
+                                            </div>
+                                        </li>
+                                        <li class="mb_10 clearfix">
+                                            <input type="text" name="eCode" v-model="eCode" placeholder="请输入短信验证码" class="code_ipt">
+                                            <div class="code_r">
+                                                <button class="code_r fl ac" @click="eGetCode" id="sendCode2">获取验证码</button>
+                                            </div>
+                                            
+                                        </li>
+
+                                        
+                                        <li class="mb_10">
+                                                <input type="password" name="companyPassword" v-model="companyPasswordData" placeholder="请设置6-12位数字或字母组合" class="login_input form-control ">
+                                            </li>
+                                            <li class="mb_10">
+                                                <input type="password" name="companyRepassword" v-model="companyRepasswordData" placeholder="请再次确认密码" class="login_input form-control ">
+                                            </li>
+                                            
+                                            <li>
+                                                <input type="button" id="lastSubmitReg" v-on:click="lastSubmitReg" value="立即注册" class="login_btn">
+                                            </li>
+
+                                            <li class="autoLogin">
+                                                <input type="checkbox" checked="checked" class="login_checked" id="a2">
+                                                <label for="a2" id="a2">我已阅读并同意<a href="http://g.hights.cn/beetl/help/rule_detail.html?type=104">高企云服务条款</a><label>
+                                            </li>
+                                    </ul>
+                                
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div id="overlay"></div>
+                <div class="submitInfo" v-cloak>
+                    <div class="submitInfoHeader">
+                        <i @click="close"></i>
+                        <s></s>
+                        <h3>恭喜您，<span class="submit_name" v-cloak v-show="isActive==0">个人</span><span class="submit_name" v-cloak v-show="isActive==1">企业</span>账号注册成功！</h3>
+                    </div>
+                    <div class="submitInfoContent">
+                        <p>平台赠送的<i>10honey</i>值已放入您的账号中，可用于文档下载。</p>
+                        <a href="/">&lt;返回首页</a>
+                        <a href="/ht-biz/login/login">立即登录></a>
+                    </div>
+                    
+                </div>
+                
+            </div>
+        </div>
+        <!--E=底部-->
+        <div th:replace="~{login_footer::copy}"></div>
+    </div>
+
+    <!-- 公共js部分 -->
+    <th:block th:include="block/footlink :: copy" />
+    <!-- over -->
+    <script type="text/javascript" th:src="@{/statics/js/register.js?v=0.2}"></script>
+    <th:block th:include="block/statistics :: copy" />
+</body>
+
+</html>

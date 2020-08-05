@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.biz.mapper.GoldcoinRuleRecordMapper">
+	<select id="findGoldcoin" parameterType="com.ht.commons.utils.MyPage" resultType="com.ht.commons.utils.PageData">
+		select 
+		gcr.name,
+		gcrr.id,
+		gcrr.golds,
+		gcrr.exchange,
+		gcrr.remark,
+		gcrr.createdate, 
+		gcrr.targetid, 
+		gcrr.flowcode
+		from t_gold_coin_rule_record gcrr
+		left join t_gold_coin_rule gcr on gcrr.goldcoinRuleId=gcr.id
+		where gcrr.userId=#{pd.userId}
+		order by gcrr.createdate desc
+	</select>
+	<select id="findCounts" parameterType="com.ht.commons.utils.PageData" resultType="java.lang.Double"  flushCache="false" useCache="false">
+		select sum(golds) from t_gold_coin_rule_record gcrr where 1=1 and gcrr.userId=#{userId} and gcrr.exchange=#{exchange}
+	</select>
+
+	<select id="mygolds" parameterType="java.lang.String" resultType="java.lang.Double"  flushCache="false" useCache="false">
+		select sum(golds) from t_gold_coin_rule_record gcrr where 1=1 and gcrr.userId=#{userId}
+	</select>
+</mapper>

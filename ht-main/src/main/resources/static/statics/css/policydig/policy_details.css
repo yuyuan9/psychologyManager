@@ -1,0 +1,872 @@
+html,
+body {
+    height: 100%;
+}
+
+#user {
+    width: 100%;
+    background: url("../../images/policydig/policy_banner.jpg")0px -14px no-repeat;
+    height: 35px;
+}
+
+.wrap {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.head {
+    width: 100%;
+    height: 165px;
+    background: url("../../images/policydig/policy_banner.jpg")0px -48px no-repeat;
+}
+
+/* 
+header {width:1200px;margin:0 auto;height:35px;line-height:34px;font-size:12px;color:#fff;font-family:'microsoft yahei';background-color:transparent;border-bottom:none;}
+.title_h {width:1200px;margin:0 auto;}
+.tit_left {float:left;}
+.tit_right {float:right;}
+.tit_left span {padding:0 20px;border-right:1px solid #ccc;color:#fff;cursor:pointer;}
+.tit_left span:nth-child(1) {color:#fff;padding-left:0;}
+.tit_left span:nth-child(1)>a {color:#fff;padding:0 5px;}
+.tit_left span:last-child {border:none;}
+.tit_left span a{color:#fff;}
+
+.place {display:inline-block;width:20px;height:21px;vertical-align:middle;background:url("../../images/policydig/map.png")no-repeat center;}
+.tit_right a {padding:0 20px;border-right:1px solid #ccc;color:#fff;}
+.tit_right a:last-child {border:none;padding-right:0;}
+.tit_right a:first-child {color:#fff;}
+.register_icon {display:inline-block;width:20px;height:20px;vertical-align:middle;background:url("../../images/policydig/user.png")no-repeat center;} */
+
+.search {
+    width: 1200px;
+    height: 115px;
+    margin: 0 auto;
+}
+
+.search_l {
+    width: 456px;
+    margin-top: 33px;
+}
+
+.search_logo {
+    height: 50px;
+    line-height: 50px;
+}
+
+.search_logo img {
+    vertical-align: middle;
+}
+
+.search_l p {
+    height: 50px;
+    border-left: 1px solid #fff;
+    padding-left: 20px;
+    margin-left: 25px;
+    color: #fff;
+}
+
+.search_l p a {
+    color: #fff;
+    font-size: 14px;
+}
+
+.search_r {
+    width: 740px;
+}
+
+.search_ipt {
+    width: 590px;
+    margin-top: 14px;
+}
+
+.search_ipt_bottom {
+    margin-top: 5px;
+}
+
+.search_ipt_bottom span {
+    color: #cfe4ff;
+}
+
+.search_ipt_bottom a {
+    color: #fff;
+    margin-left: 15px;
+}
+
+.search_ipt_top {
+    margin-top: 10px;
+    width: 590px;
+    height: 40px;
+}
+
+.search_ipt_top input {
+    border-radius: 5px 0 0 5px;
+    width: 530px;
+    height: 40px;
+    padding-left: 10px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.search_ipt_top input::placeholder {
+    color: #72c8bc;
+    font-size: 14px;
+}
+
+.search_ipt_top s {
+    border-radius: 0 5px 5px 0;
+    display: inline-block;
+    width: 60px;
+    height: 40px;
+    line-height: 35px;
+    text-align: center;
+    cursor: pointer;
+    background: -o-linear-gradient(left, #ff7d4a, #ff4a2b);
+    background: -moz-linear-gradient(left, #ff7d4a, #ff4a2b);
+    background: linear-gradient(left, #ff7d4a, #ff4a2b);
+    background: linear-gradient(to right, #ff7d4a, #ff4a2b);
+    filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr='#ff7d4a', endColorStr='#ff4a2b', gradientType='0');
+    -ms-filter: "progid:DXImageTransform.Microsoft.Gradient(startColorStr='#ff7d4a',endColorStr='#ff4a2b',gradientType='0')";
+}
+
+.search_ipt_top s i {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    background: url("../../images/policydig/lib_icon.png")-39px -23px;
+    vertical-align: middle;
+}
+
+.search_but {
+    width: 130px;
+    margin-left: 20px;
+    margin-top: 8px;
+}
+
+.search_but button {
+    width: 130px;
+    height: 40px;
+    background: -o-linear-gradient(left, #ff7d4a, #ff4a2b);
+    background: -moz-linear-gradient(left, #ff7d4a, #ff4a2b);
+    background: linear-gradient(left, #ff7d4a, #ff4a2b);
+    background: linear-gradient(to right, #ff7d4a, #ff4a2b);
+    filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr='#ff7d4a', endColorStr='#ff4a2b', gradientType='0');
+    -ms-filter: "progid:DXImageTransform.Microsoft.Gradient(startColorStr='#ff7d4a',endColorStr='#ff4a2b',gradientType='0')";
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.library_details {
+    width: 100%;
+    background: #f2f5f4;
+}
+
+.library_content {
+    width: 1200px;
+    height: 20px;
+    margin: 0 auto;
+    position: relative;
+    top: -45px;
+}
+
+.library_content_l {
+    width: 900px;
+}
+
+.library_content_r {
+    width: 284px;
+}
+
+.condition {
+    width: 900px;
+    padding: 10px 30px 30px 30px;
+    box-sizing: border-box;
+    background: #fff;
+    box-shadow: 0px 6px 20px rgba(31, 95, 148, .1);
+    position: relative;
+    z-index: 999;
+}
+
+.library_content_r {
+    margin-left: 15px;
+}
+
+.library_content_r .bigData {
+    padding: 20px;
+    box-sizing: border-box;
+    background: #fff;
+    border-radius: 5px 5px 0 0;
+}
+
+.library_content_r .bigData>h2 {
+    font-size: 18px;
+    color: #333;
+    margin-top: 10px;
+}
+
+.library_content_r .bigData>p {
+    font-size: 12px;
+    color: #999;
+    margin-top: 5px;
+}
+
+.bigData_ipt {
+    width: 240px;
+    height: 35px;
+    border: 1px solid #d2bdf9;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+.bigData_ipt input {
+    border-radius: 5px 0 0 5px;
+    width: 200px;
+    height: 33px;
+    padding-left: 10px;
+    font-size: 14px;
+    box-sizing: border-box;
+    background: #f6f6f6;
+}
+
+.bigData_ipt input::placeholder {
+    color: #8b9cd5;
+    font-size: 12px;
+}
+
+.bigData_ipt s {
+    border-radius: 0 5px 5px 0;
+    display: inline-block;
+    width: 38px;
+    height: 33px;
+    background: #f6f6f6;
+    line-height: 35px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.bigData_ipt s i {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    background: url("../../images/policydig/lib_icon.png")-136px -24px;
+    vertical-align: middle;
+}
+
+.project {
+    padding: 20px;
+    box-sizing: border-box;
+    background: #fff;
+    border-radius: 5px 5px 0 0;
+    margin-top: 15px;
+}
+
+.project>h2 {
+    font-size: 18px;
+    color: #333;
+    margin-top: 10px;
+}
+
+.project>p {
+    font-size: 12px;
+    color: #999;
+    margin-top: 5px;
+}
+
+.project_ipt {
+    width: 240px;
+    height: 35px;
+    border: 1px solid #d2bdf9;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+.project_ipt input {
+    border-radius: 5px 0 0 5px;
+    width: 200px;
+    height: 33px;
+    padding-left: 10px;
+    font-size: 14px;
+    box-sizing: border-box;
+    background: #f6f6f6;
+}
+
+.project_ipt input::placeholder {
+    color: #8b9cd5;
+    font-size: 12px;
+}
+
+.project_ipt s {
+    border-radius: 0 5px 5px 0;
+    display: inline-block;
+    width: 38px;
+    height: 33px;
+    background: #f6f6f6;
+    line-height: 35px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.project_ipt s i {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    background: url("../../images/policydig/lib_icon.png")-136px -23px;
+    vertical-align: middle;
+}
+
+.resource_packs {
+    background: #fff;
+    margin-top: 15px;
+}
+
+.product_r_img {
+    width: 286px;
+    height: 56px;
+}
+
+.product_r_text {
+    padding-top: 20px;
+}
+
+.view_more {
+    padding: 0 20px;
+    text-align: center;
+    margin-top: 20px;
+    padding-bottom: 10px;
+}
+
+.view_more>a {
+    width: 247px;
+    height: 34px;
+    line-height: 34px;
+    display: inline-block;
+    color: #0297ff;
+    font-size: 14px;
+    border: 1px solid #dbdbdb;
+    border-radius: 5px;
+}
+
+.kou {
+    margin-top: 15px;
+}
+
+.kou a {
+    display: inline-block;
+    width: 285px;
+    height: 160px;
+    background: url("../../images/policydig/kou.png")no-repeat 2px 0;
+}
+
+.library_show {
+    background: #fff;
+    padding: 15px 30px;
+    box-sizing: border-box;
+    border-bottom: 2px solid #f2f5f4;
+}
+
+.library_show p {
+    padding: 0 10px;
+}
+
+.have_close {
+    display: inline-block;
+    position: relative;
+    margin-right: 20px;
+}
+
+.close {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background: url("../../images/policydig/lib_icon.png")-145px -49px;
+    vertical-align: middle;
+    position: absolute;
+    top: -3px;
+    right: -13px;
+    cursor: pointer;
+}
+
+.page_box {
+    width: 100%;
+    height: 80px;
+    line-height: 120px;
+    background: #fff;
+}
+
+footer {
+    width: 100%;
+    background: #373737;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+}
+
+footer p {
+    color: #fff;
+    font-size: 14px;
+}
+
+/* 小程序二维码 */
+.drop_img {
+    position: relative;
+    display: inline-block;
+}
+
+.set_area>span {
+    display: inline-block;
+}
+
+.set_area>span>a {
+    font-size: 16px;
+    margin-left: 18px;
+}
+
+.set_xx {
+    font-size: 12px;
+    display: inline-block;
+    width: 100px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 10px;
+    margin-top: 5px;
+    cursor: pointer;
+    background: -o-linear-gradient(left, #ff7d4a, #ff4a2b);
+    background: -moz-linear-gradient(left, #ff7d4a, #ff4a2b);
+    background: linear-gradient(left, #ff7d4a, #ff4a2b);
+    background: linear-gradient(to right, #ff7d4a, #ff4a2b);
+    filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr='#ff7d4a', endColorStr='#ff4a2b', gradientType='0');
+    -ms-filter: "progid:DXImageTransform.Microsoft.Gradient(startColorStr='#ff7d4a',endColorStr='#ff4a2b',gradientType='0')";
+}
+
+.xia_icon_xx {
+    display: inline-block;
+    background: url("../../images/policydig/xia1.png")no-repeat center right;
+    vertical-align: middle;
+}
+
+.set_xx>s {
+    width: 10px;
+    height: 5px;
+}
+
+.product_r_img>h2 {
+    width: 255px;
+    margin: 0 15px;
+    box-sizing: border-box;
+    line-height: 56px;
+    font-size: 16px;
+    border-bottom: 1px solid #ccc;
+}
+
+.product_r_img>h2>span {
+    font-size: 12px;
+    color: #999999;
+    margin-left: 20px;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+.search {
+    width: 1200px;
+    height: 115px;
+    margin: 0 auto;
+}
+
+.search_l {
+    width: 456px;
+    margin-top: 33px;
+}
+
+.search_logo {
+    height: 50px;
+    line-height: 50px;
+}
+
+.search_logo img {
+    vertical-align: middle;
+}
+
+.search_l p {
+    height: 50px;
+    border-left: 1px solid #fff;
+    padding-left: 20px;
+    margin-left: 25px;
+    color: #fff;
+}
+
+.search_l p a {
+    color: #fff;
+    font-size: 14px;
+}
+
+.search_r {
+    width: 740px;
+}
+
+.search_ipt {
+    width: 590px;
+    margin-top: 14px;
+}
+
+.search_ipt_bottom {
+    margin-top: 5px;
+}
+
+.search_ipt_bottom span {
+    color: #cfe4ff;
+}
+
+.search_ipt_bottom a {
+    color: #fff;
+    margin-left: 15px;
+}
+
+.search_ipt_top {
+    margin-top: 10px;
+    width: 590px;
+    height: 40px;
+}
+
+.search_ipt_top input {
+    border-radius: 5px 0 0 5px;
+    width: 530px;
+    height: 40px;
+    padding-left: 10px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.search_ipt_top input::placeholder {
+    color: #72c8bc;
+    font-size: 14px;
+}
+
+.search_ipt_top s {
+    border-radius: 0 5px 5px 0;
+    display: inline-block;
+    width: 60px;
+    height: 40px;
+    line-height: 35px;
+    text-align: center;
+    cursor: pointer;
+    background: -o-linear-gradient(left, #ff7d4a, #ff4a2b);
+    background: -moz-linear-gradient(left, #ff7d4a, #ff4a2b);
+    background: linear-gradient(left, #ff7d4a, #ff4a2b);
+    background: linear-gradient(to right, #ff7d4a, #ff4a2b);
+    filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr='#ff7d4a', endColorStr='#ff4a2b', gradientType='0');
+    -ms-filter: "progid:DXImageTransform.Microsoft.Gradient(startColorStr='#ff7d4a',endColorStr='#ff4a2b',gradientType='0')";
+}
+
+.search_ipt_top s i {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    background: url("../../images/policydig/lib_icon.png")-39px -23px;
+    vertical-align: middle;
+}
+
+.search_but {
+    width: 130px;
+    margin-left: 20px;
+    margin-top: 8px;
+}
+
+.search_but button {
+    width: 130px;
+    height: 40px;
+    background: -o-linear-gradient(left, #ff7d4a, #ff4a2b);
+    background: -moz-linear-gradient(left, #ff7d4a, #ff4a2b);
+    background: linear-gradient(left, #ff7d4a, #ff4a2b);
+    background: linear-gradient(to right, #ff7d4a, #ff4a2b);
+    filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr='#ff7d4a', endColorStr='#ff4a2b', gradientType='0');
+    -ms-filter: "progid:DXImageTransform.Microsoft.Gradient(startColorStr='#ff7d4a',endColorStr='#ff4a2b',gradientType='0')";
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.navigation>p {
+    font-size: 12px;
+    color: #ccfbf4;
+    margin-top: 5px;
+}
+
+.navigation>.bread_nav>a {
+    color: #ccfbf4;
+}
+
+.library_details {
+    width: 100%;
+    background: #f2f5f4;
+}
+
+.library_content {
+    width: 1200px;
+    height: 20px;
+    margin: 0 auto;
+    position: relative;
+    top: -45px;
+}
+
+.library_content_l {
+    width: 900px;
+}
+
+.library_content_r {
+    width: 284px;
+}
+
+.condition {
+    width: 900px;
+    padding: 10px 30px 30px 30px;
+    box-sizing: border-box;
+    background: #fff;
+    box-shadow: 0px 6px 20px rgba(31, 95, 148, .1);
+    position: relative;
+    z-index: 999;
+}
+
+.library_content_r {
+    margin-left: 15px;
+}
+
+.library_content_r .bigData {
+    padding: 20px;
+    box-sizing: border-box;
+    background: #fff;
+    border-radius: 5px 5px 0 0;
+}
+
+.library_content_r .bigData>h2 {
+    font-size: 18px;
+    color: #333;
+    margin-top: 10px;
+}
+
+.library_content_r .bigData>p {
+    font-size: 12px;
+    color: #999;
+    margin-top: 5px;
+}
+
+.project_ipt s i {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    background: url("../../images/policydig/lib_icon.png")-136px -23px;
+    vertical-align: middle;
+}
+
+.resource_packs {
+    background: #fff;
+}
+
+.product_r_img {
+    width: 286px;
+    height: 56px;
+}
+
+.product_r_text {
+    padding-top: 20px;
+}
+
+.product_r_text>li {
+    padding: 0 15px;
+    width: 100%;
+    height: 30px;
+    box-sizing: border-box;
+}
+
+.product_r_text>li>a {
+    color: #666;
+    font-size: 14px;
+    width: 230px;
+    height: 20px;
+    float: right;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.product_r_text>li>s {
+    background: #129e87;
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    line-height: 6px;
+    text-align: center;
+    border-radius: 2px;
+    color: #129e87;
+    vertical-align: middle;
+    float: left;
+    padding: 1px;
+    font-size: 12px;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 7px;
+    margin-left: 5px;
+}
+
+.product_r_text>li:nth-child(1)>s,
+.product_r_text>li:nth-child(2)>s,
+.product_r_text>li:nth-child(3)>s {
+    background: #129e87;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    line-height: 15px;
+    text-align: center;
+    border-radius: 2px;
+    color: #fff;
+    vertical-align: middle;
+    float: left;
+    padding: 1px;
+    font-size: 12px;
+    margin-top: 0px;
+}
+
+
+.view_more {
+    padding: 0 20px;
+    text-align: center;
+    margin-top: 20px;
+    padding-bottom: 10px;
+}
+
+.view_more>a {
+    width: 247px;
+    height: 34px;
+    line-height: 34px;
+    display: inline-block;
+    color: #0297ff;
+    font-size: 14px;
+    border: 1px solid #dbdbdb;
+    border-radius: 5px;
+}
+
+.kou {
+    margin-top: 15px;
+}
+
+.kou a {
+    display: inline-block;
+    width: 285px;
+    height: 160px;
+    background: url("../../images/policydig/kou.png")no-repeat 2px 0;
+}
+
+.library_show {
+    background: #fff;
+    padding: 15px 30px;
+    box-sizing: border-box;
+    border-bottom: 2px solid #f2f5f4;
+}
+
+.library_show p {
+    padding: 0 10px;
+}
+
+.have_close {
+    display: inline-block;
+    position: relative;
+    margin-right: 20px;
+}
+
+.close {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background: url("../../images/policydig/lib_icon.png")-145px -49px;
+    vertical-align: middle;
+    position: absolute;
+    top: -3px;
+    right: -13px;
+    cursor: pointer;
+}
+
+.page_box {
+    width: 100%;
+    height: 80px;
+    line-height: 120px;
+    background: #fff;
+}
+
+footer {
+    width: 100%;
+    background: #373737;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+}
+
+footer p {
+    color: #fff;
+    font-size: 14px;
+}
+
+/* 小程序二维码 */
+.drop_img {
+    position: relative;
+    display: inline-block;
+}
+
+.set_area>span {
+    display: inline-block;
+}
+
+.set_area>span>a {
+    font-size: 16px;
+    margin-left: 18px;
+}
+
+.set_xx {
+    font-size: 12px;
+    display: inline-block;
+    width: 100px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 10px;
+    margin-top: 5px;
+    cursor: pointer;
+    background: -o-linear-gradient(left, #ff7d4a, #ff4a2b);
+    background: -moz-linear-gradient(left, #ff7d4a, #ff4a2b);
+    background: linear-gradient(left, #ff7d4a, #ff4a2b);
+    background: linear-gradient(to right, #ff7d4a, #ff4a2b);
+    filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr='#ff7d4a', endColorStr='#ff4a2b', gradientType='0');
+    -ms-filter: "progid:DXImageTransform.Microsoft.Gradient(startColorStr='#ff7d4a',endColorStr='#ff4a2b',gradientType='0')";
+}
+
+.xia_icon_xx {
+    display: inline-block;
+    background: url("../../images/policydig/xia1.png")no-repeat center right;
+    vertical-align: middle;
+}
+
+.set_xx>s {
+    width: 10px;
+    height: 5px;
+}
+
+.product_r_img>h2 {
+    width: 255px;
+    margin: 0 15px;
+    box-sizing: border-box;
+    line-height: 56px;
+    font-size: 16px;
+    border-bottom: 1px solid #ccc;
+}
+
+.product_r_img>h2>span {
+    font-size: 12px;
+    color: #999999;
+    margin-left: 20px;
+}
+
+/* 分享 */

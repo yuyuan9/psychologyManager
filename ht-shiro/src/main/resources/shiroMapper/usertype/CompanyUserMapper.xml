@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.shiro.mapper.usertype.CompanyUserMapper">
+
+    <!-- 开启二级缓存 -->
+    <!--<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>-->
+    <select id="findById" resultType="com.ht.commons.utils.PageData" parameterType="com.ht.commons.utils.PageData">
+        select c.*,u.trueName ,u.phone,u.email ,u.active,u.userType,u.remark,
+        u.regProvince,u.regcity,u.regarec  from t_company_user c left join t_sys_user u on c.createid=u.user_id
+        where 1=1
+        <if test="id!=null and id!=''">
+            and c.id=#{id}
+        </if>
+        <if test="userId!=null and userId!=''">
+            and    u.USER_ID =#{userId}
+        </if>
+    </select>
+
+    <select id="findlist" resultType="com.ht.commons.utils.PageData" parameterType="com.ht.commons.utils.MyPage">
+        select c.*,u.trueName,u.email,u.phone,u.userType from t_company_user c left join t_sys_user u on c.createid=u.user_id
+        where 1=1
+        <if test="pd.keyword!=null and pd.keyword!=''">
+          and (c.companyname LIKE CONCAT('%', #{pd.keyword},'%')
+               or u.trueName LIKE CONCAT('%', #{pd.keyword},'%')
+                or u.phone LIKE CONCAT('%', #{pd.keyword},'%')
+            )
+        </if>
+    </select>
+    
+  
+	
+
+</mapper>

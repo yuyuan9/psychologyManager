@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>政策速递</title>
+    <meta name="keywords" content="高企云文库政策解读,高企云政策解读,项目政策解读" />
+    <meta name="description" content="高企云文库为您提供各地区科技政策项目政策解读文档，让您快速掌握行业专业的解读文件." />   
+    <!-- 公共头部 -->
+    <th:block th:include="block/headlink :: test('政策速递')" />
+    <!-- 结束 -->
+    <link rel="stylesheet" th:href="@{/statics/css/policydig/pagination.css}">
+    <link rel="stylesheet" th:href="@{/statics/css/policydig/index.css?v=0.0.2}">
+    <link rel="stylesheet" th:href="@{/statics/css/policydig/datepicker.css}">
+    <link rel="stylesheet" th:href="@{/statics/css/policydig/policy_index.css?v=0.0.22}">
+    <style>
+        /* .contract_mask{
+            top: -36px;
+        } */
+        .navigation {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="library"></div>
+    <div id="box"></div>
+    <div id="user">
+        <div th:replace="~{user_head::copy}"></div>
+    </div>
+    <div class="wrap" id="policy" @click.stop="isProvince=false;isCity=false;isArea=false;" v-cloak>
+        <!-- 登录弹框组件 -->
+        <mylogin :islogin="false" @close-login="isLogin=!false"></mylogin>
+        <!-- 结束 -->
+        <div th:replace="~{policy_nav::copy}"></div>
+
+        <section class="library_details clearfix">
+            <div class="library_content clearfix">
+                <div class="navigation clearfix">
+                    <p class="bread_nav fl">
+                        <a>当前位置：</a>
+                        <a href="/">首页</a> > <a href="/ht-biz/policydig/index">政策速递</a>
+                    </p>
+                </div>
+                <div class="library_content_l fl">
+                    <div class="l_box fl">
+                        <div class="part2">
+                            <div class="part2_list" style="margin-top: 0px; padding-bottom: 0px;margin-bottom: 0px">
+                            </div>
+                            <div class="part2_top">
+                                <div class="part2_top_title">
+                                    <!-- 导航标题-->
+                                    <div class="choice_title">
+                                        <span class="choice_content" data-data="0" :class="{active:isclaCation==0}"
+                                            @click="conceal=1;isclaCation=0;getPitchData();">全部政策</span>
+                                        <span class="choice_content" data-data="1" :class="{active:isclaCation==1}"
+                                            @click="conceal=1;isclaCation=1;getPitchData();">申报通知</span><span
+                                            class="choice_content" data-data="3" :class="{active:isclaCation==3}"
+                                            @click="conceal=1;isclaCation=3;getPitchData();">公示名录</span><span
+                                            class="choice_content" data-data="2" :class="{active:isclaCation==2}"
+                                            @click="conceal=1;isclaCation=2;getPitchData();">政府文件</span><span
+                                            class="choice_content" data-data="4" :class="{active:isclaCation==4}"
+                                            @click="conceal=1;isclaCation=4;getPitchData();">政策解读</span><span
+                                            class="choice_content" data-data="5" :class="{active:isclaCation==5}"
+                                            @click="conceal=1;isclaCation=5;getPitchData();">新闻资讯</span><span
+                                            class="choice_content" data-data="6" :class="{active:isclaCation==6}"
+                                            @click="conceal=1;isclaCation=6;getPitchData();">其他</span>
+                                        <span class="choice_content mySubscrib_right" data-data="7"
+                                            :class="{active:isclaCation==7}"
+                                            @click="conceal=1;isclaCation=7;subscription=1;mySubscrib();">
+                                            <i class="icon_sub"></i>我的订阅></span>
+                                    </div>
+                                </div>
+                                <div class="part2_top_title1"></div>
+
+
+                                <!-- 我订阅的方位 -->
+                                <div v-show='isclaCation == 7' class="part2_top_choice">
+                                    <div class="choice region Subscribe">
+                                        <div class="item1_left">
+                                            <span class="choice_title">以下是您已订阅的推送内容，可编辑更改</span>
+                                        </div>
+                                        <div class="item1_right" @click="edit_show()">
+                                            <button class="edit_btn"><s></s>编辑</button>
+                                        </div>
+                                    </div>
+                                    <div class="choice_mysub">
+                                        <div class="choice_region">
+                                            订阅的地区:
+                                            <span id="dydq" v-if="form.city == ''" v-cloak>{{Subprovicnce}}</span>
+                                            <span>{{form.city | myAddressCity}} {{form.erae | myAddressErae}}
+                                                {{form.minerae | myAddressMinerae}}</span>
+                                            <!-- {{form.city | myAddressCity}}{{form.erae | myAddressErae}}{{form.minerae | myAddressMinerae}} -->
+
+                                        </div>
+
+                                        <div v-show="fruitIds2 != ''" class="choice_claCation">
+                                            性质类型：
+                                            <div class="claCation_chilren"
+                                                style="display:inline-block;margin-right:8px;"
+                                                v-for='(itemC,index) in fruitIds2 '>
+                                                <span v-cloak>{{itemC}}</span>
+                                            </div>
+                                        </div>
+                                        <div v-show="fruitIds3 != ''" class="choice_claCation">
+                                            政策类型：
+                                            <div class="claCation_chilren"
+                                                style="display:inline-block;margin-right:8px;"
+                                                v-for='(itemC,index) in fruitIds3 '>
+                                                <span v-cloak>{{itemC}}</span>
+                                            </div>
+                                        </div>
+                                        <div v-show="fruitIds4 != ''" class="choice_claCation">
+                                            技术领域：
+                                            <div class="claCation_chilren"
+                                                style="display:inline-block;margin-right:8px;"
+                                                v-for='(itemC,index) in fruitIds4 '>
+                                                <span v-cloak>{{itemC}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 日历 -->
+                                    <!-- <div class="choice">
+                                        <span class="choice_title">发布日期：</span>
+                                        <input v-model="pitchDataPubTime" type="data" id="regDate" :class="{active:pitchDataPubTime!='选择起始时间'}" name="regDate" /><i
+                                        class="arrow" style="margin-right:20px;"></i>
+                                        <input v-model="pitchDataPubTime1" type="data" id="regDate1" :class="{active:pitchDataPubTime1!='选择截止时间'}" name="regDate1" /><i
+                                        class="arrow"></i>
+                                    </div> -->
+                                </div>
+
+                                <!-- 编辑按钮 -->
+                                <div class="edit_Mask">
+                                    <div class="edit_container">
+                                        <div class="edit_title">
+                                            <span class="title">请选择你感兴趣的政策分类</span>
+                                            <span>可多选择，可随时调整</span>
+                                            <s id="edit_close" @click="edit_close()">x</s>
+                                        </div>
+                                        <div class="edit_main" style="margin-top:15px;">
+
+                                            <div class="edit_region">
+                                                <p> <s class="I"></s>地区选择分类</p>
+
+                                                <el-form ref="form" :model="form" label-width="100px">
+                                                    <el-cascader :options="CityInfo" v-model="form.selectedOptions"
+                                                        :change-on-select="true" :clearable="true" :filterable="true"
+                                                        @change="handleChange">
+                                                    </el-cascader>
+
+                                                    <span>所选地区：
+                                                        <span id="region1">{{form.city | myAddressCity}}</span>
+                                                        <span id="region2">{{form.erae | myAddressErae}}</span>
+                                                        <span id="region3">{{form.minerae | myAddressMinerae}}</span>
+                                                    </span>
+                                                    <!-- <span id="dydq" v-cloak>所选地区： {{Subprovicnce}} {{Subcity}} {{Subarea}}</span> -->
+                                                </el-form>
+                                            </div>
+
+                                            <div class="edit_claCation">
+                                                <p> <s class="C"></s>性质分类</p>
+                                                <div v-cloak class="claCation_list" :data-data=item.id
+                                                    name="nature_type" :clacation=item.clacation :id=item.id
+                                                    :value=item.id v-for='(item,index) in claCationList'
+                                                    @click="checkedOne(item.id,item.clacation)">
+                                                    {{ item.clacation }}
+                                                </div>
+                                            </div>
+                                            <!-- :class="{activec123:fruitIds_Type.indexOf(item2.id)>=0}" -->
+                                            <div class="edit_ProType">
+                                                <p> <s class="P"></s>政策分类</p>
+                                                <div v-cloak class="ProType_list" :data-data=item2.id
+                                                    name='productTyper' :ProType=item2.ProType :id=item2.id
+                                                    :value=item2.id @click='checkedOne2(item2.id,item2.ProType)'
+                                                    v-for='(item2,index) in ProTypeList'>
+                                                    <span>{{ item2.ProType }}</span>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="edit_technology">
+                                                <p> <s class="P"></s>技术领域</p>
+                                                <div v-cloak class="technology_list" :data-data=item3.id
+                                                    name='technologyTyper' :ProType=item3.technology :id=item3.id
+                                                    :value=item3.id @click='checkedOne3(item3.id,item3.technology)'
+                                                    v-for='(item3,index) in technologyField'>
+                                                    <span>{{ item3.technology }}</span>
+                                                </div>
+                                            </div> -->
+                                        </div>
+                                        <div class="edit_submit" @click='edit_submit'>选好了</div>
+                                        <div style="height:1px;"></div>
+                                    </div>
+                                </div>
+                                <!-- 编辑框结束 -->
+
+
+
+                                <div v-show='isclaCation != 7' class="part2_top_choice">
+                                    <!--地区范围-->
+                                    <div class="choice region competents" style="margin-top:0;">
+                                        <span class="choice_title">地区范围：</span>
+                                        <span class="choice_content" :class="{active:isRegion==1}"
+                                            @click="conceal=1;isRegion=1;province='省级'; city='市级';isCityActive=0;area='区级';showArea=true;isAreaActive=0;pitchCity='';pitchArea='';getPitchData();getDeliveryList();">国家</span>
+                                        <!-- 省级 -->
+                                        <span v-cloak class="choice_content region_modify" :class="{active:isRegion==2}"
+                                            @click.stop.prevent="isProvince=true;">
+                                            <s id="province_text">{{province}}</s><i class="arrow"></i>
+                                            <ul v-cloak class="province" v-show="isProvince">
+                                                <li v-cloak v-for="(region, index) in regionData"
+                                                    @click.self="toggleBox"
+                                                    @click.stop.prevent="conceal=1;province = region.n;isProvince=false;isRegion=2;city='市级';pitchCity='';isCityActive=0;area='区级';pitchArea='';isAreaActive=0;getPitchData();getDeliveryList();">
+                                                    {{region.n}}</li>
+                                            </ul>
+                                        </span>
+                                        <!-- 市级 -->
+                                        <span v-cloak class="choice_content region_modify"
+                                            :class="{active:isCityActive==1}" @click.stop.prevent="getCityData();">
+                                            {{city}}<i class="arrow"></i>
+                                            <ul v-cloak class="city" v-show="isCity">
+                                                <li v-cloak v-for="(c, index) in cityData"
+                                                    @click.stop.prevent="conceal=1;choseCity(c.n);getPitchData();getDeliveryList();">
+                                                    {{c.n}}</li>
+                                            </ul>
+                                        </span>
+                                        <!-- 区级 -->
+
+                                        <span v-cloak class="choice_content region_modify"
+                                            @click.stop.prevent="stopThings()" :class="{active:isAreaActive==1}"
+                                            v-show="showArea">
+                                            {{area}}<i class="arrow"></i>
+                                            <ul v-cloak class="area" v-show="isArea">
+                                                <li v-for="(a, index) in areaData"
+                                                    @click.stop.prevent="conceal=1;area = a.n;isArea=false;if(isCityActive==1){isAreaActive=1};getPitchData();getDeliveryList();">
+                                                    {{a.n}}</li>
+                                            </ul>
+                                        </span>
+                                    </div>
+                                    <!-- 城市复选框 -->
+                                    <!-- 地区选择 -->
+
+                                    <div class="choice pro_type clearfix competents" v-cloak v-if="pitchDataRegion!=''">
+                                        <span class="choice_title fl" style="margin-right: 23px;">政策层级：</span>
+                                        <div v-cloak v-if="pitchDataRegion!=''" class="choice_ipt countrys fl">
+                                            <label for="" @change="conceal=1;getPitchData();">
+                                                <input type="checkbox" v-model="countrys" name="countrys">
+                                            </label>
+                                            <span>国家</span>
+                                        </div>
+                                        <div v-cloak v-if="isRegion == 2" class="choice_ipt provinces fl">
+                                            <label for="" @change="conceal=1;getPitchData();">
+                                                <input type="checkbox" v-model="provinces" name="provinces">
+                                            </label>
+                                            <span>省级</span>
+                                        </div>
+                                        <div v-cloak v-if="pitchDataRegion!='' && pitchCity!=''"
+                                            class="choice_ipt citys fl">
+                                            <label for="" @change="conceal=1;getPitchData();">
+                                                <input type="checkbox" v-model="citys" name="citys">
+                                            </label>
+                                            <span>市级</span>
+                                        </div>
+                                        <div v-cloak v-if="pitchDataRegion!='' && pitchCity!='' && pitchArea!=''"
+                                            v-show="areaShow" class="choice_ipt areas fl">
+                                            <label for="" @change="conceal=1;getPitchData();">
+                                                <input type="checkbox" v-model="areas" name="areas">
+                                            </label>
+                                            <span>区级</span>
+                                        </div>
+                                    </div>
+                                    <!--政策分类-->
+                                    <div class="choice pro_type competents">
+                                        <span class="choice_title">政策分类：</span>
+                                        <span class="choice_content" :class="{active:isProType==9}"
+                                            @click="conceal=1;isProType=9;getPitchData();">全部</span>
+                                        <span class="choice_content" :class="{active:isProType==1}"
+                                            @click="conceal=1;isProType=1;getPitchData();">高新技术企业</span>
+                                        <span class="choice_content" :class="{active:isProType==2}"
+                                            @click="conceal=1;isProType=2;getPitchData();">研发机构</span>
+                                        <span class="choice_content" :class="{active:isProType==3}"
+                                            @click="conceal=1;isProType=3;getPitchData();">科研立项</span>
+                                        <span class="choice_content" :class="{active:isProType==4}"
+                                            @click="conceal=1;isProType=4;getPitchData();">科技成果</span>
+                                        <span class="choice_content" :class="{active:isProType==5}"
+                                            @click="conceal=1;isProType=5;getPitchData();">知识产权</span>
+                                        <span class="choice_content" :class="{active:isProType==6}"
+                                            @click="conceal=1;isProType=6;getPitchData();">科技财金</span>
+                                        <span class="choice_content" :class="{active:isProType==7}"
+                                            @click="conceal=1;isProType=7;getPitchData();">人才团队</span>
+                                        <span class="choice_content" :class="{active:isProType==8}"
+                                            @click="conceal=1;isProType=8;getPitchData();">其他</span>
+                                    </div>
+                                    <!--发布单位-->
+                                    <!-- <div class="choice issue_unit competents">
+                                        <span class="choice_title">主管单位：</span>
+                                        <span class="choice_content organization_list" :class="{active:isIssUnit==27}"
+                                            @click="isIssUnit=27;getPitchData();">全部</span>
+                                        <span v-for="(content, index) in organizationList"
+                                            class="choice_content organization_list"
+                                            :class="{active:isIssUnit==(index+1)}"
+                                            @click="isIssUnit=(index+1);getPitchData();">{{content.beforeUnitName}}</span>
+                                        <div class="more_item" @click="browse_more2">更多<s class="more_icon2"></s></div>
+                                    </div> -->
+                                    <!-- 行业领域 -->
+                                    <!-- <div class="choice pro_type jishu competents">
+                                        <span class="choice_title">技术领域：</span>
+                                        <span class="choice_content" :class="{active:isIndustry==1355}"
+                                            @click="isIndustry=1355;getPitchData();">全部</span>
+                                        <span v-for="(content, index) in isIndustryJson"
+                                            class="choice_content choice_content_test"
+                                            :class="{active:isIndustry==(content.id)}"
+                                            @click="isIndustry=(content.id);getPitchData();">{{content.name.slice(2)}}</span>
+                                        <div class="more_item" @click="browse_more1">更多<s class="more_icon1"></s></div>
+
+                                    </div> -->
+                                    <!-- 发布日期： -->
+                                    <div class="choice competents clearfix" style="line-height: 28px;">
+                                        <span class="choice_title fl">发布日期：</span>
+                                        <input class="datakk1 fl" v-model="pitchDataPubTime" type="data" id="regDate"
+                                            :class="{active:pitchDataPubTime!='选择起始时间'}" name="regDate" /><i
+                                            class="arrow datakk fl"></i>
+                                            <s class="fl" style="margin-left:5px;">-</s>
+                                        <input class="datakk1 fl" v-model="pitchDataPubTime1" type="data" id="regDate1"
+                                            :class="{active:pitchDataPubTime1!='选择截止时间'}" name="regDate1"
+                                            style="margin-left: 5px;" /><i class="arrow datakk fl"></i>
+                                        <div class="fl" v-show="isclaCation==1" style="margin-left: 20px;">
+                                            <span class="choice_content" :class="{active:isApplyActive==1}"
+                                                @click="conceal=1;apply=1;isApplyActive=1;getPitchData();">申报中</span>
+                                            <span class="choice_content" :class="{active:isApplyActive==0}"
+                                                @click="conceal=1;apply=0;isApplyActive=0;getPitchData();">已截止</span>
+                                        </div>
+
+                                    </div>
+                                    <!-- <div class="choice pro_type cla_cation">
+                                        <span class="choice_title">申报状态：</span>
+                                    </div> -->
+                                </div>
+                            </div>
+                            <div class="library_show clearfix">
+                                <div v-show="conceal != 0">
+                                    <p v-if="isclaCation != 7" class="tiaojian fl">已选条件：</p>
+                                    <div class="have_chosen">
+
+                                        <span v-cloak class="have_chosen_content"
+                                            v-if="pitchDataClaCation!='' && isclaCation != 7 ">{{pitchDataClaCation}}
+                                            <i class="close ac"
+                                                @click="pitchDataClaCation='';isRegion=0;isCityActive=0;isAreaActive=0;province='省级';city='市级';area='区级';pitchCity='';pitchArea='';getContent(0);"></i>
+                                        </span>
+
+                                        <span v-cloak class="have_chosen_content"
+                                            v-if="pitchDataRegion!='' && isclaCation != 7">{{pitchDataRegion}}<i
+                                                class="close ac"
+                                                @click="pitchDataRegion='';isRegion=0;isCityActive=0;isAreaActive=0;province='省级';city='市级';area='区级';pitchCity='';pitchArea='';getContent(0);"></i></span>
+
+                                        <span v-cloak class="have_chosen_content"
+                                            v-if="pitchCity!='' && isclaCation != 7">{{pitchCity}}<i class="close ac"
+                                                @click="pitchCity='';city='市级';isCityActive=0;pitchArea='';area='区级';isAreaActive=0;getContent(0);"></i></span>
+
+                                        <span v-cloak class="have_chosen_content"
+                                            v-if="pitchArea!='' && isclaCation != 7">{{pitchArea}}<i class="close ac"
+                                                @click="pitchArea='';area='区级';isAreaActive=0;getContent(0);"></i></span>
+
+                                        <span v-cloak class="have_chosen_content"
+                                            v-if="pitchIndustryField!='' && isclaCation != 7">{{pitchIndustryField}}<i
+                                                class="close ac"
+                                                @click="pitchIndustryField='';isIndustry=0;getContent(0);"></i></span>
+
+                                        <span v-cloak class="have_chosen_content"
+                                            v-if="pitchDataProType!='' && isclaCation != 7">{{pitchDataProType}}<i
+                                                class="close ac"
+                                                @click="pitchDataProType='';isProType=0;getContent(0);"></i></span>
+
+                                        <!-- <span v-cloak class="have_chosen_content" v-if="pitchDataClaCation!=''">{{pitchDataClaCation}}<i class="close ac"
+								 @click="pitchDataClaCation='';isclaCation=0;apply=-1;isApplyActive=-1;getContent(0);"></i></span> -->
+
+                                        <span v-cloak class="have_chosen_content"
+                                            v-if="pitchDataIssUnit!='' && isclaCation != 7">{{pitchDataIssUnit}}<i
+                                                class="close ac"
+                                                @click="conceal=0;pitchDataIssUnit='';isIssUnit=0;getContent(0);"></i></span>
+
+                                        <span v-cloak class="have_chosen_content"
+                                            v-if="pitchDataPubTime!='选择起始时间' && isclaCation != 7">{{pitchDataPubTime}}<i
+                                                class="close ac"
+                                                @click="conceal=0;pitchDataPubTime='选择起始时间';getContent(0);"></i></span>
+
+                                        <span v-cloak class="have_chosen_content"
+                                            v-if="pitchDataPubTime1!='选择截止时间' && isclaCation != 7">{{pitchDataPubTime1}}<i
+                                                class="close ac"
+                                                @click="conceal=0;pitchDataPubTime1='选择截止时间';getContent(0);"></i></span>
+                                        <span v-if="words!=''&&isclaCation!=7" v-cloak
+                                            class="have_chosen_content">“{{words}}”</span>
+
+                                        <s>共为您查询<i style="color: #eb5836">{{page.totalResult}}</i>条结果</s>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <!-- 展示列表 -->
+                            <!-- v-show='isclaCation != 7' -->
+                            <div class="part2_list" style="background: #fff">
+                                <div v-if="notfind != 1" class="part2_list_content">
+                                    <ul>
+                                        <li class="part2_list_li part2_list_li_after" v-cloak
+                                            v-for="(contentData, index) in contentDatas">
+                                            <span class="top ac" v-cloak v-if="contentData.top==1&&index<3">置顶</span>
+                                            <a v-cloak v-if="contentData.productType==1" target="_blank"
+                                                :href="'/ht-biz/policydig/details?id='+contentData.id" class="title"
+                                                :class="{'active_top': contentData.top==1&&index<3}"
+                                                :title="contentData.title">
+                                                <span v-cloak
+                                                    v-if="contentData.nature==1&&contentData.beginDate&&contentData.endDate"
+                                                    class="sbz">
+                                                    <i class="stop" v-cloak v-if="(contentData.status)<0">已截止申报</i>
+                                                    <i class="ing" v-cloak v-else>正在申报中</i>
+                                                </span>
+                                                <span v-cloak v-else></span>
+                                                <span v-cloak v-if="contentData.nature==1">【申报通知】</span>
+                                                <span v-cloak v-else-if="contentData.nature==2">【政府文件】</span>
+                                                <span v-cloak v-else-if="contentData.nature==3">【公示名录】</span>
+                                                <span v-cloak v-else-if="contentData.nature==4">【政策解读】</span>
+                                                <span v-cloak v-else-if="contentData.nature==5">【新闻资讯】</span>
+                                                <span v-cloak v-else-if="contentData.nature==6">【其他】</span>
+                                                <span v-cloak v-else-if="contentData.nature"></span>
+                                                {{contentData.title}}</a>
+
+                                            <a v-cloak v-else-if="contentData.productType==2" target="_blank"
+                                                :href="'/ht-biz/policydig/details?id='+contentData.id" class="title"
+                                                :class="{'active_top': contentData.top==1&&index<3}"
+                                                :title="contentData.title">
+                                                <span v-cloak
+                                                    v-if="contentData.nature==1&&contentData.beginDate&&contentData.endDate"
+                                                    class="sbz">
+                                                    <i class="stop" v-cloak v-if="(contentData.status)<0">已截止申报</i>
+                                                    <i class="ing" v-cloak v-else>正在申报中</i>
+                                                </span>
+                                                <span v-cloak v-else></span>
+                                                <span v-cloak v-if="contentData.nature==1">【申报通知】</span>
+                                                <span v-cloak v-else-if="contentData.nature==2">【政府文件】</span>
+                                                <span v-cloak v-else-if="contentData.nature==3">【公示名录】</span>
+                                                <span v-cloak v-else-if="contentData.nature==4">【政策解读】</span>
+                                                <span v-cloak v-else-if="contentData.nature==5">【新闻资讯】</span>
+                                                <span v-cloak v-else-if="contentData.nature==6">【其他】</span>
+                                                {{contentData.title}}</a>
+
+                                            <a v-cloak v-else-if="contentData.productType==2" target="_blank"
+                                                :href="'/ht-biz/policydig/details?id='+contentData.id" class="title"
+                                                :class="{'active_top': contentData.top==1&&index<3}"
+                                                :title="contentData.title">
+                                                <span v-cloak
+                                                    v-if="contentData.nature==1&&contentData.beginDate&&contentData.endDate"
+                                                    class="sbz">
+                                                    <i class="stop" v-cloak v-if="contentData.status < 0">已截止申报</i>
+                                                    <i class="ing" v-cloak v-else>正在申报中</i>
+                                                </span>
+                                                <span v-cloak v-else></span>
+                                                <span v-cloak v-if="contentData.nature==1">【申报通知】</span>
+                                                <span v-cloak v-else-if="contentData.nature==2">【政府文件】</span>
+                                                <span v-cloak v-else-if="contentData.nature==3">【公示名录】</span>
+                                                <span v-cloak v-else-if="contentData.nature==4">【政策解读】</span>
+                                                <span v-cloak v-else-if="contentData.nature==5">【新闻资讯】</span>
+                                                <span v-cloak v-else-if="contentData.nature==6">【其他】</span>
+                                                {{contentData.title}}</a>
+
+                                            <a v-cloak v-else-if="contentData.productType==4" target="_blank"
+                                                :href="'/ht-biz/policydig/details?id='+contentData.id" class="title"
+                                                :class="{'active_top': contentData.top==1&&index<3}"
+                                                :title="contentData.title">
+                                                <span v-cloak
+                                                    v-if="contentData.nature==1&&contentData.beginDate&&contentData.endDate"
+                                                    class="sbz">
+                                                    <i class="stop" v-cloak v-if="(contentData.status)<0">已截止申报</i>
+                                                    <i class="ing" v-cloak v-else>正在申报中</i>
+                                                </span>
+                                                <span v-else></span>
+                                                <span v-if="contentData.nature==1">【申报通知】</span>
+                                                <span v-else-if="contentData.nature==2">【政府文件】</span>
+                                                <span v-else-if="contentData.nature==3">【公示名录】</span>
+                                                <span v-else-if="contentData.nature==4">【政策解读】</span>
+                                                <span v-else-if="contentData.nature==5">【新闻资讯】</span>
+                                                <span v-else-if="contentData.nature==6">【其他】</span>
+                                                {{contentData.title}}</a>
+
+                                            <a v-cloak v-else-if="contentData.productType==5" target="_blank"
+                                                :href="'/ht-biz/policydig/details?id='+contentData.id" class="title"
+                                                :class="{'active_top': contentData.top==1&&index<3}"
+                                                :title="contentData.title">
+                                                <span v-cloak
+                                                    v-if="contentData.nature==1&&contentData.beginDate&&contentData.endDate"
+                                                    class="sbz">
+                                                    <i class="stop" v-cloak v-if="(contentData.status)<0">已截止申报</i>
+                                                    <i class="ing" v-cloak v-else>正在申报中</i>
+                                                </span>
+                                                <span v-else></span>
+                                                <span v-if="contentData.nature==1">【申报通知】</span>
+                                                <span v-else-if="contentData.nature==2">【政府文件】</span>
+                                                <span v-else-if="contentData.nature==3">【公示名录】</span>
+                                                <span v-else-if="contentData.nature==4">【政策解读】</span>
+                                                <span v-else-if="contentData.nature==5">【新闻资讯】</span>
+                                                <span v-else-if="contentData.nature==6">【其他】</span>
+                                                {{contentData.title}}</a>
+
+                                            <a v-cloak v-else-if="contentData.productType==6" target="_blank"
+                                                :href="'/ht-biz/policydig/details?id='+contentData.id" class="title"
+                                                :class="{'active_top': contentData.top==1&&index<3}"
+                                                :title="contentData.title">
+                                                <span v-cloak
+                                                    v-if="contentData.nature==1&&contentData.beginDate&&contentData.endDate"
+                                                    class="sbz">
+                                                    <i class="stop" v-cloak v-if="(contentData.status)<0">已截止申报</i>
+                                                    <i class="ing" v-cloak v-else>正在申报中</i>
+                                                </span>
+                                                <span v-else></span>
+                                                <span v-if="contentData.nature==1">【申报通知】</span>
+                                                <span v-else-if="contentData.nature==2">【政府文件】</span>
+                                                <span v-else-if="contentData.nature==3">【公示名录】</span>
+                                                <span v-else-if="contentData.nature==4">【政策解读】</span>
+                                                <span v-else-if="contentData.nature==5">【新闻资讯】</span>
+                                                <span v-else-if="contentData.nature==6">【其他】</span>
+                                                {{contentData.title}}</a>
+
+                                            <a v-cloak v-else-if="contentData.productType==7" target="_blank"
+                                                :href="'/ht-biz/policydig/details?id='+contentData.id" class="title"
+                                                :class="{'active_top': contentData.top==1&&index<3}"
+                                                :title="contentData.title">
+                                                <span v-cloak
+                                                    v-if="contentData.nature==1&&contentData.beginDate&&contentData.endDate"
+                                                    class="sbz">
+                                                    <i class="stop" v-cloak v-if="(contentData.status)<0">已截止申报</i>
+                                                    <i class="ing" v-cloak v-else>正在申报中</i>
+                                                </span>
+                                                <span v-else></span>
+                                                <span v-if="contentData.nature==1">【申报通知】</span>
+                                                <span v-else-if="contentData.nature==2">【政府文件】</span>
+                                                <span v-else-if="contentData.nature==3">【公示名录】</span>
+                                                <span v-else-if="contentData.nature==4">【政策解读】</span>
+                                                <span v-else-if="contentData.nature==5">【新闻资讯】</span>
+                                                <span v-else-if="contentData.nature==6">【其他】</span>
+                                                {{contentData.title}}</a>
+
+                                            <a v-cloak v-else-if="contentData.productType==8" target="_blank"
+                                                :href="'/ht-biz/policydig/details?id='+contentData.id" class="title"
+                                                :class="{'active_top': contentData.top==1&&index<3}"
+                                                :title="contentData.title">
+                                                <span v-cloak
+                                                    v-if="contentData.nature==1&&contentData.beginDate&&contentData.endDate"
+                                                    class="sbz">
+                                                    <i class="stop" v-cloak v-if="(contentData.status)<0">已截止申报</i>
+                                                    <i class="ing" v-cloak v-else>正在申报中</i>
+                                                </span>
+
+                                                <span v-else></span>
+                                                <span v-if="contentData.nature==1">【申报通知】</span>
+                                                <span v-else-if="contentData.nature==2">【政府文件】</span>
+                                                <span v-else-if="contentData.nature==3">【公示名录】</span>
+                                                <span v-else-if="contentData.nature==4">【政策解读】</span>
+                                                <span v-else-if="contentData.nature==5">【新闻资讯】</span>
+                                                <span v-else-if="contentData.nature==6">【其他】</span>
+                                                {{contentData.title}}</a>
+
+                                            <a v-cloak v-else target="_blank"
+                                                :href="'/ht-biz/policydig/details?id='+contentData.id" class="title"
+                                                :class="{'active_top': contentData.top==1&&index<3}"
+                                                :title="contentData.title">
+                                                <span v-cloak
+                                                    v-if="contentData.nature==1&&contentData.beginDate&&contentData.endDate"
+                                                    class="sbz">
+                                                    <i class="stop" v-cloak v-if="(contentData.status)<0">已截止申报</i>
+                                                    <i class="ing" v-cloak v-else>正在申报中</i>
+                                                </span>
+                                                <span v-else></span>
+                                                <span v-if="contentData.nature==1">【申报通知】</span>
+                                                <span v-else-if="contentData.nature==2">【政府文件】</span>
+                                                <span v-else-if="contentData.nature==3">【公示名录】</span>
+                                                <span v-else-if="contentData.nature==4">【政策解读】</span>
+                                                <span v-else-if="contentData.nature==5">【新闻资讯】</span>
+                                                <span v-else-if="contentData.nature==6">【其他】</span>
+                                                {{contentData.title}}</a>
+
+                                            <!-- v-if="contentData.nature==1&&contentData.beginDate&&contentData.endDate&&(contentData.endDate+86400000)>=tomorrowDate" -->
+                                            <div v-cloak v-if="contentData.status > -1 && contentData.nature == 1"
+                                                class="sbrq">
+                                                <span v-if="contentData.status > -1"
+                                                    class="jzrq">申报中&nbsp;截止日期还剩{{(contentData.status)}}天</span>
+                                                <span
+                                                    class="sbsj">申报时间：{{contentData.beginDate}}-{{contentData.endDate}}</span>
+                                            </div>
+                                            <div class="message">
+                                                <span class="area sp1"><s
+                                                        class="area_icon"></s>{{contentData.province}}{{contentData.city}}{{contentData.area}}</span>
+                                                <span class="date sp1"><s
+                                                        class="date_icon"></s>{{contentData.createdate | date}}</span>
+                                                <span class="date sp1"><s
+                                                        class="read_icon"></s>{{contentData.browsecount}}</span>
+                                                <!-- <span class="source"><s class="source_icon"></s><span class="sp1">政策来源：</span>{{contentData.source}}</span> -->
+                                                <a v-cloak
+                                                    v-if="contentData.nature==1&&contentData.beginDate&&contentData.endDate&&(contentData.endDate+86400000)>=tomorrowDate"
+                                                    href="http://p.qiao.baidu.com/cps/chat?siteId=11406523&userId=20408321"
+                                                    target="_blank" class="zxzx">在线咨询</a>
+                                                <a v-else></a>
+
+                                            </div>
+
+                                            <div v-cloak class="look_over"
+                                                v-if="contentData.status > -1 && contentData.nature == 1">
+                                                <a target="_blank"
+                                                    :href="'/ht-biz/policydig/details?id='+contentData.id">立即申报></a>
+                                            </div>
+                                        </li>
+
+                                        
+
+                                        <div class="page_box ac" v-if="page.totalResult>0">
+                                            <mypagenation :page="page" @btn-click="clickPage"></mypagenation>
+                                            <!-- <div class="target_goto">
+                                                <span>输入页码</span>
+                                                <input type="text" name="targetData" v-model:value="targetData" />
+                                                <s @click="clickPage();">确认</s>
+                                            </div> -->
+                                        </div>
+                                    </ul>
+
+                                </div>
+                                <div v-cloak v-if="notfind == 1" class="not-find">
+                                    <p></p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="library_content_r fl clearfix">
+                    <div th:replace="~{block/search_right::copy}"></div>
+                    <div class="resource_packs">
+                        <div class="product_r_img">
+                            <h2><i style="color: #129e87">推荐</i>阅读<span>每日最新最热的政策榜单</span></h2>
+                        </div>
+                        <ul class="product_r_text">
+                            <li class="product_r_text_rows" v-for="(arr,list) in deliveryList">
+                                <s>{{list + 1}}</s><a target="_blank" :href="'/ht-biz/policydig/details?id='+arr.id"
+                                    :title="arr.title" v-html="arr.title"></a>
+                            </li>
+                            <div class="view_more">
+                                <!-- <a href="javascript:;" @click="getDeliveryList(2)">查看更多</a> -->
+                            </div>
+                        </ul>
+                    </div>
+                    <div class="kou">
+                        <a target="_blank" href="http://g.hights.cn/produce/addDel_detail"></a>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <footer>
+            <p>COPYRIGHT © 版权归属 广州高企云信息科技有限公司 粤ICP备16007486号-1</p>
+        </footer>
+
+    </div>
+
+    <!-- 公共js部分 -->
+    <th:block th:include="block/footlink_index :: copy" />
+    <!-- over -->
+    <script type="text/javascript" th:src="@{/statics/js/policydig/index.js?v=0.1.5}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/more.js?v=0.1.9}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/morepolicy.js?v=0.1.0}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/component/mylogin.js?v=1.0.1}"></script>
+
+    <script>
+        $(function () {
+            $("#policy").click(function () {
+                var play = $(".dropdown-menu").css("display");
+                if (play == "block") {
+                    $(".dropdown-menu").css({
+                        "display": "none"
+                    })
+                } else {
+                    $(".dropdown-menu").css({
+                        "display": "none"
+                    })
+                }
+                event.stopPropagation(); //  阻止事件冒泡
+            })
+        })
+        $(".xcx_h").mouseover(function () {
+            $(".xcx").css({
+                'visibility': 'visible'
+            })
+        })
+        $(".xcx_h").mouseleave(function () {
+            $(".xcx").css({
+                'visibility': 'hidden'
+            })
+        })
+    </script>
+    <th:block th:include="block/statistics :: copy" />
+</body>
+
+</html>

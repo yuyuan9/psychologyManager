@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<!-- 公共头部 -->
+    <th:block th:include="block/headlink :: test('充值中心')" /> 
+    <!-- 结束 -->
+</head>
+
+<body>
+	<div>
+		<form th:action="${requestUrl}" id="alipayForm" th:method="${requestMethod}" th:accept-charset="${requestCharset}" style="display: none;">
+			<input th:each="map:${parameterMap}" type="text" th:name="${map.key}" th:value="${map.value}" />
+		</form>
+	</div>
+	<script type="text/javascript" th:src="@{/statics/js/jquery-3.4.1.min.js}"></script>
+	<script>
+		$(function(){
+			document.forms[0].submit();
+		})
+	</script>
+	<th:block th:include="block/statistics :: copy" />
+</body>
+
+</html>

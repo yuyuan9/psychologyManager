@@ -1,0 +1,7 @@
+.app_pbg {
+    width: 100%;
+    height: 26.1333vw;
+
+    background: url("../../images/login/login_bg.png") no-repeat;
+    background-size: 100% 100%;
+}

@@ -1,0 +1,36 @@
+<div th:fragment="copy">
+    <script>
+        $(".xcx_h").mouseover(function () {
+            $(".xcx").css({
+                'visibility': 'visible'
+            })
+        })
+        $(".xcx_h").mouseleave(function () {
+            $(".xcx").css({
+                'visibility': 'hidden'
+            })
+        })
+        $(function(){ 
+            var lianjie = window.location.href;
+            if(lianjie.indexOf("information") >= 0){
+                $(".page-index").addClass("active");
+            }
+            else if(lianjie.indexOf("shop") >= 0){
+                $(".page-shop").addClass("active");
+            }
+            else if(lianjie.indexOf("product") >= 0){
+                $(".page-product").addClass("active");
+            }
+            else if(lianjie.indexOf("product") >= 0){
+                $(".page-granular").addClass("active");
+            }
+            else if(lianjie.indexOf("order") >= 0){
+                $(".page-order").addClass("active");
+            }
+            else if(lianjie.indexOf("safeguard") >= 0){
+                $(".page-safeguard").addClass("active");
+            }
+        })
+    </script>
+</div>
+    

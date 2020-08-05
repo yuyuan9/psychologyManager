@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- 公共头部 -->
+    <th:block th:include="block/headlink :: test('错误页面')" /> 
+    <!-- 结束 -->
+    <link rel="stylesheet" th:href="@{/statics/css/footer.css?v=0.0.1}">
+    <link rel="stylesheet" th:href="@{/statics/css/user/index.css?v=0.0.3}">
+    <!-- <link rel="stylesheet" th:href="@{/statics/css/help/about_us.css?v=0.0.2}"> -->
+    <style type="text/css">
+        [v-cloak] {
+            display: none;
+        }
+        footer>div {
+            line-height: 20px;
+            color: #808080;
+            text-align: left;
+        }
+        .box {
+            width: 100%;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        #pdf {
+            position: relative;
+            padding-top: 30px;
+            background-color: #fff;
+            padding-bottom: 20px;
+
+        }
+
+        .mask {
+            width: 814px;
+            height: 100px;
+            background-color: pink;
+            opacity: 0;
+            position: absolute;
+            top: 31px;
+            left: 182px;
+            z-index: 1000;
+        }
+
+        .mask_b {
+            width: 720px;
+            height: 120px;
+            background-color: pink;
+            position: absolute;
+            opacity: 0;
+            top: 615px;
+            left: 200px;
+            z-index: 1000;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div id="user">
+        <div th:replace="~{user_head::copy}"></div>
+        <div th:replace="~{header::copy}"></div>
+    </div>
+    <div id="box">
+        <div class="box">
+            <div id="pdf" class="contain ac">
+                <!-- <iframe src="http://47.92.70.12:9090/uploadFiles/uploadFile/mycontent/errr.pdf" id="pdfContant" frameborder="0" width="828px" height="700px"></iframe> -->
+                <img src="/statics/images/help/404.png" alt="">
+            </div>
+        </div>
+         <!--E=底部-->
+        <div th:replace="~{footer::copy}"></div>
+    </div>
+    <!-- 公共js部分 -->
+    <div th:replace="~{block/footlink::copy}"></div>
+    <!-- over -->
+    <script type="text/javascript">
+        $('.title_list>li').mouseover(function(e){
+            $('.title_list>li').removeClass('active');
+            $(this).addClass('active');
+            $(this).children().stop().siblings(".drop_down").animate({
+                'top':'30px',
+                'opacity':'1',
+            },200);
+        });
+        $('.title_list>li').mouseout(function(e){
+            $(this).children().stop().siblings(".drop_down").animate({
+                'top':'-30px',
+                'opacity':'0'
+            },200);
+        })
+        $(".xcx_h").mouseover(function () {
+        $(".xcx").css({
+            'visibility': 'visible'
+        })
+        })
+        $(".xcx_h").mouseleave(function () {
+            $(".xcx").css({
+                'visibility': 'hidden'
+            })
+        })
+    </script>
+</body>
+
+</html>

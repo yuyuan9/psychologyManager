@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.biz.mapper.BannerMapper">
+
+
+<!-- 后台接口-->
+    <select id="sysfindByPage"    parameterType="com.ht.commons.utils.MyPage" resultType="com.ht.commons.utils.PageData">
+        select  ban.* ,reg.name from t_sys_banner ban left join  t_sys_region_set  reg  on reg.id = ban.proid where 1=1
+        <if test="pd.title != null and pd.title !=''">
+            and title LIKE CONCAT(CONCAT('%', #{pd.title}),'%')
+        </if>
+        <if test=" pd.id!=null and pd.id !='' ">
+            and ban.proid=#{pd.id}
+        </if>
+        <if test="pd.type != null ">
+            and type=${pd.type}
+        </if>
+    </select>
+    <select id="findbyId" parameterType="java.lang.String" resultType="com.ht.commons.utils.PageData">
+    select  ban.* ,reg.name from t_sys_banner ban left join  t_sys_region_set  reg  on reg.id = ban.proid where ban.id=#{id}
+    </select>
+
+<!-- 前端接口-->
+
+    <select id="findByPage"    parameterType="com.ht.commons.utils.MyPage" resultType="com.ht.commons.utils.PageData">
+        select  *  from t_sys_banner where 1=1
+        and type= ${pd.type}
+        <if test=" pd.proid!=null and pd.proid !='' ">
+            and proid=#{pd.proid}
+        </if>
+        and  isdisable =2
+        ORDER BY sort desc
+    </select>
+</mapper>

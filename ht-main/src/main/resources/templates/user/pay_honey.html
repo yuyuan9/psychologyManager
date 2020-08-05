@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- 公共头部 -->
+    <th:block th:include="block/headlink :: test('充值中心')" /> 
+    <!-- 结束 -->
+    <link rel="stylesheet" th:href="@{/statics/css/user/index.css?v=0.0.1}">
+    <style>
+        .page_content{
+            background: #fff;
+        }
+        .wrap{
+            background: #fafafa;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="user">
+        <div th:replace="~{user_head::copy}"></div>
+        <div th:replace="~{header::copy}"></div>
+    </div>
+    <div class="wrap" id="box">
+        <section>
+            <div class="voucher_center">
+                <h3>您的位置：<a href="/ht-biz/usercenter/user/index">个人中心</a>><a href="/ht-biz/usercenter/user/honey">honey值&金币</a>><a href="/ht-biz/usercenter/user/pay_honey">充值中心</a></h3>
+                <div class="voucher_content">
+                    <h3>充值面额</h3>
+                    <div class="honey_card clearfix">
+                        <div :class="{honey:chosePic==index}" @click="chosePic=index;doChose(index,item.newmoney,item.id)" v-for="(item,index) in honeyData">
+                            <p>充值<s>{{item.honey}}</s>honey</p>
+                            <span>售价：{{item.newmoney}}元</span>
+                            <i><s></s></i>
+                        </div>
+
+                    </div>
+                    <div class="settle_accounts">
+                        <span>总计金额：<s><i>{{payMoney}}</i>元</s></span>
+                        <span>充值honey值：<s><i>{{honey}}</i>honey</s></span>
+                    </div>
+                    <div class="pay_way">
+                        <i>支付方式：</i>
+                        <span class="zfb" @click="jumpAlipay(payid)"><s></s>支付宝</span>
+                        <span class="wx" @click="wechatPay" ><s></s>微信支付</span>
+                    </div>
+                </div>
+
+
+                <!--常见问题-->
+                <div class="question clearfix">
+                    <div class="contain1">
+                        <div class="title_q clearfix">
+                            <h3>常见问题</h3>
+                            <s></s>
+                        </div>
+                        <div class="answer clearfix">
+                            <p class="ques_title"><s></s> 哪些情况下需要充值？</p>
+                            <p class="ques_text">
+                                1、高企云中部分文档的下载需要使用honey值进行兑换，当您的honey值不足以下载该文档时，可以选择“充值”购买一定数额的honey值，再进行相应文档的下载；<br/>
+                                2、高企云中政策库和立项库的查询功能：可免费查询3次/天，第4次开始，会扣除相应的honey值，当您的honey值不足以继续进行关键词查询时，可购买一定数额的honey值，以保证查询功能的正常使用；<br/>
+                                3、高企云中政策库和立项库的数据导出功能：导出查询到的数据，需扣除0.5honey/条，当您的honey值不足以支持您需要导出的数据时，可购买一定数额的honey值，以保证查询结果的正常导出；<br/>
+                                4、高企云提供的其他系统工具服务，需要使用一定数额的honey值进行兑换，如免费评估中免费结果的导出，科研项目管理系统的使用等。<br/>
+                            </p>
+                        </div>
+                        <div class="answer">
+                            <p class="ques_title"><s></s> 如何进行充值？</p>
+                            <p class="ques_text">
+                                当您有honey值充值的需求时，可以通过支付宝、微信方式进行充值，1元可兑换10 honey，充值的honey值越多，可享受不同程度的折扣，用以享受高企云相关服务。
+                            </p>
+                        </div>
+                        <div class="answer">
+                            <p class="ques_title"><s></s> 在哪里可以查询到我的充值记录？</p>
+                            <p class="ques_text">
+                                请登录“个人云中心＞honey值及金币＞honey值记录”中查询您的充值和消费记录，若对充值或消费记录有疑问，可在线联系平台工作人员或拨打高企云客服电话：400-166-3308。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <!-- 微信支付弹窗-->
+            <div class="wechatPay" style="display: none" v-cloak>
+                <div class="wechatPay_l fl">
+                    <div class="payText ac">
+                        <p>请使用<span>微信</span><s></s><span>扫一扫</span></p>
+                        <p>扫描二维码支付</p>
+                    </div>
+                    <div class="payDetail ac">
+                        <img id="payCode" class="payCode"  alt="" width="230px" height="230px"/>
+                        <div class="payMoney ac">
+                            <p>支付总额：<span>{{amount}}</span>元</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="wechatPay_r fr">
+                    <s class="closePayIcon" @click="closeWechatPay"></s>
+                </div>
+            </div>
+        </section>
+        <footer>
+            <div>COPYRIGHT © 版权归属 广州高企云信息科技有限公司 粤ICP备16007486号-1</div>
+        </footer>
+    </div>
+    <!-- 公共js部分 -->
+    <th:block th:include="block/footlink :: copy" /> 
+    <!-- over -->
+    <script type="text/javascript" th:src="@{/statics/js/user/pay_honey.js?v=0.0.2}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/user/part_tab.js?v=0.0.2}"></script>
+    <script>
+        $(".xcx_h").mouseover(function(){
+            $(".xcx").css({
+                'visibility':'visible'
+            })
+        })
+        $(".xcx_h").mouseleave(function(){
+            $(".xcx").css({
+                'visibility':'hidden'
+            })
+        })
+    </script>
+    <th:block th:include="block/statistics :: copy" />
+</body>
+
+</html>

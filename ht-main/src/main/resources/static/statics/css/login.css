@@ -1,0 +1,428 @@
+html,
+body {
+    height: 100%;
+}
+
+.wrap {
+    width: 100%;
+    height: 100%;
+    min-height: 800px;
+    position: relative;
+}
+
+header {
+    width: 100%;
+    height: 75px;
+    background: #fff;
+}
+
+.register_logo {
+    width: 1200px;
+    line-height: 70px;
+    margin: 0 auto;
+}
+
+.register_l a img {
+    vertical-align: middle;
+}
+
+.register_l {
+    float: left;
+}
+
+.register_r {
+    float: right;
+}
+
+.register_r a {
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+}
+
+.register_box {
+    width: 100%;
+}
+
+.register_content {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.turn {
+    width: 890px;
+    margin: 0 auto;
+}
+
+/* 媒体查询 适应屏幕 */
+@media (min-width: 1024px) {
+    .turn {
+        margin-top: 17px;
+    }
+}
+
+/*>=1024的设备*/
+@media (min-width: 1100px) {
+    .turn {
+        margin-top: 27px;
+    }
+}
+
+/*>=1024的设备*/
+@media (min-width: 1280px) {
+    .turn {
+        margin-top: 37px;
+    }
+}
+
+@media (min-width: 1366px) {
+    .turn {
+        margin-top: 47px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .turn {
+        margin-top: 57px;
+    }
+}
+
+@media (min-width: 1680px) {
+    .turn {
+        margin-top: 77px;
+    }
+}
+
+@media (min-width: 1920px) {
+    .turn {
+        margin-top: 87px;
+    }
+}
+
+.turn a {
+    color: #758ba7;
+    font-size: 14px;
+}
+
+.login {
+    width: 890px;
+    height: 420px;
+    margin: 0 auto;
+    margin-top: 10px;
+    background: #fff;
+    box-shadow: 0 0 30px rgba(78, 78, 78, 0.15);
+}
+
+.login_l {
+    width: 510px;
+    height: 420px;
+    float: left;
+    line-height: 420px;
+    text-align: center;
+}
+
+.login_r {
+    width: 380px;
+    height: 420px;
+    float: left;
+    overflow: hidden;
+}
+
+.login_cont {
+    width: 100%;
+    position: relative;
+}
+
+.loginicon_r {
+    position: absolute;
+    right: 0;
+    top: -30px;
+    background: url("../images/register_icon.png")-103px -76px;
+    width: 86px;
+    height: 63px;
+    display: block;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.loginicon_r a p {
+    padding-top: 10px;
+    padding-left: 44px;
+    color: white;
+}
+
+.loginicon_r:hover {
+    transform: scale(1.2);
+}
+
+.login_con {
+    padding: 0 40px;
+}
+
+.l_tit {
+    color: #666;
+    line-height: 20px;
+    margin-top: 30px;
+    margin-bottom: 25px;
+}
+
+.l_tit .login_text {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.mb_10 {
+    margin-bottom: 15px;
+}
+
+.login_input {
+    border: #999 solid 1px;
+    height: 40px;
+    line-height: 40px\9;
+    text-indent: 5px;
+    width: 100%;
+    background-color: #f5f5f5;
+    border-radius: 2px;
+}
+
+.form-control {
+    display: block;
+    box-sizing: border-box;
+    width: 300px;
+    height: 41px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.code_ipt {
+    width: 200px;
+    float: left;
+    display: inline-block;
+    border: #999 solid 1px;
+    height: 40px;
+    line-height: 40px\9;
+    text-indent: 5px;
+    box-sizing: border-box;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.code_r {
+    width: 87px;
+    height: 40px;
+    margin-left: 10px;
+    background: #ccc;
+    float: left;
+}
+
+#codeImg {
+    width: 88px;
+    height: 40px;
+    border: 0;
+    vertical-align: middle;
+}
+
+.login_btn {
+    color: white;
+    text-align: center;
+    width: 300px;
+    height: 40px;
+    background: -webkit-linear-gradient(left, #ff7d4a, #ff4a2b);
+    background: -o-linear-gradient(left, #ff7d4a, #ff4a2b);
+    background: -moz-linear-gradient(left, #ff7d4a, #ff4a2b);
+    background: linear-gradient(left, #ff7d4a, #ff4a2b);
+    background: linear-gradient(to right, #ff7d4a, #ff4a2b);
+    filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr='#ff7d4a', endColorStr='#ff4a2b', gradientType='0');
+    -ms-filter: "progid:DXImageTransform.Microsoft.Gradient(startColorStr='#ff7d4a',endColorStr='#ff4a2b',gradientType='0')";
+    border-right: 2px;
+    font-size: 18px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.autoLogin {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #999;
+}
+
+.autoLogin input {
+    width: 17px;
+    height: 18px;
+}
+
+.autoLogin>a {
+    float: right;
+    color: #999;
+}
+
+.autoLogin>label>span>a {
+    color: #3e81da;
+}
+
+.submitInfo {
+    width: 240px;
+    height: 80px;
+    z-index: 999;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    margin-left: -100px;
+    cursor: pointer;
+    -moz-box-shadow: 10px 10px 15px #888888;
+    /* 老的 Firefox */
+    box-shadow: 10px 10px 15px #888888;
+    display: none;
+}
+
+.submitInfoHeader {
+    width: 240px;
+    height: 80px;
+    background: #fff;
+    position: relative;
+}
+
+.submitInfoHeader i {
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    background: url("../images/register_icon.png")-42px -3px;
+    vertical-align: middle;
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    cursor: pointer;
+}
+
+.submitInfoHeader s {
+    margin-top: 15px;
+    width: 45px;
+    height: 45px;
+    display: inline-block;
+    background: url("../images/login_success.png");
+    vertical-align: middle;
+    float: left;
+    margin: 18px;
+}
+
+.submitInfoHeader h3 {
+    font-size: 16px;
+    color: #333333;
+    float: left;
+    margin-top: 20px;
+}
+
+.submitInfoHeader h3 p {
+    font-size: 14px;
+    color: #999999;
+    margin-top: 5px;
+}
+
+
+footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    background: #fff;
+}
+
+.info {
+    width: 1200px;
+    height: 120px;
+    margin: 0 auto;
+}
+
+.info_text>div {
+    width: 400px;
+    height: 120px;
+    float: left;
+}
+
+.info_text>div>i {
+    display: inline-block;
+    width: 85px;
+    height: 120px;
+    float: left;
+    line-height: 160px;
+    text-align: center;
+}
+
+.info_icon1 {
+    display: inline-block;
+    width: 45px;
+    height: 45px;
+    background: url("../images/register_icon.png")-53px -25px;
+}
+
+.info_icon2 {
+    display: inline-block;
+    width: 45px;
+    height: 45px;
+    background: url("../images/register_icon.png")-3px -76px;
+}
+
+.info_icon3 {
+    display: inline-block;
+    width: 45px;
+    height: 45px;
+    background: url("../images/register_icon.png")-102px -25px;
+}
+
+.info_icon4 {
+    display: inline-block;
+    width: 45px;
+    height: 45px;
+    background: url("../images/register_icon.png")-53px -76px;
+}
+
+.info_text>div>h2 {
+    width: 200px;
+    float: left;
+    font-size: 16px;
+    color: #333;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.info_text>div>p {
+    width: 210px;
+    float: left;
+    font-size: 12px;
+    color: #999;
+}
+
+footer .copyright {
+    width: 100%;
+    line-height: 40px;
+    font-size: 14px;
+    background-color: #232323;
+}
+
+footer .copyright p {
+    display: inline-block;
+    vertical-align: middle;
+    color: #fff;
+}

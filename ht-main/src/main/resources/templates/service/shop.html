@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- 公共头部 -->
+    <th:block th:include="block/headlink :: test('商铺')" /> 
+    <!-- 结束 -->
+    <link rel="stylesheet" th:href="@{/statics/css/service/index.css?v=0.0.2}">
+    <link rel="stylesheet" th:href="@{/statics/css/style.css?v=0.0.3}">
+    <link rel="stylesheet" th:href="@{/statics/css/service/shop.css?v=0.0.4}">
+    <style>
+    </style>
+</head>
+
+<body>
+    <div id="user">
+        <div th:replace="~{servive_nav::copy}"></div>
+    </div>
+    <div class="wrap" id="box">
+        <section>
+            <div class="service_content clearfix">
+                <div class="service_list fl clearfix">
+                    <div th:replace="~{service_com::copy}"></div>
+                </div>
+                <!-- 1 -->
+                <div class="shop_details fl clearfix">
+                    <div class="shop_head clearfix">
+                        <div class="clearfix">
+                            <div class="shop fl">店铺信息</div>
+                            <div class="fl clearfix">
+                                <a :href="'/ht-biz/product/getlistprobyshop?id='+serid" target="_blank"><span class="shop_check">查看店铺</span></a>
+                                <span class="shop_check shop_check1"><a href="/ht-biz/service/index/shop_edit">编辑店铺信息</a></span>
+                            </div>
+                        </div>
+                        <div class="clearfix">
+                            <p class="s_x"></p>
+                        </div>
+                        <!-- 公司类型的信息 -->
+                        <div class="shop_basic clearfix" v-if="netrytype == 1">
+                            <div v-cloak>
+                                <span class="basic_one">社会统一信用代码：<span>{{socialcode}}</span></span><i class="one_h hk"></i>
+                                <span class="basic_one">机构名称：<span>{{banme}}</span></span><i class="one_h hk"></i>
+                                <span class="basic_one">联系人：<span>{{contacts}}</span></span>
+                            </div>
+                            <div v-cloak class="basic_two">
+                                <span class="basic_one">客服联系人：<span>{{customercont}}</span></span><i class="one_h hk"></i>
+                                <span class="basic_one">手机号码：<span>{{phone}}</span></span>
+                            </div>
+                        </div>
+
+                         <!-- 个人类型的信息 -->
+                         <div class="shop_basic clearfix" v-if="netrytype == 2">
+                            <div>
+                                <span class="basic_one">真实姓名：<span>{{banme}}</span></span><i class="one_h hk"></i>
+                                <span class="basic_one">客服qq：<span>{{customerqq}}</span></span><i class="one_h hk"></i>
+                                <span class="basic_one">邮箱：<span>{{email}}</span></span>
+                            </div>
+                        </div>
+                        
+                        <div class="shop_infos clearfix">
+                            <div v-cloak class="fl shop_l">
+                                <div v-if="shopimg != ''" class="upload_img fl">
+                                    <img :src="'http://47.92.70.12:9090' + shopimg" alt="">
+                                </div>
+                                <div v-else class="upload_img fl">
+                                    <img src="/statics/images/service/defaultlogo.png" alt="">
+                                </div>
+                            </div>
+                            <div class="fr shop_r">
+                                <div class="sn">
+                                    <i class="sign hk"></i>
+                                    <span class="hk shop_name">{{shopIpt}}</span>
+                                    <i v-if="isbond == 1" class="hk baozhang"></i>
+                                    <i v-if="isagency == 1" class="hk rz"></i>
+                                </div>
+                                <div class="sn1">
+                                    <div>
+                                        <span class="basic_one">等级：
+                                            <!-- 星级组件 -->
+                                            <star-rating :max="5" :current="value"></star-rating>
+                                            <!-- over -->
+                                        </span><i class="one_h1 hk"></i>
+                                        <span class="basic_one">评分：<span class="grade">{{grade}}</span></span><i class="one_h1 hk"></i>
+                                        <span class="basic_one">类型：
+                                            <span v-if="netrytype == 1" class="grade">服务机构</span>
+                                            <span v-if="netrytype == 2" class="grade">个人</span>
+                                        </span><i class="one_h1 hk"></i> 
+                                        <span class="basic_one"><i class="locat hk"></i><span>{{pronice}}-{{city}}<i v-if="area!='请选择县'">-{{area}}</i></span></span>
+                                    </div>
+                                    <div class="sn1">
+                                        <span class="basic_one">服务范围：<span>{{businesscope}}</span></span>
+                                    </div>
+                                </div>
+                                <!-- 公司简介-为公司类型时显示 -->
+                                <div class="comj">
+                                    <p class="basic_one">公司简介：</p>
+                                    <p class="basic_one sn1 sn2">{{intro}}</p>
+                                </div>
+
+                                 <!-- 个人简介-为个人类型时显示 -->
+                                 <div class="comj">
+                                    <!-- <p class="basic_one">个人简介：</p>
+                                    <p class="basic_one sn1 sn2">畅欣知识产权有限公司是国家工商行政管理总局备案的代理机构，专业办理软件著作权、专利申请、商标注册；现已在全国众多城市设立了分支机构, 砺炼了一批具有10年经验队伍，热线400-880-3590</p> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 2 -->
+                <div class="process fl clearfix">
+                    <div class="process_w">
+                        <div class="process_w_w clearfix">
+                            <div class="process_t"><i class="process_i hk"></i>服务流程</div>
+                            <!-- 服务流程图-后台返回 -->
+                            <!-- <div class="process_img">
+                                <img src="/statics/images/service/exchange_test/service_process.png" alt="" class="pimg">
+                            </div> -->
+                            <div class="process_text" v-html="describeService"></div>
+                        </div>
+                        <!-- 服务案列 -->
+                        <div class="process_w_w">
+                            <div class="process_t"><i class="process_i hk"></i>服务案列</div>
+                            <!-- 服务案列图-后台返回 -->
+                            <!-- <div class="process_img">
+                                <img src="/statics/images/service/exchange_test/service_process.png" alt="" class="pimg">
+                            </div> -->
+                            <div class="process_text" v-html="cases"></div>
+                        </div>
+                        <!-- 服务团队 为个人类型时不显示服务案例-->
+                        <div v-if="netrytype == 1" class="process_w_w">
+                            <div class="process_t"><i class="process_i hk"></i>服务团队</div>
+                            <!-- 服务团队图-后台返回 -->
+                            <!-- <div class="process_img">
+                                <img src="/statics/images/service/exchange_test/sevice_tuandui.png" alt="" class="pimg">
+                            </div> -->
+                            <div class="process_text" v-html="describeTeam"></div>
+                        </div>
+                        <!-- 服务保障 -->
+                        <div class="process_w_w">
+                            <div class="process_t"><i class="process_i hk"></i>服务保障</div>
+                            <div class="process_text" v-html="describeSafe"> </div>
+                        </div>
+                        <!-- 其他 -->
+                        <div class="process_w_w">
+                            <div class="process_t"><i class="process_i hk"></i>其他</div>
+                            <div class="process_text" v-html="other"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 3荣誉资质 -->
+                <div class="process process1 fl clearfix">
+                    <div class="process_w">
+                        <div class="process_w_w clearfix">
+                            <div class="process_t"><i class="process_i hk"></i>荣誉资质</div>
+                            <div class="honor fl">
+                                <div class="process_img process_img1" v-html="originalfile"></div>
+                            </div> 
+                            <div class="honor fl" v-if="netrytype == 1">
+                                <!-- 营业执照图-后台返回 个人类型没有营业执照-->
+                                <div class="process_img process_img1">
+                                    <img v-cloak :src="'http://47.92.70.12:9090'+pdfpath1" alt="">
+                                </div>
+                                <p class="process_it process_it1">营业执照</p>
+                            </div>   
+                            <div  v-if="isagency == 1" class="honor fl">
+                                <!-- 荣誉资质图-后台返回 -->
+                                <div class="process_img process_img1" >
+                                    <img :src="'http://47.92.70.12:9090'+agencyimg" alt="">
+                                </div>
+                                <p class="process_it process_it1">服务机构认证</p>
+                            </div>
+                                     
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer>
+            <div class="copyright ac">
+                <p>COPYRIGHT © 版本归属 广州高企云信息科技有限公司 粤ICP备16007486号-1</p>
+            </div>
+        </footer>
+    </div>
+    <!-- 公共js部分 -->
+    <th:block th:include="block/footlink :: copy" />
+    <!-- over -->
+    <script type="text/javascript" th:src="@{/statics/js/service/shop.js?v=0.1.9}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/component/star.js?v=0.0.3}"></script>
+    <script type="text/x-template" id="star-rating">
+        <div class="star-rating">
+            <span v-for="n in max">&star;</span>
+            <div class="star-rating__current" :style="{width: getRating + '%'}">
+            <span v-for="n in max">&starf;</span>
+            </div>
+        </div>
+    </script>
+    <th:block th:include="block/service_each :: copy" />
+    <th:block th:include="block/statistics :: copy" />
+    <script>
+        $(function(){
+            var timer=setTimeout(function(){
+                $(".process_text>p").children("img").attr("style","");
+                $(".process_img>p").children("img").attr("style","");
+            },1000);
+        })
+    </script>
+</body>
+
+</html>

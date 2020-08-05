@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.biz.mapper.PolicyMatchMapper">
+	<select id="findlist" parameterType="com.ht.commons.utils.MyPage" resultType="com.ht.entity.biz.policymatch.PolicyMatch">
+		select 
+		projectName,
+		type,
+		applyCon,
+		applyMean,
+		applyField1,
+		applyField2,
+		applyTime,
+		province,
+		city,
+		area,
+		scaleCode,
+		applyScale1,
+		applyScale2,
+		applyScale3,
+		matchType,
+		id,
+		createdate,
+		createid,
+		lastmodified,
+		regionid
+		from ${pd.sql} where 1=1
+		<if test="pd.scaleCode!=null and pd.scaleCode!=''">
+			and applyScale2 LIKE CONCAT(CONCAT('%', #{pd.scaleCode}),'%')
+		</if>
+		<if test="pd.applyField!=null and pd.applyField!=''">
+			and applyField2 LIKE CONCAT(CONCAT('%', #{pd.applyField}),'%')
+		</if>
+		<if test="pd.matchType!=null and pd.matchType!=''">
+			and matchType=#{pd.matchType}
+		</if>
+		order by id 
+	</select>
+	<select id="findById" parameterType="com.ht.commons.utils.PageData" resultType="com.ht.entity.biz.policymatch.PolicyMatch">
+		select 
+		projectName,
+		type,
+		applyCon,
+		applyMean,
+		applyField1,
+		applyField2,
+		applyTime,
+		province,
+		city,
+		area,
+		scaleCode,
+		applyScale1,
+		applyScale2,
+		applyScale3,
+		matchType,
+		id,
+		createdate,
+		createid,
+		lastmodified,
+		regionid
+		from t_policy_match where id=#{id}
+	</select>
+</mapper>

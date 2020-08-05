@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- 公共头部 -->
+    <th:block th:include="block/headlink :: test('交易中心')" />
+    <link rel="stylesheet" th:href="@{/statics/css/index.css?v=0.0.4}">
+    <link rel="stylesheet" th:href="@{/statics/css/swiper.min.css?v=0.0.1}">
+    <link rel="stylesheet" th:href="@{/statics/css/trading/index.css?v=0.1.0}">
+    <link rel="stylesheet" th:href="@{/statics/css/trading/style.css?v=0.1.0}">
+    <style>
+        .carousel-inner {
+            position: relative;
+            width: 95%;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        .com{
+            width: 30px;
+            float: left;
+            position: absolute;
+            right: 34px;
+            top: 27px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="banner" class="institute">
+        <a v-for="(list,index) in bannerList" target="_blank" :href="list.url">
+            <img :src="'http://47.92.70.12:9090'+ list.imgpath" alt="">
+        </a>
+    </div>
+    <div id="user">
+        <div th:replace="~{user_head::copy}"></div>
+        <div th:replace="~{header::copy}"></div>
+    </div>
+    
+    <div class="wrap" id="box">
+        <section class="nav-right">
+            <div class='fix-server'>
+                <a class="qq" href="http://p.qiao.baidu.com/cps/chat?siteId=11406523&userId=20408321" title="高企云咨询"
+                    target="_blank">
+                    <div class="hotLine_zx">
+                        <i class='online_zx'></i>
+                        <div class="hot-number">
+                            <span class='number-text'>服务热线：400-166-3308</span>
+                        </div>
+                    </div>
+                </a>
+                <div class="QRCode">
+                    <i class='bg-img second'></i>
+                    <div class="QR-bg">
+                        <i class='QR-imgbg' style="padding-top: 5px;display: none;">
+                            <img src="/statics/images/codeLogo.png" width="90px" height="90px" alt="" />
+                        </i>
+                        <span class='QR-text'>高企云微信二维码</span>
+                    </div>
+                </div>
+                <div class="suggestions" title="反馈意见" @click="tickling()">
+                    <i class='bg-img third'></i>
+                    <div class="suggestbox" style="display: none;">
+                        <span class='suggest-text'>欢迎反馈意见和建议</span>
+                    </div>
+                </div>
+                <a href="javascript:void(0)" title="返回顶部" id="goTop">
+                    <div class="toTop"><i class="bg-img fourth"></i></div>
+                </a>
+            </div>
+        </section>
+        
+        <section>
+            <div class="trand_bg clearfix">
+            </div>
+            <div class=" clearfix">
+                    <div class="w clearfix">
+                        <div class="clearfix">
+                            <!-- 搜索1 -->
+                            <div class="search_box clearfix">
+                                <p class="search_t clearfix">
+                                    <input type="text" v-model="searchWords" @keyup.enter="searchPro();"
+                                        placeholder="请输入产品关键字，如“高新技术企业”" class="dib fl">
+                                    <s class="search_icon dib fl" @click="searchPro();"><i
+                                            class="dib search_icons"></i></s>
+                                </p>
+                                <div th:replace="~{block/hot_word::trading_lx}"></div>
+                            </div>
+                            <!-- 服務商2 -->
+                            <div v-cloak class="sevice_s fr clearfix">
+                                
+                                <div class="serbanner">
+                                    
+                                    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="5000">
+                                        <p>
+                                            <span class="dib fws">优选服务商</span>
+                                            <p class="trait">严格审核资质，专业服务</p>
+                                        </p>
+                                        <a class="carousel-control right btns" id="next"  href="#myCarousel" data-slide="next"></a>
+                                        <div class="com"><s class="mun">1</s>/<s class="all">{{datamun}}</s></div>
+                                        <a class="carousel-control left btns" id="previous" href="#myCarousel" data-slide="prev"></a>
+
+                                        <!-- 轮播（Carousel）指标 -->
+                                        <!-- <ol class="carousel-indicators">
+                                            <li v-if="index == 0" v-for="(list,index) in bannerList1" data-target="#myCarousel" :data-slide-to="index" class="active"></li>
+                                            <li v-if="index > 0" v-for="(list,index) in bannerList1" data-target="#myCarousel" :data-slide-to="index"></li>
+                                        </ol> -->
+                                        <!-- 轮播（Carousel）项目 -->
+                                        <div class="carousel-inner">
+                                            <div v-if="index == 0" class="item active" v-for="(list,index) in bannerList1">
+                                                <a target="_blank" :href="list.url">
+                                                    <img :src="'http://47.92.70.12:9090'+ list.imgpath">
+                                                </a>
+                                            </div>
+                                            <div v-if="index > 0" class="item" v-for="(list,index) in bannerList1">
+                                                <a target="_blank" :href="list.url">
+                                                    <img :src="'http://47.92.70.12:9090'+ list.imgpath">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div v-cloak class="clearfix nav_wrap">
+                            <div>
+                                <!-- Swiper -->
+                                <div class="swiper-container swiper2" style="height: 150px;">
+                                    <div class="swiper-wrapper">
+                                        <div class="swiper-slide" data-hash="slide1">
+                                            <a target="_blank" href="/ht-biz/product/topagespecial?producttypeone=28">
+                                                <i class="nav_icon nav_icon1 dib"></i>
+                                                <p class="nav_one">科技政策服务</p>
+                                                <p class="nav_two">高企认定/研发机构</p>
+                                            </a>
+                                        </div>
+                                        <div class="swiper-slide" data-hash="slide2">
+                                            <a target="_blank" href="/ht-biz/product/topagespecial?producttypeone=33">
+                                                <i class="nav_icon nav_icon2 dib"></i>
+                                                <p class="nav_one">粒度化服务</p>
+                                                <p class="nav_two">报告编写/申报辅导</p>
+                                            </a>
+                                            
+                                        </div>
+                                        <div class="swiper-slide" data-hash="slide3">
+                                            <a target="_blank" href="/ht-biz/product/topagespecial?producttypeone=37">
+                                                <i class="nav_icon nav_icon3 dib"></i>
+                                                <p class="nav_one">知识产权服务</p>
+                                                <p class="nav_two">专利/版权/商标</p>
+                                            </a>
+                                        </div>
+
+                                        <div class="swiper-slide" data-hash="slide4">
+                                            <a target="_blank" href="/ht-biz/product/topagespecial?producttypeone=41">
+                                                <i class="nav_icon nav_icon44 dib"></i>
+                                                <p class="nav_one">企业创新规划</p>
+                                                <p class="nav_two">创新规划/体系建设</p>
+                                            </a>
+                                        </div>
+                                        <div class="swiper-slide" data-hash="slide5">
+                                            <a target="_blank" href="/ht-biz/product/topagespecial?producttypeone=45">
+                                                <i class="nav_icon nav_icon55 dib"></i>
+                                                <p class="nav_one">区域创新规划</p>
+                                                <p class="nav_two">孵化器/众创空间</p>
+                                            </a>
+                                        </div>
+
+                                        <div class="swiper-slide" data-hash="slide6">
+                                            <a target="_blank" href="/ht-biz/product/topagespecial?producttypeone=46">
+                                                <i class="nav_icon nav_icon66 dib"></i>
+                                                <p class="nav_one">科技金融服务</p>
+                                                <p class="nav_two">投融资/上市培育</p>
+                                            </a>
+                                        </div>
+
+                                        <div class="swiper-slide" data-hash="slide7">
+                                            <a target="_blank" href="/ht-biz/product/topagespecial?producttypeone=47">
+                                                <i class="nav_icon nav_icon4 dib"></i>
+                                                <p class="nav_one">科技财税服务</p>
+                                                <p class="nav_two">审计/财税顾问</p>
+                                            </a>
+                                        </div>
+
+                                        
+                                    </div>
+                                    <div class="swiper-wrapper">
+                                        <div class="swiper-slide" data-hash="slide8">
+                                            <a target="_blank" href="/ht-biz/product/topagespecial?producttypeone=48">
+                                                <i class="nav_icon nav_icon77 dib"></i>
+                                                <p class="nav_one">人才双创服务</p>
+                                                <p class="nav_two">人才引进/产学研</p>
+                                            </a>
+                                        </div>
+                                        <div class="swiper-slide" data-hash="slide9">
+                                            <a target="_blank" href="/ht-biz/product/topagespecial?producttypeone=49">
+                                                <i class="nav_icon nav_icon88 dib"></i>
+                                                <p class="nav_one">技术服务</p>
+                                                <p class="nav_two">检验检测/技术转移</p>
+                                            </a>
+                                        </div>
+                                        <div class="swiper-slide" data-hash="slide10">
+                                            <a target="_blank" href="/ht-biz/product/topagespecial?producttypeone=285">
+                                                <i class="nav_icon nav_icon99 dib"></i>
+                                                <p class="nav_one">培训服务</p>
+                                                <p class="nav_two">政策培训/双创培训</p>
+                                            </a>
+                                        </div>
+                                        <div class="swiper-slide" data-hash="slide11">
+                                            <a target="_blank" href="/ht-biz/product/topagespecial?producttypeone=299">
+                                                <i class="nav_icon nav_icon100 dib"></i>
+                                                <p class="nav_one">市场服务</p>
+                                                <p class="nav_two">展会服务/软件开发</p>
+                                            </a>
+                                        </div>
+                                        <div class="swiper-slide" data-hash="slide12">
+                                            <a target="_blank" href="/ht-biz/product/topagespecial?producttypeone=307">
+                                                <i class="nav_icon nav_icon110 dib"></i>
+                                                <p class="nav_one">管理咨询服务</p>
+                                                <p class="nav_two">企业管理/知识产权</p>
+                                            </a>
+                                        </div>
+                                        <div class="swiper-slide" data-hash="slide13">
+                                            <a target="_blank" href="/ht-biz/product/topagespecial?producttypeone=323">
+                                                <i class="nav_icon nav_icon120 dib"></i>
+                                                <p class="nav_one">信息化服务</p>
+                                                <p class="nav_two">信息化/电商服务</p>
+                                            </a>
+                                        </div>
+                                        <div class="swiper-slide" data-hash="slide14">
+                                            <a target="_blank" href="#">
+                                                <i class="nav_icon nav_icon130 dib"></i>
+                                                <p class="nav_one">机构特色服务</p>
+                                                <p class="nav_two"></p>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <!-- Add Arrows -->
+                                    <div class="swiper-button-next swiper-button-next2">
+                                        <s class="morel">更多</s>
+                                    </div>
+
+                                    <!-- <div class="swiper-button-prev"></div> -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 产品分类3 -->
+                        <div v-cloak class="fenlei clearfix">
+                            <!-- 科技政策服务 -->
+                            <div v-cloak class="clearfix">
+                                <div class="L fl">
+                                    <p class="one">{{scienceList.name}}</p>
+                                    <p class="explain">{{scienceList.remark}}</p>
+                                    <a target="_blank"
+                                        :href="'/ht-biz/product/topagespecial?producttypeone='+ scienceList.id">
+                                        <p class="to_z"><span class="to_tips">前往专场</span><span><s class="fudao_bot_s_blank"></s></span></p>
+                                    </a>
+                                </div>
+                                <div class="R fl">
+                                    <ul>
+                                        <li class="dib r_nav" v-for="(list,index) in scienceList.children">
+                                            <p class="listword">
+                                                <span v-for="(listword,index) in list.flag"  v-if="list.flag != null"
+                                                    class="benefit benefit1 b">{{listword}}</span>
+                                            </p>
+                                            <p class="t_t">
+                                                <a target="_blank"
+                                                    :href="'/ht-biz/product/topagespecial?producttypeone='+ scienceList.id +'&productTypetwo=' + list.id"
+                                                    :title="list.name">
+                                                    <span class="dib two">{{list.name}}</span>
+                                                    <i v-if="list.ishot == true" class="dib two_hot">HOT</i>
+                                                    <s class="two_r fr"><s class="fudao_bot_s"></s></s>
+                                                    <a>
+                                            </p>
+                                            <ul class="three three_ss">
+                                                <li v-for="(list1,index) in list.children" v-if="index < 4">
+                                                    <a target="_blank"
+                                                        :href="'/ht-biz/product/topagespecial?producttypeone='+ scienceList.id +'&productTypetwo=' + list.id + '&productTypethere=' + list1.id"
+                                                        :title="list1.name">
+                                                        <i class="dib radio actives"></i><span>{{list1.name}}</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="R_r fr">
+                                    <h3 class="two more">更多科技政策服务</h3>
+                                    <div class="more_s">
+                                        <ul class="three three_r">
+                                            <li v-for="(list,index) in scienceListThree" v-if="index < 8">
+                                                <a target="_blank"
+                                                    :href="'/ht-biz/product/topagespecial?producttypeone='+ list.producttypeone +'&productTypetwo=' + list.producttypetwo + '&productTypethere=' + list.producttypethree"
+                                                    :title="list.name">
+                                                    {{list.name}}
+                                                </a>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 粒度化服务 -->
+                            <div v-cloak class="clearfix">
+                                <div class="L LD fl">
+                                    <p class="one">{{granularList.name}}</p>
+                                    <p class="explain">{{granularList.remark}}</p>
+                                    <a target="_blank"
+                                        :href="'/ht-biz/product/topagespecial?producttypeone='+ granularList.id"
+                                        :title="granularList.name">
+                                        <p class="to_z"><span class="to_tips">前往专场</span><span><s class="fudao_bot_s_blank"></s></span></p>
+                                    </a>
+                                </div>
+                                <div class="R fl">
+                                    <ul>
+                                        <li class="dib r_nav" v-for="(list,index) in granularList.children">
+                                            <p class="listword">
+                                                <span v-for="(listword,index) in list.flag"  v-if="list.flag != null"
+                                                    class="benefit benefit1 b">{{listword}}</span>
+                                            </p>
+                                            <p class="t_t">
+                                                <a target="_blank"
+                                                    :href="'/ht-biz/product/topagespecial?producttypeone='+ granularList.id +'&productTypetwo=' + list.id"
+                                                    :title="list.name">
+                                                    <span class="dib two">{{list.name}}</span>
+                                                    <i v-if="list.ishot == true" class="dib two_hot">HOT</i>
+                                                    <s class="two_r fr"><s class="fudao_bot_s"></s></s>
+                                                </a>
+                                            </p>
+                                            <ul class="three">
+                                                <li v-for="(list1,index) in list.children" v-if="index < 4">
+                                                    <a target="_blank"
+                                                        :href="'/ht-biz/product/topagespecial?producttypeone='+ granularList.id +'&productTypetwo=' + list.id + '&productTypethere=' + list1.id"
+                                                        :title="list1.name">
+                                                        <i class="dib radio actives"></i><span>{{list1.name}}</span>
+                                                    </a>
+
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="R_r fr">
+                                    <h3 class="two more">更多粒度化服务</h3>
+                                    <div class="more_s">
+                                        <ul class="three three_r">
+                                            <li v-for="(list,index) in granularListThree" v-if="index < 9">
+                                                <a target="_blank"
+                                                    :href="'/ht-biz/product/topagespecial?producttypeone='+ list.producttypeone +'&productTypetwo=' + list.producttypetwo + '&productTypethere=' + list.producttypethree"
+                                                    :title="list.name">
+                                                    {{list.name}}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 知识产权服务 -->
+                            <div v-cloak class="clearfix">
+                                <div class="L M fl">
+                                    <p class="one">{{IPRList.name}}</p>
+                                    <p class="explain">{{IPRList.remark}}</p>
+                                    <!-- <p class="to_z">
+                                        <span class="to_tips">前往专场</span>
+                                        <span><s class="fudao_bot_s_blank"></s></span>
+                                    </p> -->
+                                    <a target="_blank"
+                                        :href="'/ht-biz/product/topagespecial?producttypeone='+ IPRList.id"
+                                        :title="IPRList.name">
+                                        <p class="to_z"><span class="to_tips">前往专场</span><span><s class="fudao_bot_s_blank"></s></span></p>
+                                    </a>
+                                </div>
+                                <div class="R fl">
+                                    <ul>
+                                        <li class="dib r_nav" v-for="(list,index) in IPRList.children">
+                                            
+                                            <p class="listword">
+                                                <span v-for="(listword,index) in list.flag"  v-if="list.flag != null"
+                                                    class="benefit benefit1 b">{{listword}}</span>
+                                            </p>
+                                            <p class="t_t">
+                                                <a target="_blank"
+                                                    :href="'/ht-biz/product/topagespecial?producttypeone='+ IPRList.id +'&productTypetwo=' + list.id"
+                                                    :title="list.name">
+                                                    <span class="dib two">{{list.name}}</span>
+                                                    <i v-if="list.ishot == true" class="dib two_hot">HOT</i>
+                                                    <s class="two_r fr"><s class="fudao_bot_s"></s></s>
+                                                </a>
+                                            </p>
+                                            <ul class="three">
+                                                <li v-for="(list1,index) in list.children" v-if="index < 4">
+                                                    <a target="_blank"
+                                                        :href="'/ht-biz/product/topagespecial?producttypeone='+ IPRList.id +'&productTypetwo=' + list.id + '&productTypethere=' + list1.id"
+                                                        :title="list1.name">
+                                                        <i class="dib radio actives"></i><span>{{list1.name}}</span></a>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                                <div class="R_r fr">
+                                    <h3 class="two more">更多知识产权服务</h3>
+                                    <div class="more_s">
+                                        <ul class="three three_r">
+                                            <li v-for="(list,index) in IPRListThree" v-if="index < 9">
+                                                <a target="_blank"
+                                                    :href="'/ht-biz/product/topagespecial?producttypeone='+ list.producttypeone +'&productTypetwo=' + list.producttypetwo + '&productTypethere=' + list.producttypethree"
+                                                    :title="list.name">
+                                                    {{list.name}}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 4 -->
+                        <div class="clearfix other w">
+                            <div>
+                                <ul class="other_nav">
+                                    <li v-cloak class="other_item dib" v-for="(list,index) in otherList">
+                                        <h3 class="other_two">
+                                            <a target="_blank"
+                                                :href="'/ht-biz/product/topagespecial?producttypeone='+ list.id"
+                                                :title="list.name">
+                                                <span class="dib other_n">{{list.name}}</span>
+                                                <span class="dib other_m fr"><s class="fudao_bot_s"></s></span>
+                                                <i class="x_x"></i>
+                                            </a>
+
+                                        </h3>
+                                        <ul class="three other_list clearfix" v-for="(list1,index) in list.children">
+                                            <li v-if="index <= 7">
+                                                <a target="_blank"
+                                                    :href="'/ht-biz/product/topagespecial?producttypeone='+ list.id +'&productTypetwo=' + list1.id"
+                                                    :title="list1.name">{{list1.name}}</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </section>
+        <section>
+            <div id="ids1" style="display: none;">
+                <h3>欢迎反馈意见和建议</h3>
+                <textarea name="" id=""></textarea>
+                <a class="btn0 " @click="submitBtn()">确定</a>
+            </div>
+        </section>
+        <!--E=底部-->
+        <div th:replace="~{footer::copy}" class="clearfix"></div>
+    </div>
+    <!-- 公共js部分 -->
+    <div th:replace="~{block/footlink::copy}"></div>
+    
+    <script type="text/javascript" th:src="@{/statics/js/trading/index.js?v=0.0.2}"></script>
+    <!-- <script type="text/javascript" th:src="@{/statics/js/trading/slide.js?v=0.0.1}"></script> -->
+    <script type="text/javascript" th:src="@{/statics/js/swiper.min.js?v=0.0.1}"></script>
+    <!-- over -->
+    <script>
+        $(".swiper-button-next2").mouseover(function(){
+            $(".swiper2").animate({'height':'300px'});
+            $(".swiper-button-next").css("background","url(/statics/images/trading/icon_down.png)center no-repeat #fff");
+            $(".morel").text("收起");
+        })
+        $(".swiper2").mouseleave(function(){
+            $(".swiper2").animate({'height':'150px'});
+            $(".swiper-button-next").css("background","url(/statics/images/trading/more_circle_2.png)center no-repeat #fff");
+            $(".morel").text("更多");
+        })
+        $('#myCarousel').on('slide.bs.carousel', function (event) {
+        　　var $hoder = $('#myCarousel').find('.item'),
+        　　$items = $(event.relatedTarget);
+        　　//getIndex就是轮播到当前位置的索引
+        　　var getIndex= $hoder.index($items);
+            $(".mun").text(getIndex+1);
+        })
+        //  var swiper = new Swiper('.swiper2', {
+        //     nextButton: '.swiper-button-next2',
+        //     // loop: true,
+        //     paginationClickable: true,
+        //     slidesPerView: 8,
+        //     spaceBetween: 50,
+        //     breakpoints: {
+        //         1024: {
+        //             slidesPerView: 4,
+        //             spaceBetween: 40
+        //         },
+        //         768: {
+        //             slidesPerView: 3,
+        //             spaceBetween: 30
+        //         },
+        //         640: {
+        //             slidesPerView: 2,
+        //             spaceBetween: 20
+        //         },
+        //         320: {
+        //             slidesPerView: 1,
+        //             spaceBetween: 10
+        //         }
+        //     }
+        // });
+        $(".xcx_h").mouseover(function () {
+            $(".xcx").css({
+                'visibility': 'visible'
+            })
+        })
+        $(".xcx_h").mouseleave(function () {
+            $(".xcx").css({
+                'visibility': 'hidden'
+            })
+        })
+        $("#goTop").on("click", function () {
+            $('html , body').stop().animate({scrollTop: 0},'slow');
+        })
+        // jq 动画效果
+        $(function(){
+            $(".icon_box").hide();
+            $(".icon_position").mouseover(function(){
+                $(".icon_box").show();
+                $(".gd").hide();
+            })
+            $(".icon_position").mouseout(function(){
+                $(".icon_box").hide();
+                $(".gd").show();
+            })
+
+            $(window).scroll(function () {
+                var $scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop; //兼容浏览器
+                if ($scrollTop > 200) { //滚动高度可调
+                    $("#goTop").css("visibility", "visible");
+                } else {
+                    $("#goTop").css("visibility", "hidden");
+                }
+            });
+
+            $("#goTop").on("click", function () {
+                $('html , body').stop().animate({scrollTop: 0},'slow');
+            })
+        })
+
+        $(".QRCode").mouseover(function(e){
+            $(".QR-bg").css({
+                'display': 'block',
+                'opacity': '1',
+            })
+            $(".QR-imgbg").css({
+                'display':'block'
+            })
+        })
+        $(".QRCode").mouseout(function(e){
+            $(".QR-bg").css({
+                'display': 'none',
+                'opacity': '0',
+            })
+            $(".QR-imgbg").css({
+                'display':'none'
+            })
+        })
+        var banner = new Vue({
+            el: '#banner',
+            data:function() {
+                return {
+                    bannerList:'',
+                }
+            },
+            created :function() {
+                this.initPage();
+            },
+            methods: {
+                initPage: function () {
+                    this.getbanner();
+                },
+                getbanner:function(){
+                    htajax.postForm('/ht-biz/banner/getbannerbytype', {
+                        type: 2,//交易大厅顶部
+                    },
+                    function (data) {
+                        if (data.code == 10000) {
+                            console.log(data);
+                            banner.bannerList = data.data;
+                        }
+                    }, function (data) {
+                        //错误回调
+                        // console.log(data.msg)
+                    });
+                },
+            }
+        })
+    </script>
+    <th:block th:include="block/statistics :: copy" />
+</body>
+
+</html>

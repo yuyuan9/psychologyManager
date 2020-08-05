@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.biz.mapper.KeyworkMapper">
+
+<select id="syslistall" parameterType="com.ht.commons.utils.MyPage" resultType="com.ht.commons.utils.PageData">
+  select * from t_keywork where 1=1 
+   <if test="pd.keywordname != null and pd.keywordname != ''">
+            and  keywordname  LIKE CONCAT(CONCAT('%', #{pd.keywordname}),'%')
+    </if>
+     order by createdate desc
+</select>
+
+ <select id="findList" resultType="com.ht.entity.biz.sys.keywork.Keywork">
+    select * from  t_keywork
+ </select>
+
+    <select id="getfindbyId" parameterType="java.lang.String" resultType="com.ht.commons.utils.PageData">
+        select t.* ,(select keywordname from t_keywork tt where tt.id=t.pid) as pkeywordname from t_keywork t where t.id=#{id}
+    </select>
+</mapper>

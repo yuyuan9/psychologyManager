@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="keywords" content="${keywords}" />
+    <meta name="description" content="${description}" />
+    <title>500-内部服务器错误</title>
+    <style type="text/css">
+        .head404 {
+            width: 659px;
+            height: 280px;
+            margin: 50px auto 0 auto;
+            background: url("/statics/images/500.jpg") no-repeat;
+        }
+        .txtbg404 {
+            width: 499px;
+            height: 169px;
+            margin: 10px auto 0 auto;
+            background: url(https://www.daixiaorui.com/Public/images/txtbg404.png) no-repeat;
+        }
+        .txtbg404 .txtbox {
+            width: 390px;
+            position: relative;
+            top: 30px;
+            left: 60px;
+            color: #eee;
+            font-size: 13px;
+        }
+        .txtbg404 .txtbox p {
+            margin: 5px 0;
+            line-height: 18px;
+        }
+        .txtbg404 .txtbox .paddingbox {
+            padding-top: 15px;
+        }
+        .txtbg404 .txtbox p a {
+            color: #eee;
+            text-decoration: none;
+        }
+        .txtbg404 .txtbox p a:hover {
+            color: #FC9D1D;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body bgcolor="#2a2a34">
+    <div class="head404"></div>
+    <div class="txtbg404">
+        <div class="txtbox">
+            <p>对不起，内部服务器错误</p>
+            <p class="paddingbox">请点击以下链接继续浏览网页</p>
+            <p>》<a style="cursor:pointer" href="javascript:history.go(-1)">返回上一步</a></p>
+            <p>》<a href="/">返回网站首页</a></p>
+        </div>
+    </div>
+    <th:block th:include="block/statistics :: copy" />
+</body>
+</html>

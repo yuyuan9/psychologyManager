@@ -1,0 +1,936 @@
+/* input缓存 */
+input:-webkit-autofill { -webkit-box-shadow: 0 0 0 1000px white inset !important; }
+/*<!--S=头部-->*/
+.estimate_top{
+    width: 100%;
+    height: 270px;
+    background: url("../../images/hisself/free_estimate.png?v=1.0.3");
+    color: #fff;
+    overflow: hidden;
+    min-width: 1200px;
+}
+#inputForm{
+    min-width: 1200px;
+}
+.estimate_top .nav-tabs{
+    border-bottom: 1px solid #dbdbdb;
+}
+.estimate_top .nav-tabs li{
+    position: relative;
+}
+.estimate_top .centre{
+    width: 363px;
+    height: 75px;
+    margin: 50px auto;
+    color: #fff;
+}
+.estimate_top .centre .centre_t{
+    width: 380px;
+    height: 42px;
+    font-size: 38px;
+}
+.estimate_top .centre .centre_t .line{
+    width: 80px;
+    height: 1px;
+    background-color: #fff;
+    vertical-align: middle;
+    margin-top: 40px;
+}
+.estimate_top .centre .centre_t .top_title{
+    margin-left: 30px;
+    margin-right: 30px;
+    font-weight: 800;
+}
+.estimate_top .centre .centre_b{
+    width: 377px;
+    height: 20px;
+    font-size: 16px;
+}
+/*<!--E=头部-->*/
+/*S=tab切换*/
+.tab_info .contain{
+    background-color: #fff;
+    margin-bottom: 35px;
+    margin-top: -136px;
+}
+.tab_info .estimate_bg{
+    position: relative;
+}
+.tab_info .estimate_bg .bg_icon{
+    position: absolute;
+    display: inline-block;
+    width: 180px;
+    height: 177px;
+    background: url("../../images/hisself/estimate_bg_icon.png");
+    right: 40px;
+    top: -122px;
+}
+.tab_info .nav li .step{
+    position: relative;
+    z-index: 4;
+    width: 36px;
+    height: 36px;
+    border-radius: 18px;
+    background-color: #dbdbdb;
+    font-size: 26px;
+    font-weight: 800;
+    color:#fff;
+    text-align: center;
+    line-height: 35px;
+    margin-left: 23px;
+}
+.tab_info .nav {
+    height: 136px;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+    border-bottom:1px solid #dbdbdb;
+}
+.tab_info .nav > li {
+    height: 136px;
+    position: relative;
+    display: block;
+
+}
+.tab_info .nav > li > a {
+    height: 136px;
+    position: relative;
+    display: block;
+    padding: 0;
+    font-size: 16px;
+    color: #333;
+    text-decoration: none;
+    padding-top: 40px;
+}
+.tab_info .nav > li > a .step_title{
+    display: inline-block;
+    padding-top: 15px;
+    letter-spacing: 2px;
+    font-weight: 400;
+}
+.tab_info .nav > li > a:hover,
+.tab_info .nav > li > a:focus {
+    text-decoration: none;
+    background-color: #fff;
+    border: none;
+}
+
+.step{
+    cursor: pointer;
+}
+.step_title{
+    cursor: pointer;
+}
+.line{
+    cursor: auto;
+}
+.tab_info .nav > li > a:hover>.step_title{
+    color: #1355c5;
+}
+.tab_info .nav > li.disabled > a {
+    color: #777;
+}
+.tab_info .nav > li.disabled > a:hover,
+.tab_info .nav > li.disabled > a:focus {
+    color: #777;
+    text-decoration: none;
+    cursor: not-allowed;
+    background-color: transparent;
+}
+.tab_info .nav .open > a,
+.tab_info .nav .open > a:hover,
+.tab_info .nav .open > a:focus {
+    background-color: #eee;
+    border-color: #337ab7;
+}
+.tab_info .nav .nav-divider {
+    height: 1px;
+    margin: 9px 0;
+    overflow: hidden;
+    background-color: #e5e5e5;
+}
+.tab_info .nav > li > a > img {
+    max-width: none;
+}
+.tab_info .nav-tabs {
+    border-bottom:1px solid #dbdbdb;
+}
+.tab_info .nav-tabs > li {
+    float: left;
+    margin-bottom: -1px;
+
+}
+
+.tab_info .nav-tabs > li > a {
+    margin-left: 106px;
+    line-height: 1.42857143;
+    border: none;
+    border-radius: 4px 4px 0 0;
+    margin-right: 0;
+}
+.tab_info .nav-tabs > li > .first{
+    margin-left: 278px;
+}
+.tab_info .nav-tabs > li > a:hover {
+    border-color: #eee #eee #ddd;
+    border-bottom: 3px solid #1355c5;
+    background-color: #fff;
+}
+.tab_info .nav-tabs > li.active > a,
+.tab_info .nav-tabs > li.active > a:hover,
+.tab_info .nav-tabs > li.active > a:focus {
+    color:#1355c5;
+    cursor: default;
+    background-color: #fff;
+    border-bottom: 3px solid #1355c5;
+}
+.tab_info .nav-tabs > li.active .step,.tab_info .nav-tabs > li.active .line{
+    background-color: #1355c5;
+}
+.tab_info .nav-tabs > li.active .step_title{
+    font-weight: bold;
+}
+.tab_info .nav-tabs.nav-justified {
+    width: 100%;
+    border-bottom: 0;
+}
+.tab_info .nav-tabs.nav-justified > li {
+    float: none;
+}
+.tab_info .nav-tabs.nav-justified > li > a {
+    margin-bottom: 5px;
+    text-align: center;
+}
+.tab_info .nav-tabs.nav-justified > .dropdown .dropdown-menu {
+    top: auto;
+    left: auto;
+}
+@media (min-width: 768px) {
+    .tab_info .nav-tabs.nav-justified > li {
+        display: table-cell;
+        width: 1%;
+    }
+    .tab_info .nav-tabs.nav-justified > li > a {
+        margin-bottom: 0;
+    }
+}
+.tab_info .nav-tabs.nav-justified > li > a {
+    margin-right: 0;
+    border-radius: 4px;
+}
+.tab_info .nav-tabs.nav-justified > .active > a,
+.tab_info .nav-tabs.nav-justified > .active > a:hover,
+.tab_info .nav-tabs.nav-justified > .active > a:focus {
+    border: none;
+}
+@media (min-width: 768px) {
+    .tab_info .nav-tabs.nav-justified > li > a {
+        border-bottom: 1px solid #ddd;
+        border-radius: 4px 4px 0 0;
+    }
+    .tab_info .nav-tabs.nav-justified > .active > a,
+    .tab_info .nav-tabs.nav-justified > .active > a:hover,
+    .tab_info .nav-tabs.nav-justified > .active > a:focus {
+        background-color: #fff;
+    }
+}
+
+.tab_info .nav .line{
+    width: 160px;
+    height: 10px;
+    background-color: #dbdbdb;
+    position: absolute;
+    top: 53px;
+    left: -135px;
+    z-index: 3;
+}
+
+/*E=tab切换*/
+/*S=基本信息*/
+.basic_form {
+    padding-top: 30px;
+    margin-left: 100px;
+    padding-bottom: 50px;
+    margin-bottom: 35px;
+}
+.basic_form p{
+    position: relative;
+    width: 255px;
+    color: #333;
+    line-height: 40px;
+    float: left;
+    clear: both;
+    margin-top: 20px;
+    text-align: right;
+}
+/* .basic_form p:nth-of-type(1){
+    margin-top: 0;
+} */
+.basic_form span{
+    color: #fe8910;
+    line-height: 20px;
+}
+.basic_form select{
+    line-height: 40px;
+    border: 1px solid #dbdbdb;
+    margin-left: 30px;
+    margin-top: 20px;
+    font-size: 14px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #999;
+}
+.basic_form input{
+    width: 500px;
+    height: 40px;
+    line-height: 40px;
+    border: 1px solid #dbdbdb;
+    margin-left: 30px;
+    margin-top: 20px;
+    font-size: 14px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #999;
+}
+/* .basic_form input:nth-of-type(1){
+    margin-top: 0;
+} */
+.basic_form #province,.basic_form #city,.basic_form #area{
+    width: 148px;
+    height: 40px;
+    color: #999;
+    font-size: 14px;
+    margin-top: 20px;
+    margin-left: 30px;
+    padding-left: 10px;
+    padding-right: 0;
+}
+.basic_form #city,.basic_form #area {
+    margin-left: 30px;
+}
+.basic_form #area {
+    width: 160px;
+}
+#s_province,#s_city{
+    width: 240px;
+    height: 40px;
+    color: #999;
+    font-size: 14px;
+    margin-top: 20px;
+    margin-left: 13px;
+    padding-left: 10px;
+}
+
+.basic_form .science{
+    width: 140px;
+    float: left;
+
+}
+.basic_form p.describe{
+    float: left;
+    display: inline-block;
+    width: 350px;
+    font-size: 12px;
+    color: #999;
+    margin-left: 20px;
+    line-height: 18px;
+}
+.basic_form button{
+    width: 200px;
+    height: 50px;
+    color: #fff;
+    font-size: 20px;
+    margin-top: 20px;
+    background-color: #1355c5;
+    float: left;
+    margin-left: -510px;
+}
+
+.time_tip1, .time_tip2 {
+    position: absolute;
+    right: 150px;
+    top: 166px;
+}
+
+.time_tip1 img, .time_tip2 img {
+    padding-right: 4px;
+    vertical-align: top;
+}
+.basic_form input.touch, .basic_form input.tel, .basic_form input.email {
+    width: 148px;
+    padding-right: 0;
+}
+.basic_form input.tel, .basic_form input.email {
+    margin-left: 21px;
+}
+.basic_form .situation {
+    width: 522px;
+    height: 40px;
+    line-height: 40px;
+    border: 1px solid #dbdbdb;
+    margin-left: 30px;
+    margin-top: 20px;
+    font-size: 14px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #999;
+}
+
+.basic_form .other_s {
+    display: inline-block;
+    vertical-align: -50%;
+    margin-left: 20px;
+    color: #333;
+}
+.munber{
+    display: inline;
+}
+.basic_form input.smallInput {
+    width: 82px;
+    padding-right: 6px;
+}
+.basic_form input.smallInput::-webkit-input-placeholder {
+    text-align: right;
+}
+.basic_form input.smallInput1 {
+    margin-left: 0;
+}
+.basic_form input.smallInput2 {
+    width: 158px;
+    margin-left: 0;
+    border-left: none;
+    border-right: none;
+}
+
+.basic_form .textarea {
+    width: 278px;
+    height: 60px;
+    color: #999;
+    padding: 20px;
+    line-height: 20px;
+    overflow-y: hidden;
+    border: 1px dashed #dbdbdb;
+    margin-top: 20px;
+    margin-left: 30px;
+    outline:none;
+}
+.basic_form .textarea.position {
+    position: absolute;
+    right: -348px;
+    top: -60px;
+}
+input.yf_re_input:focus {
+    border-color: #dbdbdb;
+}
+.basic_form .unit{
+    position: relative;
+    top: 11px;
+    left: 5px;
+}
+/*E=基本信息*/
+
+/*S=财务信息*/
+.finance_form {
+    padding-top: 20px;
+}
+
+.finance_form p:nth-of-type(2){
+    margin-top: 0;
+}
+.finance_form p.finance_title{
+    width: 256px;
+    font-size: 20px;
+    color: #666;
+    float: none;
+}
+.finance_form .span{
+    display: inline-block;
+    height: 40px;
+    color: #999;
+    font-size: 14px;
+    padding-left: 10px; 
+    vertical-align: middle;
+}
+.finance_form .span_first{
+    margin-top: 0;
+}
+.finance_form .span_year{
+    margin-right: -28px;
+}
+.finance_form .finance_next{
+    float: right;
+    margin-top: 30px;
+    margin-bottom: 60px;
+    margin-right: 295px;
+}
+.finance_form .financeSmallInput {
+    width: 82px;
+    padding-right: 6px;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+ 
+/*E=财务信息*/
+/*S=知识产权*/
+.knowledge_form{
+    padding-top: 40px;
+    padding-bottom: 60px;
+    margin-bottom: 35px;
+}
+.knowledge_form input{
+    width: 90px;
+    height: 30px;
+    border: 1px solid #dbdbdb;
+    float: left;
+    margin-right: 6px;
+    text-align: right;
+    margin-top: -5px;
+    padding-right: 5px;
+}
+.knowledge_form .type_I{
+    width: 920px;
+    margin: 0 auto;
+    border: 1px dashed #dbdbdb;
+    padding-bottom: 20px;
+}
+.knowledge_form .type_I p{
+    font-size: 14px;
+    color: #808080;
+    float: left;
+    margin-left: 20px;
+}
+.knowledge_form .X_12 p:nth-of-type(1){
+    margin-left: 0;
+    font-size: 14px;
+    color: #333;
+    width: 300px;
+    text-align: right;
+}
+.knowledge_form .X_12 span b{
+    color: #fe8910;
+    font-size: 16px;
+    margin-right: 14px;
+}
+.knowledge_form .type_I span{
+    font-size: 12px;
+    color: #999;
+    float: left;
+}
+.knowledge_form .type_I .title_type{
+    width: 100%;
+    height: 40px;
+    font-size: 16px;
+    color: #010832;
+    font-weight: 800;
+    line-height: 40px;
+    background-color: #f5f5f5;
+    float: none;
+    margin-left: 0;
+}
+.knowledge_form .X_12_l,.knowledge_form .X_12_r{
+    width: 800px;
+    padding:20px 50px 20px 0;
+}
+.knowledge_form .total{
+    padding-right: 50px;
+}
+.knowledge_form .total p{
+    float: none;
+    font-size: 14px;
+    color: #999;
+    margin-top: 10px;
+}
+.knowledge_form .total p:nth-of-type(1){
+    color: #fe8910;
+    margin-top: 0;
+    font-size: 16px;
+}
+.knowledge_form .total p span{
+    float: right;
+    color: #333;
+    font-size: 14px;
+}
+.knowledge_form .total p b{
+    float: right;
+    margin-right: 10px;
+    font-size: 14px;
+    color: #f00;
+}
+
+.knowledge_form .type_II{
+    margin-top: 30px;
+}
+.knowledge_form .type_II .title_type span {
+    font-size: 14px;
+    color: #2dbc62;
+    float: none;
+}
+.knowledge_form .other{
+    height: 38px;
+    vertical-align: middle;
+    padding-top: 22px;
+    font-size: 16px;
+}
+.knowledge_form .other p{
+    font-size: 16px;
+}
+.knowledge_form .other input{
+    width: 20px;
+    height: 20px;
+    float: none;
+    vertical-align: middle;
+    margin-top: 1px;
+    margin-right: 5px;
+}
+.knowledge_form .other input{
+    margin-left: 60px;
+}
+.knowledge_form .other input:nth-of-type(1){
+    margin-left: 260px;
+}
+.knowledge_form .knowledge_next{
+    width: 120px;
+    height: 50px;
+    color: #fff;
+    font-size: 20px;
+    margin-top: 50px;
+    margin-left: 10px;
+    background-color: #1355c5;
+    cursor: pointer;
+}
+/*E=知识产权*/
+/*S=研发管理*/
+.manage_form{
+    padding: 30px 0px 60px 100px;
+    color: #666;
+    font-size: 16px;
+}
+.manage_form p{
+    font-size: 14px;
+    color: #333;
+    margin-top: 20px;
+}
+.manage_form p span{
+    color: #fe8910;
+}
+.manage_form p:nth-of-type(1){
+    margin-top: 0;
+}
+.manage_form li{
+    margin-top: 12px;
+    margin-left: 30px;
+}
+.manage_form li:nth-of-type(1){
+    margin-top: 20px;
+}
+.manage_form li input{
+    width: 18px;
+    height: 18px;
+    border-radius: 9px;
+    border: 1px solid #dbdbdb;
+    margin-right: 20px;
+    color: #fe8910;
+    font-size: 12px;
+    vertical-align: middle;
+    margin-top: -3px;
+}
+.manage_form .manage_next {
+    float: right;
+    margin-top: 30px;
+    margin-bottom: 60px;
+    margin-right: 295px;
+    width: 500px;
+    height: 60px;
+    color: #fff;
+    font-size: 24px;
+    background-color: #fe8910;
+}
+/*E=研发管理*/
+/*关于错误提醒*/
+
+.basic_form{
+    position: relative;
+}
+.tip{
+    position: absolute;
+    top: 45px;
+    left: 702px;
+    display: none;
+}
+.tip .error{
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border-radius: 10px;
+    background-color: #fe8910;
+    color: #fff;
+    font-size: 12px;
+    float: left;
+    line-height: 16px;
+    margin-top: 2px;
+}
+.tip .error_msg{
+    margin-left: 8px;
+    font-size: 14px;
+    margin-top: -22px;
+    color: #fe8910;
+}
+.basic_form .tip_time,.basic_form .tip_yes,.basic_form .tip_no{
+    top: 112px;
+}
+.basic_form .tip_people{
+    top: 182px;
+}
+.basic_form .tip_tel{
+    top: 252px;
+}
+.basic_form .tip_email{
+    top: 322px;
+}
+.basic_form .tip_addr{
+    top: 392px;
+}
+.basic_form .tip_prod{
+    top: 462px;
+}
+.basic_form .tip_situ{
+    top: 532px;
+}
+.basic_form .tip_total{
+    top: 602px;
+}
+.basic_form .tip_desc{
+    top: 672px;
+}
+.basic_form .tip_yes .error{
+    background-color: #4acd43;
+}
+.basic_form .tip_yes .error_msg{
+    color: #4acd43;
+}
+.tip_money{
+    top: 36px;
+    left: 472px;
+}
+.tip_in{
+    top: 296px;
+    left: 472px;
+}
+.manage_form{
+    position: relative;
+}
+.tip_ques1{
+    top: 30px;
+    left: 972px;
+}
+.tip_ques2{
+    top: 230px;
+    left: 570px;
+}
+.tip_ques3{
+    top: 399px;
+    left: 895px;
+}
+.tip_ques4{
+    top: 566px;
+    left: 980px;
+}
+
+input,select{
+    border: 1px solid #dbdbdb;
+    outline: none;
+}
+input:focus,select:focus{
+    border: 1px solid #1355c5;
+}
+
+.sz_estimate_top{
+    height: 266px;
+    background: url("../../images/hisself/banner.png") center center;
+}
+.sz_estimate_top .centre{
+    width: auto;
+}
+.sz_estimate_top .centre .centre_t{
+    width: auto;
+    display: inline-block;
+}
+.sz_estimate_top .centre .centre_b{
+    width: auto;
+}
+.sz_estimate_top .centre .top_text{
+    display: inline-block;
+}
+.sz_tab_info .contain{
+    margin-top: -122px;
+}
+.sz_tab_info .basic_form p{
+    font-size: 14px;
+}
+.sz_tab_info .basic_form .organize_code{
+    line-height: 25px;
+}
+.sz_tab_info .basic_form .code_text2{
+    margin-left: 8px;
+}
+.sz_tab_info .chose_option{
+    display: inline-block;
+    width: 100px;
+    height: 40px;
+    border: 1px solid #dbdbdb;
+    color: #999;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+    margin-left: 30px;
+}
+.sz_tab_info .chose_option.active{
+    background-color: #1355c5;
+    color: #FFFFFF;
+}
+.sz_tab_info .chose_option2{
+    margin-left: 20px;
+}
+.sz_tab_info .chose_div{
+    display: inline-block;
+    margin-top: 20px;
+ }
+.sz_tab_info  .placeholder_div{
+    position: relative;
+}
+.sz_tab_info  .placeholder_div input{
+    margin-left: 0;
+    padding-right: 40px;
+}
+.sz_tab_info  .placeholder_div .placeholder_text{
+    position: absolute;
+    right: 20px;
+    line-height: 40px;
+}
+.sz_tab_info .basic_form p.describe{
+    width: 375px;
+}
+.sz_tab_info .basic_form button{
+    float: none;
+    margin-top: 60px;
+    margin-left: 284px;
+    cursor: pointer;
+}
+.sz_tab_info .compliance_div{
+    display: inline-block;
+}
+.sz_tab_info .compliance_div p{
+    margin-top: 20px;
+}
+.sz_tab_info .finance_form2{
+    position: relative;
+    padding-top: 20px;
+    padding-bottom: 50px;
+    line-height: 16px;
+}
+.sz_tab_info .finance_form2 .basic_form{
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+.sz_tab_info .finance_form .finance_title{
+    width: 180px;
+    margin-left: 230px;
+}
+.sz_tab_info .finance_form p.finance_title2{
+    margin-left: 248px;
+}
+.sz_tab_info .manage_form li,.sz_tab_info .manage_form li label{
+    font-size: 14px;
+    color: #666566;
+    font-weight: normal;
+}
+.sz_tab_info .finance_form2 .manage_form p{
+    margin-left: 138px;
+}
+.sz_tab_info .finance_form2 .manage_form li{
+    margin-left: 158px;
+}
+.sz_tab_info .finance_btn button{
+    width: 120px;
+    height: 50px;
+    color: #fff;
+    font-size: 20px;
+    background-color: #1355c5;
+    cursor: pointer;
+    margin-left: 10px;
+}
+.sz_tab_info .knowledge_form{
+    margin-bottom: 0;
+    padding-bottom: 50px;
+}
+.sz_tab_info .manage_form .manage_next{
+    margin-bottom: 0;
+}
+.sz_tab_info .manage_form{
+    padding-bottom: 50px;
+}
+#manage{
+    padding-bottom: 50px;
+}
+.sz_tab_info .nav .line{
+    top: 45px;
+}
+.sz_tab_info .nav{
+    height: 115px;
+}
+.sz_tab_info .nav > li{
+    height: 115px;
+}
+.sz_tab_info .nav > li > a{
+    height: 85px;
+    padding-top: 30px;
+}
+.sz_tab_info .basic_form p.describe{
+    width: 345px;
+    font-size: 12px;
+}
+.sz_tab_info .compop_detail{
+    display: inline-block;
+    vertical-align: middle;
+    width: 265px;
+    font-size: 12px;
+    color: #999;
+    margin-left: 20px;
+    line-height: 18px;
+}
+
+
+
+i.question {
+    position: absolute;
+    right: -477px;
+    top: 12px;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    background: url("../../images/hisself/question.png");
+}
+i.question.last {
+    right: -280px;
+}
+.zc {
+    display: inline-block;
+    padding: 10px 16px;
+    border-radius: 8px;
+    background: #1355c5;
+    color: #fff;
+    margin: 32px 0 0 200px;
+    cursor: pointer;
+}
+.zc1 {
+    line-height: 50px;
+    margin: 0 0 0 20px;
+    padding: 0 20px;
+    border-radius: 0;
+    font-size: 20px;
+}
+
+.yanfa1,.yanfa2,.yanfa3{
+    display: none;
+}

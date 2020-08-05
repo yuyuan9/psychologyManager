@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.biz.mapper.ShoppingCartMapper">
+	<select id="findList" parameterType="com.ht.commons.utils.MyPage" resultType="com.ht.commons.utils.PageData">
+		select 
+		t.*,
+		s.createid serviceId, 
+		s.id shopid,
+		s.shopname,
+		p.productname,
+		p.price,
+		p.subsidy,
+		p.staut,
+		p.pricetwo,
+		p.pricetype,
+		pt.isscience,
+		s.shopimg
+		from t_shopping_cart t
+		left join t_sys_user u on t.userId=u.USER_ID 
+		left join t_sys_service s on t.serviceId=s.createid 
+		left join t_sys_product p on t.productId=p.id
+		left join t_sys_producttype pt on p.producttypeone=pt.id
+		where 1=1
+		<if test="pd.userId!=null and pd.userId!=''">
+			and t.userId=#{pd.userId}
+		</if>
+		<if test="pd.phone!=null and pd.phone!=''">
+			and s.phone=#{pd.phone}
+		</if>
+		order by t.createdate desc
+	</select>
+</mapper>

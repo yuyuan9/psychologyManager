@@ -1,0 +1,50 @@
+.main {
+    width: 100vw;
+}
+.main_bg {
+    background-color: #ffffff;
+}
+.to_zc_result {
+    width: 2.1333vw;
+    height: 3.2vw;
+    background: url("../../images/yidong_icons/phone_icons.png") -35.2667vw -13.5333vw no-repeat;
+    background-size: 40vw 40vw;
+    margin-right: 1.6vw;
+}
+.zc_dt {
+    font-size: 4.2667vw;
+    color: #333333;
+}
+.details_hd {
+    padding: 4.2667vw 4.2667vw 7.4667vw 4.2667vw;
+}
+.com_name {
+    font-size: 4.2667vw;
+    font-weight: bold;
+    color:  #4b87f8;
+    padding: 0 4.2667vw 3.7333vw 4.2667vw;
+}
+.line {
+    display: block;
+    border-bottom: 0.5333vw solid #4b87f8;
+    margin: 0 4.2667vw;
+}
+.zc_item {
+    margin-top: 4.8vw;
+}
+.item_xq {
+    font-size: 3.4667vw;
+    color: #333333;
+    width: 69.4vw;
+}
+.item_n {
+    font-size: 3.4667vw;
+    color: #666666;
+    vertical-align: top;
+    text-align: right;
+    width: 20.9333vw;
+    margin-right: 12px;
+}
+.zc_item:last-child {
+    padding-bottom: 36.5333vw;
+}

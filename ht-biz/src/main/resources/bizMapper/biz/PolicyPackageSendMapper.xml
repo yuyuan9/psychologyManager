@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.biz.mapper.PolicyPackageSendMapper">
+<resultMap type="com.ht.entity.policydig.PolicyPackageSend" id="PolicyPackageSendResultMap">
+<id column="id" property="id"/>
+<result column="packageId" property="packageId"/>
+<result column="customerId" property="customerId"/>
+<result column="sendStatus" property="sendStatus"/>
+<result column="sendDate" property="sendDate"/>
+<result column="pTemplateId" property="pTemplateId"/>
+<result column="message" property="message"/>
+<result column="msgcode" property="msgcode"/>
+<result column="createdate" property="createdate"/>
+<result column="createid" property="createid"/>
+<result column="lastmodified" property="lastmodified"/>
+<result column="regionid" property="regionid"/>
+</resultMap>
+
+<select id="findlistPage" resultType="com.ht.commons.utils.PageData" parameterType="com.ht.commons.utils.MyPage">
+ select 
+ 	t.id,
+ 	IFNULL(p.name,'--') policyPackageName,
+ 	p.msg,
+ 	p.email,
+ 	IFNULL(c.name,'--') customerName,
+ 	p.sendTime,
+ 	IFNULL(t.pTemplateId,'348806') pTemplateId,
+ 	IFNULL(c.phone,'--') phone,
+	c.id ciId,
+    p.id packageId,
+	p2.ciIdUrl ciIdUrl,
+	IFNULL(c.province,'--') province,
+	IFNULL(c.city,'--') city,
+	IFNULL(c.area,'--') area,
+	t.sendStatus sendStatus
+ 	from t_policy_package_send t 
+ LEFT JOIN t_customer_info c on t.customerId=c.id
+ LEFT JOIN t_policy_package p on t.packageId=p.id
+ LEFT JOIN t_package2_c_i p2 on c.id=p2.ciId and p.id=p2.packageId
+	where 1=1
+<if test="pd.keyword!=null and pd.keyword!=''">
+ 	and 
+ 	(
+ 		p.name like CONCAT(CONCAT('%', #{pd.keyword}),'%')
+ 		or 
+ 		c.name like CONCAT(CONCAT('%', #{pd.keyword}),'%')
+ 		or 
+ 		c.phone like CONCAT(CONCAT('%', #{pd.keyword}),'%')
+ 	)
+ </if>
+ <if test="pd.sendStatus!=null">
+ 	and t.sendStatus=#{pd.sendStatus}
+ </if>
+ <if test="pd.packageId!=null">
+ 	and t.packageId=#{pd.packageId}
+ </if>
+</select>
+<select id="findByPidAndCid" parameterType="com.ht.entity.policydig.PolicyPackageSend" resultType="com.ht.entity.policydig.PolicyPackageSend">
+	select * from t_policy_package_send t where t.packageId=#{packageId} and t.customerId=#{customerId}
+</select>
+</mapper>

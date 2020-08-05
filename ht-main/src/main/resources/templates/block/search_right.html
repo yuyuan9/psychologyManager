@@ -1,0 +1,22 @@
+<div th:fragment="copy">
+    <div class="bigData">
+        <h2>政策大数据查询应用系统  ></h2>
+        <p>相关政策历年政策信息都能查询到！</p>
+        <div class="bigData_ipt clearfix">
+            <input class="fl" type="text" v-model="bigData" placeholder="高新技术企业">
+            <s class="fl" @click="searchBigData">
+                <i></i>
+            </s>
+        </div>
+    </div>
+    <div class="project">
+        <h2>政策立项查询应用系统  ></h2>
+        <p>查看公司或者同行申报过的科技项目！</p>
+        <div class="project_ipt clearfix">
+            <input class="fl" type="text" v-model="setProject" placeholder="高企云">
+            <s class="fl" @click="searchProject">
+                <i></i>
+            </s>
+        </div>
+    </div>
+</div>

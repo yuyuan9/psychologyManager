@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- 公共头部 -->
+    <th:block th:include="block/headlink :: test('查询')" /> 
+    <!-- 结束 -->
+    <link rel="stylesheet" th:href="@{/statics/css/inquire/index.css?v=0.0.1}">    
+    <link rel="stylesheet" th:href="@{/statics/css/v4_footer.css?v=0.0.1}">
+
+</head>
+<body>
+    <div id="user">
+        <div th:replace="~{user_head::copy}"></div>
+        
+    </div>
+    
+    <div class="wrap" id="vc">
+        <!-- 登录组件 -->
+        <mylogin :islogin="false" @close-login="isLogin=!false"></mylogin>
+        <!-- over -->
+        <div th:replace="~{header::copy}"></div>
+        <!-- <header>
+            <div class="head clearfix">
+                <div class="head_l fl clearfix">
+                    <h3 class="fl"><a href="/"><img src="/statics/images/inquire/head_logo.png" alt=""></a></h3>
+
+
+                    <ul class="head_nav fl">
+                        <li><a href="/">首页</a></li>
+                        <li class="library">
+                            <a href="/ht-biz/library/index?curPolicy=8" target="_blank">高企云文库</a>
+                            <ul class="down drop_down1">
+                                <li><a href="/ht-biz/library/package" target="_blank">专题资源包</a></li>
+                            </ul>
+                        </li>
+                        <li class="cha">
+                            <a href="">企政查</a>
+                            <ul class="down drop_down2">
+                                <li><a href="/ht-biz/inquire/index?theme=1" target="_blank">政策查询</a></li>
+                                <li><a href="/ht-biz/inquire/index?theme=2" target="_blank">立项查询</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="/ht-biz/service/index/index">服务商入驻</a></li>
+                        <li><a target="_blank" href="http://g.hights.cn/beetl/online_training/index.html" >云学院</a></li>
+                    </ul>
+
+
+                </div>
+                <div class="head_r fr clearfix">
+                    <ul class="head_nav1 clearfix">
+                        <li><a target="_blank" href="/help/help/index">帮助中心</a></li>
+                        <li><a href="javascript:void(0);">咨询热线：400-166-3308</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header> -->
+        
+        <section class="banner_box">
+            <div class="banner">
+                <div class="banner_tab1" v-show="theme==0">
+                </div>
+                <div class="banner_tab2" v-show="theme==1">
+                </div>
+                <div class="banner_tab3" v-show="theme==2">
+                </div>
+            </div>
+            <div class="search_ipt">
+                <div class="ipt_tit">
+                    <h3 @click="theme=0" :class="{active:theme==0}">企政查询<s></s></h3>
+                    <h3 @click="theme=1" :class="{active:theme==1}">政策查询<s></s></h3>
+                    <h3 @click="theme=2" :class="{active:theme==2}">立项查询<s></s></h3>
+                </div>
+                
+                <div v-cloak class="ipt1" v-show="theme==0">
+                    <div class="search_ipt_con fl clearfix">
+                        <div class="search_img">
+                            <img src="/statics/images/inquire/qzcx.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div v-cloak class="ipt2" v-show="theme==1">
+                    <div class="search_ipt_con fl clearfix">
+                        <div class="search_ipt_top fl clearfix">
+                            <p class="fl"><i></i></p>
+                            <input class="fl" v-model="keyword1" @keyup.enter="getContent2" type="text" placeholder="请输入您想了解的政策关键词，如高新技术企业">
+                            <s class="fl" @click="getContent2">政策查询</s>
+                        </div>
+                        <div th:replace="~{block/hot_word::search_zc}"></div>
+                    </div>
+                </div>
+                <div v-cloak class="ipt3" v-show="theme==2">
+                    <div class="search_ipt_con fl clearfix">
+                        <div class="search_ipt_top fl clearfix">
+                            <p class="fl"><i></i></p>
+                            <input class="fl" v-model="keyword2" @keyup.enter="getContent1" type="text" placeholder="请输入您想了解的项目关键词或企业名称，如高新技术企业或高企云">
+                            <s class="fl" @click="getContent1" >立项查询</s>
+                        </div>
+                        <div th:replace="~{block/hot_word::search_lx}"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="system_title">
+                <h2>系统介绍</h2>
+                <p>System  Introduction</p>
+            </div>
+            <div class="system_content" v-show="theme==0">
+                <div class="sys_con_l fl">
+                    <img src="/statics/images/inquire/sys2.png" alt="">
+                </div>
+                <div class="sys_con_r fl">
+                    <h3>关于企政查</h3>
+                    <p>通过整合政策大数据库和政策立项库，输入企业名称即可获取企业基本信息、历史立项、知识产权情况，同事获得企业所在区域政策项目匹配结果及同行标杆企业作为规划参考。</p>
+                    <p>是企业全面了解自身，提前做好政策布局规划不可或缺的综合性工具。</p>
+                    <i></i>
+                </div>
+            </div>
+            <div class="system_content" v-show="theme==1">
+                <div class="sys_con_l fl">
+                    <img src="/statics/images/inquire/sys3.png" alt="">
+                </div>
+                <div class="sys_con_r fl">
+                    <h3>关于政策大数据查询应用系统</h3>
+                    <p>政策大数据查询应用系统汇集了全国范围内科技、经信、发改、人社等部门发布的各类型政策，用以满足企业科技顾问、区域科技顾问服务实施中的政策检索、政策规划、条件对比、政策评估、互动交流等需求。</p>
+                    <p>系统将每条政策进行智能标记（包括政策所属类型、技术领域、产业领域、适用对象等信息）和统计，为用户提供更加精准的政策匹配结果，供各用户进行政策检索、分析、统计、下载调用等，实现信息共享的同时将政策应用价值最大化。</p>
+                    <i class="tip_picture"></i>
+                </div>
+            </div>
+            <div class="system_content" v-show="theme==2">
+                <div class="sys_con_l fl">
+                    <img src="/statics/images/inquire/sys1.png" alt="">
+                </div>
+                <div class="sys_con_r fl">
+                    <h3>关于政策立项查询应用系统</h3>
+                    <p>政策立项查询应用系统整体规划基于科技、经信、发改、文化等部门的项目立项名单（包括高新技术企业、高新技术产品、工程中心、企业技术中心、产学研项目等）而设计的数据库平台。满足企业科技项目申报规划的项目检索、同行对比、项目参考、领域参考、分类统计等需求。</p>
+                    <i></i>
+                </div>
+            </div>
+        </section>
+        <!--E=底部-->
+        <div th:replace="~{footer::copy}"></div>
+    </div>
+    <!-- 公共js部分 -->
+    <th:block th:include="block/liblink :: copy" /> 
+    <!-- over -->
+    <script type="text/javascript" th:src="@{/statics/js/component/mylogin.js?v=1.0.2}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/inquire/index.js?v=0.1.2}"></script>
+    
+    <script>
+        $('.title_list>li').mouseover(function(e){
+                $('.title_list>li').removeClass('active');
+                $(this).addClass('active');
+                $(this).children().stop().siblings(".drop_down").animate({
+                    'top':'30px',
+                    'opacity':'1',
+                },200);
+            });
+            $('.title_list>li').mouseout(function(e){
+                $(this).children().stop().siblings(".drop_down").animate({
+                    'top':'-30px',
+                    'opacity':'0'
+                },200);
+            })
+        $(".xcx_h").mouseover(function () {
+            $(".xcx").css({
+                'visibility': 'visible'
+            })
+        })
+        $(".xcx_h").mouseleave(function () {
+            $(".xcx").css({
+                'visibility': 'hidden'
+            })
+        })
+    </script>
+    <th:block th:include="block/statistics :: copy" />
+</body>
+</html>

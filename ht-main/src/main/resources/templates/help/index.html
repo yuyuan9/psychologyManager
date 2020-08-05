@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- 公共头部 -->
+    <th:block th:include="block/headlink :: test('帮助中心')" /> 
+    <!-- 结束 -->
+    <!-- <link rel="stylesheet" th:href="@{/statics/css/user/pagination.css}"> -->
+    <link rel="stylesheet" th:href="@{/statics/css/footer.css?v=0.0.1}">
+    <link rel="stylesheet" th:href="@{/statics/css/user/index.css?v=0.0.2}">
+    <link rel="stylesheet" th:href="@{/statics/css/help/index.css?v=0.0.1}">
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+        footer>div {
+            line-height: 20px;
+            color: #808080;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="user">
+        <div th:replace="~{user_head::copy}"></div>
+        <div th:replace="~{header::copy}"></div>
+    </div>
+    <div class="wrap" id="box">
+         <!--S=帮助中心-->
+        <div class="help_banner">
+            <div class="contain">
+                <h4>帮助中心</h4>
+            </div>
+        </div>
+        <!--E=帮助中心-->
+        <!--S=我是下单人-->
+        <section class="who">
+            <div class="contain">
+                <div class="row">
+                    <div class="who_section1 fl">
+                        <div class="thumbnai_top"><s class="me order_man"></s></div>
+                        <div class="caption">
+                            <p class="me_title ac">我是下单人</p>
+    
+                            <p class="me_text ac">
+                                想要申报项目？ <br/>担忧不清楚如何操作进行， <br/>来先学习下单人教程吧。
+                            </p>
+    
+                            <div class="btn_more"><a href="/help/help/rule_detail" target="_blank" class="more ac" role="button">了解详情</a>
+    
+                            </div>
+                        </div>
+                    </div>
+                    <div class="who_section1 fl">
+                        <div class="thumbnai_top"><s class="me order_server"></s></div>
+                        <div class="caption">
+                            <p class="me_title ac">我是服务商</p>
+    
+                            <p class="me_text ac">
+                                你有很强的能力可以申报？ <br/>但又不了解具体的流程， <br/>都来学习这个吧。
+                            </p>
+    
+                            <div class="btn_more"><a href="/help/help/rule_detail" target="_blank" class="more ac" role="button">了解详情</a>
+    
+                            </div>
+                        </div>
+                    </div>
+                    <div class="who_section1 fl">
+                        <div class="thumbnai_top"><s class="me order_expert"></s></div>
+                        <div class="caption">
+                            <p class="me_title ac">我是专家</p>
+    
+                            <p class="me_text ac">
+                                我是专家，我有技术和能力去 <br/>帮助大家去解决问题，<br/>只需要了解怎么进行。
+                            </p>
+    
+                            <div class="btn_more"><a href="/help/help/rule_detail" target="_blank" class="more ac" role="button">了解详情</a>
+    
+                            </div>
+                        </div>
+                    </div>
+    
+                </div>
+                <!--E=我是下单人-->
+        </section>
+        <!--S=我是下单人-->
+        <section class="rule_center">
+            <div class="contain">
+                <div class="rule_header clearfix">
+                    <s class="line fl"></s>
+    
+                    <p class="rule_word fl">规则中心</p>
+                </div>
+                <div class="rule_contain clearfix">
+                    <div class="rule_top rule_t1 fl">
+                        <div class="rule_icon"><s class="rule_pic pic1"></s></div>
+                        <p class="desc ac">注册协议</p>
+                        <a href="/help/help/rule_detail" target="_blank" class="mask">
+                        </a>
+                        <a href="/help/help/rule_detail" target="_blank" class="look ac">立即查看</a>
+                    </div>
+                    <div class="rule_top rule_t1 fl">
+                        <div class="rule_icon"><s class="rule_pic pic2"></s></div>
+                        <p class="desc ac">服务规则</p>
+                        <a href="/help/help/rule_detail" target="_blank" class="mask">
+                        </a>
+                        <a href="/help/help/rule_detail" target="_blank" class="look ac">立即查看</a>
+                    </div>
+                    <div class="rule_top rule_t1 fl">
+                        <div class="rule_icon"><s class="rule_pic pic3"></s></div>
+                        <p class="desc ac">保证金</p>
+                        <a href="/help/help/rule_detail" target="_blank" class="mask">
+                        </a>
+                        <a href="/help/help/rule_detail" target="_blank" class="look ac">立即查看</a>
+                    </div>
+                    <div class="rule_top rule_t1 fl">
+                        <div class="rule_icon"><s class="rule_pic pic4"></s></div>
+                        <p class="desc ac">评价系统</p>
+                        <a href="/help/help/rule_detail" target="_blank" class="mask">
+                        </a>
+                        <a href="/help/help/rule_detail" target="_blank" class="look ac">立即查看</a>
+                    </div>
+                    <div class="rule_top rule_t2 fl">
+                        <div class="rule_icon"><s class="rule_pic pic5"></s></div>
+                        <p class="desc ac">Honey积分</p>
+                        <a href="/help/help/rule_detail" target="_blank" class="mask">
+                        </a>
+                        <a href="/help/help/rule_detail" target="_blank" class="look ac">立即查看</a>
+                    </div>
+                    <div class="rule_top rule_t2 fl">
+                        <div class="rule_icon"><s class="rule_pic pic6"></s></div>
+                        <p class="desc ac">合同签订</p>
+                        <a href="/help/help/rule_detail" target="_blank" class="mask">
+                        </a>
+                        <a href="/help/help/rule_detail" target="_blank" class="look ac">立即查看</a>
+                    </div>
+                    <div class="rule_top rule_t2 fl">
+                        <div class="rule_icon"><s class="rule_pic pic7"></s></div>
+                        <p class="desc ac">发票开具</p>
+                        <a href="/help/help/rule_detail" target="_blank" class="mask">
+                        </a>
+                        <a href="/help/help/rule_detail" target="_blank" class="look ac">立即查看</a>
+                    </div>
+                    <div class="rule_top rule_t2 fl">
+                        <div class="rule_icon"><s class="rule_pic pic8"></s></div>
+                        <p class="desc ac">名词解释</p>
+                        <a href="/help/help/rule_detail" target="_blank" class="mask">
+                        </a>
+                        <a href="/help/help/rule_detail" target="_blank" class="look ac">立即查看</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--S=联系我们-->
+        <section class="contact_us">
+            <div class="contain ac">
+                <p class="contact_c">联系我们</p>
+    
+                <p class="contact_e">CONTACT US</p>
+                <a href="http://p.qiao.baidu.com/cps/chat?siteId=11406523&userId=20408321" title="高企云咨询" target="_blank" class="inline_contact"><p>在线咨询</p><s class="go"></s></a>
+    
+                <p class="join">您还可以加入高企云高企服务认定群：555630713 &nbsp;| （在线服务时间：周一至周五9:00-17:30）</p>
+            </div>
+        </section>
+        <!--E=底部-->
+        <div th:replace="~{footer::copy}"></div>
+    </div>
+    <!-- 公共js部分 -->
+    <div th:replace="~{block/footlink::copy}"></div>
+    <!-- over -->
+    <script>
+        $('.title_list>li').mouseover(function(e){
+            $('.title_list>li').removeClass('active');
+            $(this).addClass('active');
+            $(this).children().stop().siblings(".drop_down").animate({
+                'top':'30px',
+                'opacity':'1',
+            },200);
+        });
+        $('.title_list>li').mouseout(function(e){
+            $(this).children().stop().siblings(".drop_down").animate({
+                'top':'-30px',
+                'opacity':'0'
+            },200);
+        })
+        $(".xcx_h").mouseover(function () {
+        $(".xcx").css({
+            'visibility': 'visible'
+        })
+        })
+        $(".xcx_h").mouseleave(function () {
+            $(".xcx").css({
+                'visibility': 'hidden'
+            })
+        })
+    </script>
+</body>
+
+</html>

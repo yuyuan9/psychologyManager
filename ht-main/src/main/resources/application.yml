@@ -1,0 +1,137 @@
+spring:
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  aop:
+    auto: true
+  jackson:
+    time-zone: GMT+8
+#  mvc:
+#                           throw-exception-if-no-handler-found: true
+#                         resources:
+#                           add-mappings: false
+#  static-path-pattern: classpath:/static/,classpath:/templates/
+#  mvc:
+#    throw-exception-if-no-handler-found: true
+#  resources:
+#    add-mappings: false
+
+
+#  mvc:
+#    throw-exception-if-no-handler-found: true
+#  resources:
+ #   add-mappings: false
+
+  #mvc:
+  #  static-path-pattern: classpath:/static/,classpath:/templates/
+#spring.http.multipart.maxFileSize=100Mb
+#spring.http.multipart.maxRequestSize=100Mb
+#数据源
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://47.92.70.12:3306/geelink?useUnicode=true&characterEncoding=utf-8&useSSL=true
+#
+    #url: jdbc:mysql://47.92.70.12:3306/gaoqiyun_springboot?useUnicode=true&characterEncoding=utf-8&useSSL=true
+    url: jdbc:mysql://47.92.70.12:3306/test?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&allowMultiQueries=true
+    username: root
+    password: gaoqiyun@123
+    type: com.alibaba.druid.pool.DruidDataSource
+    filters: stat
+    maxActive: 20
+    initialSize: 1
+    maxWait: 60000
+    minIdle: 1
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+  redis:
+      timeout: 30000
+      host: 120.24.154.152
+      port: 6379
+      password: 2018!gqy@redis23d65
+  thymeleaf:
+    mode: HTML5
+    suffix: .html
+    prefix: classpath:/templates/
+    encoding: UTF-8
+    cache: false
+    servlet:
+      content-type: text/html
+ 
+  
+  messages:
+    basename: message
+    encoding: UTF-8
+    
+  servlet:
+    multipart:
+      enabled: true
+      location: 
+      max-file-size: 100MB
+      file-size-threshold: 0
+      resolve-lazily: false
+      max-request-size: 100MB
+mybatis-plus:
+   global-config:
+    id-type: 3
+    field-strategy: 2 
+    refresh-mapper: true
+    db-column-underline: true
+#globalConfigOne:
+    #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+#  idType: 0
+    #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
+#  fieldStrategy: 2
+    #驼峰下划线转换
+#  dbColumnUnderline: true
+    #刷新mapper 调试神器
+#  refreshMapper: true
+#globalConfigShrio:
+    #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+#  idType: 3
+    #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
+#  fieldStrategy: 2
+    #驼峰下划线转换
+ # dbColumnUnderline: true
+    #刷新mapper 调试神器
+ # refreshMapper: true
+#redis: 
+#  shiro:
+#    host: 47.92.26.13
+#    port: 6379
+#    timeout: 0
+#    password: 2018!gqy@redis23d65
+guava:
+  cache:
+    maximumSize: 10000
+    expire: 15
+
+  #为true：高企云的接口；false：geelink接口
+api:
+  devproduct: true
+  policyDig : true
+  
+#为true，线上；false，测试
+solr:
+  dataupload: false
+
+#是否激活 swagger true or false
+swagger:
+  enable: true
+#高企云
+  #devproduct: false #geelink
+logging:
+  level:
+    root : error
+    com: 
+      ht:
+        biz:
+          mapper: debug
+ 

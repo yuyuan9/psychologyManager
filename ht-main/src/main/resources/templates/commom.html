@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+</head>
+<body>
+    <section th:fragment="banner" class="banner">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="5000">
+            <!-- 轮播（Carousel）指标 -->
+            <ol class="carousel-indicators">
+                <li v-if="index == 0" v-for="(list,index) in bannerList" data-target="#myCarousel" :data-slide-to="index" class="active"></li>
+                <li v-if="index > 0" v-for="(list,index) in bannerList" data-target="#myCarousel" :data-slide-to="index"></li>
+            </ol>
+            <!-- 轮播（Carousel）项目 -->
+            <div class="carousel-inner">
+                <div v-if="index == 0" class="item active" v-for="(list,index) in bannerList">
+                    <a target="_blank" :href="list.url">
+                        <img :src="'http://47.92.70.12:9090'+ list.imgpath">
+                    </a>
+                </div>
+                <div v-if="index > 0" class="item" v-for="(list,index) in bannerList">
+                    <a target="_blank" :href="list.url">
+                        <img :src="'http://47.92.70.12:9090'+ list.imgpath">
+                    </a>
+                </div>
+
+            </div>
+        </div>
+        <div v-cloak class="declare">
+            <div class="declare_box">
+                <div class="declare_head">
+                    <h2>政策智能匹配</h2>
+                    <!-- <h3>立项、知产、政策、同行，一键获取</h3> -->
+                </div>
+                <div class="declare_nav clearfix">
+                    <p @click="match=0" :class="{active:match==0}">初步匹配</p>
+                    <p @click="checklogin();" onclick="techied();" :class="{active:match==1}">精准匹配</p>
+                </div>
+                <div class="declare_content">
+                    <div v-show="match==0">
+                        <div class="declare_ipt">
+                            <span><i>*</i>企业名称：</span>
+                            <input type="text" name="companyName1" placeholder="请输入"><s class="declare_icon"></s>
+                        </div>
+                        <div class="declare_ipt">
+                            <span><i>*</i>注册地区：</span>
+                            <el-form ref="form" :model="form" label-width="100px">
+                                <el-cascader :options="CityInfo" :props="optionProps" v-model="form.selectedOptions"
+                                    :change-on-select="true" :clearable="true" :filterable="true"
+                                    @change="handleChange">
+                                </el-cascader>
+                            </el-form>
+                        </div>
+                        <span class="pp" id="region1">{{form.city | myAddressCity}}</span>
+                        <span class="pp" id="region2">{{form.erae | myAddressErae}}</span>
+                        <span class="pp" id="region3">{{form.minerae | myAddressMinerae}}</span>
+                        <div class="button" @click="preliminaryMatch()">立即匹配</div>
+                        <div class="count clearfix">
+                            <p class="p1">
+                                <span class="timer count-title" id="count-number" data-from="0.001" data-speed="2000"
+                                    v-bind:data-to="company"></span>
+                                <span class="timer count-title" id="count-number" data-from="0.001" data-speed="2000"
+                                    v-bind:data-to="provider"></span>
+                                <span class="timer count-title" id="count-number" data-from="0.001" data-speed="2000"
+                                    v-bind:data-to="professor"></span>
+                            </p>
+                            <p class="p2">
+                                <span>已服务企业数</span>
+                                <span>入驻服务商</span>
+                                <span>入驻专家</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div v-show="match==1">
+                        <div class="declare_ipt">
+                            <span><i>*</i>企业名称：</span>
+                            <input type="text" name="companyName2" placeholder="请输入"><s class="declare_icon"></s>
+                        </div>
+                        <div class="declare_ipt">
+                            <span><i>*</i>注册地区：</span>
+                            <el-form ref="form1" :model="form1" label-width="100px">
+                                <el-cascader :options="CityInfo" :props="optionProps" v-model="form1.selectedOptions"
+                                    :change-on-select="true" :clearable="true" :filterable="true"
+                                    @change="handleChange1">
+                                </el-cascader>
+                            </el-form>
+                        </div>
+                        <span class="pp" id="regions1">{{form1.city | myAddressCity}}</span>
+                        <span class="pp" id="regions2">{{form1.erae | myAddressErae}}</span>
+                        <span class="pp" id="regions3">{{form1.minerae | myAddressMinerae}}</span>
+                        <div class="declare_ipt">
+                            <span><i>*</i>申报领域：</span>
+                            <select id="productServ" v-model="productServ" name="productServ" class="situation fl">
+                                <option>请选择</option>
+                            </select>
+                        </div>
+                        <div class="declare_ipt">
+                            <span style="padding-left: 13px;">企业规模：</span>
+                            <select id="guimo" v-model="guimo" name="guimo"  class="situation fl">
+                                <option>请选择</option>
+                            </select>
+                        </div>
+                        <div class="button" style="margin-top: 0px;" @click="preciseMatch()">立即匹配</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <div th:fragment="package" class="package">
+
+        <div class="product_r_img" @mouseover="curAccordion=0" :class="{active:curAccordion==0}">
+            <a href="/ht-biz/library/package.html#pack1" target="_blank">
+                <h2>
+                    单点政策资源包 <s class="professor_icon"></s>
+                </h2>
+                <p>项目专属资源在线分享</p>
+            </a>
+        </div>
+        <ul class="product_r_text" v-show="curAccordion==0">
+            <li class="product_r_text_hyrows" v-for="(index,list) in delibraryList1"><s>{{list + 1}}</s><a target="_blank"
+                    :href="'/ht-biz/resouce/findbyid?id='+index.id" :title="index.name" v-html="index.name"></a>
+            </li>
+            <div class="view_more">
+                <a href="/ht-biz/library/package.html#pack1" target="_blank">查看更多<s class="professor_icon2"></s></a>
+            </div>
+        </ul>
+
+        <div class="product_r_img1" @mouseover="curAccordion=1" :class="{active:curAccordion==1}">
+            <a href="/ht-biz/library/package.html#pack2" target="_blank">
+                <h2>
+                    行业政策资源包 <s class="professor_icon1"></s>
+                </h2>
+                <p>全国重点支持领域政策体系全解</p>
+            </a>
+        </div>
+        <ul class="product_r_text" v-show="curAccordion==1">
+            <li class="product_r_text_hyrows" v-for="(index,list) in delibraryList2"><s>{{list + 1}}</s><a target="_blank"
+                    :href="'/ht-biz/resouce/findbyid?id='+index.id" :title="index.name" v-html="index.name"></a>
+            </li>
+            <div class="view_more">
+                <a href="/ht-biz/library/package.html#pack2" target="_blank">查看更多<s class="professor_icon2"></s></a>
+            </div>
+        </ul>
+
+        <div class="product_r_img2" @mouseover="curAccordion=2" :class="{active:curAccordion==2}">
+            <a href="/ht-biz/library/package.html#pack3" target="_blank">
+                <h2>
+                    区域政策资源包 <s class="professor_icon1"></s>
+                </h2>
+                <p>区域各主管单位政策体系汇编</p>
+            </a>
+        </div>
+        <ul class="product_r_text" v-show="curAccordion==2">
+            <li class="product_r_text_hyrows" v-for="(index,list) in delibraryList3"><s>{{list + 1}}</s><a target="_blank"
+                    :href="'/ht-biz/resouce/findbyid?id='+index.id" :title="index.name" v-html="index.name"></a>
+            </li>
+            <div class="view_more">
+                <a href="/ht-biz/library/package.html#pack3" target="_blank">查看更多<s class="professor_icon2"></s></a>
+            </div>
+        </ul>
+
+    </div>
+
+</body>
+
+</html>

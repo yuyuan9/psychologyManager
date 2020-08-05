@@ -1,0 +1,241 @@
+.service_content>.shop_details{
+    background-color: #fff;
+    width: 978px;
+    /* height: 560px; */
+    margin-left: 12px;
+}
+.shop_head {
+    margin: 0 32px 38px 32px;
+}
+.shop {
+    font-size: 24px;
+    color: #333333;
+    margin: 44px 620px 16px 0;
+}
+.shop_check {
+    display: inline-block;
+    width: 88px;
+    height: 36px;
+    line-height: 36px;
+    font-size: 14px;
+    text-align: center;
+}
+.shop_check {
+    color: #FF4B2C;
+    margin: 32px 8px 16px 0;
+    border: 1px solid #FF4B2C;
+}
+.shop_check1 {
+    background:linear-gradient(90deg,rgba(255,125,74,1),rgba(255,74,43,1));
+    border-radius:2px;
+    border: none;
+}
+.shop_check1>a {
+    color: #ffffff;
+}
+.s_x {
+    border: 0.5px solid #DBDBDB;
+}
+.sign {
+    width: 4px;
+    height: 20px;
+    background-color: #FF5B35;
+}
+.shop_name {
+    font-size: 24px;
+    color: #333333;
+    width: 250px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.shop_infos {
+    width: 900px;
+    height: 325px;
+    overflow: hidden;
+    background: url("../../images/service/exchange_img/service-detail-bg.png");
+}
+.shop_basic {
+    margin: 32px 0 24px 0;
+}
+.basic_one {
+    color: #333333;
+}
+.one_h,.one_h1 {
+    width:1px;
+    height:16px;
+    margin: 0 20px;
+    vertical-align: middle;
+    background:rgba(219,219,219,1);
+}
+.one_h1 {
+    margin: 0 12px;
+}
+.basic_two {
+    margin-top: 24px;
+}
+.baozhang {
+    width: 76px;
+    height: 18px;
+    background: url("../../images/service/exchange_img/sevice_s.png") -28px -4px no-repeat;
+}
+.rz {
+    width: 88px;
+    height: 18px;
+    background: url("../../images/service/exchange_img/sevice_s.png") -28px -28px no-repeat;
+    /* margin-right: 254px; */
+}
+.sign,.baozhang,.shop_name {
+    margin-right: 12px;
+}
+.sn {
+    margin-top: 52px;
+}
+.sn1 {
+    margin-top: 12px;
+    font-size: 12px;
+}
+.sn2 {
+    line-height: 20px;
+    margin-bottom: 108px;
+}
+.shop_l_img {
+    width: 200px;
+    height: 200px;
+    background:linear-gradient(0deg,rgba(177,212,255,1),rgba(255,255,255,1));
+}
+.shop_l {
+    cursor: pointer;
+    width: 270px;
+    height: 325px;
+}
+.level {
+    width: 14px;
+    height: 12px;
+    background: url("../../images/service/exchange_img/sevice_s.png") -5px -5px no-repeat;
+}
+.locat {
+    width: 10px;
+    height: 12px;
+    margin-right: 4px;
+    background: url("../../images/service/exchange_img/sevice_s.png") -115px -7px no-repeat;
+}
+.comj {
+    width: 542px;
+    margin-top: 24px;
+}
+.process {
+    width: 978px;
+    margin-left: 12px;
+    margin-top: 12px;
+}
+.process1 {
+    margin-left: 220px;
+}
+.process_w {
+    background-color: #fff;
+}
+.process_w_w {
+    margin: 0 122px 12px 56px;
+}
+.process_w_w img{
+    width: 100%;
+}
+.process_t {
+    font-size: 18px;
+    color: #333333;
+    font-weight: bold;
+    padding-top: 32px;
+}
+.process_i {
+    width: 8px;
+    height: 8px;
+    background-color: #FB6A53;
+    vertical-align: middle;
+    margin-right: 16px;
+}
+.honor {
+    width: 100%;
+    margin-bottom: 28px;
+    margin-right: 22px;
+}
+.process_img {
+    margin-top: 32px;
+}
+.process_img1 {
+    width: 100%;
+    margin-left: 28px;
+}
+.process_img1>img{
+    width: 100%;
+}
+.process_img1>img {
+    width: 100%;
+}
+.process_it {
+    font-size: 14px;
+    color: #303C3C;
+    margin-top: 32px;
+    margin-left: 20px;
+}
+.process_it1 {
+    text-align: center;
+}
+.process_it2 {
+    padding-bottom: 56px;;
+}
+.pimg {
+    width: 800px;
+}
+.process_honor {
+    width: 230px;
+    text-align: center;
+}
+.hk {
+    display: inline-block;
+}
+footer .copyright {
+    width: 100%;
+    height: 50px;
+    font-size: 14px;
+    padding-top: 14px;
+    background-color: #1B1B1B;
+}
+footer .copyright p {
+    display: inline-block;
+    vertical-align: middle;
+}
+.grade {
+    color: #FF502F;
+}
+.process_text{
+    margin-bottom: 20px;
+    margin-top: 20px;
+    padding-bottom: 20px;
+}
+
+
+/* 更换头像 */
+.upload_btn0 {
+    margin-top: 20px;
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
+    overflow: hidden;
+    background: url("../../images/service/up_img.jpg")center no-repeat;
+    background-size: 100%;
+}
+.file_ipt1 {
+    display: none !important;
+}
+.upload_img {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    margin-left:50px;
+    margin-top: 50px;
+}
+.shop_r{
+    width: 592px;
+}

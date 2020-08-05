@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+<link rel="stylesheet" th:href="@{/statics/app/css/reset.css}">
+<link rel="stylesheet" th:href="@{/statics/app/css/index/policyzx.css}">
+<link rel="stylesheet" th:href="@{/statics/app/css/vant_common.css}">
+
+<head>
+   <title>立项查询</title>
+<style>
+    [v-cloak] {
+        display: none;
+    }
+    .van-dropdown-menu__title {
+        font-size: 3.2vw;
+    }
+</style>
+</head>
+<body>
+    <div id="app-projectcx" class="a_projectcx" v-cloak>
+        <div class="project_bg">
+            <div class="zc_hd">
+                <a href="/ht-biz/app/index/index?refer=2">
+                    <i class="to_zc dib"></i>
+                    <span class="zccx">立项查询</span>
+                    <span class="zc_t">企业立项检索.政策应用规范.同行标杆参考</span>
+                </a>
+            </div>
+            <div class="zc_icom">
+                <input type="text" name="keyword" v-model="keyword" id="keyword"  placeholder="请输入..." class="pj_input dib">
+                <i class="zc_search dib" @click="projectData(1)"></i>
+            </div>
+        </div>
+        <!-- 查找结果 -->
+        <div class="search_r">
+            <div class="result">
+                <div class="total dib">已为您匹配<span class="r_total">{{total}}</span>条结果</div>
+                <!-- 地区选择 -->
+                <div class="dib diqu" @click="showPopup">{{area || city || province}}</div><i class="pull" @click="showPopup"></i>
+                
+                <!-- 年份 -->
+                <div class="dib year">
+                    <van-dropdown-menu style="height: 10.6vw;">
+                        <van-dropdown-item v-model="value1" :options="option1" @change="yearchange"></van-dropdown-item>
+                    </van-dropdown-menu>
+                </div>
+            </div>
+            <div>
+                <!-- <ul> -->
+                <van-list v-model="loading" :finished="finished" finished-text="没有更多了"  :error.sync="error" error-text="请求失败，点击重新加载" @load="projectData" > 
+                    <div class="zc_item" v-for="list in projectList">
+                        <!-- <a :href="'/ht-biz/app/projectlib/details?id='+list.id"> -->
+                        <a href="javascript:void(0);" @click="projectbDetails(list.id)">
+                            <p class="c_name dib" v-html="list.companyName">{{list.companyName}}</p><i class="c_details dib"></i>
+                        </a>
+                        <p class="c_b">
+                            <span class="dib sbtj sbtj1">项目名称：<span v-html="list.name">{{list.name}}</span></span>
+                            <span class="dib peitao peitao1">立项额度：<span v-html="list.quota">{{list.quota}}</span></span>
+                        </p>
+                    </div>
+                </van-list>
+                    
+                <!-- </ul> -->
+            </div>
+            <!-- 无结果页 -->
+            <div class="hasno" style="display: none;">
+                <div class="no_result"></div>
+                <p class="N">无搜索结果</p>
+                <p class="huan">试试换一下关键词或搜索条件吧</p>
+            </div>
+        </div>
+        <threelink :show="show" @comfirm="queren" @cancel="btn"></threelink>
+    </div>
+    <script type="text/javascript" th:src="@{/statics/app/js/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/vue.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/vant.min.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/layer.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/jquery.area.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/htajax.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/component/threeLink.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/projectlib/projectlib.js?v=0.03}"></script>
+</body>
+
+<!-- <script type="text/javascript">
+
+var sign = 10;
+$(window).scroll(function () {
+    var s = $(window).scrollTop();
+    var c= 500;
+    //alert(s);
+    if (s >= c) {
+        var oScrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        if (oScrollTop - sign > c) {
+        	c=oScrollTop - sign-20;
+            sign = oScrollTop;//更新scrollTop
+            projectcx.projectData(projectcx.page.current);
+        }
+    }
+});
+
+</script> -->
+
+</html>

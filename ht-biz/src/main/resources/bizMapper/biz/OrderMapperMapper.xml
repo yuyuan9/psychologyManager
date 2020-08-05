@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.biz.mapper.OrderMapper">
+	<select id="findlist" parameterType="com.ht.commons.utils.MyPage" resultType="com.ht.commons.utils.PageData">
+		select 
+		o.id,
+		o.productId,
+		o.number,
+		o.productCounts,
+		o.productPrice,
+		o.serviceCast,
+		o.productName,
+		s.shopname,
+		s.id shopid,
+        o.serviceId,
+		IFNULL(u.phone,u.trueName) createid,
+		o.serviceCast,
+		o.status,
+		o.createdate,
+		o.refuse,
+		o.userDeleted,
+		o.serviceDeleted,
+		IFNULL(s.shopimg,'')shopimg
+		from t_order o 
+		left join t_sys_service s on o.serviceId=s.createid
+		left join t_sys_user u on o.createid=u.user_id
+		where 1=1
+		<if test="pd.keyword!=null and pd.keyword!=''">
+			and
+			(
+				o.number LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+			    or
+				o.productName LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+				or
+				s.banme LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+				or
+				u.phone LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+				or
+				u.trueName LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+				or
+				o.serviceCast LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+				or
+				o.createdate LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+			)
+		</if>
+		<if test="pd.userId!=null and pd.userId!=''">
+			and o.createid=#{pd.userId}
+			and o.userDeleted=0
+		</if>
+		<if test="pd.serviceId!=null and pd.serviceId!=''">
+			and o.serviceId=#{pd.serviceId}
+			and o.serviceDeleted=0
+		</if>
+		<if test="pd.status!=null">
+			and o.status=#{pd.status}
+		</if>
+		order by o.createdate desc
+	</select>
+	<select id="findById" parameterType="com.ht.commons.utils.PageData" resultType="com.ht.entity.biz.product.Order">
+		select
+		o.id,
+		o.number,
+		o.createdate,
+		o.status,
+		o.companyName,
+		o.province,
+		o.productName,
+		o.productCounts,
+		o.productPrice,
+		o.serviceCast,
+		o.city,
+		o.area,
+		o.linkman,
+		o.phone,
+		s.shopname serviceId,
+		s.phone servicePhone,
+		s.contacts serviceLinkman,
+		o.productId,
+		o.remark,
+		o.refuse
+		from t_order o 
+		left join t_sys_service s on o.serviceId=s.createid
+		where 1=1 
+		and o.id=#{id}
+	</select>
+	<update id="updateOrder" parameterType="com.ht.entity.biz.product.Order">
+	    update t_order
+	    <set>
+	    	<if test="status !=null and status !=0">status=#{status},</if>
+	    	<if test="userDeleted !=null  and userDeleted !=0">userDeleted=#{userDeleted},</if>
+	    	<if test="serviceDeleted !=null  and serviceDeleted !=0">serviceDeleted=#{serviceDeleted},</if>
+	    	<if test="refuse !=null and refuse!=''">refuse=#{refuse},</if>
+	    	<if test="lastmodified !=null">lastmodified=#{lastmodified},</if>
+	    </set>
+	    where id=#{id}
+	</update>
+	<select id="listCounts" parameterType="com.ht.commons.utils.PageData" resultType="com.ht.commons.utils.PageData">
+		select IFNULL(0,status)status,count(0)count from t_order where serviceId=#{serviceId} and status=0
+		<if test="userId!=null and userId!=''">
+			and userDeleted=0
+		</if>
+		<if test="serviceId!=null and serviceId!=''">
+			and serviceDeleted=0
+		</if>
+		union all
+		select IFNULL(1,status)status,count(0)count from t_order where serviceId=#{serviceId} and status=1
+		<if test="userId!=null and userId!=''">
+			and userDeleted=0
+		</if>
+		<if test="serviceId!=null and serviceId!=''">
+			and serviceDeleted=0
+		</if>
+		union all
+		select IFNULL(2,status)status,count(0)count from t_order where serviceId=#{serviceId} and status=2
+		<if test="userId!=null and userId!=''">
+			and userDeleted=0
+		</if>
+		<if test="serviceId!=null and serviceId!=''">
+			and serviceDeleted=0
+		</if>
+	</select>
+</mapper>

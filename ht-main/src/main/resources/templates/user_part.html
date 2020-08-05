@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+</head>
+
+<body>
+    <div th:fragment="copy">
+        <div class="user_head clearfix">
+            <div v-cloak class="user_head_l fl">
+                <div v-cloak v-if="headImg == null"><img src="/statics/images/user/head.png" alt=""></div>
+                <div v-cloak v-if="headImg!=null"><img :src="'http://47.92.70.12:9090'+headImg" alt=""></div>
+            </div>
+            <div class="user_head_r fl">
+                <h3 v-cloak>{{username}}</h3>
+                <!-- <h3 v-cloak>{{username|hideMiddle}}</h3> -->
+                <p v-cloak v-if="userInfoType == null"><s>{{userGrade}}</s>-普通用户</p>
+                <p v-cloak v-if="userInfoType == 'DEFAULT_USER'"><s>{{userGrade}}</s>-普通用户</p>
+                <!-- <p v-cloak v-if="userInfoType == ''"><s>{{userGrade}}</s>-普通用户</p> -->
+                <!-- <p v-cloak v-if="userInfoType == undefined"><s>{{userGrade}}</s>-普通用户4</p> -->
+                <p v-cloak v-if="userInfoType == 'ADMIN'"><s>{{userGrade}}</s>-ADMIN</p>
+                <p v-cloak v-if="userInfoType == 'COMPANY_USER'" ><s>{{userGrade}}</s>-企业用户</p>
+                <p v-cloak v-if="userInfoType == 'SERVICE_PROVIDER'"><s>{{userGrade}}</s>-服务商</p>
+            </div>
+        </div>
+        <ul class="user_column">
+            <li class="page-index">
+                <a href="/ht-biz/usercenter/user/index">
+                    <p class="p1"><i></i>主页<s></s></p>
+                </a>
+            </li>
+            <li class="page-honey">
+                <a href="/ht-biz/usercenter/user/honey">
+                    <p class="p2"><i></i>honey值&金币<s></s></p>
+                </a>
+            </li>
+            <li class="page-doc">
+                <a href="/ht-biz/usercenter/user/document">
+                    <p class="p3"><i></i>我的文档<s></s></p>
+                </a>
+            </li>
+            <li class="page-assess">
+                <a href="/ht-biz/usercenter/user/assess">
+                    <p class="p4"><i></i>我的评估<s></s></p>
+                </a>
+            </li>
+            <li class="page-share">
+                <a href="/ht-biz/usercenter/user/share">
+                    <p class="p5"><i></i>分享中心<s></s></p>
+                </a>
+            </li>
+            <!-- <li class="page-order">
+                <a href="/ht-biz/usercenter/user/myorder">
+                    <p class="p11"><i></i>我的订单<s></s></p>
+                </a>
+            </li> -->
+            <!-- <li class="page-cart">
+                <a href="/ht-biz/usercenter/user/cart">
+                    <p class="p12"><i></i>购物车管理<s></s></p>
+                </a>
+            </li> -->
+            <li class="page-info">
+                <a href="/ht-biz/usercenter/user/infoUser">
+                    <p class="p6"><i></i>个人信息管理<s></s></p>
+                </a>
+            </li>
+            <li v-cloak v-if="userInfoType == 'SERVICE_PROVIDER' " class="page-myCard">
+                <a href="/ht-biz/usercenter/user/add_card">
+                    <p class="p10"><i></i>银行卡管理<s></s></p>
+                </a>
+            </li>
+            <li v-cloak v-if="userInfoType == 'COMPANY_USER' " class="page-infoCompany">
+                <a href="/ht-biz/usercenter/user/infoCompany">
+                    <p class="p7"><i></i>企业信息管理<s></s></p>
+                </a>
+            </li>
+            
+            <!-- <li v-cloak v-if="userInfoType == 'SERVICE_PROVIDER' " class="page-myShop">
+                <a href="/ht-biz/service/index/information">
+                    <p class="p9"><i></i>我的店铺<s></s></p>
+                </a>
+            </li> -->
+
+        </ul>
+    </div>
+</body>
+
+</html>

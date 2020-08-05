@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>高企云文库</title>
+    <meta name="keywords" content="高企云文库,高企云政策解读,高企云培训课件" />
+    <meta name="description" content="高企云文库为您提供科技政策项目政策解读、公示名录、培训课件、政策文件等文档，让您快速掌握行业最新资讯." />    
+    <!-- 公共头部 -->
+    <th:block th:include="block/headlink :: test('文库')" />
+    <!-- 结束 -->
+    <link rel="stylesheet" th:href="@{/statics/css/library/library.css?v=0.0.6}">
+</head>
+
+<body>
+    <div id="box"></div>
+    <div id="box1"></div>
+    <div class="wrap" id="user">
+        <div th:replace="~{user_head::copy}"></div>
+    </div>
+
+    <div class="wrap" id="library" @click.stop="isProvince=false;isCity=false;isArea=false" v-cloak>
+        <mylogin :islogin="false" @close-login="isLogin=!false"></mylogin>
+        <section class="head clearfix">
+            <div th:replace="~{library_nav::copy}"></div>
+        </section>
+        <section class="library_details clearfix">
+
+            <div class="library_content clearfix">
+                <div class="navigation clearfix">
+                    <p class="bread_nav fl"><a>当前位置：</a> <a href="/">首页</a> &gt; <a
+                            href="/ht-biz/library/index?curPolicy=8">高企云文库</a></p>
+                </div>
+                <div class="library_content_l fl">
+
+                    <div class="condition clearfix">
+                        <div class="condition0 clearfix">
+                            <p class="fl condition0_p">
+                                <span @click="conceal=1;curPolicy=8;key=0;getPitchData()"
+                                    :class="{active:curPolicy==8}">全部</span>
+                                <span @click="conceal=1;curPolicy=9;key=0;getPitchData()"
+                                    :class="{active:curPolicy==9}">资源包</span>
+                                <span @click="conceal=1;curPolicy=7;key=0;getPitchData()"
+                                    :class="{active:curPolicy==7}">产业报告</span>    
+                                <span @click="conceal=1;curPolicy=4;key=0;getPitchData()"
+                                    :class="{active:curPolicy==4}">政策解读</span>
+                                <span @click="conceal=1;curPolicy=2;key=0;getPitchData()"
+                                    :class="{active:curPolicy==2}">模板范文</span>
+                                <span @click="conceal=1;curPolicy=1;key=0;getPitchData()"
+                                    :class="{active:curPolicy==1}">培训资料</span>
+                                <span @click="conceal=1;curPolicy=6;key=0;getPitchData()"
+                                    :class="{active:curPolicy==6}">申报通知</span>
+                                <span @click="conceal=1;curPolicy='0';key=0;getPitchData()"
+                                    :class="{active:curPolicy=='0'}">公示名录</span>
+                                <span @click="conceal=1;curPolicy=5;key=0;getPitchData()"
+                                    :class="{active:curPolicy==5}">政府文件</span>
+                                <span @click="conceal=1;curPolicy=3;key=0;getPitchData()"
+                                    :class="{active:curPolicy==3}">其他</span>
+                            </p>
+                        </div>
+                        <div class="condition1 clearfix">
+                            <span class="fl">地区范围：</span>
+                            <!-- 地区选择 -->
+                            <div class="choice region lib_area_t">
+                                <span class="choice_content" :class="{active:isRegion==1}"
+                                    @click="conceal=1;key=0;isRegion=1;province='省级'; city='市级';isCityActive=0;area='区级';showArea=true;isAreaActive=0;pitchCity='';pitchArea='';getPitchData();">国家</span>
+                                <!-- 省级 -->
+                                <span v-cloak class="choice_content choice_kk" :class="{active:isRegion==2}"
+                                    @click.stop.prevent="isProvince=true;">
+                                    <s id="province_text">{{province}}</s><i class="arrow"></i>
+                                    <ul v-cloak class="province" v-show="isProvince">
+                                        <li v-cloak v-for="(region, index) in regionData"
+                                            @click.stop.prevent="conceal=1;key=0;province = region.n;isProvince=false;isRegion=2;city='市级';pitchCity='';isCityActive=0;area='区级';pitchArea='';isAreaActive=0;getPitchData();">
+                                            {{region.n}}</li>
+                                    </ul>
+                                </span>
+                                <!-- 市级 -->
+                                <span v-cloak class="choice_content choice_kk" :class="{active:isCityActive==1}"
+                                    @click.stop.prevent="getCityData();">
+                                    {{city}}<i class="arrow"></i>
+                                    <ul v-cloak class="city" v-show="isCity">
+                                        <li v-cloak v-for="(c, index) in cityData"
+                                            @click.stop.prevent="conceal=1;key=0;choseCity(c.n);getPitchData();">{{c.n}}
+                                        </li>
+                                    </ul>
+                                </span>
+                                <!-- 区级 -->
+                                <span v-cloak class="choice_content choice_kk" @click.stop.prevent="stopThings();"
+                                    :class="{active:isAreaActive==1}" v-show="showArea">
+                                    {{area}}<i class="arrow"></i>
+                                    <ul v-cloak class="area" v-show="isArea">
+                                        <li v-for="(a, index) in areaData"
+                                            @click.stop.prevent="conceal=1;key=0;area = a.n;isArea=false;if(isCityActive==1){isAreaActive=1};getPitchData();">
+                                            {{a.n}}</li>
+                                    </ul>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="condition2 clearfix">
+                            <span class="fl">项目分类：</span>
+                            <p class="fl condition2_p">
+                                <span @click="conceal=1;curProject=8;key=0;getPitchData()"
+                                    :class="{active:curProject==8}">全部</span>
+                                <span @click="conceal=1;curProject=1;key=0;getPitchData()"
+                                    :class="{active:curProject==1}">高新技术企业</span>
+                                <span @click="conceal=1;curProject=2;key=0;getPitchData()"
+                                    :class="{active:curProject==2}">研发机构</span>
+                                <span @click="conceal=1;curProject=3;key=0;getPitchData()"
+                                    :class="{active:curProject==3}">科研立项</span>
+                                <span @click="conceal=1;curProject=4;key=0;getPitchData()"
+                                    :class="{active:curProject==4}">知识产权</span>
+                                <span @click="conceal=1;curProject=5;key=0;getPitchData()"
+                                    :class="{active:curProject==5}">科技成果</span>
+                                <span @click="conceal=1;curProject=6;key=0;getPitchData()"
+                                    :class="{active:curProject==6}">科技财金</span>
+                                <span @click="conceal=1;curProject=7;key=0;getPitchData()"
+                                    :class="{active:curProject==7}">人才团队</span>
+                                <span @click="conceal=1;curProject=9;key=0;getPitchData()"
+                                    :class="{active:curProject==9}">其他</span>
+                            </p>
+                        </div>
+                        <!-- <div class="condition3 clearfix">
+                            <span class="fl">技术领域：</span>
+                            <p class="fl condition2_p">
+                                <span @click="curTechnology=0;getPitchData()" :class="{active:curTechnology==0}">全部</span>
+                                <span @click="curTechnology=1;getPitchData()" :class="{active:curTechnology==1}">电子信息</span>
+                                <span @click="curTechnology=2;getPitchData()" :class="{active:curTechnology==2}">生物与新医药</span>
+                                <span @click="curTechnology=3;getPitchData()" :class="{active:curTechnology==3}">航天航空</span>
+                                <span @click="curTechnology=4;getPitchData()" :class="{active:curTechnology==4}">新材料</span>
+                                <span @click="curTechnology=5;getPitchData()" :class="{active:curTechnology==5}">高科技服务</span>
+                                <span @click="curTechnology=6;getPitchData()" :class="{active:curTechnology==6}">新能源与节能</span>
+                                <span @click="curTechnology=7;getPitchData()" :class="{active:curTechnology==7}">资源与环境</span>
+                                <span @click="curTechnology=8;getPitchData()" :class="{active:curTechnology==8}">其他</span>
+                            </p>
+                        </div> -->
+                    </div>
+
+                    <div class="some_tj">
+                        <div v-if="conceal != 0">
+                            <p class="tiaojian fl">已选条件：</p>
+
+                            <span class="have_close fl" v-cloak v-if="pitchDataRegion">
+                                {{pitchDataRegion}}
+                                <i class="close"
+                                    @click="pitchDataRegion = '';isRegion=0;isCityActive=0;isAreaActive=0;province='省级';city='市级';area='区级';pitchCity='';pitchArea='';getRegion();"></i>
+                            </span>
+                            <span class="have_close fl" v-cloak v-if="pitchCity">
+                                {{pitchCity}}
+                                <i class="close"
+                                    @click="pitchCity = '';city='市级';isCityActive=0;pitchArea='';area='区级';isAreaActive=0;getRegion();"></i>
+                            </span>
+                            <span class="have_close fl" v-cloak v-if="pitchArea">
+                                {{pitchArea}}
+                                <i class="close"
+                                    @click="pitchArea = '';area='区级';isAreaActive=0;getRegion();"></i>
+                            </span>
+                            <span class="have_close fl" v-cloak v-if="pitchPolicy">
+                                {{pitchPolicy}}
+                                <i class="close" @click="pitchPolicy = '';curPolicy=8;getRegion();"></i>
+                            </span>
+                            <span class="have_close fl" v-cloak v-if="pitchProject">
+                                {{pitchProject}}
+                                <i class="close" @click="pitchProject = '';curProject = '';getRegion();"></i>
+                            </span>
+                            <span class="have_close fl" v-cloak v-if="pitchTechnology">
+                                {{pitchTechnology}}
+                                <i class="close"
+                                    @click="pitchTechnology = '';curTechnology='';getRegion();"></i>
+                            </span>
+                            <p>
+                                <i v-if="keywords != ''" style="color: #8797ca;">“{{keywords}}”</i>
+                                <span>共为您查询<i style="margin: 0 5px;;color: #ff7948;">{{total}}</i>条结果</span>
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="library_show clearfix">
+                        <p v-if="keywords != '' && key == 1">搜索内容列表</p>
+                        <p v-if="key == 0">内容列表</p>
+                        <span class="fr look_info">
+                            <s class="fl">上传者</i></s>
+                            <s class="fl">浏览量</i></s>
+                            <s class="fl">上传日期</i></s>
+                        </span>
+                    </div>
+                    <div class="library_show_con">
+                        <div>
+                            <p v-cloak v-for="(list,index) in contentDatas">
+                                <!-- 资源包 -->
+                                <a v-if="list.libtype==9" class="clearfix"
+                                    :href="'/ht-biz/resouce/findbyid?id='+list.id" target="_blank"
+                                    :title="list.titletext">
+                                    <s class="fl" v-if="list.istop==1&&index<3"></s>
+                                    <i class="fl title_library">【资源包】<span v-html="list.title"></span></i>
+                                    <span class="text_xq">
+                                        <span v-cloak>{{list.uploadusername}}</span>
+                                        <!-- <span v-cloak>{{list.browsecount+list.jbrowsecount}}</span> -->
+                                        <span v-cloak>{{list.browsecount}}</span>
+                                        <span v-cloak>{{list.createdate|date}}</span>
+                                    </span>
+                                </a>
+                                <!-- 文库 -->
+                                <a v-else class="clearfix" :href="'http://www.hights.cn/ht-biz/library/findLibrayById?id='+list.id"
+                                    target="_blank" :title="list.titletext">
+                                    <s class="fl" v-if="list.istop==1&&index<3"></s>
+                                    <i class="fl title_library"><span v-html="list.title"></span></i>
+                                    <span class="text_xq">
+                                        <span v-cloak>{{list.uploadusername}}</span>
+                                        <!-- <span v-cloak>{{list.browsecount+list.jbrowsecount}}</span> -->
+                                        <span v-cloak>{{list.browsecount}}</span>
+                                        <span v-cloak>{{list.createdate|date}}</span>
+                                    </span>
+                                </a>
+                            </p>
+                        </div>
+                        <div v-cloak v-if="notfind == 1" class="not-find">
+                            <p></p>
+                        </div>
+                        <div v-if="total>0" class="page_box ac">
+                            <ul class="page-bar-ul">
+                                <li>
+                                    <a href="javascript:void(0)" :class="setButtonClass(0)"
+                                        v-on:click="prvePage(mun);">上一页</a>
+                                </li>
+                                <li v-for="index in indexs" v-bind:class="{active: mun == index }">
+                                    <a href="javascript:void(0)" v-on:click="btnClick(index);"
+                                        v-cloak>{{ index < 1 ? "...": index }}</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" :class="setButtonClass(1)"
+                                        v-on:click="nextPage(mun);">下一页</a>
+                                </li>
+                                <!-- <div class="target_goto">
+                                    <span>输入页码</span>
+                                    <input type="text" v-model:value="targetData">
+                                    <s id="sure" @click="getRegion(index)">确认</s>
+                                </div> -->
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="library_content_r fl clearfix">
+                    <div class="uploading_box">
+                        <a href="javascript:void;" @click="skipTo()">
+                            <div class="up_l fl"></div>
+                            <div class="up_r fl">
+                                <h3>上传文档</h3>
+                                <p>获取金币奖励，服务商可提现</p>
+                            </div>
+                        </a>
+
+                    </div>
+
+                    <div th:replace="~{block/search_right::copy}"></div>
+
+                    <div class="resource_packs">
+                        <div th:replace="~{commom::package}"></div>
+                    </div>
+                    <div class="kou">
+                        <a href="http://g.hights.cn/produce/addDel_detail"></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>COPYRIGHT © 版权归属 广州高企云信息科技有限公司 粤ICP备16007486号-1</p>
+        </footer>
+
+    </div>
+    <!-- 公共js部分 -->
+    <th:block th:include="block/liblink :: copy" />
+    <div th:replace="~{block/confine::copy}"></div>
+    <!-- over -->
+    <script type="text/javascript" th:src="@{/statics/js/component/mylogin.js?v=1.00}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/library/library_index.js?v=0.1.4}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/more.js?v=0.1.0}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/more1.js?v=0.1.0}"></script>
+
+    <script>
+        $(".xcx_h").mouseover(function () {
+            $(".xcx").css({
+                'visibility': 'visible'
+            })
+        })
+        $(".xcx_h").mouseleave(function () {
+            $(".xcx").css({
+                'visibility': 'hidden'
+            })
+        })
+        $("#sure").click(function () {
+            window.scrollTo(0, 350);
+        })
+    </script>
+    <th:block th:include="block/statistics :: copy" />
+</body>
+
+</html>

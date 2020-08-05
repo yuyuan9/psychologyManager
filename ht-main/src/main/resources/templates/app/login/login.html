@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+<link rel="stylesheet" th:href="@{/statics/app/css/reset.css}">
+<link rel="stylesheet" th:href="@{/statics/app/css/layer.css}">
+<link rel="stylesheet" th:href="@{/statics/app/css/login/login.css}">
+
+<head>
+   <title>登录</title>
+<style>
+</style>
+</head>
+<body>
+    <div id="l-login" class="app_login">
+        <div class="login">
+            <div class="w">
+                <div class="w1"></div>
+                <div class="login_tip"><i class="dib to_q"></i>注册登录账号, 即刻体验更多</div>
+                <!-- 注册登录tab栏 -->
+                <div class="register">
+                    <div class="tab tab-1 fl" :class="{active:isTab==true}" @click="login()">
+                        <span class="">登录</span>
+                    </div>
+                    <div class="tab tab-2 fl" :class="{active:isTab==false}" @click="register()">
+                        <span>注册</span>
+                    </div>
+                </div>
+            </div>
+              <!-- 登录 -->
+              <div class="login-info clearfix" v-if="isTab == true">
+                <div class="phone">
+                    <i class="login-icon">*</i>
+                    <span class="login-title">手机号码:</span>
+                    <input type="text" name="phone" v-model="phone" placeholder="请输入您注册的手机号码">
+                </div>
+                <div class="phone">
+                    <i class="login-icon">*</i>
+                    <span class="login-title">账户密码:</span>
+                    <input :type="passwordType" name="password" v-model="password" placeholder="请输入改账户的密码">
+                    <div class="fr clearfix" @click="showPwd">
+                        <i class="dib psw"></i>
+                    </div>
+                </div>
+                <div class="phone clearfix">
+                    <i class="login-icon">*</i>
+                    <span class="login-title">图形验证:</span>
+                    <input type="text" name="code" v-model="codeImg" class="img_verify" placeholder="请输入右边图形验证码">
+                    <img id="logincodeimg" class="fr" style="height: 35%;padding-top: 8.8vw;" src="" alt="" @keyup.enter="loginSubmit()" @click="changeCode('logincodeimg')">
+                     <!-- 
+                    <div class="r_img fr" @click="changeCode('logincodeimg')">
+                    </div> -->
+                </div>
+                <div>
+                    <button class="r_btn" @click="loginSubmit()">立即登录</button>
+                    <div class="forget"><a href="/ht-biz/app/login/reset.html">忘记密码</a></div>
+                </div>
+            </div>
+        
+        </div>
+    </div>
+    <script type="text/javascript" th:src="@{/statics/app/js/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/htajax.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/layer.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/vue.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/login/login.js}"></script>
+</body>
+
+</html>

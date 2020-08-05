@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+<link rel="stylesheet" th:href="@{/statics/app/css/reset.css}">
+<link rel="stylesheet" th:href="@{/statics/app/css/index/accurate.css}">
+<link rel="stylesheet" th:href="@{/statics/app/css/vant_common.css}">
+
+<head>
+    <title>智能匹配</title>
+<style>
+</style>
+</head>
+<body>
+    <div class="app_accurate" id="app_match">
+        <div class="accurates_bg">
+           <div class="intellitg" @click="clickurl('/ht-biz/app/index/index')">
+            <i class="dib to_intelligent" ></i>
+            <span class="intelligent">智能匹配</span>
+            <span class="rapid">快速匹配适合企业的项目</span>
+           </div>
+           <!-- 初步精准匹配按钮 -->
+           <div class="matching">
+                <div class="tab tab-1">
+                    <span class="initial active">初步匹配</span>
+                </div>
+                <div class="tab tab-2">
+                    <span class="exact" @click="clickurl('/ht-biz/app/policymatch/fastindex')">精准匹配</span>
+                </div>
+            </div>
+            <!-- 匹配条件 -->
+            <div class="initial-info clearfix">
+                <div class="company">
+                    <i class="initial_icon">*</i>
+                    <span class="initial_title">企业名称:</span>
+                    <input type="text" v-model="companyname" placeholder="请输入企业名称" class="initial_input">
+                    <p class="line"></p>
+                </div>
+                <div class="company">
+                    <i class="initial_icon">*</i>
+                    <span class="initial_title">注册地区:</span>
+                    <input type="text" v-model="addr" placeholder="请选择企业注册地区" class="initial_input">
+                    <span class="choice" @click="showPopup">点击选择</span>
+                    <p class="line"></p>
+                </div>
+                <div>
+                    <button class="r_btn" @click="match">获取匹配项目</button>
+                </div>
+            </div>
+        </div>
+
+         <!-- 地区弹窗 -->
+         <threelink :show="show" @comfirm="queren" @cancel="btn"></threelink>
+    </div>
+    <script type="text/javascript" th:src="@{/statics/app/js/vue.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/layer.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/htajax.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/vant.min.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/component/threeLink.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/policymatch/match_index.js?v=0.08}"></script>
+    
+</body>
+
+</html>

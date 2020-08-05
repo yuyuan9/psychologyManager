@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- 公共头部 -->
+    <th:block th:include="block/headlink :: test('企业健康体检诊疗系统')" /> 
+    <!-- 结束 -->
+    <link rel="stylesheet" th:href="@{/statics/css/physical/index.css?v=0.0.4}">
+    <link rel="stylesheet" th:href="@{/statics/css/physical/intro.css?v=0.0.4}">
+</head>
+
+
+
+<body>
+<div class="wrap" id="user">
+    <div th:replace="~{user_head::copy}"></div>
+    <div th:replace="~{header::copy}"></div>
+</div>
+    
+<div id="box">
+    
+    <div class="intro_bg"><a href="http://p.qiao.baidu.com/cps/chat?siteId=11406523&userId=20408321" target="_blank"></a></div>
+    <div class="intro_content">
+        <div class="doctor_intro">
+            <div class="contain clearfix">
+                <div class="intro_l intro_l_first fl">
+                    <s class="img"></s>
+                </div>
+                <div class="intro_r fr">
+                    <div class="ar">
+                        <p class="intro_title"><s class="title_icon"></s>企业体检介绍</p>
+                        <p class="intro_little_title">INTRODUCE</p>
+                        <span class="line_x"></span>
+                        <p class="intro_line">以“科技顾问六大体系”为核心，为中小企业的科学管理与</p>
+                        <p class="intro_line intro_line2">科技创新提供一项全面、专业化诊断方式与手段。</p>
+                    </div>
+                    <div class="intro_text">
+                        <p>
+                            &nbsp; &nbsp; &nbsp; &nbsp;通过“企业体检”，为企业发展做出权威的科技检测，指导企业把科技创新提升到战略高度，<br/>
+                            理清自身科技资源，发现科技创新短板，整合人才、技术、资金、信息等资源，把握行业发展趋势，<br/>
+                            制定科技规划，建立企业为主体、市场为导向、产学研相结合的创新体系。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="doctor_intro doctor_content">
+            <div class="contain clearfix">
+                <div class="intro_r fl">
+                    <div class="al">
+                        <p class="intro_title"><s class="title_icon"></s>企业体检内容</p>
+                        <p class="intro_little_title">CONTENT</p>
+                        <span class="line_x"></span>
+                        <p class="intro_line">包含基本信息登记、创新元素采集、元素采集附表、技术研</p>
+                        <p class="intro_line intro_line2">讨记录、高层访谈记录、企业需求调查和体检报告管理七</p>
+                        <p class="intro_line intro_line2">大版块</p>
+                    </div>
+                    <div class="intro_text">
+                        <p>
+                            &nbsp; &nbsp; &nbsp; &nbsp;通过体检信息的在线采集和记录，建立企业科技创新要素信息库，实时跟踪、管理<br/>
+                            企业的“健康”发展情况，实现企业科技创新发展方面的全面监测、分析、评估和规<br/>
+                            划，帮助企业和区域政府全面快速地了解企业的创新现状、创新需求以及同行科技创新<br/>
+                            发展模式，为科技创新体系建设提供数据支撑，更好的建立企业创新体系规划。
+                        </p>
+                    </div>
+                </div>
+                <div class="intro_l fr">
+                    <s class="img"></s>
+                </div>
+            </div>
+        </div>
+        <div class="reply_guide">
+            <p class="intro_title ac"><s class="title_icon"></s>诊断报告下载指引</p>
+            <p class="intro_little_title ac">&nbsp;&nbsp;&nbsp;&nbsp;DOWNLOAD</p>
+            <div class="guide_step">
+                <div class="contain clearfix">
+                    <div class="step">
+                        <div class="step_icon_div step_icon_div1 ac">
+                            <s class="step_icon step_icon1"></s>
+                        </div>
+                        <p class="title1 ac">注册登陆</p>
+                        <p class="text al">1.	免费注册成为高企云会员，<br/>然后登陆系统页面</p>
+                        <div class="step_b clearfix">
+                            <!-- <a href="javascript:void(0);" target="_blank" class="step_btn ac fl">立即注册</a> -->
+                            <span class="fr step_num">1</span>
+                        </div>
+                    </div>
+                    <div class="step step2">
+                        <div class="step_icon_div step_icon_div2 ac">
+                            <s class="step_icon step_icon2"></s>
+                        </div>
+                        <p class="title1 ac">进入系统页面</p>
+                        <p class="text al">登陆高企云平台后，在上方工具栏点击管理工具，然后点击企业健康体检诊疗系统</p>
+                        <div class="step_b clearfix">
+                            <!-- <a href="javascript:void(0);" target="_blank" class="step_btn ac fl">诊疗系统</a> -->
+                            <span class="fr step_num">2</span>
+                        </div>
+                    </div>
+                    <div class="step step2 step3">
+                        <div class="step_icon_div step_icon_div3 ac">
+                            <s class="step_icon step_icon3"></s>
+                        </div>
+                        <p class="title1 ac">信息绑定</p>
+                        <p class="text al">输入企业名称和统一社会信用代码，绑定手机号码</p>
+                        <!--<div class="step_b clearfix">-->
+                            <span class="fr step_num">3</span>
+                        <!--</div>-->
+                    </div>
+                    <div class="step step2 step4">
+                        <div class="step_icon_div step_icon_div4 ac">
+                            <s class="step_icon step_icon4"></s>
+                        </div>
+                        <p class="title1 ac">下载诊断报告</p>
+                        <p class="text al">企业体检完成等待系统自动上传体检诊断报告，即可查看及下载</p>
+                        <div class="step_b clearfix">
+                            <!-- <a href="javascript:void(0);" target="_blank" class="step_btn ac fl">查看报告</a> -->
+                            <span class="fr step_num">4</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="explain">
+            <div class="explain_bg">
+                <p class="title1">特别说明</p>
+                <p class="text">1、目前企业健康体检诊疗体统仅对已在现场实施过体检的平台用户开放；如果您想体验企业体检服务，<br/>但您所在企业还未实施过现场体检，请联系我们。</p>
+                <p class="text">2、现场体检工作完成后的7个工作日内，可登陆系统进行诊断报告的查询和下载。</p>
+                <p class="text">3、体检诊断报告可免费下载2次，之后下载需扣除一定数额的honey值。</p>
+            </div>
+        </div>
+    </div>
+    <div class="contact_us ac">
+        <p class="title1"><s class="contact_icon"></s>咨询电话</p>
+        <p class="phone">400-166-3308</p>
+        <a href="http://p.qiao.baidu.com/cps/chat?siteId=11406523&userId=20408321" title="高企云咨询" target="_blank" class="online">在线咨询</a>
+    </div>
+    <!--E=底部-->
+    <footer>
+        <div class="copyright ac">
+            <p>COPYRIGHT © 版本归属 广州高企云信息科技有限公司 粤ICP备16007486号-1</p>
+        </div>
+    </footer>
+</div>
+<!-- 公共js部分 -->
+<th:block th:include="block/footlink :: copy" /> 
+<!-- over -->
+<!-- <script type="text/javascript" th:src="@{/statics/js/count.js?v=0.0.3}"></script> -->
+<script>
+    $('.title_list>li').mouseover(function(e){
+        $('.title_list>li').removeClass('active');
+        $(this).addClass('active');
+        $(this).children().stop().siblings(".drop_down").animate({
+            'top':'30px',
+            'opacity':'1',
+        },200);
+    });
+    $('.title_list>li').mouseout(function(e){
+        $(this).children().stop().siblings(".drop_down").animate({
+            'top':'-30px',
+            'opacity':'0'
+        },200);
+    })
+    $(".xcx_h").mouseover(function () {
+        $(".xcx").css({
+            'visibility': 'visible'
+        })
+    })
+    $(".xcx_h").mouseleave(function () {
+        $(".xcx").css({
+            'visibility': 'hidden'
+        })
+    })
+</script>
+<th:block th:include="block/statistics :: copy" />
+</body>
+</html>

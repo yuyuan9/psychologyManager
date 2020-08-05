@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- 公共头部 -->
+    <th:block th:include="block/headlink :: test('商铺')" /> 
+    <!-- 结束 -->
+    <link rel="stylesheet" th:href="@{/statics/css/service/index.css?v=0.0.1}">
+    <link rel="stylesheet" th:href="@{/statics/css/style.css?v=0.0.1}">
+    <link rel="stylesheet" th:href="@{/statics/css/service/shop.css?v=0.0.1}">
+    <style>
+         [v-cloak] {
+            display: none;
+        }
+        .service_content>.service_list {
+            height: 1107px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="user">
+        <div th:replace="~{servive_nav::copy}"></div>
+    </div>
+    <div class="wrap" id="box">
+        <section>
+            <div class="service_content clearfix">
+                <div class="service_list fl clearfix">
+                    <div th:replace="~{service_com::copy}"></div>
+                </div>
+                <div class="shop_details fl clearfix">
+                    <div class="shop">
+                        <div class="shop_head clearfix">
+                            <div class="shop_name fl">
+                                <h3>店铺名称</h3>
+                                <p v-cloak>{{shopIpt}}</p>
+                            </div>
+                            <div class="grade fl" id="app">
+                                <h3>等级</h3>
+                                <p class="star">
+                                    <!-- 星级组件 -->
+                                    <star-rating :max="5" :current="value"></star-rating>
+                                    <!-- over -->
+                                </p>
+                            </div>
+                            <div class="marks fl">
+                                <h3>评分<i></i></h3>
+                                <p v-cloak>{{grade}}</p>
+                            </div>
+                            <div v-cloak class="compiles fl">
+                                <span class="compiles fr"><a href="/ht-biz/service/index/shop_edit">编辑店铺信息</a></span>
+                            </div>
+                        </div>
+                        <div class="shop_tit_con clearfix">
+                            <h2>图片介绍</h2>
+                            <div class="shop_tit_per clearfix">
+                                <i class="fl">店铺封面图：</i>
+                                <img v-cloak class="fr" :src="'http://47.92.70.12:9090' + serviceimg" alt="">
+                            </div>
+                            <div class="shop_tit_per shop_detial_per clearfix">
+                                <i class="fl">店铺详情介绍图：</i>
+                                <div class="sup" v-for='list in originaldata'>
+                                    <img :src="'http://47.92.70.12:9090' + list" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="service_content_button fl clearfix">
+                    <div class="shop_button">
+                        <div class="shop_tit_con  clearfix">
+                            <h2 class="word_details">文字介绍</h2>
+                            <div class="clearfix">
+                                    <div class="shop_info">
+                                        <ul class="clearfix">
+                                            <li class="clearfix" v-if="netrytype == 1">
+                                                <i>企业网址：</i>
+                                                <p v-cloak>{{web}}</p>
+                                            </li>
+                                            <li class="clearfix">
+                                                <i v-if="netrytype == 2">邮箱：</i>
+                                                <i v-if="netrytype == 1">企业邮箱：</i>
+                                                <p v-cloak>{{email}}</p>
+                                            </li>
+                                            <li class="clearfix">
+                                                <i v-if="netrytype == 2">个人简介：</i>
+                                                <i v-if="netrytype == 1">企业简介：</i>
+                                                <p v-cloak>{{intro}}</p>
+                                            </li>
+                                            <li class="clearfix">
+                                                <i>服务案例：</i>
+                                                <p v-cloak>{{cases}}</p>
+                                            </li>
+                                            <li class="honor clearfix">
+                                                <i>荣誉资质：</i>
+                                                <div id="honor" v-html="originalfile"></div>
+                                            </li>
+                                            <li class="clearfix" v-if="netrytype == 1">
+                                                <i>服务团队：</i>
+                                                <p v-cloak>{{describeTeam}}</p>
+                                            </li>
+                                            <li class="clearfix">
+                                                <i>服务流程：</i>
+                                                <p v-cloak>{{describeService}}</p>
+                                            </li>
+                                            <li class="clearfix">
+                                                <i>服务保障：</i>
+                                                <p v-cloak>{{describeSafe}}</p>
+                                            </li>
+                                            <li class="clearfix">
+                                                <i>其他：</i>
+                                                <p v-cloak>{{other}}</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer>
+            <div class="copyright ac">
+                <p>COPYRIGHT © 版本归属 广州高企云信息科技有限公司 粤ICP备16007486号-1</p>
+            </div>
+        </footer>
+    </div>
+    <!-- 公共js部分 -->
+    <th:block th:include="block/footlink :: copy" />
+    <!-- over -->
+    <script type="text/javascript" th:src="@{/statics/js/service/shop.js?v=0.1.0}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/component/star.js?v=0.0.2}"></script>
+    <script type="text/x-template" id="star-rating">
+        <div class="star-rating">
+            <span v-for="n in max">&star;</span>
+            <div class="star-rating__current" :style="{width: getRating + '%'}">
+            <span v-for="n in max">&starf;</span>
+            </div>
+        </div>
+    </script>
+    <script>
+            $(function(){
+                var lianjie = window.location.href;
+                console.log(lianjie);
+                if(lianjie.indexOf("information") >= 0){
+                    $(".page-index").addClass("active");
+                }
+                else if(lianjie.indexOf("shop") >= 0){
+                    $(".page-shop").addClass("active");
+                }
+                else if(lianjie.indexOf("shop_product") >= 0){
+                    $(".page-product").addClass("active");
+                }
+                else if(lianjie.indexOf("shop_product") >= 0){
+                    $(".page-granular").addClass("active");
+                }
+                else if(lianjie.indexOf("shop_product") >= 0){
+                    $(".page-order").addClass("active");
+                }
+            })
+        </script>
+</body>
+
+</html>

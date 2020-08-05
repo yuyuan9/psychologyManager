@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.biz.mapper.CityTreeMapper">
+
+    <resultMap id="cityresultmap" type="com.ht.entity.biz.citytree.Citytree">
+        <id column="ID"  property="id"/>
+        <result column="PARENT_ID" property="pid" />
+        <result column="REGION_ID" property="rpid" />
+        <result column="REGION_NAME" property="cityName" />
+        <result column="disables" property="disables"/>
+    </resultMap>
+
+    <!-- 开启二级缓存 -->
+    <!--<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>-->
+
+    <select id="findlistPage"  resultMap="cityresultmap">
+              select * from t_region  where disables=0  order by REGION_ID
+    </select>
+
+    <select id="childnodecount"  parameterType="java.lang.String" resultType="java.lang.String">
+        select COUNT(*) from t_region   where PARENT_ID =#{id}
+    </select>
+
+    <!-- <delete id ="deleteById" parameterType="java.lang.String" >
+        delete  from t_region where id=#{id}
+    </delete> -->
+
+    <select id="selectbyId" parameterType="java.lang.String" resultMap="cityresultmap">
+        select * from t_region where id=#{id}
+    </select>
+
+    <update id="updateOne"  parameterType="com.ht.commons.utils.PageData">
+      update t_region SET disables=${disables} where id=${id}
+</update>
+
+</mapper>

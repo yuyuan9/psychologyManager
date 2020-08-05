@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- 公共头部 -->
+    <th:block th:include="block/headlink :: test('个人云中心-我的评估')" /> 
+    <!-- 结束 -->
+    
+    <link rel="stylesheet" th:href="@{/statics/css/user/pagination.css}">    
+    <link rel="stylesheet" th:href="@{/statics/css/user/index.css?v=0.0.1}">
+    <style>
+        .user_content>.user_list {
+            width: 210px;
+            height: 740px;
+            background: #fff;
+        }
+        .user_content>.user_details {
+            width: 973px;
+            height: 100%;
+            margin-left: 15px;
+        }
+        .page_box{
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="user">
+        <div th:replace="~{user_head::copy}"></div>
+        <div th:replace="~{header::copy}"></div>
+    </div>
+    <div class="wrap" id="box">
+        <section>
+            <div class="user_content clearfix">
+                <div class="user_list fl clearfix">
+                    <div th:replace="~{user_part::copy}"></div>
+                </div>
+                <div class="user_details fl">
+                    <div class="assess">
+                        <div class="assess_head">
+                            <h3><i></i>评估历史记录</h3>
+                        </div>
+                        <div class="assess_tit clearfix">
+                            <ul class="clearfix">
+                                <li>评估企业</li>
+                                <li>社会统一信用代码</li>
+                                <li>所在城市</li>
+                                <li>技术领域</li>
+                                <li>评估得分</li>
+                                <li>操作</li>
+                            </ul>
+                        </div>
+                        <div class="assess_result clearfix">
+                            <ul class="clearfix" v-for="(list,index) in assessData">
+                                <li v-cloak>
+                                    <h3>{{list.companyName}}</h3>
+                                    <p><i></i>{{list.createdate|date}}</p>
+                                </li>
+                                <li v-cloak><p>{{list.orgcode}}</p></li>
+                                <li v-cloak><p>{{list.province}}-{{list.city}}{{list.area}}</p></li>
+                                <li v-cloak><p>{{list.productServ|hideMiddle}}</p></li>
+                                <li v-cloak><p>{{list.total}}</p></li>
+                                <li v-cloak><a class="xq" :href="'/ht-biz/hisself/result?id=' + list.id + '&province=' + list.province + '&city=' + list.city + '&area=' + list.area">查看详情</a><a class="cx" href="/ht-biz/hisself/index">重新评估</a></li>
+                            </ul>
+                            <!-- 分页 -->
+                            <div class="page_box ac">
+                                <mypagenation :page="page" @btn-click="clickPage"></mypagenation>
+                                <div class="target_goto">
+                                    <span>输入页码</span>
+                                    <input type="text" v-model:value="targetData">
+                                    <s @click="clickPage();">确认</s>
+                                </div>
+                            </div>
+                            <!-- 分页 -->
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+        <footer>
+            <div>COPYRIGHT © 版权归属 广州高企云信息科技有限公司 粤ICP备16007486号-1</div>
+        </footer>
+    </div>
+    <!-- 公共js部分 -->
+    <th:block th:include="block/footlink :: copy" /> 
+    <!-- over -->
+    <script type="text/javascript" th:src="@{/statics/js/user/assess.js?v=0.0.2}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/user/part_tab.js?v=0.0.2}"></script>
+    <th:block th:include="block/statistics :: copy" />
+</body>
+
+</html>

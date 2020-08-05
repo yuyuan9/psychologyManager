@@ -1,0 +1,22 @@
+.list_content_text>div>p>span {
+    border-bottom: 1px solid #ccc;
+    width: 500px;
+    min-height: 30px;
+    line-height: 30px;
+    display: inline-block;
+    float: left;
+}
+.list_content_text>div>p>i {
+    display: inline-block;
+    color: #96a5b5;
+    margin-right: 5px;
+    width: 110px;
+    float: left;
+    text-align: right;
+    line-height: 30px;
+}
+.sp_b {
+    min-height: 18px;
+    line-height: 30px;
+    display: inline-block;
+}

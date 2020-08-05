@@ -1,0 +1,25 @@
+/* not find */
+.not-find {padding:50px 0;background:#fff;}
+.not-find>p {
+    width: 491px;
+    height: 199px;
+    margin: 0 auto;
+    background: url("../../images/service/no-join.png")no-repeat center;
+    border-bottom: none !important;
+}
+.totalSearch_tab{
+    background: #fff;
+
+}
+.totalSearch_tab>div{
+    width: 120px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    float: left;
+    cursor: pointer;
+}
+.totalSearch_tab>.active{
+    background: #5c9bf7;
+    color: #fff;
+}

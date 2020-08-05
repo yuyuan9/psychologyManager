@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- 公共头部 -->
+    <th:block th:include="block/headlink :: test('充值中心')" /> 
+    <!-- 结束 -->
+    <link rel="stylesheet" th:href="@{/statics/css/user/index.css?v=0.0.1}">
+    <style>
+        .page_content{
+            background: #fff;
+        }
+        .wrap{
+            background: #fafafa;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="user">
+        <div th:replace="~{user_head::copy}"></div>
+        <div th:replace="~{header::copy}"></div>
+    </div>
+    <div class="wrap" id="box">
+        <section>
+            <div class="voucher_center">
+                <h3>当前位置：<a href="/">首页</a>><a href="/ht-biz/usercenter/user/index">服务商入驻</a>><a href="/ht-biz/usercenter/user/safeguard">服务保障计划</a></h3>
+                <div class="safeguard_content">
+                    <div class="safeguard_img">
+                        <img src="/statics/images/user/baozhang.png" alt="">
+                    </div>
+                    <div class="safeguard_content_details">
+                        <div class="safe1 clearfix">
+                            <i></i>
+                            <div>
+                                <h3>服务保障周期为一年</h3>
+                                <span>服务商缴纳保证金后，即加入“保障计划”，保证金统一为5000元，有效期为1年；</span>
+                            </div>
+                        </div>
+                        <div class="safe2 clearfix">
+                            <i></i>
+                            <div>
+                                <h3>优先推荐优质订单</h3>
+                                <span>服务商店铺上会有“保障计划”的特殊标记，让用户能快速找到您；同时，平台会优先选择推荐用户需求至您的个人中心；</span>
+                            </div>
+                        </div>
+                        <div class="safe3 clearfix">
+                            <i></i>
+                            <div>
+                                <h3>平台广告推广</h3>
+                                <span>具有更多曝光机会，对加入本计划的服务商进行一定规模的长期的宣传，提高服务商知名度。</span>
+                            </div>
+                        </div>
+                        <div class="join">
+                            加入服务保障计划: <i> 5000<span>元</span></i><s>有效期一年</s>
+                        </div>
+                        <div class="payway clearfix">
+                            支付方式：
+                            <p @click="jumpAlipay()"><i></i>支付宝</p>
+                            <p @click="wechatPay()"><i></i>微信支付</p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="hint">
+                    <p>已经加入服务保障计划的用户如需了解更多，请咨询客服： <s style="color: #3b72e1;">400-166-3308</s></p>
+                    <p>高企云提供发票开具服务，点此 <a style="color: #3b72e1;" href="#">了解更多</a> </p>
+                </div>
+            </div>
+        </section>
+        <footer>
+            <div>COPYRIGHT © 版权归属 广州高企云信息科技有限公司 粤ICP备16007486号-1</div>
+        </footer>
+    </div>
+    <!-- 公共js部分 -->
+    <th:block th:include="block/footlink :: copy" /> 
+    <!-- over -->
+    <script type="text/javascript" th:src="@{/statics/js/user/pay_safeguard.js?v=0.0.4}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/user/part_tab.js?v=0.0.3}"></script>
+    <script>
+        $(".xcx_h").mouseover(function(){
+            $(".xcx").css({
+                'visibility':'visible'
+            })
+        })
+        $(".xcx_h").mouseleave(function(){
+            $(".xcx").css({
+                'visibility':'hidden'
+            })
+        })
+    </script>
+    <th:block th:include="block/statistics :: copy" />
+</body>
+
+</html>

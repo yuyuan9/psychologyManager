@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>政策速递移动端页面测试</title>
+        <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+        <meta content="yes" name="apple-mobile-web-app-capable"/>
+        <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+        <meta content="telephone=no" name="format-detection"/>
+        <link rel="stylesheet" th:href="@{/statics/css/policydig/style.css}">
+        <style>
+             [v-cloak] {
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+
+        <section id="appDetails" class="aui-flexView">
+            <header class="aui-navBar aui-navBar-fixed">
+                <a href="javascript:history.go(-1)" class="aui-navBar-item">
+                    <i class="icon icon-return"></i>
+                </a>
+                <div class="aui-center">
+                    <span class="aui-center-title"></span>
+                </div>
+                <a href="javascript:;" class="aui-navBar-item">
+                    <i class="icon icon-share"></i>
+                </a>
+            </header>
+            <section class="aui-scrollView">
+                <div class="aui-flex aui-flex-bottom">
+                    <div class="aui-flex-box">
+                        <h1 v-cloak>{{appTitle}}</h1>
+                    </div>
+                </div>
+                <div class="aui-flex">
+                    <div class="aui-flex-box">
+                        <p v-cloak>
+                            <i class="icon icon-ad"></i>政策来源：{{appSource}}
+                        </p>
+                        <p v-cloak>
+                            <i class="icon icon-yew"></i>区域：{{companyProvince}}{{companyCity}}{{companyArea}}
+                        </p>
+                        <p v-cloak>
+                            <i class="icon icon-xul"></i>发布日期：{{createdate|date}}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="aui-flex b-line">
+                    <div class="aui-flex-box" v-cloak v-html="content"></div>
+                </div>
+
+                <div class="divHeight"></div>
+                <div style="height:60px;"></div>
+            </section>
+            <footer class="aui-footer-button aui-footer-flex aui-footer-fixed">
+                <!-- <div class="aui-footer-wrap">
+                    <span>一键收藏</span>
+                </div> -->
+
+                <!-- <div class="aui-footer-group aui-footer-flex1">
+                    <div class="aui-footer-flex">
+                        <div class="aui-btn aui-btn-gray">
+                            <h2>立即沟通</h2>
+                        </div>
+                    </div>
+                </div> -->
+            </footer>
+        </section>
+    <script type="text/javascript" th:src="@{/statics/js/policydig/app/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/policydig/app/vue.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/policydig/app/moment.min.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/policydig/app/htajax.js}"></script>    
+    <script type="text/javascript" th:src="@{/statics/js/policydig/app/getUrl.js}"></script>
+    <script>
+        var appDetails = new Vue({
+        el: '#appDetails',
+        data: function() {
+        	return {
+                listDatas: [],
+                companyProvince:'',
+                companyCity:'',
+                companyArea:'',
+                content:'',
+                appTitle:'',
+                appProvince:'',
+                appCity:'',
+                appArea:'',
+                appName:'',
+                appSource:'',
+                createdate:'',
+        	}
+        },
+        created: function () {
+        	this.initPage(); 
+        },
+        methods: {
+			initPage: function () {
+                this.getList();
+            },
+            getList: function() {
+                var id=UrlParm.parm("id");
+				console.log(id);
+            	htajax.get('/ht-biz/policydig/findById?id='+id,function(data) {
+					console.log(data);
+            		if(data.code == 10000){
+                        appDetails.listDatas = data.data;
+                        appDetails.appTitle = data.data.title;
+                        appDetails.content = data.data.content;
+                        appDetails.appSource = data.data.source;
+                        appDetails.companyProvince = data.data.companyProvince;
+                        appDetails.companyCity = data.data.companyCity;
+                        appDetails.companyArea = data.data.companyArea;
+                        appDetails.createdate = data.data.createdate;
+            		}
+            	},function(data) {
+            		//错误回调
+            	});
+            }
+        }
+    })
+    Vue.filter('date', function (value, formatString) {
+    	formatString = formatString || 'YYYY年MM月DD日';
+    	return moment(value).format(formatString);
+	});
+    </script>
+    <th:block th:include="block/statistics :: copy" />
+    </body>
+</html>

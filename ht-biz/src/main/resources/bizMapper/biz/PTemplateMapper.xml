@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.biz.mapper.PTemplateMapper">
+<resultMap type="com.ht.entity.policydig.PTemplate" id="PTemplateResultMap">
+<id column="id" property="id"/>
+<result column="name" property="name"/>
+<result column="type" property="type"/>
+<result column="content" property="content"/>
+<result column="createdate" property="createdate"/>
+<result column="createid" property="createid"/>
+<result column="lastmodified" property="lastmodified"/>
+<result column="regionid" property="regionid"/>
+</resultMap>
+
+<select id="findlistPage" resultMap="PTemplateResultMap" parameterType="com.ht.commons.utils.MyPage">
+ select * from t_p_template t where 1=1 
+ 	 <if test="pd.keyword!= null and pd.keyword != ''">
+			and
+			(
+			    name LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+			    or
+				content LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+			)
+     </if>
+ order by t.createdate desc 
+</select>
+</mapper>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+<link rel="stylesheet" th:href="@{/statics/app/css/reset.css}">
+<link rel="stylesheet" th:href="@{/statics/app/css/layer.css}">
+<link rel="stylesheet" th:href="@{/statics/app/css/login/login.css}">
+
+<head>
+   <title>注册</title>
+<style>
+</style>
+</head>
+<body>
+    <div id="r-register" class="app_login">
+        <div class="login">
+            <div class="w">
+                <div class="w1"></div>
+                <div class="login_tip"><i class="dib to_q"></i>注册登录账号, 即刻体验更多</div>
+                <!-- 注册登录tab栏 -->
+                <div class="register">
+                    <div class="tab tab-1 fl" :class="{active:isTab==true}" @click="login()">
+                        <span class="">登录</span>
+                    </div>
+                    <div class="tab tab-2 fl" :class="{active:isTab==false}" @click="register()">
+                        <span>注册</span>
+                    </div>
+                </div>
+            </div>
+              
+         
+            <div class="login-info clearfix"  v-if="isTab == false">
+                <div class="phone">
+                    <i class="login-icon">*</i>
+                    <span class="login-title">手机号码:</span>
+                    <input type="text" name="phone" id="phone" v-model="phone" placeholder="请输入您的手机号码">
+                </div>
+                <div class="phone">
+                    <i class="login-icon">*</i>
+                    <span class="login-title">图形验证:</span>
+                    <input type="text" name="imgCode" v-model="imgCode" @focus="valistdata()"  class="img_verify" id="imgCode" placeholder="请输入右边图形验证码">
+                    <img id="regcodeimg" style="height: 35%;padding-top: 8.8vw;" class="fr" src="" alt=""  @click="changeCode()">
+                </div>
+                <div class="phone">
+                    <i class="login-icon">*</i>
+                    <span class="login-title">短信验证:</span>
+                    <input type="text" name="code" v-model="code"  placeholder="请输入短信验证码">
+                    <div class="fr">
+                        <button class="r_code" id="sendCode" @click="getcode" >点击获取</button>
+                    </div>
+                </div>
+                <div class="phone">
+                    <i class="login-icon">*</i>
+                    <span class="login-title">设置密码:</span>
+                    <input type="password" v-model="password" name="password" placeholder="请设置账号密码">
+                </div>
+                <div class="phone">
+                    <i class="login-icon">*</i>
+                    <span class="login-title">确认密码:</span>
+                    <input type="password" v-model="repassword" name="repassword" placeholder="请再次确认账号密码">
+                </div>
+                <div>
+                    <button class="r_btn" id="submitReg"  v-on:click="submitReg">立即注册</button>
+                </div>
+            </div>
+         
+        
+        </div>
+    </div>
+    <script type="text/javascript" th:src="@{/statics/app/js/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/htajax.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/layer.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/vue.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/login/register.js}"></script>
+</body>
+
+</html>

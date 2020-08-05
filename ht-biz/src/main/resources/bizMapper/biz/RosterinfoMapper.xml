@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.biz.mapper.RosterinfoMapper">
+
+
+<!-- 后台接口-->
+    <select id="sysfindall"    parameterType="com.ht.commons.utils.MyPage" resultType="com.ht.commons.utils.PageData">
+        select  info.*,main.* from t_smalltech_rosterinfo   info  LEFT JOIN  t_smalltech_mainroster  main on  info.roster_id = main .id where 1=1
+        <if test="pd.enterprise != null and pd.enterprise !=''">
+            and info.enterprise LIKE CONCAT(CONCAT('%', #{pd.enterprise}),'%')
+        </if>
+        <if test="pd.address!=null and pd.address !='' ">
+            and info.address LIKE CONCAT(CONCAT('%', #{pd.address}),'%')
+        </if>
+        <if test="pd.registernum != null and pd.registernum !=''">
+            and info.registernum LIKE CONCAT(CONCAT('%', #{pd.registernum}),'%')
+        </if>
+        <if test="pd.socialcode != null and pd.socialcode !=''">
+            and info.socialcode LIKE CONCAT(CONCAT('%', #{pd.socialcode}),'%')
+        </if>
+
+        <if test="pd.province != null and pd.province !=''">
+            and main.province LIKE CONCAT(CONCAT('%', #{pd.province}),'%')
+        </if>
+        <if test=" pd.year!=null and pd.year !='' ">
+            and main.year LIKE CONCAT(CONCAT('%', #{pd.year}),'%')
+        </if>
+        <if test="pd.type != null and pd.type !=''">
+            and main.type = #{pd.type}
+        </if>
+        <if test="pd.batch != null and pd.batch !=''">
+            and main.batch LIKE CONCAT(CONCAT('%', #{pd.batch}),'%')
+        </if>
+
+    </select>
+
+    <select id="getpagedataById" parameterType="java.lang.Integer" resultType="com.ht.commons.utils.PageData">
+          select  info.*,main.* from t_smalltech_rosterinfo   info  LEFT JOIN  t_smalltech_mainroster  main on  info.roster_id = main .id where 1=1
+          and info.id = #{id}
+    </select>
+
+
+    <select id="finbyrostervo" resultType="com.ht.entity.biz.sys.Rosterinfo">
+        SELECT b1.num as registernum,SUBSTRING_INDEX(b1.num2,'|',-1)as enterprise,b1.roster_id  as roster_id
+            from
+       (SELECT roster_id,SUBSTRING_INDEX(comtext,'|',1)as num1,SUBSTRING_INDEX(comtext,'|',2) as num2,SUBSTRING_INDEX(comtext,'|',-1)as num
+           from t_smalltech_rostervo )b1
+    </select>
+</mapper>

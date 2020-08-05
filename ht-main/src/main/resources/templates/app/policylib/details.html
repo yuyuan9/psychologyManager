@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+<link rel="stylesheet" th:href="@{/statics/app/css/reset.css}">
+<link rel="stylesheet" th:href="@{/statics/app/css/index/policy_details.css}">
+
+<head>
+<title>政策详情</title>
+   
+<style>
+    [v-cloak] {
+        display: none;
+    }
+</style>
+</head>
+<body>
+    <div id="app-details" v-cloak>
+        <div class="main_bg">
+            <div class="details_hd">
+                <!-- <a href="javascript:history.back();" > -->
+                <a href="javascript:void(0)" @click="toback">
+                    <i class="to_zc_result dib"></i>
+                    <span class="zc_dt">政策详情</span>
+                </a>
+            </div>
+            <!-- 详情 -->
+            <div>
+                <h3 class="com_name">{{entity.projecname}}</h3><i class="line"></i>
+                <p class="zc_item">
+                    <span class="item_n dib">政策地区:</span>
+                    <span class="item_xq dib">{{entity.province}}{{entity.city}}{{entity.area}}</span>
+                </p>
+                <p class="zc_item">
+                    <span class="item_n dib">政策年份:</span>
+                    <span class="item_xq">{{entity.year}}</span>
+                </p>
+                <p class="zc_item">
+                    <span class="item_n dib">申报时间:</span>
+                    <span class="item_xq dib">{{entity.endtime}}</span></li>
+                </p>
+                <p class="zc_item">
+                    <span class="item_n dib">申报条件:</span>
+                    <span class="item_xq dib">{{entity.applyterm}}</span>
+                </p>
+                <p class="zc_item">
+                    <span class="item_n dib">文件编号:</span>
+                    <span class="item_xq dib">{{entity.fileno}}</span>
+                </p>
+                <p class="zc_item">
+                    <span class="item_n dib">政策名称:</span>
+                    <span class="item_xq dib">{{entity.projecname}}</span>
+                </p>
+                <p class="zc_item">
+                    <span class="item_n dib">专项:</span>
+                    <span class="item_xq dib">{{entity.specialmum}}</span>
+                </p>
+                <p class="zc_item">
+                    <span class="item_n dib">管理办法:</span>
+                        <span class="item_xq dib">{{entity.managerway}}</span>
+                </p>
+                <p class="zc_item">
+                    <span class="item_n dib">支持对象:</span>
+                    <span class="item_xq dib">{{entity.supportobj}}</span>
+                </p>
+                <p class="zc_item">
+                    <span class="item_n dib">经典及配套:</span>
+                    <span class="item_xq dib">{{entity.fundfacilitie}}</span>
+                </p>
+                <p class="zc_item">
+                    <span class="item_n dib">主管部门:</span >
+                        <span class="item_xq dib">{{entity.chargedept}}</span>
+                </p>
+                <p class="zc_item">
+                    <span class="item_n dib">联系人:</span>
+                        <span class="item_xq dib">{{entity.linkman}}</span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" th:src="@{/statics/app/js/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/vue.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/layer.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/htajax.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/policylib/details.js?v=0.01}"></script>
+</body>
+
+</html>

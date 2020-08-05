@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.solr.mapper.ImportRecordMapper">
+	<select id="findlist" parameterType="com.ht.commons.utils.MyPage" resultType="com.ht.entity.biz.solr.recore.ImportRecord">
+		select  
+			t.id,
+			t.fileName,
+			t.tableName,
+			t.allCounts,
+			t.resetCounts,
+			t.sucdessCounts,
+			t.remark,
+			t.phone,
+			t.province,
+			t.city,
+			t.area,
+			t.importLocal,
+			t.createdate,
+			(u.USERNAME)createid
+		from t_import_record t 
+		left join t_sys_user u on t.createid=u.USER_ID
+		where 1=1
+		<if test="pd.keyword != null and pd.keyword != ''">
+			and 
+			(
+				t.fileName LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+				or
+				t.phone LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+				or
+				t.province LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+				or
+				t.city LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+				or
+				t.area LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+				or
+				t.importLocal LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+			)
+		</if>
+		<if test="pd.createdate != null and pd.createdate !=''">
+			and t.createdate LIKE CONCAT(CONCAT('%', #{pd.createdate}),'%')
+		</if>
+		<if test="pd.importLocal != null and pd.importLocal !=''">
+			and t.importLocal LIKE CONCAT(CONCAT('%', #{pd.importLocal}),'%')
+		</if>
+		order by t.createdate desc
+	</select>
+</mapper>

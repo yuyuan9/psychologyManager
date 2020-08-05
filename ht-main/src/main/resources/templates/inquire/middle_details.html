@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- 公共头部 -->
+    <th:block th:include="block/headlink :: test('中小企查询')" />
+    <!-- 结束 -->
+    <link rel="stylesheet" th:href="@{/statics/css/policydig/pagination.css?v=0.0.3}">
+    <link rel="stylesheet" th:href="@{/statics/css/mylogin.css?v=0.0.3}">
+    <link rel="stylesheet" th:href="@{/statics/css/inquire/filt.css?v=0.0.3}">
+    <link rel="stylesheet" th:href="@{/statics/css/inquire/datepicker.css?v=0.0.3}">
+    <link rel="stylesheet" th:href="@{/statics/css/inquire/details.css?v=0.1.3}">
+    <link rel="stylesheet" th:href="@{/statics/css/inquire/msgbox.css?v=0.0.2}">
+    <link rel="stylesheet" th:href="@{/statics/css/inquire/company-details.css?v=0.0.2}">
+
+    <style>
+        .tianchong {
+            height: 200px;
+        }
+        .look_more1::before{right: -4px;}
+        .page-bar-ul{left: 0;}
+        .look-details{display: inline-block;float: right;margin-right: 50px;}
+        table>tbody .q6 td s{width: 138px;}
+    </style>
+</head>
+
+<body style="background-color:#fff;">
+    <div id="user">
+        <div th:replace="~{user_head::copy}"></div>
+    </div>
+    <div class="wrap" id="box" @click.stop="isProvince=false;isCity=false;isArea=false;isData=false;isData1=false">
+        <!-- 登录组件 -->
+        <mylogin :islogin="false" @close-login="isLogin=!false"></mylogin>
+        <!-- over -->
+        <div class="header">
+            
+            <div class="head_ipt clearfix">
+                <!-- 查询头部 -->
+                <th:block th:include="block/search_head :: copy" />
+                <!-- over -->
+                <search class="showDiv" :isSearch="true" @btn-click="showMsg2"></search>
+            </div>
+        </div>
+        <section>
+            <div class="filtrate clearfix">
+                <div class="filt_l fl">当前位置：<a href="/">首页</a>><a href="/ht-biz/inquire/index?theme=0">中小企查询</a>><a
+                        href="/ht-biz/inquire/company_details?theme=0">查询结果</a></div>
+                <div class="filt_r fr">没查到？不好用？<a target="_blank"
+                        href="http://p.qiao.baidu.com/cps/chat?siteId=11406523&userId=20408321">在线反馈</a></div>
+            </div>
+            <div class="all clearfix">
+                <div class="filtrate_con">
+
+                    <div class="part2">
+                        <div class="part2_list" style="margin-top: 0px; padding-bottom: 0px;margin-bottom: 0px">
+                        </div>
+                        <div class="part2_top">
+
+                            <div v-show='isclaCation != 7' class="part2_top_choice">
+                                <!--地区范围-->
+                                <div class="choice region clearfix">
+                                    <span class="choice_title choice_title_dq">地区范围：</span>
+                                    <!-- <span class="choice_content" :class="{active:isRegion==1}"
+                                        @click="getUserHoney();isRegion=1;province='省级'; city='市级';isCityActive=0;area='区级';showArea=true;isAreaActive=0;pitchCity='';pitchArea='';regions=1;getPitchData();">国家</span> -->
+                                    <!-- 省级 -->
+                                    <span v-cloak class="choice_content region_modify" :class="{active:isRegion==2}"
+                                        @click.stop.prevent="isProvince=true;">
+                                        <s id="province_text">{{province}}</s><i class="arrow"></i>
+                                        <ul v-cloak class="province" v-show="isProvince">
+                                            <li v-cloak v-for="(region, index) in regionData" @click.self="toggleBox"
+                                                @click.stop.prevent="getUserHoney();guojia='国家级';province = region.n;isProvince=false;isRegion=2;city='市级';pitchCity='';isCityActive=0;area='区级';pitchArea='';isAreaActive=0;regions=1;getPitchData();">
+                                                {{region.n}}</li>
+                                        </ul>
+                                    </span>
+
+                                    <!-- 市级 -->
+                                    <!-- <span v-cloak class="choice_content region_modify" :class="{active:isCityActive==1}"
+                                        @click.stop.prevent="getCityData();">
+                                        {{city}}<i class="arrow"></i>
+                                        <ul v-cloak class="city" v-show="isCity">
+                                            <li v-cloak v-for="(c, index) in cityData"
+                                                @click.stop.prevent="getUserHoney();choseCity(c.n);regions=1;getPitchData();">
+                                                {{c.n}}</li>
+                                        </ul>
+                                    </span> -->
+                                    <!-- 区级 -->
+
+                                    <!-- <span v-cloak class="choice_content region_modify"
+                                        @click.stop.prevent="stopThings()" :class="{active:isAreaActive==1}"
+                                        v-show="showArea">
+                                        {{area}}<i class="arrow"></i>
+                                        <ul v-cloak class="area" v-show="isArea">
+                                            <li v-for="(a, index) in areaData"
+                                                @click.stop.prevent="getUserHoney();area = a.n;isArea=false;if(isCityActive==1){isAreaActive=1};regions=1;getPitchData();">
+                                                {{a.n}}</li>
+                                        </ul>
+                                    </span> -->
+
+                                </div>
+                                <!-- 城市复选框 -->
+                                <!-- 地区选择 -->
+
+                                <!-- <div class="choice pro_type clearfix" v-cloak v-if="pitchDataRegion!=''">
+                                    <span class="choice_title fl" style="margin-right: 28px;">政策级别：</span>
+                                    <div v-cloak v-if="pitchDataRegion!=''" class="choice_ipt countrys fl">
+                                        <span :class="{active:checkBox==4}"
+                                            @click="getUserHoney();checkBox=4;regions=1;getPitchData();">不限</span>
+                                    </div>
+                                    <div v-cloak v-if="pitchDataRegion!=''" class="choice_ipt countrys fl">
+                                        <span :class="{active:checkBox==0}"
+                                            @click="getUserHoney();checkBox=0;clearPCA();countrys='国家';regions=0;getPitchData();">国家</span>
+                                    </div>
+                                    <div v-cloak v-if="isRegion == 2" class="choice_ipt provinces fl">
+                                        <span :class="{active:checkBox==1}"
+                                            @click="getUserHoney();checkBox=1;clearPCA();provinces='省';regions=0;getPitchData();">省级</span>
+                                    </div>
+                                    <div v-cloak v-if="pitchDataRegion!='' && pitchCity!=''"
+                                        class="choice_ipt citys fl">
+                                        <span :class="{active:checkBox==2}"
+                                            @click="getUserHoney();checkBox=2;clearPCA();citys='市';regions=0;getPitchData();">市级</span>
+                                    </div>
+                                    <div v-cloak v-if="pitchDataRegion!='' && pitchCity!='' && pitchArea!=''"
+                                        v-show="areaShow" class="choice_ipt areas fl">
+                                        <span :class="{active:checkBox==3}"
+                                            @click="getUserHoney();checkBox=3;clearPCA();areas='区';regions=0;getPitchData();">区级</span>
+                                    </div>
+                                    <div class="info_r fr"><i></i>选择政策级别可获取单独政策展示</div>
+                                </div> -->
+                                <!-- 认定年份 -->
+                                <div class="choice clearfix">
+                                    <span class="choice_title fl">认定年份：</span>
+                                    <span v-cloak @click.stop.prevent="isData=true;" class="selectYear" @><s
+                                            id="province_text">{{issueData}}</s><i class="arrow"></i></span>
+                                    <ul v-cloak name="years" class="dataList" id="year" v-show="isData">
+                                        <!-- <li @click.stop.prevent="issueData='全部';isData=false;showMsg2()">全部</li> -->
+                                        <li @click.stop.prevent="getUserHoney();issueData=2008;isData=false;showMsg2();">
+                                            2008</li>
+                                        <li @click.stop.prevent="getUserHoney();issueData=2009;isData=false;showMsg2();">
+                                            2009</li>
+                                        <li @click.stop.prevent="getUserHoney();issueData=2010;isData=false;showMsg2();">
+                                            2010</li>
+                                        <li @click.stop.prevent="getUserHoney();issueData=2011;isData=false;showMsg2();">
+                                            2011</li>
+                                        <li @click.stop.prevent="getUserHoney();issueData=2012;isData=false;showMsg2();">
+                                            2012</li>
+                                        <li @click.stop.prevent="getUserHoney();issueData=2013;isData=false;showMsg2();">
+                                            2013</li>
+                                        <li @click.stop.prevent="getUserHoney();issueData=2014;isData=false;showMsg2();">
+                                            2014</li>
+                                        <li @click.stop.prevent="getUserHoney();issueData=2015;isData=false;showMsg2();">
+                                            2015</li>
+                                        <li @click.stop.prevent="getUserHoney();issueData=2016;isData=false;showMsg2();">
+                                            2016</li>
+                                        <li @click.stop.prevent="getUserHoney();issueData=2017;isData=false;showMsg2();">
+                                            2017</li>
+                                        <li @click.stop.prevent="getUserHoney();issueData=2018;isData=false;showMsg2();">
+                                            2018</li>
+                                        <li @click.stop.prevent="getUserHoney();issueData=2019;isData=false;showMsg2();">
+                                            2019</li>
+                                        <li @click.stop.prevent="getUserHoney();issueData=2020;isData=false;showMsg2();">
+                                            2020</li>
+                                        <li @click.stop.prevent="getUserHoney();issueData=2021;isData=false;showMsg2();">
+                                            2021</li>
+                                    </ul>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- 展示列表 -->
+                        <!-- v-show='isclaCation != 7' -->
+                        <div class="part2_list" style="background: #fff">
+                            <!-- 已选条件： -->
+                            <div v-cloak class="choice choice_have clearfix">
+                                <span class="result fl">已选条件：</span>
+                                <!-- 地区 -->
+                                <span v-cloak v-if="pitchDataRegion" class="condition">{{pitchDataRegion}}
+                                    <i class="close"
+                                        @click="getUserHoney();pitchDataRegion = '';isRegion=0;isCityActive=0;isAreaActive=0;province='省级';city='市级';area='区级';pitchCity='';pitchArea='';showMsg2();"></i>
+                                </span>
+                                <span v-cloak v-if="pitchCity" class="condition">{{pitchCity}}
+                                    <i class="close"
+                                        @click="getUserHoney();pitchCity = '';city='市级';isCityActive=0;pitchArea='';area='区级';isAreaActive=0;showMsg2();"></i>
+                                </span>
+                                <span v-cloak v-if="pitchArea" class="condition">{{pitchArea}}
+                                    <i class="close"
+                                        @click="getUserHoney();pitchArea = '';area='区级';isAreaActive=0;showMsg2();"></i>
+                                </span>
+                                <!-- 政策级别 -->
+                                <!-- <span v-if="pitchdiqu" class="condition">{{pitchdiqu}}
+                                    <i class="close"
+                                        @click="getUserHoney();checkBox=4;pitchdiqu='';regions=1;showMsg2();"></i>
+                                </span> -->
+                                <!-- 年份 -->
+                                <span v-if="issueData != '选择年份'" class="condition">{{issueData}}
+                                    <i class="close" @click="getUserHoney();issueData= '选择年份';showMsg2();"></i>
+                                </span>
+                               
+
+                                <div class="fl derive_l"><s v-if="words!=''">“{{words}}”</s> 共为您查询 
+                                    <s v-if="page.totalResult != ''" style="color: #ff4f2e;">{{page.totalResult}}</s>
+                                    <s v-if="page.totalResult == ''" style="color: #ff4f2e;">0</s>
+                                     条结果</div>
+                                <!-- <span class="upload_info" @mouseenter="enter()" @mouseleave="leave()">
+                                    <i class="upload_info_icon"></i>查询导出须知
+                                    <div class="info_img">
+                                        <s class="info_top"></s>
+                                        <div class="info-box">
+                                            <p>1、每个账号每天可免费查询3次，超过3次，每次扣除1honey；</p>
+                                            <p>2、每个账号每天最多可导出100条数据，每条数据扣除0.5honey。</p>
+                                        </div>
+                                    </div>
+                                </span> -->
+                                <!-- <div class="fr derive_r">
+                                    <div @click="deriveInformation()"><i></i>导出数据</div>
+                                </div> -->
+                                <div class="fr types clearfix">
+                                    <span @click="tabcur=0;getContent()" :class="{active:tabcur==0}">全部</span>
+                                    <span @click="tabcur=1;getContent()" :class="{active:tabcur==1}">拟入库</span>
+                                    <span @click="tabcur=2;getContent()" :class="{active:tabcur==2}">认定</span>
+                                    <span @click="tabcur=3;getContent()" :class="{active:tabcur==3}">撤销</span>
+                                    <!-- <span @click="tabcur=3;getContent()" :class="{active:tabcur==3}">公示</span> -->
+                                </div>
+                            </div>
+
+                            <div class="part2_list_content">
+                                <table>
+                                    <thead>
+                                        <tr class="q1">
+                                            <td>企业名称</td>
+                                        </tr>
+                                        <tr class="q2">
+                                            <td>省份</td>
+                                        </tr>
+                                        <tr class="q3">
+                                            <td>批次</td>
+                                        </tr>
+                                        <tr class="q4">
+                                            <td>认定类型</td>
+                                        </tr>
+                                        <tr class="q5">
+                                            <td>认定年份</td>
+                                        </tr>
+                                        <tr class="q6">
+                                            <td>城市</td>
+                                        </tr>
+                                        <!-- <tr class="q7">
+                                            <td class="look-details">查看详情</td>
+                                        </tr> -->
+                                    </thead>
+                                    <tbody v-for="(contentData, index) in contentDatas">
+                                        <tr class="q1">
+                                            <td class="tips1">
+                                                <i>{{index+1}}</i><span v-html="contentData.enterprise"></span>
+                                                <!-- <p v-show="contentData.companyname !=''" v-html="contentData.companyname"></p> -->
+                                            </td>
+                                        </tr>
+                                        <tr class="q2">
+                                            <td>
+                                                <s v-html="contentData.province"></s>
+                                            </td>
+                                        </tr>
+                                        <tr class="q3">
+                                            <td>
+                                                <s v-html="contentData.batch"></s>
+                                            </td>
+                                        </tr>
+                                        <tr class="q4">
+                                            <td class="tips1">
+                                                <s v-html="contentData.type"></s>
+                                                <!-- <p v-show="contentData.type !=''" v-html="contentData.type"></p> -->
+                                            </td>
+                                        </tr>
+                                        <tr class="q5">
+                                            <td class="tips1">
+                                                <s v-html="contentData.year"></s>
+                                                <!-- <p v-show="contentData.year !=''" v-html="contentData.year"></p> -->
+                                            </td>
+                                        </tr>
+                                        <tr class="q6">
+                                            <td class="tips1">
+                                                <s v-html="contentData.address"></s>
+                                                <!-- <p v-show="contentData.batch !=''" v-html="contentData.batch"></p> -->
+                                            </td>
+                                        </tr>
+                                        <!-- <tr class="q7">
+                                            <td class="tips1">
+                                                <s class="look_more1" @click="getLookTime(contentData.companyname);lookmore(contentData.id,contentData.companyname)">查看详情</s>
+                                            </td>
+                                        </tr> -->
+                                    </tbody>
+                                </table>
+                                <div v-cloak v-if="notfind == 1" class="not-find"><p></p></div>
+                                <div v-if="page.totalResult>0" class="page_box ac">
+                                    <mypagenation :page="page" @btn-click="clickPage"></mypagenation>
+                                    <!-- <div class="target_goto">
+                                        <span>输入页码</span>
+                                        <input type="text" v-model:value="targetData">
+                                        <s @click="getContent();">确认</s>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section>
+            <div class="clearfix" style="width: 1200px;margin:0 auto;">
+                <div class="text">
+                    <!-- 查询不到想要的结果？<a href="">在线反馈</a> -->
+                </div>
+            </div>
+
+        </section>
+        <section v-cloak>
+            <!-- 点击继续的弹窗-->
+            <div v-cloak class="contract_mask" v-show="honeyInfo"></div>
+            <div v-cloak class="read_over" v-show="honeyInfo">
+                <div id="look" class="next_page">
+                    <div class="table_top">
+                        <p>查询提示<i>(账号免费查询20次/天)</i></p>
+                        <s class="fa close_login fr" @click="honeyInfo=false"></s>
+                    </div>
+                    <div v-if="honeyInfoGoon=true" class="table_bottom ac middle" style="height: 134px;margin-top: 40px;">
+                        <p><span class="pdf_size size_big" v-cloak>当前您已免费查询20次，若仍需查询，将扣除<i>1</i>honey/次</span></p>
+                        <p><span class="pdf_size" v-cloak>您的账户余额：{{userHoney}} honey</span></p>
+                    </div>
+                    <div v-if="honeyInfoGoon=false" class="table_bottom ac middle" style="height: 134px;margin-top: 40px;">
+                        <p><span class="pdf_size size_big" v-cloak>当前您的honey值不足</span></p>
+                        <p><span class="pdf_size" v-cloak>您的账户余额：{{userHoney}} honey</span></p>
+                    </div>
+                    <div class="table_bottom ac">
+                        <p>
+                            <a href="/ht-biz/usercenter/user/pay_honey" target="_blank" class="use_honey buy_honey ac" >前去充值</a>
+                            <a v-if="honeyInfoGoon=true" href="javascript:void(0)" class="use_honey ac" @click="gtype='charge';getContent(1)">继续</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section v-cloak>
+            <!-- 点击导出的弹窗-->
+            <div v-cloak class="contract_mask" v-show="deriveInfo"></div>
+            <div v-cloak class="read_over" v-show="deriveInfo">
+                <div id="look" class="next_page">
+                    <div class="table_top">
+                        <p>政策查询结果导出<i>(每条0.5honey,最多导出100条/天)</i></p>
+                        <s class="fa close_login fr" @click="deriveInfo=false"></s>
+                    </div>
+                    <div class="table_bottom ac middle">
+                        <p><span class="pdf_size size_big" v-cloak>导出信息数量：<i>{{deriveQuantity}}</i> 条</span></p>                        
+                        <p><span class="pdf_size size_big" v-cloak>导出文档所需：<i>{{needHoney}}</i> honey</span></p>
+                        <p><span class="pdf_size" v-cloak>您的账户余额：{{userHoney}} honey</span></p>
+
+                    </div>
+                    <div class="table_bottom ac">
+                        <p>
+                            <a href="/ht-biz/usercenter/user/pay_honey" target="_blank" class="use_honey buy_honey ac" >前去充值</a>
+                            <a href="javascript:void(0)" class="use_honey ac" @click="deriveToIf()">立即下载</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- 查看详情弹框 -->
+        <div v-cloak id="ids">
+            
+            <div class="list_content_text">
+                <div v-for="(content1, index) in contentData1">
+                    <p class="flow clearfix"><i>政策地区：</i>
+                        <span>
+                            <span class="sp_b" v-html="content1.province+content1.city+content1.area"></span>
+                            <span><i style="color: #96a5b5;margin-left: 20px;">成立日期：</i><span class="sp_b" v-html="content1.companycreatedate"></span></span>
+                        </span>
+                    </p>
+                    <p class="flow clearfix"><i>社会信用代码：</i><span v-cloak v-html="content1.number"></span></p>
+                    <p class="clearfix"><i>机构代码：</i><span v-cloak v-html="content1.orgcode"></span></p>
+                    <p class="clearfix"><i>注册编码：</i><span v-cloak v-html="content1.regnumber"></span></p>
+                    <p class="clearfix"><i>运营状态：</i><span v-cloak v-html="content1.managestatus"></span></p>
+                    <p class="clearfix"><i>公司类型：</i><span v-cloak v-html="content1.companytype"></span></p>
+                    <p class="clearfix"><i>成立日期：</i><span v-cloak v-html="content1.companycreatedate"></span></p>
+                    <p class="clearfix"><i>企业法人：</i><span v-cloak v-html="content1.legalperson"></span></p>
+                    <p class="clearfix"><i>注册金额：</i><span v-cloak v-html="content1.regcapital"></span></p>
+                    <p class="clearfix"><i>经营日期：</i><span v-cloak v-html="content1.businessdate"></span></p>
+                    <p class="clearfix"><i>批准日期：</i><span v-cloak v-html="content1.permitdate"></span></p>
+                    <p class="clearfix"><i>登记处：</i><span v-cloak v-html="content1.regauth"></span></p>
+                    <p class="clearfix"><i>详细地址：</i><span v-cloak v-html="content1.addr"></span></p>
+                    <p class="clearfix"><i>商业范围（经营范围）：</i><span v-cloak v-html="content1.managesscope"></span></p>
+                    <p class="clearfix"><i>批准日期：</i><span v-cloak v-html="content1.permitdate"></span></p>
+                    <p class="clearfix"><i>行业：</i><span v-cloak v-html="content1.industry"></span></p>
+                    <p class="web clearfix"><i>访问地址：</i>
+                        <span>
+                            <a target="_blank" :href="content1.weburl">政策链接</a>
+                            <a target="_blank"
+                                href="http://p.qiao.baidu.com/cps/chat?siteId=11406523&userId=20408321">政策咨询</a>
+                        </span>
+                    </p>
+                </div>
+                <div v-for="(content2, index) in contentData2" style="margin-top: 10px;">
+                    <p class="flow clearfix"><i>立项地区：</i>
+                        <span>
+                            <span class="sp_b" v-html="content2.region+content2.province+content2.city+content2.area"></span>
+                            <span><i style="color: #96a5b5;margin-left: 20px;">年度立项：</i><span class="sp_b" v-html="content2.yearProject"></span></span>
+                        </span>
+                    </p>
+                    <p class="flow clearfix"><i>项目类别：</i><span v-html="content2.type"></span></p>
+                    <p class="clearfix"><i>项目负责人：</i><span v-html="content2.project_leader"></span></p>
+                    <p class="clearfix"><i>主管单位：</i><span v-html="content2.directorUnit"></span></p>
+                    <p class="clearfix"><i>批次：</i><span v-html="content2.batch"></span></p>
+                    <p class="clearfix"><i>项目专题：</i><span v-html="content2.special"></span></p>
+                    <p class="clearfix"><i>项目名称：</i><span v-html="content2.name"></span></p>
+                    <!-- <p class="clearfix"><i>立项编号：</i><span v-html="content2.project_number"></span></p>
+                    <p class="clearfix"><i>立项额度：</i><span v-html="content2.quota"></span></p>
+                    <p class="clearfix"><i>合作单位：</i><span v-html="content2.unit"></span></p> -->
+                </div>
+
+                
+
+            </div>
+
+        </div>
+
+        <footer>
+            <div>COPYRIGHT © 版权归属 广州高企云信息科技有限公司 粤ICP备16007486号-1</div>
+        </footer>
+
+    </div>
+
+    <!-- 公共js部分 -->
+    <th:block th:include="block/inquirelink :: copy" />
+    <div th:replace="~{block/confine::copy}"></div>
+    <!-- over -->
+    <script type="text/javascript" th:src="@{/statics/js/inquire/middle_details.js?v=0.0.2}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/component/search.js?v=1.1.4}"></script>
+    <!-- <script type="text/javascript" th:src="@{/statics/js/component/mylogin.js?v=1.0.2}"></script> -->
+    <script>
+        $('.head_nav>li').mouseover(function (e) {
+            $('.head_nav>li').removeClass('active');
+            $(this).addClass('active');
+            $(this).children().stop().siblings(".search_drop_down").animate({
+                'top': '57px',
+            }, 200);
+            $(this).children().stop().siblings(".search_drop_down").css({
+                'display': 'block',
+            });
+        });
+        $('.head_nav>li').mouseout(function (e) {
+            $(this).children().stop().siblings(".search_drop_down").animate({
+                'top': '30px',
+            }, 200);
+            $(this).children().stop().siblings(".search_drop_down").css({
+                'display': 'none',
+            });
+        })
+        $(".xcx_h").mouseover(function () {
+            $(".xcx").css({
+                'visibility': 'visible'
+            })
+        })
+        $(".xcx_h").mouseleave(function () {
+            $(".xcx").css({
+                'visibility': 'hidden'
+            })
+        })
+    </script>
+    <th:block th:include="block/statistics :: copy" />
+</body>
+
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- 公共头部 -->
+    <th:block th:include="block/headlink :: test('服务商基本信息')" /> 
+    <!-- 结束 -->
+    <link rel="stylesheet" th:href="@{/statics/css/service/index.css?v=0.0.1}">
+    <style>
+        .service_content>.service_details{
+            width: 973px;
+            /* height: 865px; */
+            margin-left: 15px;
+            background-color: #fff;
+            padding-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="user">
+        <div th:replace="~{servive_nav::copy}"></div>
+    </div>
+    <div class="wrap" id="box">
+        <section>
+            <div class="service_content clearfix">
+                <div class="service_list fl clearfix">
+                    <div th:replace="~{service_com::copy}"></div>
+                </div>
+                <div class="service_details fl">
+                    <div class="info">
+                        <div class="info_detail">
+                            <div class="person_info"></div>
+                            <div class="company_info">
+                                <h2 class="title_put">服务商基本信息</h2>
+                                <ul>
+                                    <li v-cloak>
+                                        <i>入驻类型：</i>
+                                        <p v-cloak v-if="type == 1">服务机构</p>
+                                        <p v-cloak v-else-if="type == 2">个人</p>
+                                        <span v-if="stats == 2" class="compile fr"><a href="/ht-biz/service/index/information_edit">修改服务商信息</a></span>
+                                        <span v-else-if="stats == 1" class="compile_audit fr">修改审核中</span>
+                                        <span v-if="stats == 4" class="compile fr"><a href="/ht-biz/service/index/information_edit">修改服务商信息</a></span>
+                                    </li>
+                                    <li>
+                                        <i v-if="type == 1">机构名称：</i>
+                                        <i v-if="type == 2">真实姓名：</i>
+                                        <p v-cloak>{{name}}</p>
+                                    </li>
+                                    <li>
+                                        <i>服务商铺名称：</i>
+                                        <p v-cloak>{{shop}}</p>
+                                    </li>
+                                    <li v-if="type == 1">
+                                        <i>社会统一信用代码：</i>
+                                        <p v-cloak>{{code}}</p>
+                                    </li>
+                                    <li>
+                                        <i>注册地址：</i>
+                                        <p v-cloak>{{province}} {{city}} {{area}} {{detailed_address}}</p>
+                                        <span></span>
+                                    </li>
+                                    <!-- <li v-if="type == 1">
+                                        <i>服务商类型</i>
+                                        <p v-cloak v-if="type == 1">服务机构</p>
+                                        <p v-cloak v-else-if="type == 2">个人</p>
+                                    </li> -->
+                                    <li v-if="type == 1">
+                                        <i>是否创新劵服务机构：</i>
+                                        <p v-cloak v-if="isagency == 1">是</p>
+                                        <p v-cloak v-if="isagency == 0">否</p>
+                                    </li>
+                                    <li>
+                                        <i>客服QQ：</i>
+                                        <p v-cloak>{{qq}}</p>
+                                    </li>
+                                    <li>
+                                        <i>客服联系人：</i>
+                                        <p v-cloak>{{customer}}</p>
+                                    </li>
+                                    <li>
+                                        <i>联系人：</i>
+                                        <p v-cloak>{{linkman}}</p>
+                                    </li>
+                                    <li>
+                                        <i>手机号码：</i>
+                                        <p v-cloak>{{phone}}</p>
+                                    </li>
+                                    <li>
+                                        <i>业务服务地区：</i>
+                                        <p v-cloak>{{scope}}</p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="service_tit_con company_info">
+                                <h2>附件</h2>
+                                <div class="service_tit_per" v-if="type == 1&&pdfpath1!=''">
+                                    <img v-cloak :src="'http://47.92.70.12:9090'+pdfpath1" alt="">
+                                    <p>企业营业执照</p>
+                                </div>
+                                <div class="service_tit_per" v-if="pdfpath2!=''">
+                                    <img v-cloak :src="'http://47.92.70.12:9090'+pdfpath2" alt="">
+                                    <p>联系人身份证正面</p>
+                                </div>
+                                <div class="service_tit_per" v-if="pdfpath3!=''">
+                                    <img v-cloak :src="'http://47.92.70.12:9090'+pdfpath3" alt="">
+                                    <p>联系人身份证反面</p>
+                                </div>
+                                <div v-if="isagency == 1&&pdfpath4!=''" class="service_tit_per">
+                                    <img v-cloak :src="'http://47.92.70.12:9090'+pdfpath4" alt="">
+                                    <p>服务机构</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer>
+            <div class="copyright ac">
+                <p>COPYRIGHT © 版本归属 广州高企云信息科技有限公司 粤ICP备16007486号-1</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- 公共js部分 -->
+    <th:block th:include="block/footlink :: copy" /> 
+    <!-- over -->
+    <script type="text/javascript" th:src="@{/statics/js/service/information.js?v=0.0.5}"></script>
+    <th:block th:include="block/service_each :: copy" />
+    <th:block th:include="block/statistics :: copy" />
+</body>
+
+</html>

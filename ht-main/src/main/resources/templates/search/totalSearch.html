@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- 公共头部 -->
+    <th:block th:include="block/headlink :: test('全站搜索')" /> 
+    <!-- 结束 -->
+    <link rel="stylesheet" th:href="@{/statics/css/policydig/pagination.css}">
+    <link rel="stylesheet" th:href="@{/statics/css/search/totalSearch.css?v=0.0.3}">
+</head>
+
+<body>
+    <div class="wrap" id="user">
+        <div th:replace="~{user_head::copy}"></div>
+    </div>
+    
+    <div class="wrap" id="totalSearch" v-cloak>
+        <section class="head clearfix">
+            <div th:replace="~{totalSearch_nav::copy}"></div>
+        </section>
+        <section class="navigation clearfix">
+            <div class="bread_nav"><a>当前位置：</a> <a href="/">首页</a> &gt; <a href="/ht-biz/search/index/totalSearch">全站搜索</a></div>
+        </section>
+        <section class="totalSearch_details clearfix">
+            <!-- 有结果的页面 -->
+            <div class="totalSearch_content clearfix">    
+                <div class="totalSearch_content_l fl">
+                    <div class="totalSearch_tab clearfix">
+                        <div @click="havechiose=1;tab=0;getKeyWord()" :class="{active:tab==0}">全部结果</div>
+                        <!-- <div @click="havechiose=1;tab=1;getKeyWord()" :class="{active:tab==1}">服务产品</div> -->
+                        <div @click="havechiose=1;tab=2;getKeyWord()" :class="{active:tab==2}">高企云文库</div>
+                        <div @click="havechiose=1;tab=3;getKeyWord()" :class="{active:tab==3}">政策速递</div>
+                    </div>
+                    <div  class="totalSearch_show clearfix">
+                        <p class="yinying"></p>
+                        <p v-if="havechiose==1" class="tiaojian fl">搜索结果：</p>
+                        <p v-if="havechiose==1" class="jieguo"><i v-if="keyword != ''" style="color: #3b8aed;">"{{keyword}}"</i>共为您查询<span style="color: #ff7948;">{{page.totalResult}}</span>条结果</p>
+                        <p v-if="havechiose==0" class="tiaojian fl"></p>
+                        <p v-if="havechiose==0" class="jieguo"></p>
+                        <span class="fr look_info">
+                            <s class="fl">地区</i></s>
+                            <s class="fl">浏览量</i></s>
+                            <s class="fl">日期</i></s>
+                        </span>
+                    </div>
+                    <div v-cloak v-if="notfind == 1" class="not-find"><p></p></div>
+                    <div v-cloak v-if="page.totalResult != 0" class="totalSearch_show_con">
+                        <div v-cloak v-for="(resultData, index) in resultDatas">
+                            <p v-cloak>
+                                <a v-if="resultData.sign == 'policydig'" class="clearfix total_list" :href="'/ht-biz/policydig/details?id='+resultData.id" target="_blank" :title="resultData.title">
+                                    <i class="fl title_policy title_library"><s>政策速递</s><span>{{resultData.title}}</span></i>
+                                    <span class="text_xq">
+                                        <span class="city" v-cloak>{{resultData.province}}{{resultData.city}}{{resultData.area}}</span>
+                                        <span v-cloak>{{resultData.browsecount}}</span>
+                                        <span v-cloak>{{resultData.datetime|date}}</span>
+                                    </span>
+                                </a>
+                                <a v-if="resultData.sign == 'library'" class="clearfix total_list" :href="'/ht-biz/library/findLibrayById?id='+resultData.id" target="_blank" :title="resultData.title">
+                
+                                    <i class="fl title_library title_library1"><s>高企云文库</s><span>{{resultData.title}}</span></i>
+                                    <span class="text_xq">
+                                        <span class="city" v-cloak>{{resultData.province}}{{resultData.city}}{{resultData.area}}</span>
+                                        <span v-cloak>{{resultData.browsecount}}</span>
+                                        <span v-cloak>{{resultData.datetime|date}}</span>
+                                    </span>
+                                </a>
+                                <!-- <a v-if="resultData.sign == 'product'" class="clearfix total_list" :href="'/ht-biz/product/toproseroder?id='+resultData.id" target="_blank" :title="resultData.title">
+                
+                                    <i class="fl title_library title_library2"><s>服务产品</s><span>{{resultData.title}}</span></i>
+                                    <span class="text_xq">
+                                        <span class="city" v-cloak>{{resultData.province}}{{resultData.city}}{{resultData.area}}</span>
+                                        <span v-cloak>{{resultData.browsecount}}</span>
+                                        <span v-cloak>{{resultData.datetime|date}}</span>
+                                    </span>
+                                </a> -->
+                            </p>
+                        </div>
+                        <div v-if="page.totalResult>0" class="page_box ac">
+                            <mypagenation :page="page" @btn-click="clickPage"></mypagenation>
+                            <!-- <div class="target_goto">
+                                <span>输入页码</span>
+                                    <input type="text" name="targetData" v-model:value="targetData"/>
+                                <s @click="clickPage();">确认</s>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="totalSearch_r fl clearfix">
+                    <!-- 
+                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                        
+                    </div>
+                     -->
+                    <div class="uploading_box">
+                        <a target="_blank" href="/ht-biz/library/index?curPolicy=8">
+                            <div class="up_r up_r1 fr"></div>
+                            <div class="up_l up_l1 fl">
+                                <h3>高企云文库</h3>
+                                <i class="fr"></i>
+                                <p>实用政策、全面解读</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="uploading_box">
+                        <a target="_blank" href="/ht-biz/policydig/index">
+                            <div class="up_r up_r2 fr"></div>
+                            <div class="up_l up_l2 fl">
+                                <h3>政策速递</h3>
+                                <i class="fr"></i>
+                                <p>最新政策、一触即达</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>COPYRIGHT © 版权归属 广州高企云信息科技有限公司 粤ICP备16007486号-1</p>
+        </footer>
+
+    </div>
+    <!-- 公共js部分 -->
+    <th:block th:include="block/footlink :: copy" /> 
+    <!-- over -->
+    <script type="text/javascript" th:src="@{/statics/js/search/totalSearch_index.js?v=0.0.2}"></script>
+    <script>
+        $(".xcx_h").mouseover(function () {
+            $(".xcx").css({
+                'visibility': 'visible'
+            })
+        })
+        $(".xcx_h").mouseleave(function () {
+            $(".xcx").css({
+                'visibility': 'hidden'
+            })
+        })
+        $("#sure").click(function(){
+            window.scrollTo(0,350);  
+        })
+    </script>
+    <th:block th:include="block/statistics :: copy" />
+</body>
+
+</html>

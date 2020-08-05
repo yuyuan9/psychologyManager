@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+     <!-- 公共头部 -->
+     <th:block th:include="block/headlink :: test('订单详情')" /> 
+     <!-- 结束 -->
+    <link rel="stylesheet" th:href="@{/statics/css/service/index.css?v=0.0.1}">
+    <link rel="stylesheet" th:href="@{/statics/css/service/order_status.css?v=0.0.3}">
+    <style>
+        .copyright{padding-top: 0!important;}
+    </style>
+</head>
+
+<body>
+    <div id="user">
+        <div th:replace="~{servive_nav::copy}"></div>
+    </div>
+    <div class="wrap" id="box">
+        <section>
+            <div class="order_d clearfix">当前位置：<a href="/ht-biz/service/index/order">订单管理</a>><a>订单详情</a></div>
+        </section>
+        <section>
+            <div class="w clearfix">
+                <p class="t_x"></p>
+                <div class="order_info">
+                    <h3 class="details_t">订单详情</h3>
+                    <p class="o_x o_x1"></p>
+                    <div v-cloak class="o_status">
+                        <i></i>
+                        <span class="o_s">订单状态:</span>
+                        <button v-if="status == 2" class="r_btn">已拒接</button>
+                        <button v-if="status == 0" class="r_btn">待服务</button>
+                        <button v-if="status == 1" class="r_btn">服务完成</button>
+                        <p class="o_xq">
+                            <span>产品名称：{{productName}}</span>
+                            <span>订单编号：{{number}}</span>
+                            <span>下单时间：{{createdate | date}}</span>
+                        </p>
+                    </div>
+                    <p v-if="status == 1||status == 2" class="o_x"></p>
+                    <!-- 下单信息 订单状态为服务完成时显示 其他状态不显示 -->
+                    <div v-cloak v-if="status == 1" class="p_info">
+                        <i></i>
+                        <div class="o_s o_st">下单信息：</div>
+                        <p class="info_n"><span class="info_n1">企业名称：</span><span class="info_n2">{{companyName}}</span></p>
+                        <p class="info_n"><span class="info_n1">联系人：</span><span class="info_n2">{{linkman}}</span></p>
+                        <p class="info_n"><span class="info_n1">手机号码：</span><span class="info_n2">{{phone}}</span></p>
+                        <p class="info_n"><span class="info_n1">用户所在地：</span><span class="info_n2">{{province}}-{{city}}-{{area}}</span></p>
+                    </div>
+                    <!-- 拒绝理由 订单状态为已拒接时显示理由,其他不显示-->
+                    <div v-cloak class="reason" v-if="status == 2">
+                        <span class="o_s">拒接理由:<span class="o_s1">{{refuse}}</span></span>
+                    </div>
+                    <p class="o_x"></p>
+                    <!-- 产品信息 -->
+                    <div v-cloak class="p_info">
+                        <i></i>
+                        <div class="o_s o_st">产品信息：</div>
+                        <p class="info_n"><span class="info_n1">产品类型：</span><span class="info_n2">{{producttypeonename}}-{{producttypetwoname}}-{{producttypethreename}}</span></p>
+                        <p v-if="producttypeonename==28" class="info_n"><span class="info_n1">产品级别：</span><span class="info_n2">{{plevelname}}</span></p>
+                        <p class="info_n"><span class="info_n1">产品所属区域：</span><span class="info_n2">
+                            <i v-if="province1!=''&&province1!='请选择省'">{{province1}}</i>
+                            <i v-if="city1!=''&&city1!='请选择市'">- {{city1}}</i>
+                            <i v-if="area1!='' && area1!='请选择区' && area1!='请选择县'">- {{area1}}</i>
+                        </span></p>
+                        <p v-if="producttypeonename==28" class="info_n"><span class="info_n1">补助金额：</span><span class="info_n2">{{subsidy}}元</span></p>
+                        <p v-if="producttypeonename==28" class="info_n"><span class="info_n1">申报时间：</span><span class="info_n2">{{begintime | date}} - {{endtime | date}}</span></p>
+                        <p class="info_n"><span class="info_n1">产品单价：</span>
+                            <span class="info_n2">
+                                <i v-if="pricetype == 1">{{price}}</i>
+                                <!-- <i v-if="pricetype == 2">{{price}}-{{price2}}</i> -->
+                                <i v-if="pricetype == 3">面议</i>
+                                <!-- {{productPrice}}元 -->
+                            </span></p>
+                        <p class="info_n"><span class="info_n1">数量：</span><span class="info_n2">{{productCounts}}</span></p>
+                        <p class="info_n"><span class="info_n1">产品总价：</span>
+                            <span class="o_totla" v-if="serviceCast>0">{{serviceCast}}</span><i v-if="serviceCast>0">元</i>
+                            <span class="o_totla" v-if="serviceCast==0">面议</span>
+                        </p>
+                        <p class="info_n"><span class="info_n1">备注：</span><span class="info_n2">{{remark}}</span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer>
+            <div class="copyright ac">
+                <p>COPYRIGHT © 版本归属 广州高企云信息科技有限公司 粤ICP备16007486号-1</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- 公共js部分 -->
+    <th:block th:include="block/footlink :: copy" /> 
+    <!-- over -->
+    <script type="text/javascript" th:src="@{/statics/js/service/order_status.js?v=0.0.5}"></script>
+    <th:block th:include="block/statistics :: copy" />
+</body>
+
+</html>

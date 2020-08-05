@@ -1,0 +1,28 @@
+.introduct {
+    width: 100%;
+}
+.introduct_bg {
+    width: 100%;
+    height: 100%;
+}
+.introduct_bg>img {
+    width: 100%;
+    height: 100%;
+}
+.to_express {
+    width: 2.1333vw;
+    height: 4vw;
+    background: url("../../images/yidong_icons/phone_icons.png") -32.2667vw -13.1333vw no-repeat;
+    background-size: 40vw 40vw;
+    margin-right: 2.1333vw;
+}
+.zc_express {
+    font-size: 4.2667vw;
+    color: #ffffff;
+    margin-right: 2.6667vw;
+}
+.xq {
+    position: absolute;
+    left: 2.2667vw;
+    top: 4.2667vw;
+}

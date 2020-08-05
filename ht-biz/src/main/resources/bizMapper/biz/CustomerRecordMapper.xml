@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.biz.mapper.CustomerRecordMapper">
+<resultMap type="com.ht.entity.policydig.CustomerRecord" id="CustomerRecordResultMap">
+<id column="id" property="id"/>
+<result column="fileName" property="fileName"/>
+<result column="counts" property="counts"/>
+<result column="addr" property="addr"/>
+<result column="province" property="province"/>
+<result column="city" property="city"/>
+<result column="area" property="area"/>
+<result column="uplaodPerson" property="uplaodPerson"/>
+<result column="phone" property="phone"/>
+<result column="uploadCon" property="uploadCon"/>
+<result column="createdate" property="createdate"/>
+<result column="createid" property="createid"/>
+<result column="lastmodified" property="lastmodified"/>
+<result column="regionid" property="regionid"/>
+</resultMap>
+
+<select id="findlistPage" resultMap="CustomerRecordResultMap" parameterType="com.ht.commons.utils.MyPage">
+  select 
+	t.id,
+	t.fileName,
+	t.counts,
+	t.addr,
+	IFNULL(t.province,'') province,
+	IFNULL(t.city,'') city,
+	IFNULL(t.area,'') area,
+	t.uplaodPerson,
+	t.phone,
+	t.uploadCon,
+	t.createdate,
+	s.USERNAME createid,
+	t.lastmodified,
+	r.REGION_NAME regionid
+ from t_customer_record t 
+ left join t_region r on t.regionid=r.id
+ left join t_sys_user s on t.createid=s.USER_ID
+ where 1=1 
+ <if test="pd.keyword!= null and pd.keyword != ''">
+			and
+			(
+			    t.fileName LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+			    or
+				t.counts LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+				or
+				t.province LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+				or
+				t.city LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+				or
+				t.area LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+				or
+				t.uplaodPerson LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+				or
+				t.phone LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+				or
+				t.uploadCon LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+			)
+         </if>
+ <if test="pd.fileName!=null and pd.fileName!=''">
+ 	and t.fileName like CONCAT(CONCAT('%', #{pd.fileName}),'%')
+ </if>
+ <if test="pd.province!=null and pd.province!=''">
+ 	and t.province like CONCAT(CONCAT('%', #{pd.province}),'%')
+ </if>
+ <if test="pd.city!=null and pd.city!=''">
+ 	and t.city like CONCAT(CONCAT('%', #{pd.city}),'%')
+ </if>
+ <if test="pd.area!=null and pd.area!=''">
+ 	and r.REGION_NAME like CONCAT(CONCAT('%', #{pd.area}),'%')
+ </if>
+ <if test="pd.createdate1!=null and pd.createdate1!='' and pd.createdate2!=null and pd.createdate2!=''">
+	 and t.createdate between #{pd.createdate1} and #{pd.createdate2}
+ </if>
+ order by t.createdate desc 
+</select>
+
+</mapper>

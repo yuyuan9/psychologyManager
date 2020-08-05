@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- 公共头部 -->
+    <th:block th:include="block/headlink :: test('兑换中心')" />
+    <!-- 结束 -->
+    <link rel="stylesheet" th:href="@{/statics/css/user/index.css?v=0.0.2}">
+    <link rel="stylesheet" th:href="@{/statics/css/inquire/msgbox.css?v=0.0.2}">
+    <style>
+        .coin_goback {
+            background: #fafafa;
+            font-size: 16px;
+            color: #333333;
+        }
+
+        .coin_comfirm {
+            background: #bbbbbb;
+            border-radius: 5px;
+            color: #eeeeee;
+            font-size: 16px;
+        }
+
+        .next_page {
+            height: 340px;
+        }
+
+        .bgbtn {
+            background: #ff4b2b;
+            color: #fff;
+            border: 1px solid #ff4b2b;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="user">
+        <div th:replace="~{user_head::copy}"></div>
+        <div th:replace="~{header::copy}"></div>
+    </div>
+    <div class="wrap" id="box">
+        <section>
+            <div class="voucher_center">
+                <h3>当前位置：<a href="/ht-biz/usercenter/user/index">个人中心</a>><a href="/ht-biz/usercenter/user/honey">honey值&金币</a>><a href="">金币提现</a></h3>
+                <div class="voucher_content voucher_content_coin">
+                    <h3>请选择提现金币(账号金币余额：<i v-cloak>{{money}}</i>)</h3>
+                    <div class="money_list clearfix">
+                        <div @click="cur=1;countMoney(2000);warning(1);" :class="{active:cur==1,'bg':mun1,}">2000</div>
+                        <div @click="cur=2;countMoney(3000);warning(2);" :class="{active:cur==2,'bg':mun2,}">3000</div>
+                        <div @click="cur=3;countMoney(4000);warning(3);" :class="{active:cur==3,'bg':mun3,}">4000</div>
+                        <div @click="cur=4;countMoney(5000);warning(4);" :class="{active:cur==4,'bg':mun4,}">5000</div>
+                    </div>
+                    <div v-cloak class="get_honey">兑换金额: <i>{{exMoney}}</i>元（10个金币=1元，需扣除10%的税率）</div>
+                    <div v-cloak class="get_honey">到账金额: <i>{{myMoney}}</i>元</div>
+                    <div v-cloak class="receipt">收款账号：<b>{{carnumber}}</b></div>
+                    <div v-cloak class="bank_cards">
+                        <div v-for="(list,index) in cardList" class='cards'
+                            @click.prevent="curCard=index;getInfo($event);" :id="list.id" :title="list.acuountname"
+                            :class="{active:curCard==index}">
+                            <s></s><span>{{list.banktype}}</span><i>({{list.carnumber|hideMiddle}})</i>
+                        </div>
+                        <div class="add" @click="popping()"><s></s>添加收款银行卡</div>
+                    </div>
+                    <div class="voucher_content_coin">
+                        <input type="button" id="submitRegs" class="coin_comfirm" @click="conversion()" value="提交申请">
+                    </div>
+                    <div class="voucher_content_coin">
+                        <input type="button" class="coin_goback" value="返回" @click="prev()">
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <section v-cloak>
+            <!-- 添加弹框-->
+            <div v-cloak class="contract_mask" v-show="honeyInfo1"></div>
+            <div v-cloak class="read_over" v-show="honeyInfo1">
+                <div id="look" class="next_page">
+                    <div class="table_top">
+                        <p>添加收款银行卡<i>(为了保障您的权益，请务必确认所留卡号信息的正确)</i></p>
+                        <s class="fa close_login fr" @click="honeyInfo1=false"></s>
+                    </div>
+                    <div class="table_bottom ac middle_ipt">
+                        <p><input type="text" name="cardName" value="" placeholder="持卡人姓名"></p>
+                        <p><input type="text" name="phone" value="" placeholder="手机号码"></p>
+                        <p><input type="text" name="idNumber" value="" placeholder="银行账号"></p>
+                        <p><input type="text" name="bank" value="" placeholder="所属银行"></p>
+                    </div>
+                    <div class="table_bottom ac">
+                        <p>
+                            <a href="javascript:void(0)" class="use_honey buy_honey ac" @click="cancel()">取消</a>
+                            <a href="javascript:void(0)" class="use_honey ac" @click="getContent()">确认</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="submitInfo" v-cloak>
+            <div class="submitInfoHeader clearfix">
+                <i @click="close"></i>
+                <s></s>
+            </div>
+            <h3>提现申请已提交，请耐心等待</h3>
+            <p>具体情况可前往个人中心查看</p>
+        </div>
+    </div>
+    <!-- 公共js部分 -->
+    <th:block th:include="block/footlink :: copy" />
+    <!-- over -->
+    <script type="text/javascript" th:src="@{/statics/js/user/withdraw.js?v=0.0.3}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/user/part_tab.js?v=0.0.2}"></script>
+    <script>
+        $(".xcx_h").mouseover(function () {
+            $(".xcx").css({
+                'visibility': 'visible'
+            })
+        })
+        $(".xcx_h").mouseleave(function () {
+            $(".xcx").css({
+                'visibility': 'hidden'
+            })
+        })
+    </script>
+    <th:block th:include="block/statistics :: copy" />
+</body>
+
+</html>

@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>资源包专题 - 高企云</title>
+    <meta name="keywords" content="资源包专题,高企云文库资源包" />
+    <meta name="description" content="高企云文库资源包整理热门政策的历年通知，历年公示名单." />
+    <!-- 公共头部 -->
+    <th:block th:include="block/headlink :: test('资源包详情页')" /> 
+    <!-- 结束 -->
+    <link rel="stylesheet" th:href="@{/statics/css/library/library.css?v=0.0.1}">
+    <link rel="stylesheet" th:href="@{/statics/css/library/pagination.css?v=0.0.1}">
+    <link rel="stylesheet" th:href="@{/statics/css/library/download_center.css?v=0.0.1}">
+    <link rel="stylesheet" th:href="@{/statics/css/library/page_disable.css?v=0.0.1}">
+    <link rel="stylesheet" th:href="@{/statics/css/library/package_details.css?v=0.0.1}">
+    <style>
+        .contain {
+            width: 900px;
+        }
+
+        .discuss1 .share24 {
+            position: absolute;
+            top: -78px;
+            left: 409px;
+        }
+
+        .discuss1 .discuss_left .collection.active s {
+            background-position: -78px -3px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap" id="user">
+        <div th:replace="~{user_head::copy}"></div>
+    </div>
+    <!--S=您的位置-->
+    <div class="wrap" id="box">
+        <mylogin :islogin="false" @close-login="isLogin=!false"></mylogin>
+        <input type="hidden" class="getId" th:value="${list.id}" />
+        <section class="head clearfix">
+            <div th:replace="~{library_nav::copy}"></div>
+        </section>
+        <!--E=logo、导航-->
+        <div class="clearfix">
+            <!--S=文档部分-->
+            <div class="document library_content clearfix">
+                <div class="navigation clearfix">
+                    <p class="bread_nav fl"><a>当前位置：</a> <a href="/">首页</a> &gt; <a
+                            href="/ht-biz/library/package">专题资源包</a> &gt; <a
+                            href="/ht-biz/library/package_details">详情页</a></p>
+                </div>
+                <div class="contain clearfix fl">
+                    <div class="document_left clearfix fl">
+
+                        <div class="pdf_tit clearfix">
+                            <h2 id="title" class="fl" th:text="${list.name}"></h2>
+                            <div class="pdf_look fl clearfix">
+                                <span class="identification fl">高企云<i class="i1"></i></span>  
+                                <span class="pdf_data fl"><i></i>上传日期：<s  th:text="${#dates.format(list.createdate, 'yyyy-MM-dd')}"></s></span>
+                                <span class="pdf_view fl"><i></i>浏览量：<s
+                                        th:text="${list.browsecount} +${list.jbrowsecount}"></s></span>
+                                <span class="pdf_download fl"><i></i>下载量：<s
+                                        th:text="${list.downloadcount} +${list.jdownloadcount}"></s></span>
+                            </div>
+                            <div class="fr tishi">
+                                <p  th:if="${list.benefit==0}" class="fr free">免费下载文档</p>
+                                <p  th:if="${list.benefit!=0}" class="fr pay">精品付费文档</p>
+
+                                <p class="fr pingfen"><i></i>专家评分：<s th:text="${list.score}"></s></p>
+                            </div>
+
+                        </div>
+                        <div id="pdf" class="doc_body clearfix">
+                            <div class="pdf_show" style="width:100%;overflow:auto;">
+                                <canvas id="the-canvas"></canvas>
+                            </div>
+                        </div>
+                        <!-- 支持一下 -->
+                        <!-- <div class="support clearfix"> -->
+                            <!-- <div class="praise clearfix">
+                                <span><i th:text="${list.benefit}"></i></span>
+                                <p>支持一下吧</p>
+                            </div> -->
+                            <!-- <div class="remain clearfix">
+                                <s>还剩下<s class="page_last"></s>页未读，继续下一页阅读></s>
+                            </div>
+                            <p class="load_info clearfix">下载文档到电脑，使用更方便</p>
+                        </div> -->
+                        <!-- 按钮 -->
+                        <div id="free_bottom2" v-if="docDatas.downloadhoney!=''" class="discuss1 btn_discuss1 clearfix">
+                            <div class="share24"><s></s>
+                                <p style="display:inline-block; font-size: 18px;color: #fff;">分享到：<p>
+                                        <div id="socialShare1"></div>
+                                        <b class="shareclose24">x</b>
+                            </div>
+
+                            <div class="discuss_left">
+                                <div class="pdf_zoom fl">
+                                    <button id="small"><i></i>缩小</button>
+                                    <button id=big><i></i>放大</button>
+                                </div>
+
+                                <div class="btn_page fl">
+                                    <button class="prev" id="prev_down_one" @click="getUserHoney">上一页</button>
+                                    <span class="p_num">第<span class="page_num" id="page_num_down_one"></span>页</span>
+                                    <span style="color:white;" class="page_all_num">/
+                                        共<span id="page_count_down_one"></span>页</span>
+                                    <button class="next" id="next_down_one" @click="getUserHoney">下一页</button>
+                                </div>
+                                <p class="sharweb" id="share_pay" style="color:white"><b class="share_icon"></b>分享</p>
+
+                                <div id='shareweb1'
+                                    style="width: 80px;padding:0px 2px 0px 2px;height: 50px;float:right;margin-left:5px;color:white;background-color: #4a5177;"
+                                    v-cloak class="collection" v-show="isCollection==false" @click="doCollection">
+                                    <s class="collection_icon"></s>
+                                    <span>收 藏</span>
+                                </div>
+                                <div v-cloak class="collection finish_collection active"
+                                    :class='{active:isCollection==true}'
+                                    style="width: 80px;padding:0px 2px 0px 2px;float:right;margin-left:5px;height: 50px;color:white;background-color: #4a5177;"
+                                    v-show="isCollection==true" @click="doCollection">
+                                    <s class="collection_icon"></s>
+                                    <span>已收藏</span>
+                                </div>
+
+                            </div>
+                            <div class='discuss_right'>
+                                <div v-cloak class="collection coll1" style="display:inline-block;">
+                                    <span v-if="docDatas.honey==''||docDatas.honey==null">
+                                        付费文档：
+                                        <b class="icon_honey"></b><i th:text="${list.benefit}"></i>honey
+                                    </span>
+                                </div>
+                                <input type="button" class='downloadhoney' @click="doDownload" value="下载文档">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="discuss clearfix">
+                        <div class="discuss_header clearfix">
+                            <p class="limit fr"><span class="state">0</span>/300</p>
+                            <textarea class="shuru" name="discuss_word" id="discuss_word" v-model="discussContent"
+                                maxlength="300" rows="20" placeholder="写点评论支持一下吧~"></textarea>
+                            <div class="issue_r fr clearfix">
+                                <button class="discuss_btn" type="button" data-toggle="modal" @click="postMsg">发布评论
+                                </button>
+                            </div>
+                        </div>
+                        <div class=""></div>
+                        <div class="discuss_all clearfix">
+                            <div class="discuss_title clearfix">
+                                <div class="title_l fl">
+                                    <s class="line"></s>
+
+                                    <p>全部评论</p>
+                                    <span>(<s class="slip" v-cloak>{{totalPage}}</s>条评论)</span>
+                                </div>
+                                <div class="title_r fr">
+                                    <p><span>第<s class="page_current" v-cloak>{{cur}}</s>页</span>/共<s class="page_all"
+                                            v-cloak>{{pages}}</s>页</p>
+                                </div>
+
+                            </div>
+                            <div class="discuss_text clearfix" v-for="disList in discussList">
+                                <div class="discuss_top clearfix">
+                                    <div class="text_pic fl">
+                                        <img v-if="disList.headImg!=null&&disList.headImg!=''"
+                                            :src="'http://47.92.70.12:9090'+disList.headImg" alt=""
+                                            style="border: none" />
+                                        <img v-else alt="" style="border: none" />
+                                    </div>
+                                    <div class="text_desc fl">
+                                        <div class="text_desc_t">
+                                            <p v-cloak class="userName"
+                                                v-if="disList.userName!=''||disList.userName!=null">
+                                                {{disList.userName}}</p>
+
+                                            <p class="userName" v-else v-cloak>{{disList.phone}}</p>
+                                        </div>
+                                        <div class="text_desc_b">
+                                            <p v-cloak>{{disList.content}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="text_time fr">
+                                        <div class="text_time_t clearfix">
+                                            <!--<p class="fr">回复<s>({{totalReply}})</s></p>-->
+                                            <p class="fr" @click="showTextarea(disList.userName,disList.id)"><s>回复</s>
+                                            </p>
+
+                                            <p class="fr exception" @click="exception(disList.id)"><s>举报</s></p>
+                                        </div>
+                                        <div class="text_time_b">
+                                            <p v-cloak>{{disList.createdate|date1}}</p>
+                                        </div>
+                                    </div>
+                                    <!-- 回复-->
+                                </div>
+                                <div class="discuss_bottom">
+                                    <div class="discuss_reply clearfix">
+
+                                        <div class="reply_bottom clearfix" :id="'r_'+disList.id"
+                                            v-show="disList.children!=''">
+                                            <s class="dialog"></s>
+                                            <div v-show="richtext" style="display: none;" class="reply_textarea"
+                                                :id="disList.id">
+                                                <textarea name="discuss_word" id="reply_word" :class="disList.id"
+                                                    maxlength="300" rows="20" class="form-control limit-textarea"
+                                                    onfocus="limitTextarea(this);"
+                                                    :placeholder='"回复 "+replyName+":"'></textarea>
+
+                                                <div class="reply2 clearfix">
+                                                    <button type="submit" class="reply_btn fr"
+                                                        @click="postMsg2(disList.id)">回复
+                                                    </button>
+                                                    <button type="submit" class="reply_btn cancel_btn fr"
+                                                        @click="cancelTextarea(disList.id)">取消
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="reply_list" style="margin-left: 56px;">
+                                            <div class="reply_floor">
+                                                <div class="floor clearfix" v-for="repList in disList.children">
+                                                    <div class="reply_pic fl">
+                                                        <img v-if="repList.headImg!=null&&repList.headImg!=''"
+                                                            :src="'http://47.92.70.12:9090'+repList.headImg" alt=""
+                                                            style="border: none" />
+                                                        <img v-else src="" alt="" style="border: none" />
+
+                                                    </div>
+                                                    <div class="reply_content fl">
+                                                        <p class="reply_name" v-cloak>{{repList.userName}} 回复
+                                                            {{disList.userName}}</p>
+
+                                                        <p class="reply_text" v-cloak>{{repList.content}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="block policy_pagenation" v-if="isHave">
+                            <div class="page-bar ac">
+                                <ul>
+                                    <li><a href="javascript:void(0)" :class="setButtonClass(0)"
+                                            v-on:click="prvePage(cur)">上一页</a>
+                                    </li>
+                                    <li v-for="index in indexs" v-bind:class="{ active: cur == index }">
+                                        <a href="javascript:void(0)" v-on:click="btnClick(index)"
+                                            v-cloak>{{ index < 1 ? "...": index }}</a> </li>
+                                    <li><a href="javascript:void(0)" :class="setButtonClass(1)"
+                                            v-on:click="nextPage(cur)">下一页</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <p class="never ac" v-else="isHave">还没有人评论</p>
+                    </div>
+                </div>
+                <div class="document_right clearfix fl">
+                    <div class="resource_packs">
+                        <div class="uploading_box">
+                            <a href="javascript:void;" @click="skipTo()">
+                                <div class="up_l fl"></div>
+                                <div class="up_r fl">
+                                    <h3>上传文档</h3>
+                                    <p>获取金币奖励，服务商可提现</p>
+                                </div>
+                            </a>
+
+                        </div>
+                        <ul class="product_r_text">
+                            <h2 class="product_r_tit">相关文档推荐</h2>
+                            <li v-cloak v-for="(index,list) in delibraryList"><s>{{list + 1}}</s><a target="_blank"
+                                    :href="'/ht-biz/library/findLibrayById?id='+index.id" :title="index.title"
+                                    v-html="index.title"></a>
+                            </li>
+                            <div class="view_more">
+                                <a href="/ht-biz/library/index?curPolicy=8">查看更多</a>
+                            </div>
+                        </ul>
+                        <div class="kou">
+                            <a href=""></a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <!--E=文档部分-->
+        </div>
+    <!-- 点击下载的弹窗-->
+    <div class="contract_mask" v-show="isDownload" v-cloak></div>
+    <div class="read_over">
+        <div id="look" class="next_page" v-cloak v-show="isDownload" style="z-index: 2000">
+            <div class="table_top">
+                <p th:text="${list.name}"></p>
+                <s class="fa close_login fr" style="margin-top: 0;" @click="closePopup"></s>
+            </div>
+            <div class="table_bottom ac middle" style="height: 118px;">
+                <p style="margin-top: 44px;"><span class="pdf_size" v-cloak>下载文档所需：<i style="color:#ff4a2b;font-size: 22px;">{{requiredHoney}}</i> <s v-show="requiredHoney != '免费'">honey</s></span></p>
+                <p style="margin-top: 15px;"><span class="pdf_size" v-cloak>您的账户余额：<i style="color:#ff4a2b;">{{honey}}</i> honey</span></p>
+                
+            </div>
+            <div class="table_bottom ac">
+                <p style="margin-top: 20px;">
+                    <a href="/ht-biz/usercenter/user/pay_honey" target="_blank" class="use_honey buy_honey ac" >前去充值</a>
+                    <a href="javascript:void(0)" class="use_honey ac" @click="useHoneyDownload">立即下载</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>COPYRIGHT © 版权归属 广州高企云信息科技有限公司 粤ICP备16007486号-1</p>
+    </footer>
+    </div>
+
+</div>
+
+
+</body>
+<!-- 公共js部分 -->
+<th:block th:include="block/liblink :: copy" />
+<div th:replace="~{block/confine::copy}"></div>
+<!-- over -->
+<script type="text/javascript" th:src="@{/statics/js/component/mylogin.js?v=1.00}"></script>
+<script type="text/javascript" th:src="@{/statics/js/library/package_detail.js?v=0.0.2}"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $(".xcx_h").mouseover(function () {
+            $(".xcx").css({
+                'visibility': 'visible'
+            })
+        })
+        $(".xcx_h").mouseleave(function () {
+            $(".xcx").css({
+                'visibility': 'hidden'
+            })
+        })
+        //固定栏
+        $(function () {
+            $(window).scroll(function () {
+                var $scrollTop = document.documentElement.scrollTop || window.pageYOffset ||
+                    document.body.scrollTop; //兼容浏览器
+                //console.log($scrollTop);
+                if ($scrollTop > 288) { //滚动高度可调
+                    $(".btn_discuss1").css({
+                        "position": "relative",
+                        "margin-left": "-450px",
+                    });
+                } else {
+                    $(".btn_discuss1").css({
+                        "position": "fixed",
+                        "left": " 50%",
+                        "bottom": "0",
+                        "margin-left": "-600px",
+                    });
+                }
+            });
+
+        })
+    })
+    //分享
+    $('#share_pay').click(function () {
+        $('.share24').fadeIn(300);
+    });
+
+    $('.shareclose24').click(function () {
+        $('.share24').hide(300);
+    });
+
+    $('.payshow').hide(300);
+    $(".freeshow").hide(300);
+    $('#r_box_login2').hide();
+    $('.close-reveal-modal').click(function () {
+        location.reload();
+        setInterval(function () {
+            $('.login-top').hide();
+        }, 3000);
+    });
+    // if (top != self) {
+    //     top.location.href = "${ctx}/main_toLogin.do";
+    // }
+    // changeCode();
+    // $("#codeImg").click(function () {
+    //     changeCode();
+    // });
+
+    $('#login_btn1').click(function () {
+        login_submit();
+    });
+
+    $('.login_input').keyup(function (event) {
+        if (event.keyCode == 13) {
+            login_submit();
+        }
+    });
+
+    $("#contract_mask").css("width", $(document).width());
+
+    function limitTextarea(self, nowleng) {
+        $(self).on('input propertychange', function (event) {
+            var _val = $(self).val();
+            _val = _val < 300 ? _val : _val.substr(0, 300);
+            $(self).val(_val);
+            $(nowleng).text(_val.length)
+        });
+        $(self).blur(function () {
+            $(self).off('input propertychange');
+        });
+    }
+    //分享
+
+    $(function () {
+        $("#socialShare").socialShare({
+            content: $("p").text().trim(),
+            url: window.location.href,
+            titile: $("h1").text().trim()
+        });
+        $("#socialShare1").socialShare({
+            content: $("p").text().trim(),
+            url: window.location.href,
+            titile: $("h1").text().trim()
+        });
+        $(".msb_main").trigger('click');
+    });
+
+    $("#shareQQ").on("click", function () {
+        $(this).socialShare("tQQ");
+    })
+
+    $(function () {
+        function autocenter() {
+            var bodyW = parseInt(document.documentElement.clientWidth);
+            var bodyH = parseInt(document.documentElement.clientHeight);
+            var elW = $("#weixin").width();
+            var elH = $("#weixin").height();
+
+            $("#weixin").css("left", (bodyW - elW) / 2);
+            $("#weixin").css("top", (bodyH - elH) / 2);
+        }
+        window.onresize = function () {
+            autocenter();
+        };
+    });
+
+    $(document).on("click", ".msb_main", function () {
+        if ($(this).hasClass("disabled")) return;
+        var e = 500; //动画时间
+        var t = 250; //延迟时间
+        var r = $(this).parent().find(".msb_network_button").length; //分享组件的个数
+        var i = 60;
+        var s = e + (r - 1) * t;
+        var o = 1;
+        var a = $(this).outerWidth();
+        var f = $(this).outerHeight();
+        var c = $(this).parent().find(".msb_network_button:eq(0)").outerWidth();
+        var h = $(this).parent().find(".msb_network_button:eq(0)").outerHeight();
+        var p = (a - c) / 2; //起始位置
+        var d = (f - h) / 2; //起始位置
+        var v = 0 / 180 * Math.PI;
+        if (!$(this).hasClass("active")) {
+            $(this).addClass("disabled").delay(s).queue(function (e) {
+                $(this).removeClass("disabled").addClass("active");
+                e()
+            });
+            $(this).parent().find(".msb_network_button").each(function () {
+                var n = p + (p + i * o) * Math.cos(v) * 0.8; //结束位置
+                var r = d + (d + i * o) * Math.sin(v); //结束位置
+                $(this).css({
+                    display: "block",
+                    left: p + "px",
+                    top: d + "px"
+                }).stop().delay(t * o).animate({
+                    left: n + "px",
+                    top: r + "px"
+                }, e);
+                o++
+            })
+        } else {
+            o = r;
+            $(this).addClass("disabled").delay(s).queue(function (e) {
+                $(this).removeClass("disabled").removeClass("active");
+                e()
+            });
+            $(this).parent().find(".msb_network_button").each(function () {
+                $(this).stop().delay(t * o).animate({
+                    left: p,
+                    top: d
+                }, e);
+                o--
+            })
+        }
+    });
+    //懒加载方法
+    function test(name) {
+        if (name) {
+            this.layerIndex = layer.load(0, {
+                offset: ['50%', "42%"],
+                shade: false
+            })
+        } else {
+            layer.close(this.layerIndex); //完成加载后关闭loading
+        }
+    }
+
+    $(function () {
+        test(true);
+        var id0 = $('.getId').val();
+        var downloadhoney = "[[${list.benefit}]]";
+        var pdfDoc = null,
+            pageNum = 1,
+            pageRendering = false,
+            pageNumPending = null,
+            scale = 1,
+            scaleChange = false,
+            canvas = document.getElementById('the-canvas'),
+            ctx = canvas.getContext('2d');
+        canvas.height = 600;
+        var url = "/ht-biz/resouce/seekExperts?id=" + id0;
+        //console.log(url);
+        // /upload_file/seekExperts
+        function renderPage(num) {
+            pageRendering = true;
+            // Using promise to fetch the page
+            pdfDoc.getPage(num).then(function (page) {
+                var viewport = page.getViewport(1);
+
+                if (!scaleChange) {
+                    var desiredWidth = "900";
+                    scale = desiredWidth / viewport.width;
+                }
+                viewport = page.getViewport(scale);
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+
+                // Render PDF page into canvas context
+                var renderContext = {
+                    canvasContext: ctx,
+                    viewport: viewport
+                };
+                var renderTask = page.render(renderContext);
+
+                // Wait for rendering to finish
+                renderTask.promise.then(function () {
+                    pageRendering = false;
+                    if (pageNumPending !== null) {
+                        // New page rendering is pending
+                        renderPage(pageNumPending);
+                        pageNumPending = null;
+                    }
+                });
+            });
+            // Update page counters
+            $(".page_last").html(pdfDoc.numPages - num);
+            $("#page_num_down_one").html(num);
+        }
+        /**
+         * If another page rendering in progress, waits until the rendering is
+         * finised. Otherwise, executes rendering immediately.
+         */
+        function queueRenderPage(num) {
+            if (pageRendering) {
+                pageNumPending = num;
+            } else {
+                renderPage(num);
+            }
+        }
+        /**
+         * Displays previous page.
+         */
+        function onPrevPage() {
+            if (pageNum <= 1) {
+                return;
+            }
+            pageNum--;
+            $(".contract_mask").hide();
+            $('.payshow').hide(300);
+            $('.freeshow').hide(300);
+            queueRenderPage(pageNum);
+        }
+        document.getElementById('prev_down_one').addEventListener('click', onPrevPage);
+
+        function onNextPage() {
+            if (pageNum >= pdfDoc.numPages) {
+                return;
+            }
+            pageNum++;
+            $(".contract_mask").hide();
+            $('.payshow').hide(300);
+            $('.freeshow').hide(300);
+            queueRenderPage(pageNum);
+        }
+        document.getElementById('next_down_one').addEventListener('click', onNextPage);
+
+        /**
+         * Asynchronously downloads PDF.
+         */
+        PDFJS.getDocument(url).then(function (pdfDoc_) {
+            pdfDoc = pdfDoc_;
+            $("#page_count_down_one").html(pdfDoc.numPages);
+            // document.getElementById('page_count').textContent = pdfDoc.numPages;
+            // document.getElementById('page_count_down').textContent = pdfDoc.numPages;
+
+            // Initial/first page rendering
+            renderPage(pageNum);
+            test(false);
+        });
+
+        //放大
+        document.getElementById('big').addEventListener('click', function () {
+            scale += 0.1;
+            queueRenderPage(pageNum);
+            var sizeNum = (Math.round(scale * 10000) / 100) + '%';
+            //document.getElementById('pdf_size').innerHTML = sizeNum;
+            scaleChange = true;
+        });
+        //初始化放大120%
+        //document.getElementById('pdf_size').innerHTML = '130%';
+
+        //缩小
+        document.getElementById('small').addEventListener('click', function () {
+            if (scale > 0.1) {
+                scale -= 0.1;
+                queueRenderPage(pageNum);
+                var sizeNum = (Math.round(scale * 10000) / 100) + '%';
+                //document.getElementById('pdf_size').innerHTML = sizeNum;
+            } else {
+                scale = 0;
+                var sizeNum = (Math.round(scale * 10000) / 100) + '%';
+                //document.getElementById('pdf_size').innerHTML = sizeNum;
+            }
+
+            scaleChange = true;
+
+        });
+
+    });
+</script>
+<th:block th:include="block/statistics :: copy" />
+
+</html>

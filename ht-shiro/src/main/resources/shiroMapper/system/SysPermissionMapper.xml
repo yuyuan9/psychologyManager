@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.shiro.mapper.SysPermissionMapper">
+
+    <!-- 开启二级缓存 -->
+    <!--<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>-->
+
+    <select id="findallPermsByRoleId" resultType="com.ht.entity.shiro.SysPermission" parameterType="java.lang.Integer">
+       SELECT p.* from t_sys_role r
+	   		INNER JOIN t_sys_role_permission rp on r.id=rp.roleid
+	   		INNER JOIN t_sys_permission p on p.id=rp.sysPermissionId
+	   where r.id=#{roleid}
+    </select>
+
+    <select id="findPermsByRoleId" resultType="com.ht.entity.shiro.SysPermission" parameterType="java.lang.Integer">
+       SELECT p.* from t_sys_role r
+	   		INNER JOIN t_sys_role_permission rp on r.id=rp.roleid 
+	   		INNER JOIN t_sys_permission p on p.id=rp.sysPermissionId
+	   where r.id=#{roleid} and p.menu=1  ORDER BY  p.sort
+    </select>
+    <select id="findbuttonPermsByRoleId" resultType="com.ht.entity.shiro.SysPermission" parameterType="java.lang.Integer">
+       SELECT p.* from t_sys_role r
+	   		INNER JOIN t_sys_role_permission rp on r.id=rp.roleid
+	   		INNER JOIN t_sys_permission p on p.id=rp.sysPermissionId
+	   where r.id=#{roleid} and p.menu=0
+    </select>
+    <select id="findPermsMenuByUserId" resultType="com.ht.entity.shiro.SysPermission" parameterType="java.lang.String">
+        SELECT p.* from t_sys_permission p
+            <!-- t_sys_role r 
+	    	INNER JOIN t_sys_user_role ur on ur.roleId=r.id
+		  	INNER JOIN t_sys_role_permission rp on r.id=rp.roleid 
+		   	INNER JOIN t_sys_permission p on p.id=rp.sysPermissionId -->
+		where 
+		<!-- ur.userId=#{userid} and --> 
+		p.menu=1
+    </select>
+    
+    <select id="findList" resultType="com.ht.entity.shiro.SysPermission" parameterType="com.ht.commons.utils.MyPage">
+          SELECT p.* from t_sys_permission p
+    </select>
+	
+
+</mapper>

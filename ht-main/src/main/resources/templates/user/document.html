@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- 公共头部 -->
+    <th:block th:include="block/headlink :: test('个人云中心-我的文档')" /> 
+    <!-- 结束 -->
+    <link rel="stylesheet" th:href="@{/statics/css/user/pagination.css}">
+    <link rel="stylesheet" th:href="@{/statics/css/user/index.css?v=0.0.1}">
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+        .user_content>.user_list {
+            width: 210px;
+            height: 770px;
+            background: #fff;
+        }
+        .user_content>.user_details {
+            width: 973px;
+            height: 100%;
+            margin-left: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="user">
+        <div th:replace="~{user_head::copy}"></div>
+        <div th:replace="~{header::copy}"></div>
+    </div>
+    <div class="wrap" id="box">
+        <section>
+            <div class="user_content clearfix">
+                <div class="user_list fl clearfix">
+                    <div th:replace="~{user_part::copy}"></div>
+                </div>
+                <div class="user_details fl">
+                    <div class="doc">
+                        <div class="doc_tit clearfix">
+                            <div v-cloak @click="bar=0;getCollect()" :class="{active:bar==0}" class="fl">文档收藏（{{CollectTotal}}）</div>
+                            <div v-cloak @click="bar=1;getdownload()" :class="{active:bar==1}" class="fl">下载文档（{{downloadTotal}}）</div>
+                            <div v-cloak @click="bar=2;getUpload()" :class="{active:bar==2}" class="fl">上传文档（{{uploadTotal1+uploadTotal2+uploadTotal3}}）</div>
+                        </div>
+                        <div class="condition" v-show="bar==0" style="border-bottom:none;"></div>
+                        <div class="condition" v-show="bar==1" style="border-bottom:none;"></div>
+                        <div class="condition clearfix" v-show="bar==2">
+                            <i>文档状态：</i>
+                            <span @click="state=1;getUpload1()" :class="{active:state==1}" >已上传（{{uploadTotal1}}）<s></s></span>
+                            <span @click="state=0;getUpload2()" :class="{active:state==0}" >审核中（{{uploadTotal2}}）<s></s></span>
+                            <span @click="state=-1;getUpload3()" :class="{active:state==-1}" >审核拒绝（{{uploadTotal3}}）<s></s></span>
+                            <!-- <a href="javascript:void(0)">上传文档</a> -->
+                            <a href="/ht-biz/library/upload">上传文档</a>
+                        </div>
+                        <div class="doc_list">
+                            <!-- 文档收藏  -->
+                            <ul v-cloak class="doc_ul clearfix"  v-show="bar==0">
+                                <li v-for="(list,index) in CollectList"  @mouseover="deleteShow=(index+1);" @mouseleave="deleteShow='';">
+                                    <p>{{index+1}}. {{list.libname}}</p>
+
+                                    <font class="shanchu2"><s class="delete" :id="list.targetId" v-show="deleteShow==(index+1)" @click="doCollection($event);">取消收藏</s></font>
+                                    <span>{{list.clazzName}}</span>
+                                    <i>{{list.createdate | date}}</i>
+                                    <a target="_blank" v-if="list.clazzName=='文库'" :href="'/ht-biz/library/findLibrayById?id='+list.targetId" >查看详情</a>
+                                    <a target="_blank" v-else-if="list.clazzName=='资源包'" :href="'/ht-biz/resouce/findbyid?id='+list.targetId" >查看详情</a>
+                                    <a target="_blank" v-else-if="list.clazzName=='政策速递'" :href="'/ht-biz/policydig/details?id='+list.targetId" >查看详情</a>
+                                    <a target="_blank" v-else-if="list.clazzName=='其他'" href="#" >查看详情</a>
+                                </li>
+                            </ul>
+                            <!-- 下载文档 -->
+                            <ul v-cloak class="doc_ul clearfix" v-show="bar==1">
+                                <li v-for="(list,index) in downloadList">
+                                    <p>{{index+1}}. {{list.libname}}</p>
+                                    <span>{{list.clazzName}}</span>
+                                    <i>{{list.createdate | date}}</i>
+                                    <a target="_blank" v-if="list.clazzName=='文库'" :href="'/ht-biz/library/findLibrayById?id='+list.targetId" >查看详情</a>
+                                    <a target="_blank" v-else-if="list.clazzName=='资源包'" :href="'/ht-biz/resouce/findbyid?id='+list.targetId" >查看详情</a>
+                                    <a target="_blank" v-else-if="list.clazzName=='其他'" ></a>
+                                </li>
+                            </ul>
+                            <!-- 上传文档 -->
+                            <ul v-cloak class="doc_ul clearfix" v-show="bar==2">
+                                <li v-for="(list,index) in uploadList"  @mouseover="deleteRecord=(index+1);" @mouseleave="deleteRecord='';">
+                                    <p>{{index+1}}. {{list.title}}</p>
+                                    <!--  -->
+                                    <font class="shanchu"><s class="delete" :id="list.id" v-if="list.status=='-1'" v-show="deleteRecord==(index+1)"  @click="doDelete($event);">删除</s></font>
+                                    
+
+                                    <span v-if="list.bro != null"><i class="see_icon"></i>{{list.bro}}</span>
+                                    <span v-else><i class="see_icon"></i>0</span>
+                                    <i>{{list.createdate | date}}</i>
+                                    
+                                    <a :href="'/ht-biz/library/findLibrayById?id='+list.id" v-if="list.status=='1'">查看详情</a>
+                                    <a href="javascript:void(0);" @click="reject(list.reason)" v-if="list.status=='-1'">查看详情</a>
+                                </li>
+                            </ul>
+                            <!-- 分页 -->
+                            <div class="page_box ac">
+                                <mypagenation :page="page" @btn-click="clickPage"></mypagenation>
+                                <div class="target_goto">
+                                    <span>输入页码</span>
+                                    <input type="text" v-model:value="targetData">
+                                    <s @click="clickPage();">确认</s>
+                                </div>
+                            </div>
+                            <!-- 分页 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer>
+            <div>COPYRIGHT © 版权归属 广州高企云信息科技有限公司 粤ICP备16007486号-1</div>
+        </footer>
+    </div>
+    <!-- 公共js部分 -->
+    <th:block th:include="block/footlink :: copy" /> 
+    <!-- over -->
+
+    <script type="text/javascript" th:src="@{/statics/js/user/document.js?v=0.0.3}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/user/part_tab.js?v=0.0.3}"></script>
+    <th:block th:include="block/statistics :: copy" />
+</body>
+
+</html>

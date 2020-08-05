@@ -1,0 +1,113 @@
+.app_expresss {
+    height: 100vh;
+    background-color: #ffffff;
+    padding-bottom: 12.8vw;
+}
+.express_pbg {
+    width: 100%;
+    height: 26.1333vw;
+    background: url("../../images/login/login_bg.png") no-repeat;
+    background-size: 100% 100%;
+}
+.express_t {
+    padding: 5.3333vw 4.2667vw 0 4.2667vw;
+    margin-bottom: 3.2vw;
+}
+.to_express {
+    width: 2.1333vw;
+    height: 6vw;
+    background: url("../../images/yidong_icons/phone_icons.png") -32.2667vw -13.1333vw no-repeat;
+    background-size: 40vw 40vw;
+    margin-right: 2.1333vw;
+    vertical-align: middle;
+}
+.zc_express {
+    font-size: 4.2667vw;
+    color: #ffffff;
+    margin-right: 2.6667vw;
+}
+
+.express_info {
+    width: 91.4667vw;
+    background-color: #ffffff;
+    margin: 0 auto;
+    box-shadow: 0 1.3333vw 5.3333vw 0 rgba(70,70,70,0.08);
+}
+.express_title {
+    font-size: 4.5333vw;
+    color: #4B87F8;
+    font-weight: 800;
+    padding: 5.3333vw 3.2667vw;
+}
+.sb_info {
+    margin-bottom: 2.1333vw;
+}
+.source,.sb_info {
+    font-size: 2.6667vw;
+    /* font-size: 1.6vw; */
+    color: #999999;
+}
+.source {
+    padding-bottom: 5.3333vw;
+}
+.content {
+    font-size: 3.4667vw;
+    color: #333333;
+    padding: 3.2vw 4.2667vw 12.8vw 4.2667vw;
+    background-color: #ffffff;
+    margin-top: 2.6667vw;
+    line-height: 6vw;
+}
+.content>p>img {
+    width: 100%;
+}
+.content>div>p>img {
+    width: 100%;
+}
+.sb_address,.source {
+    padding-left: 3.2667vw;
+}
+.sb_time,.sb_address {
+    margin-right: 5.3333vw;
+}
+.being,.rest {
+    color: #F04E40;
+    padding: 0.5333vw;
+    background-color: #FEEDEC;
+}
+.sb_time,.being,.rest,.sb_address {
+    display: inline-block;
+    font-size: 2.6667vw;
+}
+.expresss_bt {
+    width: 100%;
+    height: 12.8vw;
+    border-top: 1px solid #E2E2E2;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+}
+.go_back {
+    flex: 2;
+    font-size: 4.2667vw;
+    color: #4B87F8;
+    text-align: center;
+    line-height: 12.8vw;
+    background-color: #ffffff;
+}
+.consult {
+    flex: 5;
+    font-size: 4.2667vw;
+    color: #ffffff;
+    background-color: #4B87F8;
+    text-align: center;
+    line-height: 12.8vw;
+}
+.consult_icon {
+    width: 4.8vw;
+    height: 4.2667vw;
+    background: url("../../images/yidong_icons/consult.png") no-repeat;
+    background-size: 4.8vw 4.2667vw;
+    vertical-align: middle;
+    margin-right: 3.2vw;
+}

@@ -1,0 +1,177 @@
+.wrap{background: #fff;}
+.transation_banner {width:100%;height:140px;background:url("../../images/service/trans_banner.jpg")center repeat-x;}
+.transation_banner>h2 {font-size:36px;font-weight:bold;color:#fff;text-align:center;padding-top:52px;}
+.transation_option {width:1200px;margin:0 auto;margin-bottom: 50px;}
+.trans_nav>h3 {color:#666666;font-size:14px;padding:15px 0 15px 0;}
+.trans_nav>h3>a {color:#666666;font-size:14px;}
+.transation_choice {width:100%;border-bottom:1px solid #eeeeee;background:#eaf7f4;}
+.transation_option_tit {border:1px solid #dbdbdb;}
+.transation_choice_bg {width:116px;height:auto;float:left;text-align:center;background:#eaf7f4;padding:13px 0;}
+.transation_choice_bg>p {padding:3px;}
+.transation_choice_text {float:left;width:1080px;padding:11px 0;background:#fff;}
+.transation_choice_text>span {float:left;cursor:pointer;display:inline-block;padding:3px;margin-left:37px;}
+.title_nav1>.active {background:#ff4b2c;color:#fff;border-radius:3px;}
+.title_nav2>.active {color:#ff4b2c;border-radius:3px;}
+
+/* 地区选择 */
+.competents{border: 1px solid #dbdbdb;padding: 10px;margin-left: 37px;}
+.region_modify {border:1px solid #e5e5e5;/* width:110px;*/    height:28px;line-height:28px;box-sizing:border-box;padding:0 5px;}
+.transation_choice_text .choice span.active {color:#149f89;}
+.transation_choice_text .choice span.choice_content {position:relative;display:inline-block;margin-right:10px;cursor:pointer;}
+.transation_choice_text .choice i.arrow {width:20px;height:20px;display:inline-block;background:url(../../images/library/xia.png)no-repeat center;vertical-align:middle;margin-left:35px;}
+ul.province,ul.city,ul.area {position:absolute;top:28px;left:-1px;width:100px;height:180px;z-index:2;background:#fff;border:1px solid #dbdbdb;overflow:auto;box-shadow:0 2px 2px rgba(0,0,0,.2);-webkit-box-shadow:0 2px 2px rgba(0,0,0,.2);-moz-box-shadow:0 2px 2px rgba(0,0,0,.2);-o-box-shadow:0 2px 2px rgba(0,0,0,.2);-ms-box-shadow:0 2px 2px rgba(0,0,0,.2);}
+.tier{margin-left: 20px;margin-top: 16px;}
+/* 地区选择 over */
+
+/* 政策层级 */
+.library_show p {
+    padding: 0 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+.have_chosen_content {
+    position: relative;
+    margin-right: 15px;
+    color: #8797ca;
+}
+.close {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background: url(../../images/policydig/lib_icon.png)-145px -49px;
+    vertical-align: middle;
+    position: absolute;
+    top: -3px;
+    right: -13px;
+    cursor: pointer;
+    opacity: 1 !important;
+}
+.have_choice_ss{
+    width: 100%;
+    height: 65px;
+    line-height: 65px;
+}
+.transation_content{
+    width: 1200px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    align-items: center;
+}
+.transation_content>div{
+    padding: 22px 10px;
+    border: 1px solid #dbdbdb;
+    width: 300px;
+    margin-bottom: 20px;
+    box-sizing:border-box;
+}
+.transation_content>div>h3{
+    font-size: 16px;
+    color: #333;
+    padding-bottom: 10px;
+}
+.transation_content>div>p{
+
+}
+.transation_content>div>p>span{
+    font-size: 12px;
+    display: inline-block;
+    padding: 3px 10px;
+    background: #18c18d;
+    color: #fff;
+}
+.transation_content>div>p>s {
+    font-size: 12px;
+    display: inline-block;
+    padding: 3px 0;
+    color: #9c9b99;
+}
+.transation_content>div>p>s>i{
+    margin-left: 5px;
+    padding-right: 5px;
+}
+.transation_content>div>p>s>i:last-child{
+    color: #ff4a2b;
+}
+.pro_detalis{
+    width: 100%;
+    height: 70px;
+    line-height: 70px;
+    border-bottom: 1px dashed #dbdbdb;
+}
+.pro_detalis>p{
+    color: #ff4b2c;
+    font-size: 18px;
+    float: left;
+}
+.pro_detalis>a{
+    width: 66px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    display: inline-block;
+    float: right;
+    border-radius: 5px;
+    color: #ff4b2c;
+    border: 1px solid #ff7a4a;
+    margin-top: 20px;
+    font-size: 12px;
+}
+.pro_detalis>a:hover{
+    color: #fff;
+    background: -webkit-linear-gradient(left, #ff7d4a, #ff4a2b);
+    background: -o-linear-gradient(left, #ff7d4a, #ff4a2b);
+    background: -moz-linear-gradient(left, #ff7d4a, #ff4a2b);
+    background: linear-gradient(left, #ff7d4a, #ff4a2b);
+    background: linear-gradient(to right, #ff7d4a, #ff4a2b);
+    filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr='#ff7d4a', endColorStr='#ff4a2b', gradientType='0');
+    -ms-filter: "progid:DXImageTransform.Microsoft.Gradient(startColorStr='#ff7d4a',endColorStr='#ff4a2b',gradientType='0')";
+}
+.store{
+    margin-top: 20px;
+}
+.store>p{
+    float: left;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+}
+.store>p>img{
+    width: 100%;
+}
+.store>div{
+    float: left;
+}
+.store>div>h3{
+    color: #333333;
+    font-size: 14px;
+    margin-top: 3px;
+    margin-left: 10px;
+}
+.store>div>span {
+    display: inline-block;
+    color: #9c9b99;
+    font-size: 14px;
+    margin-top: 5px;
+    margin-left: 10px;
+}
+.store>div>span>i{
+    display: inline-block;
+    margin-left:2px;
+    margin-right: 2px;
+}
+.bao{
+    width: 15px;
+    height: 15px;
+    background: url(../../images/service/bao.png)center no-repeat;
+    vertical-align: middle;
+    margin-bottom:1px;
+}
+.jian {
+    width: 15px;
+    height: 15px;
+    background: url(../../images/service/jian.png)center no-repeat;
+    vertical-align: middle;
+    margin-bottom: 4px;
+}

@@ -1,0 +1,134 @@
+/*banner*/
+.about_banner{
+    background: url("../../images/about_banner.png");
+    height: 296px;
+    overflow: hidden;
+}
+.about_banner p{
+    color: #fff;
+    font-size: 32px;
+    line-height: 50px;
+    margin-left: 20px;
+}
+.about_banner p:nth-of-type(1){
+    margin-top: 60px;
+}
+/*<!--S=高企云介绍-->*/
+.intro{
+    background-color: #fff;
+    line-height: 26px;
+    /*font-family: 'microsoft yahei';*/
+}
+.intro .ht_intro,.intro_video .video,.about_advantage .server_advantage{
+    color: #010832;
+    font-size: 34px;
+    padding-top: 50px;
+    padding-bottom: 30px;
+}
+.intro .intro_info{
+    width: 630px;
+    color: #808080;
+    font-size: 18px;
+    margin: 0 auto;
+}
+.intro .intro_step{
+    padding: 60px 0px;
+}
+.intro .step{
+    margin-left: 140px;
+}
+.intro .step_first{
+    margin-left: 100px;
+}
+.intro .intro_step .num{
+    background: url("../../images/help/icons.png");
+    display: inline-block;
+}
+.intro .intro_step .title{
+    width: auto;
+    font-size: 18px;
+    color: #010832;
+    font-weight: 800;
+}
+.intro .intro_step .text{
+    font-size: 16px;
+    color: #808080;
+}
+.intro .intro_step .one{
+    width: 34px;
+    height: 50px;
+    background-position: -12px -70px;
+}
+.intro .intro_step .two{
+    width: 40px;
+    height: 50px;
+    background-position: -48px -70px;
+}
+.intro .intro_step .three{
+    width: 38px;
+    height: 50px;
+    background-position: -92px -68px;
+}
+.intro .intro_step .four{
+    width: 38px;
+    height: 50px;
+    background-position: -134px -68px;
+}
+/*<!--E=高企云介绍-->*/
+/*<!--S=高企云介绍视频-->*/
+.intro_video{
+    padding-bottom: 60px;
+}
+.intro_video .video{
+    margin-bottom: 40px;
+}
+.intro_video .video .video_government{
+    margin-left: 20px;
+}
+/*<!--E=高企云介绍视频-->*/
+/*<!--S=我们的服务优势-->*/
+/*.about_advantage .server_advantage{*/
+/*padding-bottom: 60px;*/
+/*}*/
+.about_advantage{
+    background-color: #fff;
+}
+/*.about_advantage .contain .server_advantage{*/
+/*padding-bottom: -50px;*/
+/*}*/
+.about_advantage .man{
+    width: 100%;
+    height: 500px;
+    background: url('../../images/help/man.png') no-repeat;
+    background-clip:border-box;
+    position: relative;
+    margin-top: -90px;
+}
+.about_advantage .man p{
+    position: absolute;
+    color: #808080;
+    font-size: 16px;
+}
+.about_advantage .man p span{
+    color: #fe8910;
+    font-size: 20px;
+    font-weight: 800;
+    margin-right: 30px;
+}
+.about_advantage .man p:nth-of-type(1){
+    top: 120px;
+    left: 420px;
+}
+.about_advantage .man p:nth-of-type(2){
+    top: 220px;
+    left: 434px;
+}
+.about_advantage .man p:nth-of-type(3){
+    top: 320px;
+    left: 385px;
+}
+.about_advantage .man p:nth-of-type(4){
+    top: 410px;
+    left: 227px;
+}
+/*<!--E=我们的服务优势-->*/

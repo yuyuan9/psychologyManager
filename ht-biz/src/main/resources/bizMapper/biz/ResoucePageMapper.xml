@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.biz.mapper.ResoucePageMapper">
+    <select id="findListPage" parameterType="com.ht.commons.utils.MyPage" resultType="com.ht.commons.utils.PageData">
+       select rg.* ,usr.trueName as username from
+        t_resource_page rg LEFT JOIN t_sys_user usr
+        on usr.USER_ID=rg.createid where 1=1
+         <if test="pd.keyword!=null and pd.keyword!=''">
+            and
+            (
+            rg.name LIKE CONCAT(CONCAT('%', #{pd.keyword}),'%')
+            )
+         </if>
+         <if test="pd.retype != null">
+        and   rg.retype = #{pd.retype}
+    </if>
+         <if test="pd.classify != null ">
+            and   rg.classify = #{pd.classify}
+         </if>
+        ORDER BY rg.sort desc,rg.createdate desc
+    </select>
+
+    <select id="maxsort" resultType="java.lang.Integer">
+        select max(sort) from t_resource_page
+    </select>
+    
+    <select id="geelinkfindall" resultType="com.ht.commons.support.geelink.entity.GeelinkResoupage">
+     SELECT id ,createdate,`name` as title ,browsecount from t_resource_page order by createdate desc limit 0,100
+    </select>
+</mapper>

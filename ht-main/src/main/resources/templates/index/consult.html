@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+ <head>
+  <title>心理咨询_心理咨询师_心理医生-壹心理</title>
+  <meta data-n-head="ssr" charset="utf-8">
+  <meta data-n-head="ssr" name="viewport" content="width=device-width, initial-scale=1">
+  <meta data-n-head="ssr" data-hid="description" name="description" content="## Build Setup">
+  <meta data-n-head="ssr" name="keywords" content="心理咨询,心理咨询师">
+  <meta data-n-head="ssr" name="description" content="壹心理心理咨询师频道，遵循严格的心理咨询师审核标准，已邀请500位心理咨询师和心理医生入驻，通过视频、语音、咨询室等方式为您提供婚恋、家庭、儿童、职场等心理咨询服务。">
+  <link data-n-head="ssr" rel="icon" type="image/x-icon" href="css/favicon.ico">
+
+  <link rel="stylesheet" th:href="@{/statics/css/psychology/app.css}">
+  <link rel="stylesheet" th:href="@{/statics/css/psychology/index.css}">
+
+ <body> 
+  <div data-server-rendered="true" id="__nuxt">
+   <!---->
+   <div id="__layout">
+    <div id="consult-index" data-v-c14f9f82>
+     <div class="header" data-v-c14f9f82>
+      <div class="header-content" data-v-c14f9f82>
+       <img src="images/logo.94d6a41.png" alt="logo" class="logo" data-v-c14f9f82> 
+       <ul class="nav" data-v-c14f9f82>
+        <li data-v-c14f9f82><a href="https://www.xinli001.com" data-v-c14f9f82>壹心理首页</a></li> 
+        <li class="active" data-v-c14f9f82>心理咨询</li> 
+        <li data-v-c14f9f82><a href="https://m.xinli001.com/zx/about" data-v-c14f9f82>关于我们</a></li> 
+        <li class="download-hover" data-v-c14f9f82><span data-v-c14f9f82> 下载App </span> 
+         <div class="qr-code-container" data-v-c14f9f82>
+          <img src="images/zx-dowload-code.9cdfe1f.png" class="qr-code-img" data-v-c14f9f82> 
+          <span class="triangle" data-v-c14f9f82></span> 
+          <p data-v-c14f9f82>手机扫码下载</p>
+         </div></li>
+       </ul>
+      </div>
+     </div> 
+     <div class="container" data-v-c14f9f82>
+      <div class="left-container" data-v-c14f9f82>
+       <div class="selected-box" data-v-c14f9f82>
+        <div class="selected" data-v-c14f9f82>
+         <span class="label" data-v-c14f9f82>类别</span> 
+         <ul class=" selected-list" data-v-c14f9f82>
+          <li class="selected-item active" data-v-c14f9f82><a href="https://www.xinli001.com/consult?tag=0" data-v-c14f9f82> 全部</a></li>
+          <li class="selected-item" data-v-c14f9f82><a href="https://www.xinli001.com/consult?tag=427" data-v-c14f9f82> 个人成长</a></li>
+          <li class="selected-item" data-v-c14f9f82><a href="https://www.xinli001.com/consult?tag=572" data-v-c14f9f82> 情绪管理</a></li>
+          <li class="selected-item" data-v-c14f9f82><a href="https://www.xinli001.com/consult?tag=734" data-v-c14f9f82> 心理健康</a></li>
+          <li class="selected-item" data-v-c14f9f82><a href="https://www.xinli001.com/consult?tag=452" data-v-c14f9f82> 婚姻家庭</a></li>
+          <li class="selected-item" data-v-c14f9f82><a href="https://www.xinli001.com/consult?tag=511" data-v-c14f9f82> 恋爱心理</a></li>
+          <li class="selected-item" data-v-c14f9f82><a href="https://www.xinli001.com/consult?tag=634" data-v-c14f9f82> 人际关系</a></li>
+          <li class="selected-item" data-v-c14f9f82><a href="https://www.xinli001.com/consult?tag=608" data-v-c14f9f82> 职场心理</a></li>
+          <li class="selected-item" data-v-c14f9f82><a href="https://www.xinli001.com/consult?tag=535" data-v-c14f9f82> 亲子教育</a></li>
+          <li class="selected-item" data-v-c14f9f82><a href="https://www.xinli001.com/consult?tag=490" data-v-c14f9f82> 性心理</a></li>
+         </ul>
+        </div> 
+        <div class="selected" data-v-c14f9f82>
+         <span class="label" data-v-c14f9f82>城市</span> 
+         <ul class=" selected-list" data-v-c14f9f82>
+          <li class="selected-item active" data-v-c14f9f82><a href="https://www.xinli001.com/consult?city=" data-v-c14f9f82> 全部</a></li>
+          <li class="selected-item" data-v-c14f9f82><a href="https://www.xinli001.com/consult?city=北京市" data-v-c14f9f82> 北京市</a></li>
+          <li class="selected-item" data-v-c14f9f82><a href="https://www.xinli001.com/consult?city=上海市" data-v-c14f9f82> 上海市</a></li>
+          <li class="selected-item" data-v-c14f9f82><a href="https://www.xinli001.com/consult?city=广州市" data-v-c14f9f82> 广州市</a></li>
+          <li class="selected-item" data-v-c14f9f82><a href="https://www.xinli001.com/consult?city=深圳市" data-v-c14f9f82> 深圳市</a></li>
+          <li class="selected-item" data-v-c14f9f82><a href="https://www.xinli001.com/consult?city=杭州市" data-v-c14f9f82> 杭州市</a></li>
+          <li class="selected-item" data-v-c14f9f82><a href="https://www.xinli001.com/consult?city=南京市" data-v-c14f9f82> 南京市</a></li>
+          <li class="selected-item" data-v-c14f9f82><a href="https://www.xinli001.com/consult?city=武汉市" data-v-c14f9f82> 武汉市</a></li>
+          <li class="selected-item" data-v-c14f9f82><a href="https://www.xinli001.com/consult?city=长沙市" data-v-c14f9f82> 长沙市</a></li>
+          <li class="selected-item" data-v-c14f9f82><a href="https://www.xinli001.com/consult?city=成都市" data-v-c14f9f82> 成都市</a></li>
+          <li class="selected-item" data-v-c14f9f82><a href="https://www.xinli001.com/consult?city=青岛市" data-v-c14f9f82> 青岛市</a></li>
+         </ul>
+        </div> 
+        <div class="selected price" data-v-c14f9f82>
+         <span class="label" data-v-c14f9f82>价格</span> 
+         <ul class=" selected-list" data-v-c14f9f82>
+          <li class="selected-item active" data-v-c14f9f82><a href="https://www.xinli001.com/consult" data-v-c14f9f82> 全部</a></li>
+          <li class="selected-item" data-v-c14f9f82><a href="https://www.xinli001.com/consult" data-v-c14f9f82> 200元以下</a></li>
+          <li class="selected-item" data-v-c14f9f82><a href="https://www.xinli001.com/consult" data-v-c14f9f82> 200-300元</a></li>
+          <li class="selected-item" data-v-c14f9f82><a href="https://www.xinli001.com/consult" data-v-c14f9f82> 300-500元</a></li>
+          <li class="selected-item" data-v-c14f9f82><a href="https://www.xinli001.com/consult" data-v-c14f9f82> 500-1000元</a></li>
+          <li class="selected-item" data-v-c14f9f82><a href="https://www.xinli001.com/consult" data-v-c14f9f82> 1000元以上</a></li>
+         </ul>
+        </div>
+       </div> 
+       <div class="teacher-box" data-v-c14f9f82>
+        <div class="top-box" data-v-c14f9f82>
+         <span class="title" data-v-c14f9f82>心理咨询师</span> 
+         <div class="search-box" data-v-c14f9f82>
+          <input type="text" placeholder="搜索咨询师名字" value="" data-v-c14f9f82> 
+          <i class="icon icon-node-website icon-search" data-v-c14f9f82></i>
+         </div>
+        </div> 
+        <ul class="sort-list" data-v-c14f9f82>
+         <li class="sort-item active" data-v-c14f9f82><a href="https://www.xinli001.com/consult" data-v-c14f9f82> 默认排序</a></li>
+         <li class="sort-item" data-v-c14f9f82><a href="https://www.xinli001.com/consult" data-v-c14f9f82> 预约最多</a></li>
+         <li class="sort-item" data-v-c14f9f82><a href="https://www.xinli001.com/consult" data-v-c14f9f82> 低价优先</a></li>
+         <li class="sort-item" data-v-c14f9f82><a href="https://www.xinli001.com/consult" data-v-c14f9f82> 最新入驻</a></li>
+        </ul> 
+        <ul class="teacher-list" data-v-c14f9f82>
+         <li class="teacher-item" data-v-c14f9f82>
+          <div class="teacher-info" data-v-c14f9f82>
+           <a href="https://www.xinli001.com/expert/1000690022" data-v-c14f9f82><img src="/63a84d57ad660fb64ca75ece0893658d.jpeg!120" alt="严林" class="avatar" data-v-c14f9f82></a> 
+           <div data-v-c14f9f82>
+            <p class="name-honor ellipsis-1" data-v-c14f9f82><a href="https://www.xinli001.com/expert/1000690022" data-v-c14f9f82><span class="name" data-v-c14f9f82>严林</span></a> <span class="honor" data-v-c14f9f82>国家二级心理咨询师、NGH国际催眠治疗师</span></p> 
+            <p data-v-c14f9f82><span class="city" data-v-c14f9f82><i class="icon icon-node-website icon-dingwei1" data-v-c14f9f82></i> 上海市</span> <span class="point" data-v-c14f9f82>·</span> <span class="zx_num" data-v-c14f9f82>
+              <!----> <span class="num" data-v-c14f9f82>7558</span> 人咨询</span> <span class="point" data-v-c14f9f82>·</span> <span class="experience_year" data-v-c14f9f82>从业<span class="num" data-v-c14f9f82> 9 </span>年</span></p> 
+            <p class="price" data-v-c14f9f82> ￥750 </p>
+           </div>
+          </div> <a href="https://www.xinli001.com/expert/1000690022" data-v-c14f9f82><span class="yuyue" data-v-c14f9f82>预约</span></a></li>
+         <li class="teacher-item" data-v-c14f9f82>
+          <div class="teacher-info" data-v-c14f9f82>
+           <a href="https://www.xinli001.com/expert/1001379733" data-v-c14f9f82><img src="/02349cc681fcb707fdcc877cd89c184b.png!120" alt="黎燕" class="avatar" data-v-c14f9f82></a> 
+           <div data-v-c14f9f82>
+            <p class="name-honor ellipsis-1" data-v-c14f9f82><a href="https://www.xinli001.com/expert/1001379733" data-v-c14f9f82><span class="name" data-v-c14f9f82>黎燕</span></a> <span class="honor" data-v-c14f9f82>一级婚姻家庭 二级心理咨询 高级性心理师</span></p> 
+            <p data-v-c14f9f82><span class="city" data-v-c14f9f82><i class="icon icon-node-website icon-dingwei1" data-v-c14f9f82></i> 青岛市</span> <span class="point" data-v-c14f9f82>·</span> <span class="zx_num" data-v-c14f9f82>
+              <!----> <span class="num" data-v-c14f9f82>5523</span> 人咨询</span> <span class="point" data-v-c14f9f82>·</span> <span class="experience_year" data-v-c14f9f82>从业<span class="num" data-v-c14f9f82> 9 </span>年</span></p> 
+            <p class="price" data-v-c14f9f82> ￥600 </p>
+           </div>
+          </div> <a href="https://www.xinli001.com/expert/1001379733" data-v-c14f9f82><span class="yuyue" data-v-c14f9f82>预约</span></a></li>
+         <li class="teacher-item" data-v-c14f9f82>
+          <div class="teacher-info" data-v-c14f9f82>
+           <a href="https://www.xinli001.com/expert/1001694068" data-v-c14f9f82><img src="/c3936cf678d587c370ce60323fe71df7.png!120" alt="顾曦" class="avatar" data-v-c14f9f82></a> 
+           <div data-v-c14f9f82>
+            <p class="name-honor ellipsis-1" data-v-c14f9f82><a href="https://www.xinli001.com/expert/1001694068" data-v-c14f9f82><span class="name" data-v-c14f9f82>顾曦</span></a> <span class="honor" data-v-c14f9f82>情感专家，中科院心理健康指导师</span></p> 
+            <p data-v-c14f9f82><span class="city" data-v-c14f9f82><i class="icon icon-node-website icon-dingwei1" data-v-c14f9f82></i> 南京市</span> <span class="point" data-v-c14f9f82>·</span> <span class="zx_num" data-v-c14f9f82>
+              <!----> <span class="num" data-v-c14f9f82>4530</span> 人咨询</span> <span class="point" data-v-c14f9f82>·</span> <span class="experience_year" data-v-c14f9f82>从业<span class="num" data-v-c14f9f82> 7 </span>年</span></p> 
+            <p class="price" data-v-c14f9f82> ￥500 </p>
+           </div>
+          </div> <a href="https://www.xinli001.com/expert/1001694068" data-v-c14f9f82><span class="yuyue" data-v-c14f9f82>预约</span></a></li>
+         <li class="teacher-item" data-v-c14f9f82>
+          <div class="teacher-info" data-v-c14f9f82>
+           <a href="https://www.xinli001.com/expert/3510061" data-v-c14f9f82><img src="/db403387ca50e16089fcb122801142d5.png!120" alt="杨浩波" class="avatar" data-v-c14f9f82></a> 
+           <div data-v-c14f9f82>
+            <p class="name-honor ellipsis-1" data-v-c14f9f82><a href="https://www.xinli001.com/expert/3510061" data-v-c14f9f82><span class="name" data-v-c14f9f82>杨浩波</span></a> <span class="honor" data-v-c14f9f82>中德督导组&amp;中美高级组</span></p> 
+            <p data-v-c14f9f82><span class="city" data-v-c14f9f82><i class="icon icon-node-website icon-dingwei1" data-v-c14f9f82></i> 长沙市</span> <span class="point" data-v-c14f9f82>·</span> <span class="zx_num" data-v-c14f9f82>
+              <!----> <span class="num" data-v-c14f9f82>4200</span> 人咨询</span> <span class="point" data-v-c14f9f82>·</span> <span class="experience_year" data-v-c14f9f82>从业<span class="num" data-v-c14f9f82> 7 </span>年</span></p> 
+            <p class="price" data-v-c14f9f82> ￥800 </p>
+           </div>
+          </div> <a href="https://www.xinli001.com/expert/3510061" data-v-c14f9f82><span class="yuyue" data-v-c14f9f82>预约</span></a></li>
+         <li class="teacher-item" data-v-c14f9f82>
+          <div class="teacher-info" data-v-c14f9f82>
+           <a href="https://www.xinli001.com/expert/67212086" data-v-c14f9f82><img src="/4228600090450875f16ee197d05f7775.jpg!120" alt="刘辉" class="avatar" data-v-c14f9f82></a> 
+           <div data-v-c14f9f82>
+            <p class="name-honor ellipsis-1" data-v-c14f9f82><a href="https://www.xinli001.com/expert/67212086" data-v-c14f9f82><span class="name" data-v-c14f9f82>刘辉</span></a> <span class="honor" data-v-c14f9f82>二级心理咨询师、中科院心理健康指导师</span></p> 
+            <p data-v-c14f9f82><span class="city" data-v-c14f9f82><i class="icon icon-node-website icon-dingwei1" data-v-c14f9f82></i> 广州市</span> <span class="point" data-v-c14f9f82>·</span> <span class="zx_num" data-v-c14f9f82>
+              <!----> <span class="num" data-v-c14f9f82>3497</span> 人咨询</span> <span class="point" data-v-c14f9f82>·</span> <span class="experience_year" data-v-c14f9f82>从业<span class="num" data-v-c14f9f82> 6 </span>年</span></p> 
+            <p class="price" data-v-c14f9f82> ￥500 </p>
+           </div>
+          </div> <a href="https://www.xinli001.com/expert/67212086" data-v-c14f9f82><span class="yuyue" data-v-c14f9f82>预约</span></a></li>
+         <li class="teacher-item" data-v-c14f9f82>
+          <div class="teacher-info" data-v-c14f9f82>
+           <a href="https://www.xinli001.com/expert/1000091519" data-v-c14f9f82><img src="/c86b2efbc95751c8371afe6ca4fdbd16.jpeg!120" alt="孙伟通" class="avatar" data-v-c14f9f82></a> 
+           <div data-v-c14f9f82>
+            <p class="name-honor ellipsis-1" data-v-c14f9f82><a href="https://www.xinli001.com/expert/1000091519" data-v-c14f9f82><span class="name" data-v-c14f9f82>孙伟通</span></a> <span class="honor" data-v-c14f9f82>国家二级心理咨询师、中国心理卫生协会会员</span></p> 
+            <p data-v-c14f9f82><span class="city" data-v-c14f9f82><i class="icon icon-node-website icon-dingwei1" data-v-c14f9f82></i> 北京市</span> <span class="point" data-v-c14f9f82>·</span> <span class="zx_num" data-v-c14f9f82>
+              <!----> <span class="num" data-v-c14f9f82>3644</span> 人咨询</span> <span class="point" data-v-c14f9f82>·</span> <span class="experience_year" data-v-c14f9f82>从业<span class="num" data-v-c14f9f82> 6 </span>年</span></p> 
+            <p class="price" data-v-c14f9f82> ￥500 </p>
+           </div>
+          </div> <a href="https://www.xinli001.com/expert/1000091519" data-v-c14f9f82><span class="yuyue" data-v-c14f9f82>预约</span></a></li>
+         <li class="teacher-item" data-v-c14f9f82>
+          <div class="teacher-info" data-v-c14f9f82>
+           <a href="https://www.xinli001.com/expert/271341311" data-v-c14f9f82><img src="/cef4c4f48aaa64736e0de0730c284976.jpeg!120" alt="赵燕青" class="avatar" data-v-c14f9f82></a> 
+           <div data-v-c14f9f82>
+            <p class="name-honor ellipsis-1" data-v-c14f9f82><a href="https://www.xinli001.com/expert/271341311" data-v-c14f9f82><span class="name" data-v-c14f9f82>赵燕青</span></a> <span class="honor" data-v-c14f9f82>赵燕青心理咨询工作室创始人 心理学研究生</span></p> 
+            <p data-v-c14f9f82><span class="city" data-v-c14f9f82><i class="icon icon-node-website icon-dingwei1" data-v-c14f9f82></i> 佛山市</span> <span class="point" data-v-c14f9f82>·</span> <span class="zx_num" data-v-c14f9f82>
+              <!----> <span class="num" data-v-c14f9f82>4286</span> 人咨询</span> <span class="point" data-v-c14f9f82>·</span> <span class="experience_year" data-v-c14f9f82>从业<span class="num" data-v-c14f9f82> 15 </span>年</span></p> 
+            <p class="price" data-v-c14f9f82> ￥600 </p>
+           </div>
+          </div> <a href="https://www.xinli001.com/expert/271341311" data-v-c14f9f82><span class="yuyue" data-v-c14f9f82>预约</span></a></li>
+         <li class="teacher-item" data-v-c14f9f82>
+          <div class="teacher-info" data-v-c14f9f82>
+           <a href="https://www.xinli001.com/expert/39016167" data-v-c14f9f82><img src="/fa654fd18b46f5c6b92e805e22e7c2b5.jpg!120" alt="袁巧云" class="avatar" data-v-c14f9f82></a> 
+           <div data-v-c14f9f82>
+            <p class="name-honor ellipsis-1" data-v-c14f9f82><a href="https://www.xinli001.com/expert/39016167" data-v-c14f9f82><span class="name" data-v-c14f9f82>袁巧云</span></a> <span class="honor" data-v-c14f9f82>二级心理咨询师</span></p> 
+            <p data-v-c14f9f82><span class="city" data-v-c14f9f82><i class="icon icon-node-website icon-dingwei1" data-v-c14f9f82></i> 阜新市</span> <span class="point" data-v-c14f9f82>·</span> <span class="zx_num" data-v-c14f9f82>
+              <!----> <span class="num" data-v-c14f9f82>3886</span> 人咨询</span> <span class="point" data-v-c14f9f82>·</span> 
+             <!----></p> 
+            <p class="price" data-v-c14f9f82> ￥300 </p>
+           </div>
+          </div> <a href="https://www.xinli001.com/expert/39016167" data-v-c14f9f82><span class="yuyue" data-v-c14f9f82>预约</span></a></li>
+         <li class="teacher-item" data-v-c14f9f82>
+          <div class="teacher-info" data-v-c14f9f82>
+           <a href="https://www.xinli001.com/expert/1396212" data-v-c14f9f82><img src="/bc18db3567220fa6c342807474551580.png!120" alt="肖碧玉" class="avatar" data-v-c14f9f82></a> 
+           <div data-v-c14f9f82>
+            <p class="name-honor ellipsis-1" data-v-c14f9f82><a href="https://www.xinli001.com/expert/1396212" data-v-c14f9f82><span class="name" data-v-c14f9f82>肖碧玉</span></a> <span class="honor" data-v-c14f9f82>精神分析取向 完形治疗师 中德中英班</span></p> 
+            <p data-v-c14f9f82><span class="city" data-v-c14f9f82><i class="icon icon-node-website icon-dingwei1" data-v-c14f9f82></i> 上海市</span> <span class="point" data-v-c14f9f82>·</span> <span class="zx_num" data-v-c14f9f82>
+              <!----> <span class="num" data-v-c14f9f82>4047</span> 人咨询</span> <span class="point" data-v-c14f9f82>·</span> <span class="experience_year" data-v-c14f9f82>从业<span class="num" data-v-c14f9f82> 7 </span>年</span></p> 
+            <p class="price" data-v-c14f9f82> ￥700 </p>
+           </div>
+          </div> <a href="https://www.xinli001.com/expert/1396212" data-v-c14f9f82><span class="yuyue" data-v-c14f9f82>预约</span></a></li>
+         <li class="teacher-item" data-v-c14f9f82>
+          <div class="teacher-info" data-v-c14f9f82>
+           <a href="https://www.xinli001.com/expert/1001564184" data-v-c14f9f82><img src="/6de71cad8613424bf3f5b01a63a52312.jpg!120" alt="熊小青" class="avatar" data-v-c14f9f82></a> 
+           <div data-v-c14f9f82>
+            <p class="name-honor ellipsis-1" data-v-c14f9f82><a href="https://www.xinli001.com/expert/1001564184" data-v-c14f9f82><span class="name" data-v-c14f9f82>熊小青</span></a> <span class="honor" data-v-c14f9f82>心理学硕士 二级咨询师 婚姻家庭咨询师 </span></p> 
+            <p data-v-c14f9f82><span class="city" data-v-c14f9f82><i class="icon icon-node-website icon-dingwei1" data-v-c14f9f82></i> 广州市</span> <span class="point" data-v-c14f9f82>·</span> <span class="zx_num" data-v-c14f9f82>
+              <!----> <span class="num" data-v-c14f9f82>3696</span> 人咨询</span> <span class="point" data-v-c14f9f82>·</span> <span class="experience_year" data-v-c14f9f82>从业<span class="num" data-v-c14f9f82> 9 </span>年</span></p> 
+            <p class="price" data-v-c14f9f82> ￥500 </p>
+           </div>
+          </div> <a href="https://www.xinli001.com/expert/1001564184" data-v-c14f9f82><span class="yuyue" data-v-c14f9f82>预约</span></a></li>
+         <li class="teacher-item" data-v-c14f9f82>
+          <div class="teacher-info" data-v-c14f9f82>
+           <a href="https://www.xinli001.com/expert/59109407" data-v-c14f9f82><img src="/ee42f741f1baab0d5df422f4a6cbc1dc.jpg!120" alt="张雯萍" class="avatar" data-v-c14f9f82></a> 
+           <div data-v-c14f9f82>
+            <p class="name-honor ellipsis-1" data-v-c14f9f82><a href="https://www.xinli001.com/expert/59109407" data-v-c14f9f82><span class="name" data-v-c14f9f82>张雯萍</span></a> <span class="honor" data-v-c14f9f82>心理学硕士，美国心理学会会员</span></p> 
+            <p data-v-c14f9f82><span class="city" data-v-c14f9f82><i class="icon icon-node-website icon-dingwei1" data-v-c14f9f82></i> 昆明市</span> <span class="point" data-v-c14f9f82>·</span> <span class="zx_num" data-v-c14f9f82>
+              <!----> <span class="num" data-v-c14f9f82>3411</span> 人咨询</span> <span class="point" data-v-c14f9f82>·</span> <span class="experience_year" data-v-c14f9f82>从业<span class="num" data-v-c14f9f82> 12 </span>年</span></p> 
+            <p class="price" data-v-c14f9f82> ￥600 </p>
+           </div>
+          </div> <a href="https://www.xinli001.com/expert/59109407" data-v-c14f9f82><span class="yuyue" data-v-c14f9f82>预约</span></a></li>
+         <li class="teacher-item" data-v-c14f9f82>
+          <div class="teacher-info" data-v-c14f9f82>
+           <a href="https://www.xinli001.com/expert/1000848068" data-v-c14f9f82><img src="/9c56377e50b4b80fc8701688c22dcc48.jpg!120" alt="李乾" class="avatar" data-v-c14f9f82></a> 
+           <div data-v-c14f9f82>
+            <p class="name-honor ellipsis-1" data-v-c14f9f82><a href="https://www.xinli001.com/expert/1000848068" data-v-c14f9f82><span class="name" data-v-c14f9f82>李乾</span></a> <span class="honor" data-v-c14f9f82>二级心理咨询师、中美高级精神分析班学员</span></p> 
+            <p data-v-c14f9f82><span class="city" data-v-c14f9f82><i class="icon icon-node-website icon-dingwei1" data-v-c14f9f82></i> 广州市</span> <span class="point" data-v-c14f9f82>·</span> <span class="zx_num" data-v-c14f9f82>
+              <!----> <span class="num" data-v-c14f9f82>3866</span> 人咨询</span> <span class="point" data-v-c14f9f82>·</span> <span class="experience_year" data-v-c14f9f82>从业<span class="num" data-v-c14f9f82> 13 </span>年</span></p> 
+            <p class="price" data-v-c14f9f82> ￥600 </p>
+           </div>
+          </div> <a href="https://www.xinli001.com/expert/1000848068" data-v-c14f9f82><span class="yuyue" data-v-c14f9f82>预约</span></a></li>
+         <li class="teacher-item" data-v-c14f9f82>
+          <div class="teacher-info" data-v-c14f9f82>
+           <a href="https://www.xinli001.com/expert/1002071657" data-v-c14f9f82><img src="/d6ab05447333b19d05d2051b5d2c210e.jpeg!120" alt="顾薇巍" class="avatar" data-v-c14f9f82></a> 
+           <div data-v-c14f9f82>
+            <p class="name-honor ellipsis-1" data-v-c14f9f82><a href="https://www.xinli001.com/expert/1002071657" data-v-c14f9f82><span class="name" data-v-c14f9f82>顾薇巍</span></a> <span class="honor" data-v-c14f9f82>中美精神分析联盟成员&amp;北师大心理学硕士</span></p> 
+            <p data-v-c14f9f82><span class="city" data-v-c14f9f82><i class="icon icon-node-website icon-dingwei1" data-v-c14f9f82></i> 北京市</span> <span class="point" data-v-c14f9f82>·</span> <span class="zx_num" data-v-c14f9f82>
+              <!----> <span class="num" data-v-c14f9f82>3053</span> 人咨询</span> <span class="point" data-v-c14f9f82>·</span> <span class="experience_year" data-v-c14f9f82>从业<span class="num" data-v-c14f9f82> 12 </span>年</span></p> 
+            <p class="price" data-v-c14f9f82> ￥500 </p>
+           </div>
+          </div> <a href="https://www.xinli001.com/expert/1002071657" data-v-c14f9f82><span class="yuyue" data-v-c14f9f82>预约</span></a></li>
+         <li class="teacher-item" data-v-c14f9f82>
+          <div class="teacher-info" data-v-c14f9f82>
+           <a href="https://www.xinli001.com/expert/34211473" data-v-c14f9f82><img src="/45f9ce3eccdfef0f123d9cf83e63bcce.jpeg!120" alt="罗丽" class="avatar" data-v-c14f9f82></a> 
+           <div data-v-c14f9f82>
+            <p class="name-honor ellipsis-1" data-v-c14f9f82><a href="https://www.xinli001.com/expert/34211473" data-v-c14f9f82><span class="name" data-v-c14f9f82>罗丽</span></a> <span class="honor" data-v-c14f9f82>国家二级心理咨询师 职业生涯规划师</span></p> 
+            <p data-v-c14f9f82><span class="city" data-v-c14f9f82><i class="icon icon-node-website icon-dingwei1" data-v-c14f9f82></i> 青岛市</span> <span class="point" data-v-c14f9f82>·</span> <span class="zx_num" data-v-c14f9f82>
+              <!----> <span class="num" data-v-c14f9f82>3107</span> 人咨询</span> <span class="point" data-v-c14f9f82>·</span> <span class="experience_year" data-v-c14f9f82>从业<span class="num" data-v-c14f9f82> 8 </span>年</span></p> 
+            <p class="price" data-v-c14f9f82> ￥500 </p>
+           </div>
+          </div> <a href="https://www.xinli001.com/expert/34211473" data-v-c14f9f82><span class="yuyue" data-v-c14f9f82>预约</span></a></li>
+         <li class="teacher-item" data-v-c14f9f82>
+          <div class="teacher-info" data-v-c14f9f82>
+           <a href="https://www.xinli001.com/expert/1004302318" data-v-c14f9f82><img src="/28c552bf64c9418ba7798cca2276b26a.png!120" alt="王亚南" class="avatar" data-v-c14f9f82></a> 
+           <div data-v-c14f9f82>
+            <p class="name-honor ellipsis-1" data-v-c14f9f82><a href="https://www.xinli001.com/expert/1004302318" data-v-c14f9f82><span class="name" data-v-c14f9f82>王亚南</span></a> <span class="honor" data-v-c14f9f82>英国心理治疗师协会会员&amp;督导</span></p> 
+            <p data-v-c14f9f82><span class="city" data-v-c14f9f82><i class="icon icon-node-website icon-dingwei1" data-v-c14f9f82></i> 海外</span> <span class="point" data-v-c14f9f82>·</span> <span class="zx_num" data-v-c14f9f82>
+              <!----> <span class="num" data-v-c14f9f82>2764</span> 人咨询</span> <span class="point" data-v-c14f9f82>·</span> <span class="experience_year" data-v-c14f9f82>从业<span class="num" data-v-c14f9f82> 5 </span>年</span></p> 
+            <p class="price" data-v-c14f9f82> ￥600 </p>
+           </div>
+          </div> <a href="https://www.xinli001.com/expert/1004302318" data-v-c14f9f82><span class="yuyue" data-v-c14f9f82>预约</span></a></li>
+        </ul> 
+        <ul class="mo-paging" data-v-a1038638 data-v-c14f9f82>
+         <li class="paging-item paging-item--prev paging-item--disabled" data-v-a1038638><i class="icon icon-node-website icon-m-left" data-v-a1038638></i></li> 
+         <!----> 
+         <li class="paging-item paging-item--current" data-v-a1038638> 1 </li>
+         <li class="paging-item" data-v-a1038638> 2 </li>
+         <li class="paging-item" data-v-a1038638> 3 </li>
+         <li class="paging-item" data-v-a1038638> 4 </li>
+         <li class="paging-item" data-v-a1038638> 5 </li> 
+         <li class="paging-item paging-item--more" data-v-a1038638> ... </li> 
+         <li class="paging-item paging-item--next" data-v-a1038638><i class="icon icon-node-website icon-m-right" data-v-a1038638></i></li>
+        </ul>
+       </div>
+      </div> 
+      <div class="right-container" data-v-c14f9f82>
+       <div class="apply" data-v-c14f9f82>
+        <a href="https://www.xinli001.com/zx/apply-new" data-v-c14f9f82>
+         <div class="apply-btn" data-v-c14f9f82>
+          <i class="icon icon-node-website icon-pc-zx-residence" data-v-c14f9f82></i> 心理咨询师申请入驻 
+         </div></a> 
+        <a href="https://www.xinli001.com/info/100352793" data-v-c14f9f82>
+         <div class="standard" data-v-c14f9f82>
+          <i class="icon icon-node-website icon-pc-zx-standard" data-v-c14f9f82></i> 壹心理咨询师入驻标准 
+         </div></a>
+       </div> 
+       <div class="apply-new-teacher-list" data-v-c14f9f82>
+        <div class="title" data-v-c14f9f82>
+         最新入驻
+        </div> 
+        <ul class="teacher-list" data-v-c14f9f82>
+         <li class="teacher-item" data-v-c14f9f82><a href="https://www.xinli001.com/expert/1007027138" data-v-c14f9f82><img src="/afb8a8aa79e8a0d0ffac142f5967fbc9.jpg!120" alt="姚小青" class="avatar" data-v-c14f9f82></a> 
+          <div class="teacher-info" data-v-c14f9f82>
+           <p class="name-price" data-v-c14f9f82><a href="https://www.xinli001.com/expert/1007027138" data-v-c14f9f82><span data-v-c14f9f82><span class="name" data-v-c14f9f82> 姚小青</span> <span class="city" data-v-c14f9f82><i class="icon icon-node-website icon-dingwei1" data-v-c14f9f82></i> 上海市</span></span></a> <span class="price" data-v-c14f9f82>￥1000</span></p> 
+           <p class="honor ellipsis-1" data-v-c14f9f82>婚姻家庭治疗师 荣格分析 躯体治疗</p> 
+           <p class="time" data-v-c14f9f82>2020.07.27入驻</p>
+          </div></li>
+         <li class="teacher-item" data-v-c14f9f82><a href="https://www.xinli001.com/expert/1006124573" data-v-c14f9f82><img src="/6481a2a5ffaf10ddb152f6f84b2bbb57.jpg!120" alt="李士欣" class="avatar" data-v-c14f9f82></a> 
+          <div class="teacher-info" data-v-c14f9f82>
+           <p class="name-price" data-v-c14f9f82><a href="https://www.xinli001.com/expert/1006124573" data-v-c14f9f82><span data-v-c14f9f82><span class="name" data-v-c14f9f82> 李士欣</span> <span class="city" data-v-c14f9f82><i class="icon icon-node-website icon-dingwei1" data-v-c14f9f82></i> 北京市</span></span></a> <span class="price" data-v-c14f9f82>￥500</span></p> 
+           <p class="honor ellipsis-1" data-v-c14f9f82>心理咨询师</p> 
+           <p class="time" data-v-c14f9f82>2020.07.27入驻</p>
+          </div></li>
+         <li class="teacher-item" data-v-c14f9f82><a href="https://www.xinli001.com/expert/1007687158" data-v-c14f9f82><img src="/0166885f13b36d76fe4978e94a86e145.jpeg!120" alt="吴倩" class="avatar" data-v-c14f9f82></a> 
+          <div class="teacher-info" data-v-c14f9f82>
+           <p class="name-price" data-v-c14f9f82><a href="https://www.xinli001.com/expert/1007687158" data-v-c14f9f82><span data-v-c14f9f82><span class="name" data-v-c14f9f82> 吴倩</span> <span class="city" data-v-c14f9f82><i class="icon icon-node-website icon-dingwei1" data-v-c14f9f82></i> 开封市</span></span></a> <span class="price" data-v-c14f9f82>￥300</span></p> 
+           <p class="honor ellipsis-1" data-v-c14f9f82>中国心理学会注册心理师 心理学硕士 心理治疗师</p> 
+           <p class="time" data-v-c14f9f82>2020.07.23入驻</p>
+          </div></li>
+         <li class="teacher-item" data-v-c14f9f82><a href="https://www.xinli001.com/expert/1002144043" data-v-c14f9f82><img src="/c9906383b6228bd50276563c778a9b68.jpeg!120" alt="王静华" class="avatar" data-v-c14f9f82></a> 
+          <div class="teacher-info" data-v-c14f9f82>
+           <p class="name-price" data-v-c14f9f82><a href="https://www.xinli001.com/expert/1002144043" data-v-c14f9f82><span data-v-c14f9f82><span class="name" data-v-c14f9f82> 王静华</span> <span class="city" data-v-c14f9f82><i class="icon icon-node-website icon-dingwei1" data-v-c14f9f82></i> 上海市</span></span></a> <span class="price" data-v-c14f9f82>￥600</span></p> 
+           <p class="honor ellipsis-1" data-v-c14f9f82>国家二级心理咨询师;全身聚焦治疗师</p> 
+           <p class="time" data-v-c14f9f82>2020.07.23入驻</p>
+          </div></li>
+         <li class="teacher-item" data-v-c14f9f82><a href="https://www.xinli001.com/expert/1007546427" data-v-c14f9f82><img src="/46c05ce27d57c8b95490af922bd2d336.jpg!120" alt="王敬琪" class="avatar" data-v-c14f9f82></a> 
+          <div class="teacher-info" data-v-c14f9f82>
+           <p class="name-price" data-v-c14f9f82><a href="https://www.xinli001.com/expert/1007546427" data-v-c14f9f82><span data-v-c14f9f82><span class="name" data-v-c14f9f82> 王敬琪</span> <span class="city" data-v-c14f9f82><i class="icon icon-node-website icon-dingwei1" data-v-c14f9f82></i> 深圳市</span></span></a> <span class="price" data-v-c14f9f82>￥550</span></p> 
+           <p class="honor ellipsis-1" data-v-c14f9f82>二级心理咨询师</p> 
+           <p class="time" data-v-c14f9f82>2020.07.22入驻</p>
+          </div></li>
+        </ul> 
+        <a href="https://www.xinli001.com/consult" data-v-c14f9f82>
+         <div class="change-apply-new-teacher-list" data-v-c14f9f82>
+          <i class="icon icon-node-website icon-pc-zx-change" data-v-c14f9f82></i> 换一换 
+         </div></a>
+       </div> 
+       <div class="teacher-answer" data-v-c14f9f82>
+        <div class="top" data-v-c14f9f82>
+         <div class="title" data-v-c14f9f82>
+          咨询师问答
+         </div> 
+         <a href="https://www.xinli001.com/qa?source=pc-consult" data-v-c14f9f82>
+          <div class="more" data-v-c14f9f82>
+            更多 
+           <i class="icon icon-node-website icon-m-right" data-v-c14f9f82></i>
+          </div></a>
+        </div> 
+        <ul class="teacher-answer-list" data-v-c14f9f82>
+         <li class="teacher-answer-item" data-v-c14f9f82><a href="https://m.xinli001.com/qa/answer-5775518/?source=pc-consult" data-v-c14f9f82></a>
+          <div class="info-box" data-v-c14f9f82>
+           <a href="https://m.xinli001.com/qa/answer-5775518/?source=pc-consult" data-v-c14f9f82><p class="info" data-v-c14f9f82><a href="https://www.xinli001.com/expert/1064369" data-v-c14f9f82><img src="/eabcc3ada418848d7ebbf370493c8a6f.png!120" alt="张佳英" class="avatar" data-v-c14f9f82></a> <a href="https://www.xinli001.com/expert/1064369" data-v-c14f9f82><span class="name ellipsis-1" data-v-c14f9f82>张佳英</span></a> <span class="answer-txt" data-v-c14f9f82>回答了问题</span></p></a> 
+           <span class="time ellipsis-1" data-v-c14f9f82>2020.08.03</span>
+          </div> <p class="content" data-v-c14f9f82>最近一直都大喜大悲怎么办</p></li>
+         <li class="teacher-answer-item" data-v-c14f9f82><a href="https://m.xinli001.com/qa/answer-5775509/?source=pc-consult" data-v-c14f9f82></a>
+          <div class="info-box" data-v-c14f9f82>
+           <a href="https://m.xinli001.com/qa/answer-5775509/?source=pc-consult" data-v-c14f9f82><p class="info" data-v-c14f9f82><a href="https://www.xinli001.com/expert/1007027138" data-v-c14f9f82><img src="/afb8a8aa79e8a0d0ffac142f5967fbc9_8dca94846f2840ae878115537a5e8590.jpg!120" alt="姚小青" class="avatar" data-v-c14f9f82></a> <a href="https://www.xinli001.com/expert/1007027138" data-v-c14f9f82><span class="name ellipsis-1" data-v-c14f9f82>姚小青</span></a> <span class="answer-txt" data-v-c14f9f82>回答了问题</span></p></a> 
+           <span class="time ellipsis-1" data-v-c14f9f82>2020.08.03</span>
+          </div> <p class="content" data-v-c14f9f82>我的闺蜜惧怕和老公前妻生的女儿生活，该怎么开导她？</p></li>
+         <li class="teacher-answer-item" data-v-c14f9f82><a href="https://m.xinli001.com/qa/answer-5775501/?source=pc-consult" data-v-c14f9f82></a>
+          <div class="info-box" data-v-c14f9f82>
+           <a href="https://m.xinli001.com/qa/answer-5775501/?source=pc-consult" data-v-c14f9f82><p class="info" data-v-c14f9f82><a href="https://www.xinli001.com/expert/1064369" data-v-c14f9f82><img src="/eabcc3ada418848d7ebbf370493c8a6f.png!120" alt="张佳英" class="avatar" data-v-c14f9f82></a> <a href="https://www.xinli001.com/expert/1064369" data-v-c14f9f82><span class="name ellipsis-1" data-v-c14f9f82>张佳英</span></a> <span class="answer-txt" data-v-c14f9f82>回答了问题</span></p></a> 
+           <span class="time ellipsis-1" data-v-c14f9f82>2020.08.03</span>
+          </div> <p class="content" data-v-c14f9f82>母亲沉迷抖音 该如何正确引导</p></li>
+         <li class="teacher-answer-item" data-v-c14f9f82><a href="https://m.xinli001.com/qa/answer-5775461/?source=pc-consult" data-v-c14f9f82></a>
+          <div class="info-box" data-v-c14f9f82>
+           <a href="https://m.xinli001.com/qa/answer-5775461/?source=pc-consult" data-v-c14f9f82><p class="info" data-v-c14f9f82><a href="https://www.xinli001.com/expert/1064369" data-v-c14f9f82><img src="/eabcc3ada418848d7ebbf370493c8a6f.png!120" alt="张佳英" class="avatar" data-v-c14f9f82></a> <a href="https://www.xinli001.com/expert/1064369" data-v-c14f9f82><span class="name ellipsis-1" data-v-c14f9f82>张佳英</span></a> <span class="answer-txt" data-v-c14f9f82>回答了问题</span></p></a> 
+           <span class="time ellipsis-1" data-v-c14f9f82>2020.08.03</span>
+          </div> <p class="content" data-v-c14f9f82>不萌长期地进入一段亲密关系，对异性不够信任。</p></li>
+         <li class="teacher-answer-item" data-v-c14f9f82><a href="https://m.xinli001.com/qa/answer-5775445/?source=pc-consult" data-v-c14f9f82></a>
+          <div class="info-box" data-v-c14f9f82>
+           <a href="https://m.xinli001.com/qa/answer-5775445/?source=pc-consult" data-v-c14f9f82><p class="info" data-v-c14f9f82><a href="https://www.xinli001.com/expert/1000703440" data-v-c14f9f82><img src="/094540.png!120" alt="吴钰" class="avatar" data-v-c14f9f82></a> <a href="https://www.xinli001.com/expert/1000703440" data-v-c14f9f82><span class="name ellipsis-1" data-v-c14f9f82>吴钰</span></a> <span class="answer-txt" data-v-c14f9f82>回答了问题</span></p></a> 
+           <span class="time ellipsis-1" data-v-c14f9f82>2020.08.03</span>
+          </div> <p class="content" data-v-c14f9f82>什么东西应该争取？什么时候应该放弃？</p></li>
+        </ul>
+       </div> 
+       <div class="teacher-article" data-v-c14f9f82>
+        <div class="top" data-v-c14f9f82>
+         <div class="title" data-v-c14f9f82>
+          咨询师文章
+         </div> 
+         <a href="https://www.xinli001.com/info?source=pc-consult" data-v-c14f9f82>
+          <div class="more" data-v-c14f9f82>
+            更多 
+           <i class="icon icon-node-website icon-m-right" data-v-c14f9f82></i>
+          </div></a>
+        </div> 
+        <ul class="teacher-article-list" data-v-c14f9f82>
+         <li data-v-c14f9f82><a href="https://www.xinli001.com/info/100463231" class="teacher-article-item" data-v-c14f9f82><img src="images/54a713e85220ec19e2aa6b8dbdeedd7a.jpeg" class="cover" data-v-c14f9f82> 
+           <div class="article-detail" data-v-c14f9f82>
+            <p class="title ellipsis-2" data-v-c14f9f82>西游记心理分析|15.迷失在财宝中金角银角大王</p> 
+            <div class="teacher-info" data-v-c14f9f82>
+             <p class="info" data-v-c14f9f82><img src="/004255f5edci1654qu8mbs.jpg!120" alt="李菊红" class="avatar" data-v-c14f9f82> <span class="name" data-v-c14f9f82>李菊红</span></p> 
+             <span class="time" data-v-c14f9f82>2020.08.03</span>
+            </div>
+           </div></a></li>
+         <li data-v-c14f9f82><a href="https://www.xinli001.com/info/100463230" class="teacher-article-item" data-v-c14f9f82><img src="images/35dc91dabf941aa4fb0d9f0b8d8894ee.jpeg" class="cover" data-v-c14f9f82> 
+           <div class="article-detail" data-v-c14f9f82>
+            <p class="title ellipsis-2" data-v-c14f9f82>杭州杀妻案结果曝光！当你考虑结婚，哪些男人不能嫁？</p> 
+            <div class="teacher-info" data-v-c14f9f82>
+             <p class="info" data-v-c14f9f82><img src="/c18f86c75e509bf7f90e9e5a972317cb.png!120" alt="谭素怡" class="avatar" data-v-c14f9f82> <span class="name" data-v-c14f9f82>谭素怡</span></p> 
+             <span class="time" data-v-c14f9f82>2020.08.02</span>
+            </div>
+           </div></a></li>
+         <li data-v-c14f9f82><a href="https://www.xinli001.com/info/100463216" class="teacher-article-item" data-v-c14f9f82><img src="images/3b44ca1dcdc7d330c2f18c2935adc5ff.png" class="cover" data-v-c14f9f82> 
+           <div class="article-detail" data-v-c14f9f82>
+            <p class="title ellipsis-2" data-v-c14f9f82>有哪些事情是你高考之后才真正明白的？</p> 
+            <div class="teacher-info" data-v-c14f9f82>
+             <p class="info" data-v-c14f9f82><img src="/73d327260724a3a51a05ec220826abb1.png!120" alt="秦艳鸿" class="avatar" data-v-c14f9f82> <span class="name" data-v-c14f9f82>秦艳鸿</span></p> 
+             <span class="time" data-v-c14f9f82>2020.08.02</span>
+            </div>
+           </div></a></li>
+         <li data-v-c14f9f82><a href="https://www.xinli001.com/info/100463215" class="teacher-article-item" data-v-c14f9f82><img src="images/4d740d4aff2b8ae4d79c700fa8ac27f4.jpeg" class="cover" data-v-c14f9f82> 
+           <div class="article-detail" data-v-c14f9f82>
+            <p class="title ellipsis-2" data-v-c14f9f82>60%的男人都没抵挡住野花的诱惑，所以我……</p> 
+            <div class="teacher-info" data-v-c14f9f82>
+             <p class="info" data-v-c14f9f82><img src="/549278.png!120" alt="刘新君" class="avatar" data-v-c14f9f82> <span class="name" data-v-c14f9f82>刘新君</span></p> 
+             <span class="time" data-v-c14f9f82>2020.08.02</span>
+            </div>
+           </div></a></li>
+         <li data-v-c14f9f82><a href="https://www.xinli001.com/info/100463211" class="teacher-article-item" data-v-c14f9f82><img src="images/4476290f9d4fcd34b90c92863483cc5d.jpeg" class="cover" data-v-c14f9f82> 
+           <div class="article-detail" data-v-c14f9f82>
+            <p class="title ellipsis-2" data-v-c14f9f82>为什么孩子抗挫折能力差？</p> 
+            <div class="teacher-info" data-v-c14f9f82>
+             <p class="info" data-v-c14f9f82><img src="/831713.png!120" alt="李军旗" class="avatar" data-v-c14f9f82> <span class="name" data-v-c14f9f82>李军旗</span></p> 
+             <span class="time" data-v-c14f9f82>2020.08.02</span>
+            </div>
+           </div></a></li>
+        </ul>
+       </div>
+      </div>
+     </div> 
+     <div class="footer-PC" data-v-c14f9f82>
+      <div class="footer-cont">
+       <div class="medias">
+        <div class="media wechat">
+         <i class="icon-footer-PC ic-qrcode"></i> 
+         <span class="label">微信公众号</span> 
+         <div class="account">
+          <i class="icon-footer-PC icon-account ic-yixinli"></i> 
+          <p class="txt">壹心理精选</p> 
+          <div class="qr-code-container">
+           <img src="images/account-yixinli.png" class="qr-code-img"> 
+           <span class="triangle"></span>
+          </div>
+         </div> 
+         <div class="account">
+          <i class="icon-footer-PC icon-account ic-lesson"></i> 
+          <p class="txt">壹心理</p> 
+          <div class="qr-code-container">
+           <img src="images/account-lesson.png" class="qr-code-img"> 
+           <span class="triangle"></span>
+          </div>
+         </div> 
+         <div class="account">
+          <i class="icon-footer-PC icon-account ic-fm"></i> 
+          <p class="txt">心理FM</p> 
+          <div class="qr-code-container">
+           <img src="images/account-fm.png" class="qr-code-img"> 
+           <span class="triangle"></span>
+          </div>
+         </div> 
+         <div class="account">
+          <i class="icon-footer-PC icon-account ic-xintanshe"></i> 
+          <p class="txt">壹心理学院</p> 
+          <div class="qr-code-container">
+           <img src="images/account-xintanshe.png" class="qr-code-img"> 
+           <span class="triangle"></span>
+          </div>
+         </div> 
+         <div class="account">
+          <i class="icon-footer-PC icon-account ic-test"></i> 
+          <p class="txt">壹心理测评</p> 
+          <div class="qr-code-container">
+           <img src="images/account-test.png" class="qr-code-img"> 
+           <span class="triangle"></span>
+          </div>
+         </div> 
+         <div class="account">
+          <i class="icon-footer-PC icon-account ic-zixun"></i> 
+          <p class="txt">壹心理咨询</p> 
+          <div class="qr-code-container">
+           <img src="images/account-zixun.png" class="qr-code-img"> 
+           <span class="triangle"></span>
+          </div>
+         </div>
+        </div> 
+        <div class="media app">
+         <i class="icon-footer-PC ic-mobile"></i> 
+         <span class="label">手机应用</span> 
+         <div class="account">
+          <i class="yixinli-logo yixinli-icon"></i> 
+          <p class="txt">壹心理</p> 
+          <div class="qr-code-container">
+           <img src="images/app-yixinli.png" class="qr-code-img"> 
+           <span class="triangle"></span>
+          </div>
+         </div> 
+         <div class="account">
+          <i class="medi-logo yixinli-icon"></i> 
+          <p class="txt">冥想星球</p> 
+          <div class="qr-code-container">
+           <img src="images/f2c6d6fb59bd43029e5e30b7ce693c3e.png" class="qr-code-img"> 
+           <span class="triangle"></span>
+          </div>
+         </div> 
+         <div class="account">
+          <i class="icon-footer-PC icon-account ic-test-app"></i> 
+          <p class="txt">口袋心理测试</p> 
+          <div class="qr-code-container">
+           <img src="images/app-test.png" class="qr-code-img"> 
+           <span class="triangle"></span>
+          </div>
+         </div> 
+         <div class="account">
+          <i class="icon-footer-PC icon-account ic-fm-app"></i> 
+          <p class="txt">心理FM</p> 
+          <div class="qr-code-container">
+           <img src="images/app-fm.png" class="qr-code-img"> 
+           <span class="triangle"></span>
+          </div>
+         </div> 
+         <div class="account">
+          <i class="icon-footer-PC icon-account zixunzhijia"></i> 
+          <p class="txt">咨询师之家</p> 
+          <div class="qr-code-container">
+           <img src="images/zxzhijia-qr-code.9a84116.png" class="qr-code-img"> 
+           <span class="triangle"></span>
+          </div>
+         </div>
+        </div>
+       </div> 
+       <ul class="about-us">
+        <a href="http://www.xinli001.com/about" class="about-us-item first">关于我们</a> 
+        <a href="http://www.xinli001.com/join" class="about-us-item">加入我们</a> 
+        <a href="http://www.xinli001.com/contact" class="about-us-item">联系我们</a> 
+        <a href="http://www.xinli001.com/copyright" class="about-us-item">免责声明</a> 
+        <a href="http://www.xinli001.com/sitemap" class="about-us-item">网站地图</a> 
+        <a href="http://www.xinli001.com/daohang.html" class="about-us-item">机构导航</a> 
+        <a href="https://m.xinli001.com/common/mobileApplication/" class="about-us-item">手机应用</a> 
+        <a href="http://m.xinli001.com/" class="about-us-item">手机网页</a> 
+        <a href="http://www.zixunshizhijia.com/" class="about-us-item last">咨询师之家</a>
+       </ul> 
+       <div class="icp-info">
+        <ul class="info-list">
+         <li class="info-item flex"><a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010602001691"><img src="images/guohui.png" style="width: 16PX;">粤公网安备 44010602001691</a></li> 
+         <li class="info-item"><a target="_blank" href="http://www.miibeian.gov.cn/">粤ICP备 12051153</a></li> 
+         <li class="info-item last"><a logo_size="83x30" logo_type="business" href="http://www.anquan.org" target="_blank"> 安全联盟行业验证 </a> <i class="icon-footer-PC ic-star"></i> <i class="icon-footer-PC ic-star"></i> <i class="icon-footer-PC ic-star"></i></li>
+        </ul> 
+        <p class="rights"> Copyright © 2005-2018 广州市人心网络科技有限公司 版权所有 </p>
+       </div>
+      </div>
+     </div> 
+     <div class="fixed-box" style="display:none;" data-v-c14f9f82>
+      <div class="toTop" data-v-c14f9f82>
+       <i class="icon icon-node-website icon-pc-zx-top " data-v-c14f9f82></i>
+      </div> 
+      <div class="aliService consult-default-adviser-point" data-v-c14f9f82>
+       <div>
+        <!----> 
+        <div class="pc-serviceAssitance">
+         <div class="img-box">
+          <img src="images/serviceAssitance.b74f268.png"> 
+          <span class="_adviser-after">专属顾问</span>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div> 
+     <!---->
+    </div>
+   </div>
+  </div>
+  <script>window.__NUXT__=(function(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,_,$,aa,ab,ac,ad,ae,af,ag,ah,ai,aj,ak,al,am,an,ao,ap,aq,ar,as,at,au,av,aw,ax,ay,az,aA,aB,aC,aD,aE,aF,aG,aH,aI,aJ,aK,aL,aM,aN,aO,aP,aQ,aR,aS,aT,aU,aV,aW,aX,aY,aZ,a_,a$,ba,bb,bc,bd,be,bf,bg,bh,bi,bj,bk,bl,bm,bn,bo,bp,bq,br,bs,bt,bu,bv,bw,bx,by,bz,bA,bB,bC,bD,bE,bF,bG,bH,bI,bJ,bK,bL,bM,bN,bO,bP,bQ,bR,bS,bT,bU,bV,bW,bX,bY,bZ,b_,b$,ca,cb,cc,cd,ce,cf,cg,ch,ci,cj,ck,cl){return {layout:"default",data:[{}],fetch:[],error:null,state:{tdk:{title:"心理咨询_心理咨询师_心理医生-壹心理",description:"壹心理心理咨询师频道，遵循严格的心理咨询师审核标准，已邀请500位心理咨询师和心理医生入驻，通过视频、语音、咨询室等方式为您提供婚恋、家庭、儿童、职场等心理咨询服务。",keywords:"心理咨询,心理咨询师"},commonStore:{},consultIndexStore:{zxTeacherList:[{user_id:"1000690022",name:"严林",avatar:"https:\u002F\u002Fossimg.xinli001.com\u002F20200128\u002F63a84d57ad660fb64ca75ece0893658d.jpeg!120",zx_num:7558,experience_year:U,honor:"国家二级心理咨询师、NGH国际催眠治疗师",tags:[p,q,J],price:ad,coupon:s,half_price:e,city:u,schedule:[],created:"2015-12-25",way_price:[ad,C,C]},{user_id:"1001379733",name:"黎燕",avatar:"https:\u002F\u002Fossimg.xinli001.com\u002F20171230\u002F02349cc681fcb707fdcc877cd89c184b.png!120",zx_num:5523,experience_year:U,honor:"一级婚姻家庭 二级心理咨询 高级性心理师",tags:[p,q,B],price:j,coupon:s,half_price:e,city:F,schedule:[],created:"2016-03-16",way_price:[j,j,j]},{user_id:"1001694068",name:"顾曦",avatar:"https:\u002F\u002Fossimg.xinli001.com\u002F20160627\u002Fc3936cf678d587c370ce60323fe71df7.png!120",zx_num:4530,experience_year:N,honor:"情感专家，中科院心理健康指导师",tags:[p,q,J],price:r,coupon:s,half_price:e,city:G,schedule:{date:V,time:ck},created:"2016-03-23",way_price:[r,j,cj]},{user_id:"3510061",name:"杨浩波",avatar:"https:\u002F\u002Fossimg.xinli001.com\u002F20170606\u002Fdb403387ca50e16089fcb122801142d5.png!120",zx_num:4200,experience_year:N,honor:"中德督导组&中美高级组",tags:[q,p,B],price:C,coupon:s,half_price:e,city:K,schedule:[],created:"2015-01-15",way_price:[C,C]},{user_id:"67212086",name:"刘辉",avatar:"http:\u002F\u002Fossimg.xinli001.com\u002F20190430\u002F4228600090450875f16ee197d05f7775.jpg!120",zx_num:3497,experience_year:ci,honor:"二级心理咨询师、中科院心理健康指导师",tags:[x,A,q],price:r,coupon:s,half_price:e,city:z,schedule:{date:V,time:"11:00"},created:"2015-06-24",way_price:[r,r,j]},{user_id:"1000091519",name:"孙伟通",avatar:"https:\u002F\u002Fossimg.xinli001.com\u002F20200331\u002Fc86b2efbc95751c8371afe6ca4fdbd16.jpeg!120",zx_num:3644,experience_year:ci,honor:"国家二级心理咨询师、中国心理卫生协会会员",tags:[q,x,B],price:r,coupon:s,half_price:e,city:w,schedule:{date:"今天",time:ck},created:"2015-07-05",way_price:[r,r,aa]},{user_id:"271341311",name:"赵燕青",avatar:"https:\u002F\u002Fossimg.xinli001.com\u002F20200415\u002Fcef4c4f48aaa64736e0de0730c284976.jpeg!120",zx_num:4286,experience_year:15,honor:"赵燕青心理咨询工作室创始人 心理学研究生",tags:[p,x,q],price:j,coupon:s,half_price:e,city:ab,schedule:[],created:"2015-05-21",way_price:[ch,j,j]},{user_id:"39016167",name:"袁巧云",avatar:"https:\u002F\u002Fossimg.xinli001.com\u002F20191220\u002Ffa654fd18b46f5c6b92e805e22e7c2b5.jpg!120",zx_num:3886,experience_year:e,honor:cb,tags:[q,B,L],price:D,coupon:s,half_price:e,city:Y,schedule:[],created:"2015-03-01",way_price:[D,D,"400.00"]},{user_id:"1396212",name:"肖碧玉",avatar:"https:\u002F\u002Fossimg.xinli001.com\u002F20161125\u002Fbc18db3567220fa6c342807474551580.png!120",zx_num:4047,experience_year:N,honor:"精神分析取向 完形治疗师 中德中英班",tags:[q,p,L],price:aa,coupon:s,half_price:e,city:u,schedule:[],created:"2016-04-06",way_price:[aa,C]},{user_id:"1001564184",name:"熊小青",avatar:"https:\u002F\u002Fossimg.xinli001.com\u002F20191219\u002F6de71cad8613424bf3f5b01a63a52312.jpg!120",zx_num:3696,experience_year:U,honor:"心理学硕士 二级咨询师 婚姻家庭咨询师 ",tags:[p,A,q],price:r,coupon:s,half_price:e,city:z,schedule:[],created:"2016-08-01",way_price:[r,Z,j]},{user_id:"59109407",name:"张雯萍",avatar:"https:\u002F\u002Fossimg.xinli001.com\u002F20181105\u002Fee42f741f1baab0d5df422f4a6cbc1dc.jpg!120",zx_num:3411,experience_year:ca,honor:"心理学硕士，美国心理学会会员",tags:[p,x,q],price:j,coupon:e,half_price:e,city:$,schedule:[],created:"2015-01-19",way_price:[j,j,P]},{user_id:"1000848068",name:"李乾",avatar:"https:\u002F\u002Fossimg.xinli001.com\u002F20191220\u002F9c56377e50b4b80fc8701688c22dcc48.jpg!120",zx_num:3866,experience_year:b$,honor:"二级心理咨询师、中美高级精神分析班学员",tags:[q,p,A],price:j,coupon:e,half_price:e,city:z,schedule:[],created:"2016-02-17",way_price:[j,j,j]},{user_id:"1002071657",name:"顾薇巍",avatar:"https:\u002F\u002Fossimg.xinli001.com\u002F20200104\u002Fd6ab05447333b19d05d2051b5d2c210e.jpeg!120",zx_num:3053,experience_year:ca,honor:"中美精神分析联盟成员&北师大心理学硕士",tags:[q,p,A],price:r,coupon:e,half_price:e,city:w,schedule:[],created:"2016-04-28",way_price:[r,j]},{user_id:"34211473",name:"罗丽",avatar:"https:\u002F\u002Fossimg.xinli001.com\u002F20191231\u002F45f9ce3eccdfef0f123d9cf83e63bcce.jpeg!120",zx_num:3107,experience_year:8,honor:"国家二级心理咨询师 职业生涯规划师",tags:[x,q,L],price:r,coupon:e,half_price:e,city:F,schedule:[],created:"2015-01-20",way_price:[r,j,C]},{user_id:"1004302318",name:"王亚南",avatar:"https:\u002F\u002Fossimg.xinli001.com\u002F20160928\u002F28c552bf64c9418ba7798cca2276b26a.png!120",zx_num:2764,experience_year:5,honor:"英国心理治疗师协会会员&督导",tags:[p,x,J],price:j,coupon:s,half_price:e,city:H,schedule:[],created:"2016-08-08",way_price:[j,cj,"1100.00"]}],zxTotalNum:475,consultIndexData:{areas:[{value:b_,name:b_,type:h,list:[{value:i,name:m,type:b},{value:w,name:w,type:b},{value:u,name:u,type:b},{value:z,name:z,type:b},{value:I,name:I,type:b},{value:O,name:O,type:b},{value:G,name:G,type:b},{value:M,name:M,type:b},{value:K,name:K,type:b},{value:Q,name:Q,type:b},{value:F,name:F,type:b}]},{value:w,name:w,type:h,list:[{value:w,name:w,type:b}]},{value:R,name:R,type:h,list:[{value:R,name:R,type:b}]},{value:bZ,name:bZ,type:h,list:[{value:i,name:m,type:b},{value:bY,name:bY,type:b},{value:bW,name:bW,type:b},{value:bV,name:bV,type:b},{value:bT,name:bT,type:b},{value:bS,name:bS,type:b},{value:bR,name:bR,type:b}]},{value:bP,name:bP,type:h,list:[{value:i,name:m,type:b},{value:bz,name:bz,type:b},{value:be,name:be,type:b},{value:aH,name:aH,type:b},{value:af,name:af,type:b}]},{value:"内蒙古自治区",name:"内蒙古",type:h,list:[{value:i,name:m,type:b},{value:bi,name:bi,type:b},{value:ag,name:ag,type:b}]},{value:ah,name:ah,type:h,list:[{value:i,name:m,type:b},{value:ai,name:ai,type:b},{value:aj,name:aj,type:b},{value:Y,name:Y,type:b},{value:ak,name:ak,type:b},{value:al,name:al,type:b}]},{value:am,name:am,type:h,list:[{value:i,name:m,type:b},{value:an,name:an,type:b},{value:ao,name:ao,type:b}]},{value:ap,name:ap,type:h,list:[{value:i,name:m,type:b},{value:aq,name:aq,type:b},{value:ar,name:ar,type:b},{value:as,name:as,type:b}]},{value:u,name:u,type:h,list:[{value:u,name:u,type:b}]},{value:at,name:at,type:h,list:[{value:i,name:m,type:b},{value:G,name:G,type:b},{value:au,name:au,type:b},{value:av,name:av,type:b},{value:aw,name:aw,type:b},{value:ax,name:ax,type:b},{value:ay,name:ay,type:b},{value:az,name:az,type:b},{value:aA,name:aA,type:b},{value:aB,name:aB,type:b},{value:aC,name:aC,type:b}]},{value:aD,name:aD,type:h,list:[{value:i,name:m,type:b},{value:O,name:O,type:b},{value:aE,name:aE,type:b},{value:aF,name:aF,type:b},{value:aG,name:aG,type:b},{value:cl,name:cl,type:b}]},{value:aI,name:aI,type:h,list:[{value:i,name:m,type:b},{value:aJ,name:aJ,type:b},{value:aK,name:aK,type:b},{value:aL,name:aL,type:b}]},{value:aM,name:aM,type:h,list:[{value:i,name:m,type:b},{value:aN,name:aN,type:b},{value:aO,name:aO,type:b},{value:aP,name:aP,type:b}]},{value:aQ,name:aQ,type:h,list:[{value:i,name:m,type:b},{value:aR,name:aR,type:b},{value:aS,name:aS,type:b},{value:aT,name:aT,type:b}]},{value:aU,name:aU,type:h,list:[{value:i,name:m,type:b},{value:aV,name:aV,type:b},{value:F,name:F,type:b},{value:aW,name:aW,type:b},{value:aX,name:aX,type:b},{value:aY,name:aY,type:b},{value:aZ,name:aZ,type:b},{value:a_,name:a_,type:b},{value:a$,name:a$,type:b},{value:ba,name:ba,type:b},{value:bb,name:bb,type:b}]},{value:bc,name:bc,type:h,list:[{value:i,name:m,type:b},{value:bd,name:bd,type:b},{value:ac,name:ac,type:b},{value:bf,name:bf,type:b},{value:bg,name:bg,type:b},{value:bh,name:bh,type:b}]},{value:ae,name:ae,type:h,list:[{value:i,name:m,type:b},{value:M,name:M,type:b},{value:bj,name:bj,type:b},{value:bk,name:bk,type:b},{value:bl,name:bl,type:b},{value:bm,name:bm,type:b}]},{value:bn,name:bn,type:h,list:[{value:i,name:m,type:b},{value:K,name:K,type:b},{value:bo,name:bo,type:b},{value:bp,name:bp,type:b},{value:bq,name:bq,type:b}]},{value:br,name:br,type:h,list:[{value:i,name:m,type:b},{value:z,name:z,type:b},{value:I,name:I,type:b},{value:bs,name:bs,type:b},{value:ab,name:ab,type:b},{value:bt,name:bt,type:b},{value:bu,name:bu,type:b},{value:bv,name:bv,type:b}]},{value:"广西壮族自治区",name:"广西",type:h,list:[{value:bw,name:bw,type:b}]},{value:bx,name:bx,type:h,list:[{value:by,name:by,type:b}]},{value:T,name:T,type:h,list:[{value:T,name:T,type:b}]},{value:bA,name:bA,type:h,list:[{value:i,name:m,type:b},{value:Q,name:Q,type:b},{value:bB,name:bB,type:b},{value:bC,name:bC,type:b},{value:bD,name:bD,type:b}]},{value:bE,name:bE,type:h,list:[{value:bF,name:bF,type:b}]},{value:bG,name:bG,type:h,list:[{value:i,name:m,type:b},{value:$,name:$,type:b},{value:bH,name:bH,type:b}]},{value:bI,name:bI,type:h,list:[{value:bJ,name:bJ,type:b}]},{value:"新疆维吾尔自治区",name:"新疆",type:h,list:[{value:bK,name:bK,type:b}]},{value:bL,name:bL,type:h,list:[{value:i,name:m,type:b},{value:bM,name:bM,type:b},{value:bN,name:bN,type:b},{value:bO,name:bO,type:b}]},{value:H,name:H,type:h,list:[{value:H,name:H,type:b}]},{value:"宁夏回族自治区",name:"宁夏",type:h,list:[]}],tags:[{value:e,name:m,type:t},{value:427,name:p,type:t},{value:572,name:x,type:t},{value:734,name:A,type:t},{value:452,name:q,type:t},{value:511,name:J,type:t},{value:634,name:B,type:t},{value:608,name:L,type:t},{value:535,name:"亲子教育",type:t},{value:490,name:bQ,type:t}],labels:{"427":[{value:i,name:y,type:a},{name:"性格完善",value:"428",pid:k,type:a},{name:"身份认同",value:"429",pid:k,type:a},{name:"拖延",value:"430",pid:k,type:a},{name:"注意力",value:"431",pid:k,type:a},{name:"完美主义",value:"432",pid:k,type:a},{name:"依恋问题",value:"433",pid:k,type:a},{name:"爱无能",value:"434",pid:k,type:a},{name:bU,value:"435",pid:k,type:a},{name:"独处",value:"436",pid:k,type:a},{name:"胆小",value:"437",pid:k,type:a},{name:"理想主义",value:"438",pid:k,type:a},{name:"应对方式",value:"439",pid:k,type:a},{name:"社会适应",value:"440",pid:k,type:a},{name:"自我成长",value:"441",pid:k,type:a},{name:"自我管理",value:"442",pid:k,type:a},{name:"人生规划",value:"443",pid:k,type:a},{name:"压力管理",value:"444",pid:k,type:a},{name:"跨地区适应",value:"445",pid:k,type:a},{name:"跨文化适应",value:"446",pid:k,type:a},{name:"女性成长",value:"447",pid:k,type:a},{name:"时间管理",value:"448",pid:k,type:a},{name:"童年创伤",value:"449",pid:k,type:a},{name:"自我修复",value:"450",pid:k,type:a},{name:"心理韧性",value:"451",pid:k,type:a}],"452":[{value:i,name:y,type:a},{name:"婚前焦虑",value:"453",pid:c,type:a},{name:"婚前恐惧",value:"454",pid:c,type:a},{name:"婚姻冷战",value:"455",pid:c,type:a},{name:"不婚",value:"456",pid:c,type:a},{name:"恐婚",value:"457",pid:c,type:a},{name:"新婚",value:"458",pid:c,type:a},{name:"离婚",value:"459",pid:c,type:a},{name:"婚外情",value:"460",pid:c,type:a},{name:"逼婚",value:"461",pid:c,type:a},{name:"再婚",value:"462",pid:c,type:a},{name:"出轨",value:"463",pid:c,type:a},{name:"吵架",value:"464",pid:c,type:a},{name:"平淡期",value:"465",pid:c,type:a},{name:"信任问题",value:"466",pid:c,type:a},{name:"夫妻沟通",value:"467",pid:c,type:a},{name:"相处模式",value:"468",pid:c,type:a},{name:"婚姻挽救",value:"469",pid:c,type:a},{name:"婚姻危机",value:"470",pid:c,type:a},{name:"婚姻破裂",value:"471",pid:c,type:a},{name:"婚姻质量",value:"472",pid:c,type:a},{name:"第三者",value:"473",pid:c,type:a},{name:"夫妻相处技巧",value:"474",pid:c,type:a},{name:"丧偶",value:"475",pid:c,type:a},{name:"挽回",value:"476",pid:c,type:a},{name:"复婚",value:"477",pid:c,type:a},{name:"大龄未婚困扰",value:"478",pid:c,type:a},{name:"产后抑郁",value:"479",pid:c,type:a},{name:"产前心理",value:"480",pid:c,type:a},{name:"家庭矛盾",value:"481",pid:c,type:a},{name:"组合家庭",value:"482",pid:c,type:a},{name:"原生家庭",value:"483",pid:c,type:a},{name:"单亲家庭",value:"484",pid:c,type:a},{name:"家庭冲突",value:"485",pid:c,type:a},{name:"家庭创伤",value:"486",pid:c,type:a},{name:"家庭暴力",value:"487",pid:c,type:a},{name:"父母同住",value:"488",pid:c,type:a},{name:"父母养老",value:"489",pid:c,type:a},{name:bU,value:"1589",pid:c,type:a},{name:"亲密关系",value:"1590",pid:c,type:a}],"490":[{value:i,name:y,type:a},{name:"SM",value:"491",pid:n,type:a},{name:"性身份",value:"492",pid:n,type:a},{name:"性取向",value:"493",pid:n,type:a},{name:"性偏好",value:"494",pid:n,type:a},{name:bX,value:"495",pid:n,type:a},{name:"双性恋",value:"496",pid:n,type:a},{name:"易性癖",value:"497",pid:n,type:a},{name:"性障碍",value:"498",pid:n,type:a},{name:"性成瘾",value:"499",pid:n,type:a},{name:"性恐惧",value:"500",pid:n,type:a},{name:"性冷淡",value:"501",pid:n,type:a},{name:"处女情结",value:"502",pid:n,type:a},{name:"性幻想",value:"503",pid:n,type:a},{name:"性压抑",value:"504",pid:n,type:a},{name:"性骚扰",value:"505",pid:n,type:a},{name:"性侵害",value:"506",pid:n,type:a},{name:"心理性别",value:"507",pid:n,type:a},{name:"性暴力",value:"508",pid:n,type:a},{name:"露阴癖",value:"509",pid:n,type:a},{name:"暴露狂",value:"510",pid:n,type:a}],"511":[{value:i,name:y,type:a},{name:"失恋",value:"512",pid:l,type:a},{name:"三角恋",value:"513",pid:l,type:a},{name:"网恋",value:"514",pid:l,type:a},{name:"异地恋",value:"515",pid:l,type:a},{name:"师生恋",value:"516",pid:l,type:a},{name:bX,value:"517",pid:l,type:a},{name:"脱单攻略",value:"518",pid:l,type:a},{name:"恋爱技巧",value:"519",pid:l,type:a},{name:"感情纠纷",value:"520",pid:l,type:a},{name:"分手",value:"521",pid:l,type:a},{name:"复合",value:"522",pid:l,type:a},{name:"择偶",value:"523",pid:l,type:a},{name:"单身",value:"524",pid:l,type:a},{name:"沟通技巧",value:"525",pid:l,type:a},{name:"相亲",value:"526",pid:l,type:a},{name:"陪伴",value:"527",pid:l,type:a},{name:"灵魂伴侣",value:"528",pid:l,type:a},{name:"两性差异",value:"529",pid:l,type:a},{name:"冷暴力",value:"530",pid:l,type:a},{name:"性格不合",value:"531",pid:l,type:a},{name:"情感",value:"532",pid:l,type:a},{name:"性格匹配",value:"533",pid:l,type:a},{name:"暧昧",value:"534",pid:l,type:a}],"535":[{value:i,name:y,type:a},{name:"叛逆",value:"536",pid:f,type:a},{name:"撒谎",value:"537",pid:f,type:a},{name:"多动",value:"538",pid:f,type:a},{name:"贪玩",value:"539",pid:f,type:a},{name:"网瘾",value:"540",pid:f,type:a},{name:"懒惰",value:"541",pid:f,type:a},{name:"自闭",value:"542",pid:f,type:a},{name:"孤僻",value:"543",pid:f,type:a},{name:"打架斗殴",value:"544",pid:f,type:a},{name:"自理能力差",value:"545",pid:f,type:a},{name:"分离焦虑",value:"546",pid:f,type:a},{name:"适应新环境",value:"547",pid:f,type:a},{name:"睡眠习惯差",value:"548",pid:f,type:a},{name:"离家出走",value:"549",pid:f,type:a},{name:"青少年抑郁",value:"550",pid:f,type:a},{name:"攻击性行为干预",value:"551",pid:f,type:a},{name:"学习困难",value:"552",pid:f,type:a},{name:"学习压力大",value:"553",pid:f,type:a},{name:"厌学",value:"554",pid:f,type:a},{name:"注意力不集中",value:"555",pid:f,type:a},{name:"辍学",value:"556",pid:f,type:a},{name:"逃学",value:"557",pid:f,type:a},{name:"休学退学",value:"558",pid:f,type:a},{name:"中考高考压力释放",value:"559",pid:f,type:a},{name:"考前焦虑",value:"560",pid:f,type:a},{name:"选择专业",value:"561",pid:f,type:a},{name:"青春期独立",value:"562",pid:f,type:a},{name:"青春期困惑",value:"563",pid:f,type:a},{name:"亲子冲突",value:"564",pid:f,type:a},{name:"代际沟通",value:"565",pid:f,type:a},{name:"育儿困惑",value:"566",pid:f,type:a},{name:"习惯培养",value:"567",pid:f,type:a},{name:"行为纠正",value:"568",pid:f,type:a},{name:"父母成长",value:"569",pid:f,type:a},{name:"儿童发展",value:"570",pid:f,type:a},{name:"二孩",value:"571",pid:f,type:a}],"572":[{value:i,name:y,type:a},{name:"抑郁",value:"573",pid:g,type:a},{name:"焦虑",value:"574",pid:g,type:a},{name:"愤怒",value:"575",pid:g,type:a},{name:"敏感",value:"576",pid:g,type:a},{name:"脆弱",value:"577",pid:g,type:a},{name:"悲观",value:"578",pid:g,type:a},{name:"自卑",value:"579",pid:g,type:a},{name:"自信心",value:"580",pid:g,type:a},{name:"恐惧",value:"581",pid:g,type:a},{name:"孤独",value:"582",pid:g,type:a},{name:"怯场",value:"583",pid:g,type:a},{name:"紧张",value:"584",pid:g,type:a},{name:"暴躁",value:"585",pid:g,type:a},{name:"压抑",value:"586",pid:g,type:a},{name:"内疚",value:"587",pid:g,type:a},{name:"羞耻感",value:"588",pid:g,type:a},{name:"无助感",value:"589",pid:g,type:a},{name:"空虚感",value:"590",pid:g,type:a},{name:x,value:"591",pid:g,type:a},{name:"情绪低落",value:"592",pid:g,type:a},{name:"情绪疏导",value:"593",pid:g,type:a},{name:"情绪失控",value:"594",pid:g,type:a},{name:"情绪调节",value:"595",pid:g,type:a},{name:"心理疲劳",value:"596",pid:g,type:a},{name:"厌恶",value:"597",pid:g,type:a},{name:"淡漠",value:"598",pid:g,type:a},{name:"嫉妒",value:"599",pid:g,type:a},{name:"后悔",value:"600",pid:g,type:a},{name:"怨恨",value:"601",pid:g,type:a},{name:"敌意",value:"602",pid:g,type:a},{name:"痛苦",value:"603",pid:g,type:a},{name:"羞涩",value:"604",pid:g,type:a},{name:"寂寞",value:"605",pid:g,type:a},{name:"绝望",value:"606",pid:g,type:a}],"608":[{value:i,name:y,type:a},{name:"职业发展",value:"616",pid:o,type:a},{name:"职业规划",value:"617",pid:o,type:a},{name:"职业转型",value:"618",pid:o,type:a},{name:"辞职",value:"619",pid:o,type:a},{name:"新人适应",value:"620",pid:o,type:a},{name:"工作与家庭生活平衡",value:"621",pid:o,type:a},{name:"职场人际关系",value:"622",pid:o,type:a},{name:"上下级关系",value:"623",pid:o,type:a},{name:"职场沟通",value:"624",pid:o,type:a},{name:"潜规则",value:"625",pid:o,type:a},{name:"办公室恋情",value:"626",pid:o,type:a},{name:"职场性骚扰",value:"627",pid:o,type:a},{name:"职业倦怠",value:"628",pid:o,type:a},{name:"职场焦虑",value:"629",pid:o,type:a},{name:"工作迷茫",value:"630",pid:o,type:a},{name:"同级关系",value:"631",pid:o,type:a},{name:"跳槽",value:"632",pid:o,type:a},{name:"职场压力",value:"633",pid:o,type:a}],"634":[{value:i,name:y,type:a},{name:"社交技巧",value:"635",pid:v,type:a},{name:"交往模式",value:"636",pid:v,type:a},{name:"社交恐惧",value:"637",pid:v,type:a},{name:"人际沟通不畅",value:"638",pid:v,type:a},{name:"人际关系冲突",value:"639",pid:v,type:a},{name:"人际间关系协调",value:"640",pid:v,type:a},{name:"同学交往",value:"641",pid:v,type:a},{name:"朋友沟通",value:"642",pid:v,type:a},{name:"陌生人",value:"643",pid:v,type:a},{name:"舍友关系",value:"644",pid:v,type:a}],"734":[{value:i,name:y,type:a},{name:"失眠",value:"735",pid:d,type:a},{name:"进食障碍",value:"736",pid:d,type:a},{name:"抽动",value:"737",pid:d,type:a},{name:"长期疼痛",value:"738",pid:d,type:a},{name:"人格障碍",value:"739",pid:d,type:a},{name:"精神障碍",value:"740",pid:d,type:a},{name:"心境障碍",value:"741",pid:d,type:a},{name:"恐惧症",value:"742",pid:d,type:a},{name:"强迫症",value:"743",pid:d,type:a},{name:"抑郁症",value:"744",pid:d,type:a},{name:"焦虑症",value:"745",pid:d,type:a},{name:"疑病症",value:"746",pid:d,type:a},{name:"躁狂症",value:"747",pid:d,type:a},{name:"神经衰弱",value:"748",pid:d,type:a},{name:"创伤后应激障碍",value:"749",pid:d,type:a},{name:"癔症",value:"750",pid:d,type:a},{name:"成长创伤",value:"751",pid:d,type:a},{name:"情感创伤修复",value:"752",pid:d,type:a},{name:"分离创伤",value:"753",pid:d,type:a},{name:"意外事件创伤",value:"754",pid:d,type:a},{name:"突发危机干预",value:"755",pid:d,type:a},{name:"心理创伤",value:"756",pid:d,type:a},{name:"适应障碍",value:"757",pid:d,type:a},{name:"自杀倾向",value:"758",pid:d,type:a},{name:"神经功能失调",value:"759",pid:d,type:a},{name:"成瘾",value:"760",pid:d,type:a},{name:"丧失与哀伤辅导",value:"761",pid:d,type:a},{name:"死亡",value:"762",pid:d,type:a},{name:"疲劳",value:"763",pid:d,type:a},{name:"痉挛",value:"764",pid:d,type:a},{name:"慢性压力",value:"765",pid:d,type:a},{name:"幻觉",value:"766",pid:d,type:a},{name:"控制狂",value:"767",pid:d,type:a},{name:"病态人格",value:"768",pid:d,type:a},{name:"精神分裂",value:"769",pid:d,type:a},{name:"多重人格",value:"770",pid:d,type:a},{name:"神经症",value:"771",pid:d,type:a},{name:"梦",value:"1591",pid:d,type:a}]}},applyTeacherList:[{user_id:cc,name:cd,avatar:ce,zx_num:e,experience_year:b$,honor:"婚姻家庭治疗师 荣格分析 躯体治疗",tags:[p,A,q],price:P,coupon:e,half_price:e,city:u,schedule:[],created:cf,way_price:[P,P]},{user_id:"1006124573",name:"李士欣",avatar:"http:\u002F\u002Fossimg.xinli001.com\u002F20200514\u002F6481a2a5ffaf10ddb152f6f84b2bbb57.jpg!120",zx_num:e,experience_year:e,honor:"心理咨询师",tags:[p,J,L],price:r,coupon:e,half_price:e,city:w,schedule:[],created:cf,way_price:[r,j,j]},{user_id:"1007687158",name:"吴倩",avatar:"https:\u002F\u002Fossimg.xinli001.com\u002F20200723\u002F0166885f13b36d76fe4978e94a86e145.jpeg!120",zx_num:e,experience_year:10,honor:"中国心理学会注册心理师 心理学硕士 心理治疗师",tags:[p,x,A],price:D,coupon:e,half_price:e,city:ac,schedule:[],created:cg,way_price:[D,D]},{user_id:"1002144043",name:"王静华",avatar:"http:\u002F\u002Fossimg.xinli001.com\u002F20200701\u002Fc9906383b6228bd50276563c778a9b68.jpeg!120",zx_num:e,experience_year:e,honor:"国家二级心理咨询师;全身聚焦治疗师",tags:[p,B,bQ],price:j,coupon:e,half_price:e,city:u,schedule:{date:V,time:"09:00"},created:cg,way_price:[j,j]},{user_id:"1007546427",name:"王敬琪",avatar:"http:\u002F\u002Fossimg.xinli001.com\u002F20200207\u002F46c05ce27d57c8b95490af922bd2d336.jpg!120",zx_num:e,experience_year:N,honor:cb,tags:[p,q,B],price:Z,coupon:e,half_price:e,city:I,schedule:[],created:"2020-07-22",way_price:[Z,ch,ad]}],teacherArticle:[{article_id:"100463231",title:"西游记心理分析|15.迷失在财宝中金角银角大王",cover:"https:\u002F\u002Fossimg.xinli001.com\u002F20200803\u002F54a713e85220ec19e2aa6b8dbdeedd7a.jpeg",user_id:"271168441",created:E,avatar:"https:\u002F\u002Fimage.xinli001.com\u002F20151030\u002F004255f5edci1654qu8mbs.jpg!120",name:"李菊红"},{article_id:"100463230",title:"杭州杀妻案结果曝光！当你考虑结婚，哪些男人不能嫁？",cover:"https:\u002F\u002Fossimg.xinli001.com\u002F20200802\u002F35dc91dabf941aa4fb0d9f0b8d8894ee.jpeg",user_id:"1000985308",created:S,avatar:"https:\u002F\u002Fossimg.xinli001.com\u002F20161129\u002Fc18f86c75e509bf7f90e9e5a972317cb.png!120",name:"谭素怡"},{article_id:"100463216",title:"有哪些事情是你高考之后才真正明白的？",cover:"https:\u002F\u002Fossimg.xinli001.com\u002F20200802\u002F3b44ca1dcdc7d330c2f18c2935adc5ff.png",user_id:"1005312262",created:S,avatar:"https:\u002F\u002Fossimg.xinli001.com\u002F20180504\u002F73d327260724a3a51a05ec220826abb1.png!120",name:"秦艳鸿"},{article_id:"100463215",title:"60%的男人都没抵挡住野花的诱惑，所以我……",cover:"https:\u002F\u002Fossimg.xinli001.com\u002F20200803\u002F4d740d4aff2b8ae4d79c700fa8ac27f4.jpeg",user_id:"271266491",created:S,avatar:"https:\u002F\u002Fimage.xinli001.com\u002F20151012\u002F130153\u002F549278.png!120",name:"刘新君"},{article_id:"100463211",title:"为什么孩子抗挫折能力差？",cover:"https:\u002F\u002Fossimg.xinli001.com\u002F20200802\u002F4476290f9d4fcd34b90c92863483cc5d.jpeg",user_id:"54186595",created:S,avatar:"https:\u002F\u002Fimage.xinli001.com\u002F20150722\u002F170522\u002F831713.png!120",name:"李军旗"}],teacherAnswer:[{answer_id:"5775518",user_id:X,name:W,avatar:_,title:"最近一直都大喜大悲怎么办",created:E},{answer_id:"5775509",user_id:cc,name:cd,avatar:ce,title:"我的闺蜜惧怕和老公前妻生的女儿生活，该怎么开导她？",created:E},{answer_id:"5775501",user_id:X,name:W,avatar:_,title:"母亲沉迷抖音 该如何正确引导",created:E},{answer_id:"5775461",user_id:X,name:W,avatar:_,title:"不萌长期地进入一段亲密关系，对异性不够信任。",created:E},{answer_id:"5775445",user_id:"1000703440",name:"吴钰",avatar:"https:\u002F\u002Fimage.xinli001.com\u002F20160105\u002F111101\u002F094540.png!120",title:"什么东西应该争取？什么时候应该放弃？",created:E}]}},serverRendered:true,routePath:"\u002Fconsult",config:{}}}("label","city","452","734",0,"535","572","province","","600.00","427","511","全部","490","608","个人成长","婚姻家庭","500.00",1,"tag","上海市","634","北京市","情绪管理","不限","广州市","心理健康","人际关系","800.00","300.00","2020-08-03","青岛市","南京市","海外","深圳市","恋爱心理","长沙市","职场心理","武汉市",7,"杭州市","1000.00","成都市","天津市","2020-08-02","重庆市",9,"明天","张佳英","1064369","阜新市","550.00","https:\u002F\u002Fossimg.xinli001.com\u002F20170221\u002Feabcc3ada418848d7ebbf370493c8a6f.png!120","昆明市","700.00","佛山市","开封市","750.00","湖北省","临汾市","赤峰市","辽宁省","沈阳市","大连市","朝阳市","丹东市","吉林省","长春市","吉林市","黑龙江省","哈尔滨市","大庆市","佳木斯市","江苏省","无锡市","苏州市","淮安市","宿迁市","镇江市","常州市","泰州市","扬州市","盐城市","浙江省","温州市","嘉兴市","台州市","晋中市","安徽省","合肥市","滁州市","芜湖市","福建省","福州市","厦门市","三明市","江西省","南昌市","九江市","赣州市","山东省","济南市","淄博市","烟台市","济宁市","临沂市","潍坊市","泰安市","枣庄市","菏泽市","河南省","郑州市","长治市","新乡市","焦作市","洛阳市","呼和浩特市","黄石市","宜昌市","襄樊市","恩施土家族苗族自治州","湖南省","株洲市","衡阳市","岳阳市","广东省","珠海市","中山市","汕头市","惠州市","桂林市","海南省","三亚市","太原市","四川省","德阳市","眉山市","达州市","贵州省","贵阳市","云南省","大理白族自治州","陕西省","西安市","乌鲁木齐市","台湾省","台北市","台中市","高雄市","山西省","性心理","廊坊市","衡水市","张家口市","安全感","保定市","邯郸市","同性恋","石家庄市","河北省","热门城市",13,12,"二级心理咨询师","1007027138","姚小青","http:\u002F\u002Fossimg.xinli001.com\u002F20190801\u002Fafb8a8aa79e8a0d0ffac142f5967fbc9.jpg!120","2020-07-27","2020-07-23","650.00",6,"900.00","19:00","宁波市"));</script>
+<!--  <script src="js/runtime.bfcc09e.js" defer></script>-->
+  <script type="text/javascript" th:src="@{/statics/js/psychology/runtime.bfcc09e.js}"></script>
+<!--  <script src="js/index.98d8c43.js" defer></script>-->
+  <script type="text/javascript" th:src="@{/statics/js/psychology/index.98d8c43.js}"></script>
+<!--  <script src="js/app.1c1a595.js" defer></script>-->
+  <script type="text/javascript" th:src="@{/statics/js/psychology/app.1c1a595.js}"></script>
+<!--  <script src="js/app.8694cb8.js" defer></script>-->
+  <script type="text/javascript" th:src="@{/statics/js/psychology/app.8694cb8.js}"></script>
+ </body>
+</html>

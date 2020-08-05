@@ -1,0 +1,73 @@
+.footer {
+  width: 100%;
+  height: 1.2rem;
+  line-height: 1.2rem;
+  margin-top: 0.26666667rem;
+  background-color: #fff;
+  color: #666;
+  font-size: 0.42666667rem;
+}
+/* #box {
+  margin-top: 1.1733333333333333rem;
+} */
+.header_top {
+  position: relative;
+  width: 100%;
+  height: 1.17333333rem;
+  line-height: 1.17333333rem;
+  background-color: #fff;
+  font-size: 0.42666667rem;
+  padding-left: 1.17333333rem;
+}
+.header_top .right {
+  padding-right: 0.53333333rem;
+  padding-left: 0.26666667rem;
+}
+.header_top .person_center {
+  display: inline-block;
+  width: 0.50666667rem;
+  height: 0.56rem;
+  vertical-align: middle;
+  margin-top: -0.02666667rem;
+  font-size: 0.26666667rem;
+  background: url("../../images/library/index.png") -0.10666667rem -0.05333333rem no-repeat;
+  background-size: 3.62666667rem 3.08rem;
+}
+.header_top .msg_count {
+  display: inline-block;
+  width: 0.37333333rem;
+  height: 0.37333333rem;
+  line-height: 0.37333333rem;
+  border-radius: 50%;
+  background-color: #fe8910;
+  color: #fff;
+  font-size: 0.26666667rem;
+  vertical-align: middle;
+  margin-top: -0.4rem;
+}
+.header_top .left {
+  position: absolute;
+  left: 0;
+  display: inline-block;
+  width: 1.17333333rem;
+  height: 1.17333333rem;
+  padding-left: 0.26666667rem;
+}
+.header_top .back {
+  display: inline-block;
+  width: 0.25333333rem;
+  height: 0.41333333rem;
+  background: url("../../images/library/index.png") -3.37333333rem -1.82666667rem;
+  background-size: 3.62666667rem 3.08rem;
+  vertical-align: middle;
+  margin-top: 0.37333333rem;
+}
+.vue_top {
+  position: fixed;
+  top: 0;
+  z-index: 1200;
+}
+.layerFont {
+  font-size: 0.4rem;
+  line-height: 0.4rem;
+}

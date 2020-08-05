@@ -1,0 +1,814 @@
+    <!DOCTYPE html>
+    <html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>高企云-一站式高新技术企业培育平台</title>
+        <meta name="keywords" content="高企云,高企申报政策解读,高企申报,高企培育,高企认定,高新技术企业认定条件,高新技术企业认定,科技小巨人,高新企业税收优惠" />
+        <meta name="description" content="高企云服务平台是集培训、交易、服务一体的高企培育平台,为用户申报高新技术企业认定与培育提供在线评估、在线交易、过程管控、评估和管理以及全面的高新技术企业申报政策解读." />    
+        <!-- 公共头部 -->
+        <th:block th:include="block/headlink :: test('高企云')" /> 
+        <!-- 结束 -->
+        <link rel="stylesheet" th:href="@{/statics/css/index.css?v=0.0.5}">
+    </head>
+     
+
+    <body>
+        <div id="user">
+            <div th:replace="~{user_head::copy}"></div>
+        </div>
+
+        <div class="wrap" id="box">
+            <!-- 1 -->
+            <div th:replace="~{header::copy}"></div>
+            <!-- 2 -->
+            <div th:replace="~{commom::banner}"></div>
+            <!-- 3 -->
+            <section class="contain">
+                <div id="advise" v-cloak>
+                    <section class='fix-server'>
+                        <a class="qq" href="http://p.qiao.baidu.com/cps/chat?siteId=11406523&userId=20408321" title="高企云咨询" target="_blank">
+                            <div class="hotLine_zx">
+                                <i class='online_zx'></i>
+                                <div class="hot-number">
+                                    <span class='number-text'>服务热线：400-166-3308</span>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="QRCode">
+                            <i class='bg-img second'></i>
+                            <div class="QR-bg">
+                                <i class='QR-imgbg' style="padding-top: 5px;display: none;">
+                                    <img src="/statics/images/codeLogo.png" width="90px" height="90px" alt=""/>
+                                </i> 
+                                <span class='QR-text'>高企云微信二维码</span>
+                            </div>
+                        </div>
+                        <div class="suggestions" title="反馈意见" @click="tickling">
+                            <i class='bg-img third'></i>
+                            <div class="suggestbox">
+                                <span class='suggest-text'>欢迎反馈意见和建议</span>
+                            </div>
+                        </div>
+                        <a href="javascript:void(0)" title="返回顶部" id="goTop" style="visibility: hidden;"><div class="toTop"><i class="bg-img fourth"></i></div></a>
+                    </section>
+                   
+                </div> 
+            </section>
+            <section>
+                <div id="ids1" style="display: none;">
+                    <h3>欢迎反馈意见和建议</h3>
+                    <textarea name="" id=""></textarea>
+                    <a class="btn0 " @click="submitBtn()">确定</a>
+                </div>
+            </section>
+
+            <!-- 4 -->
+            <section class="policy_wrap clearfix">
+                <div class="policy clearfix">
+                    <div class="search">
+                        <div class="search_head clearfix">
+                            <div class="search_box">
+                                <s class="search_icon"></s>
+                                <input v-cloak type="text" @keyup.enter="seachPolicy" placeholder="查政策输入政策名称    查立项输入企业名称或立项名称" v-model="keyword1">
+                                <!-- <input v-cloak type="text" v-show="curColor==1" @keyup.enter="seachProject" placeholder="查政策输入政策名称    查立项输入企业名称或立项名称" v-model="keyword2"> -->
+                            </div>
+                            <button class="b1"  @mouseover="curColor=0" :class="{active:curColor==0}" @click="seachPolicy">政策查询</button>
+                            <button class="b2"  @mouseover="curColor=1" :class="{active:curColor==1}" @click="seachProject">立项查询</button>
+                        </div>
+                        <div class="search_content clearfix">
+                            <div class="con_head">
+                                <p @mouseover="cur=0" :class="{active:cur==0}">申报通知<s></s></p>
+                                <p @mouseover="cur=1" :class="{active:cur==1}">公示名录<s></s></p>
+                                <p @mouseover="cur=2" :class="{active:cur==2}">政策解读<s></s></p>
+
+                                <!-- <a v-cloak v-show="cur==0" href="/ht-biz/policydig/index?isclaCation=1" class="icon_position">
+                                    <span class="gd"><i style="color: #4a5177;">更多</i>>></span>
+                                    <b class="icon_box"><em class="icon_animate"></em></b>
+                                </a>
+                                <a v-cloak v-show="cur==1" href="/ht-biz/policydig/index?isclaCation=3" class="icon_position">
+                                    <span class="gd"><i style="color: #4a5177;">更多</i>>></span>
+                                    <b class="icon_box"><em class="icon_animate"></em></b>
+                                </a>
+                                <a v-cloak v-show="cur==2" href="/ht-biz/library/index?curPolicy=4" class="icon_position">
+                                    <span class="gd"><i style="color: #4a5177;">更多</i>>></span>
+                                    <b class="icon_box"><em class="icon_animate"></em></b>
+                                </a> -->
+                            </div>
+                            <div class="con_body">
+                                <div v-cloak v-show="cur==0">
+                                    <p v-for="list in declareList">
+                                        <a :href="'/ht-biz/policydig/details?id='+list.id" target="_blank">
+                                            <s></s>{{list.title}}
+                                        </a><span>{{list.datetime|moment}}</span>
+                                    </p>
+                                </div>
+                                <div v-cloak v-show="cur==1">
+                                    <p v-for="list in publicityList">
+                                        <a :href="'/ht-biz/policydig/details?id='+list.id" target="_blank">
+                                            <s></s>{{list.title}}
+                                        </a><span>{{list.datetime|moment}}</span>
+                                    </p>
+                                </div>
+                                <div v-cloak v-show="cur==2">
+                                    <p v-for="list in policyList">
+                                        <a :href="'/ht-biz/library/findLibrayById?id='+list.id" target="_blank">
+                                            <s></s>{{list.title}}
+                                        </a><span>{{list.createdate|moment}}</span>
+                                    </p>
+                                </div>
+                                <div class="more_search">
+                                    <a v-cloak v-show="cur==0" href="/ht-biz/policydig/index?isclaCation=1" class="icon_position">
+                                        <span class="gd"><i style="color: #4a5177;">更多</i>>></span>
+                                        <b class="icon_box"><em class="icon_animate"></em></b>
+                                    </a>
+                                    <a v-cloak v-show="cur==1" href="/ht-biz/policydig/index?isclaCation=3" class="icon_position">
+                                        <span class="gd"><i style="color: #4a5177;">更多</i>>></span>
+                                        <b class="icon_box"><em class="icon_animate"></em></b>
+                                    </a>
+                                    <a v-cloak v-show="cur==2" href="/ht-biz/library/index?curPolicy=4" class="icon_position">
+                                        <span class="gd"><i style="color: #4a5177;">更多</i>>></span>
+                                        <b class="icon_box"><em class="icon_animate"></em></b>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="other">
+                        <div class="project clearfix">
+                            <div class="pro_l">
+                                <h2>高企在线评估规划</h2>
+                                <h3>精准测评，综合分析，科学布局</h3>
+                                <a href="/ht-biz/hisself/hisself_index">免费评估<s></s></a>
+                            </div>
+                            <div class="pro_r">
+                                <s></s>
+                                <em class="icon-server"></em>
+                            </div>
+                        </div>
+                        <div class="manage clearfix">
+                            <div class="m1" @click="handletips()">
+                                <a href="javascript:;">
+                                    <i></i>
+                                    <em class="icon-server1"></em>
+                                    <h2>项目申报管理</h2>
+                                    <p>申报进度，科学管理</p>
+                                </a>
+
+                            </div>
+                            <div class="m2" @click="handletips()">
+                                <a href="javascript:;">
+                                    <i></i>
+                                    <em class="icon-server2"></em>
+                                    <h2>元数据管理</h2>
+                                    <p>各类报表智能导出</p>
+                                </a>
+
+                            </div>
+                        </div>
+                        <div class="enter">
+                            <a href="/ht-biz/service/index/index">
+                                <h2>
+                                    服务商入驻 
+                                </h2>
+                                <p>诚邀您入驻，<br />共享科技创新服务大市场</p>
+                            </a>
+                        </div>
+                        <div class="professor" @click="handletips()">
+                            <a href="javascript:void(0);">
+                                <h2>
+                                    专家库 <s class="enter_icon"></s>
+                                </h2>
+                                <p>八大领域专家，深度专业咨询</p>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- 5 -->
+            <section class="product_wrap clearfix">
+                <div class="product">
+                    <div class="product_l">
+                        <h2><s class="icon_tiem"></s><i>广东</i> · 科技产品服务<span>创新粒度化服务，快速响应企业需求</span></h2>
+                        <ul class="select_left">
+                            <li @mouseover="curProduct=0" :class="{active:curProduct==0}">高新技术企业认定<s></s></li>
+                            <li @mouseover="curProduct=1" :class="{active:curProduct==1}">研发费用加计扣除<s></s></li>
+                            <li @mouseover="curProduct=2" :class="{active:curProduct==2}">高新技术产品认定<s></s></li>
+                            <li @mouseover="curProduct=3" :class="{active:curProduct==3}">工程技术中心<s></s></li>
+                            <li @mouseover="curProduct=4" :class="{active:curProduct==4}">科技计划项目<s></s></li>
+                            <li @mouseover="curProduct=5" :class="{active:curProduct==5}">企业技术中心<s></s></li>
+                            <li @mouseover="curProduct=6" :class="{active:curProduct==6}">新型研发机构<s></s></li>
+                            <li @mouseover="curProduct=7" :class="{active:curProduct==7}">项目验收/绩效评价<s></s></li>
+                            <div class="last_select">
+                                <a target="_blank" href="http://g.hights.cn/produce/iprIndex">更多产品服务</a>
+                            </div>
+                        </ul>
+                        <div class="select_content">
+                            <div v-cloak v-show="curProduct==0">
+                                <h2>认定为高新技术企业有什么好处</h2>
+                                <div class="select_answer clearfix" style="padding-top: 10px;padding-bottom: 10px;">
+                                    <p class="answer">
+                                        <b></b>1、税收优惠减免：企业所得税减免40%；
+                                        2、政府财政补贴：最高可达100万；
+                                        3、资本价值：助力企业投融资，推动企业产业化扩张；
+                                        4、品牌价值：国家级认证，提升企业形象；
+                                        5、规范管理：提升管理水平，提高企业核心竞争力
+                                    </p>
+                                    <p class="answer_link">
+                                        <a target="_blank" href="http://p.qiao.baidu.com/cps/chat?siteId=11406523&userId=20408321">在线咨询</a>
+                                        <a target="_blank" href="http://g.hights.cn/beetl/hightdec/index">查看详情</a>
+                                    </p>
+                                </div>
+                                <div class="serve" style="">
+                                    <h2>粒度化服务<s class="serve_icon"></s></h2>
+                                    <div class="serve_box">
+                                        <ul>
+                                            <li><a href="javascript:void(0)">项目立项材料编写</a><s class="hot_icon"></s></li>
+                                            <li><a href="javascript:void(0)">高企认定申请书填写</a></li>
+                                            <li><a href="javascript:void(0)">管理制度的个性化编写</a></li>
+                                            <li><a href="javascript:void(0)">产学研签订服务</a></li>
+                                            <li><a href="javascript:void(0)">系统注册及申请书填写、提交</a></li>
+                                            <li><a href="javascript:void(0)">研发费用辅助账分配</a></li>
+                                            <li><a href="javascript:void(0)">高新技术产品收入台账归集</a></li>
+                                            <li><a href="javascript:void(0)">年审报告出具</a><s class="hot_icon"></s></li>
+                                            <li><a href="javascript:void(0)">研发费用专项审计报告</a></li>
+                                            <li><a href="javascript:void(0)">高新技术产品收入专项审计报告出具</a></li>
+                                            <li><a href="javascript:void(0)">高新优惠备案及统计填写</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="recommend">
+                                    <h2 style="padding: 10px 0;">优秀服务商推荐<a href="/ht-biz/service/index/index">查看更多服务商></a></h2>
+                                    <div class="facilitator">
+                                        <div>
+                                            <s class="facilitator_icon"></s>
+                                            <p><img src="/statics/images/nav_logo.png" alt=""></p>
+                                            <h2>广州博士信息技术研究院有限公司</h2><span>简介：博士科技是一家以创新生态视野构建成果转化体系的科创服务机构，深刻洞悉、精准把握科技成果转化与创新群体的内在逻辑关系，打造出全体系的标准化服务产品，推动创新生态发展，加速生态体系完善升级。</span>
+                                        </div>
+                                        <div>
+                                            <s class="facilitator_icon"></s>
+                                            <p><img src="/statics/images/nav_logo.png" alt=""></p>
+                                            <h2>深圳博士创新技术转移有限公司</h2><span>简介：深圳博士创新技术转移有限公司是博士科技集团在深圳运营上市的主体公司。2015年公司发展迎来重大机遇，在深圳市政府的大力支持下，公司落址于南山区深圳虚拟大学园（国家技术转移南方中心秘书处）。</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div v-cloak v-show="curProduct==1">
+                                <h2>研发费用加计扣除</h2>
+                                <div class="select_answer clearfix" style="padding-top: 15px; padding-bottom: 10px;">
+                                    <p class="answer">
+                                        1、税收优惠减免：减轻企业税负负担（研发费用75%税前加计扣除），提高企业整体效率；
+                                        2、享受财政补贴的前提：享受省级和市级研发费用财政补贴的前提；
+                                        3、高企工作减负：提前梳理每年的科技研发项目，有助于企业建立和完善科研立项管理体系；
+                                        4、品牌价值：促进企业科技转型、促进企业品牌升级，提升企业市场价值
+                                    </p>
+                                    <p class="answer_link">
+                                        <a target="_blank" href="http://p.qiao.baidu.com/cps/chat?siteId=11406523&userId=20408321">在线咨询</a>
+                                        <a target="_blank" href="http://g.hights.cn/produce/addDel_detail">查看详情</a>
+                                    </p>
+                                </div>
+                                <div class="serve">
+                                    <h2>粒度化服务<s class="serve_icon"></s></h2>
+                                    <div class="serve_box">
+                                        <ul>
+                                            <li><a href="javascript:void(0)">项目立项材料编写</a><s class="hot_icon"></s></li>
+                                            <li><a href="javascript:void(0)">科技查新报告</a></li>
+                                            <li><a href="javascript:void(0)">企业所得税减免优惠备案表填写</a></li>
+                                            <li><a href="javascript:void(0)">研发项目费用预算计划</a></li>
+                                            <li><a href="javascript:void(0)">研发费用情况归集表</a></li>
+                                            <li><a href="javascript:void(0)">研发费用核算情况说明</a></li>
+                                            <li><a href="javascript:void(0)">在职研发人员名单整理</a></li>
+                                            
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="recommend">
+                                    <h2>优秀服务商推荐<a href="/ht-biz/service/index/index">查看更多服务商></a></h2>
+                                    <div class="facilitator">
+                                        <div>
+                                            <s class="facilitator_icon"></s>
+                                            <p><img src="/statics/images/nav_logo.png" alt=""></p>
+                                            <h2>广州博士信息技术研究院有限公司</h2><span>简介：博士科技是一家以创新生态视野构建成果转化体系的科创服务机构，深刻洞悉、精准把握科技成果转化与创新群体的内在逻辑关系，打造出全体系的标准化服务产品，推动创新生态发展，加速生态体系完善升级。</span>
+                                        </div>
+                                        <div>
+                                            <s class="facilitator_icon"></s>
+                                            <p><img src="/statics/images/nav_logo.png" alt=""></p>
+                                            <h2>深圳博士创新技术转移有限公司</h2><span>简介：深圳博士创新技术转移有限公司是博士科技集团在深圳运营上市的主体公司。2015年公司发展迎来重大机遇，在深圳市政府的大力支持下，公司落址于南山区深圳虚拟大学园（国家技术转移南方中心秘书处）。</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div v-cloak v-show="curProduct==2">
+                                <h2>高新技术产品认定</h2>
+                                <div class="select_answer clearfix">
+                                    <p class="answer">
+                                        1、提升产品形象：提高产品市场竞争力，直接证明产品的高科技含量，提高用户信任度；
+                                        2、政府资金奖励：政府给予一定的资金奖励；
+                                        3、高企认定支撑条件：高新技术企业认定的重要条件之一；
+                                        4、增值税返还：产品增值税地方截留部分退还，可返还15%-17%
+                                    </p>
+                                    <p class="answer_link">
+                                        <a target="_blank" href="http://p.qiao.baidu.com/cps/chat?siteId=11406523&userId=20408321">在线咨询</a>
+                                        <a target="_blank" href="http://g.hights.cn/produce/htPro_detail">查看详情</a>
+                                    </p>
+                                </div>
+                                <div class="serve">
+                                    <h2>粒度化服务<s class="serve_icon"></s></h2>
+                                    <div class="serve_box">
+                                        <ul>
+                                            <li><a href="javascript:void(0)">产品符合规定领域范围的说明</a><s class="hot_icon"></s></li>
+                                            <li><a href="javascript:void(0)">产品市场前景预测分析报告</a></li>
+                                            <li><a href="javascript:void(0)">广东省高新技术产品认定申请表</a></li>
+                                            <li><a href="javascript:void(0)">上一年度审计报告出具</a></li>
+                                            <li><a href="javascript:void(0)">产品经济效益预测</a></li>
+                                            <li><a href="javascript:void(0)">人员构成情况梳理</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="recommend">
+                                    <h2>优秀服务商推荐<a href="/ht-biz/service/index/index">查看更多服务商></a></h2>
+                                    <div class="facilitator">
+                                        <div>
+                                            <s class="facilitator_icon"></s>
+                                            <p><img src="/statics/images/nav_logo.png" alt=""></p>
+                                            <h2>广州博士信息技术研究院有限公司</h2><span>简介：博士科技是一家以创新生态视野构建成果转化体系的科创服务机构，深刻洞悉、精准把握科技成果转化与创新群体的内在逻辑关系，打造出全体系的标准化服务产品，推动创新生态发展，加速生态体系完善升级。</span>
+                                        </div>
+                                        <div>
+                                            <s class="facilitator_icon"></s>
+                                            <p><img src="/statics/images/nav_logo.png" alt=""></p>
+                                            <h2>深圳博士创新技术转移有限公司</h2><span>简介：深圳博士创新技术转移有限公司是博士科技集团在深圳运营上市的主体公司。2015年公司发展迎来重大机遇，在深圳市政府的大力支持下，公司落址于南山区深圳虚拟大学园（国家技术转移南方中心秘书处）。</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div v-cloak v-show="curProduct==3">
+                                <h2>工程技术中心</h2>
+                                <div class="select_answer clearfix">
+                                    <p class="answer">
+                                        1、专项资金支持：享受区域政府建设专项资助；
+                                        2、政府政策支持：享受政府科技项目优先立项；
+                                        3、促进企业发展：提升企业技术开发与创新能力，推动企业技术创新体系建设；加速高技术产业化，提高企业市场竞争力
+                                    </p>
+                                    <p class="answer_link">
+                                        <a target="_blank" href="http://p.qiao.baidu.com/cps/chat?siteId=11406523&userId=20408321">在线咨询</a>
+                                        <a target="_blank" href="http://g.hights.cn/produce/gdProTech">查看详情</a>
+                                    </p>
+                                </div>
+                                <div class="serve">
+                                    <h2>粒度化服务<s class="serve_icon"></s></h2>
+                                    <div class="serve_box">
+                                        <ul>
+                                            <li><a href="javascript:void(0)">认定申请书</a><s class="hot_icon"></s></li>
+                                            <li><a href="javascript:void(0)">认定申请报告</a></li>
+                                            <li><a href="javascript:void(0)">研发机构组建相关资料</a></li>
+                                            <li><a href="javascript:void(0)">审计报告出具</a></li>
+                                            <li><a href="javascript:void(0)">上一年度研发投入情况梳理</a></li>
+                                            <li><a href="javascript:void(0)">工程中心人员情况梳理</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="recommend">
+                                    <h2>优秀服务商推荐<a href="/ht-biz/service/index/index">查看更多服务商></a></h2>
+                                    <div class="facilitator">
+                                        <div>
+                                            <s class="facilitator_icon"></s>
+                                            <p><img src="/statics/images/nav_logo.png" alt=""></p>
+                                            <h2>广州博士信息技术研究院有限公司</h2><span>简介：博士科技是一家以创新生态视野构建成果转化体系的科创服务机构，深刻洞悉、精准把握科技成果转化与创新群体的内在逻辑关系，打造出全体系的标准化服务产品，推动创新生态发展，加速生态体系完善升级。</span>
+                                        </div>
+                                        <div>
+                                            <s class="facilitator_icon"></s>
+                                            <p><img src="/statics/images/nav_logo.png" alt=""></p>
+                                            <h2>深圳博士创新技术转移有限公司</h2><span>简介：深圳博士创新技术转移有限公司是博士科技集团在深圳运营上市的主体公司。2015年公司发展迎来重大机遇，在深圳市政府的大力支持下，公司落址于南山区深圳虚拟大学园（国家技术转移南方中心秘书处）。</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div v-cloak v-show="curProduct==4">
+                                <h2>科技计划项目</h2>
+                                <div class="select_answer clearfix">
+                                    <p class="answer">
+                                        1、政府财政补贴：享受各级政府配套补贴；
+                                        2、提高品牌知名度：承担各级政府科技项目，彰显科研实力，提升市场竞争力；
+                                        3、获得科研资金扶持：享受项目立项资金扶持，减轻企业开发投入风险；
+                                        4、推动企业发展：有利于企业融资上市
+                                    </p>
+                                    <p class="answer_link">
+                                        <a target="_blank" href="http://p.qiao.baidu.com/cps/chat?siteId=11406523&userId=20408321">在线咨询</a>
+                                        <a target="_blank" href="http://g.hights.cn/produce/produceCommon">查看详情</a>
+                                    </p>
+                                </div>
+                                <div class="serve">
+                                    <h2>粒度化服务<s class="serve_icon"></s></h2>
+                                    <div class="serve_box">
+                                        <ul>
+                                            <li><a href="javascript:void(0)">申请书、可行性报告</a><s class="hot_icon"></s></li>
+                                            <li><a href="javascript:void(0)">科技项目查新</a></li>
+                                            <li><a href="javascript:void(0)">项目立项合同签订辅导</a></li>
+                                            <li><a href="javascript:void(0)">项目经济效益预测</a></li>
+                                            <li><a href="javascript:void(0)">人员构成梳理</a></li>
+                                            <li><a href="javascript:void(0)">项目专项审计报告出具</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="recommend">
+                                    <h2>优秀服务商推荐<a href="/ht-biz/service/index/index">查看更多服务商></a></h2>
+                                    <div class="facilitator">
+                                        <div>
+                                            <s class="facilitator_icon"></s>
+                                            <p><img src="/statics/images/nav_logo.png" alt=""></p>
+                                            <h2>广州博士信息技术研究院有限公司</h2><span>简介：博士科技是一家以创新生态视野构建成果转化体系的科创服务机构，深刻洞悉、精准把握科技成果转化与创新群体的内在逻辑关系，打造出全体系的标准化服务产品，推动创新生态发展，加速生态体系完善升级。</span>
+                                        </div>
+                                        <div>
+                                            <s class="facilitator_icon"></s>
+                                            <p><img src="/statics/images/nav_logo.png" alt=""></p>
+                                            <h2>深圳博士创新技术转移有限公司</h2><span>简介：深圳博士创新技术转移有限公司是博士科技集团在深圳运营上市的主体公司。2015年公司发展迎来重大机遇，在深圳市政府的大力支持下，公司落址于南山区深圳虚拟大学园（国家技术转移南方中心秘书处）。</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div v-cloak v-show="curProduct==5">
+                                <h2>企业技术中心</h2>
+                                <div class="select_answer clearfix">
+                                    <p class="answer">
+                                        1、建设专项资金：可申请政府配套专项资金奖励，最高可达1000万；
+                                        2、配套资金奖励：享受市、区财政配套补贴；
+                                        3、企业能力认证：彰显企业实力，树立企业形象
+                                    </p>
+                                    <p class="answer_link">
+                                        <a target="_blank" href="http://p.qiao.baidu.com/cps/chat?siteId=11406523&userId=20408321">在线咨询</a>
+                                        <a target="_blank" href="http://g.hights.cn/produce/provincesTechCenter">查看详情</a>
+                                    </p>
+                                </div>
+                                <div class="serve">
+                                    <h2>粒度化服务<s class="serve_icon"></s></h2>
+                                    <div class="serve_box">
+                                        <ul>
+                                            <li><a href="javascript:void(0)">验收申请报告撰写</a><s class="hot_icon"></s></li>
+                                            <li><a href="javascript:void(0)">项目验收总结报告、项目评价报告撰写</a></li>
+                                            <li><a href="javascript:void(0)">成果查新报告</a></li>
+                                            <li><a href="javascript:void(0)">答辩PPT制作</a></li>
+                                            <li><a href="javascript:void(0)">现场答辩辅导</a></li>
+                                            <li><a href="javascript:void(0)">经费决算表、支出明细表及支出凭证辅导</a></li>
+                                            <li><a href="javascript:void(0)">项目专项审计报告出具</a></li>
+                                            <li><a href="javascript:void(0)">现场答辩辅导</a><s class="hot_icon"></s></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="recommend">
+                                    <h2>优秀服务商推荐<a href="/ht-biz/service/index/index">查看更多服务商></a></h2>
+                                    <div class="facilitator">
+                                        <div>
+                                            <s class="facilitator_icon"></s>
+                                            <p><img src="/statics/images/nav_logo.png" alt=""></p>
+                                            <h2>广州博士信息技术研究院有限公司</h2><span>简介：博士科技是一家以创新生态视野构建成果转化体系的科创服务机构，深刻洞悉、精准把握科技成果转化与创新群体的内在逻辑关系，打造出全体系的标准化服务产品，推动创新生态发展，加速生态体系完善升级。</span>
+                                        </div>
+                                        <div>
+                                            <s class="facilitator_icon"></s>
+                                            <p><img src="/statics/images/nav_logo.png" alt=""></p>
+                                            <h2>深圳博士创新技术转移有限公司</h2><span>简介：深圳博士创新技术转移有限公司是博士科技集团在深圳运营上市的主体公司。2015年公司发展迎来重大机遇，在深圳市政府的大力支持下，公司落址于南山区深圳虚拟大学园（国家技术转移南方中心秘书处）。</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div v-cloak v-show="curProduct==6">
+                                <h2>新型研发机构</h2>
+                                <div class="select_answer clearfix">
+                                    <p class="answer">
+                                        1、政府资金支持：政府专项资金支持500-1000万；
+                                        2、核补仪器税收：核补企业科研仪器相关税收；
+                                        3、完善企业管理：完善企业管理机制，助力企业创新驱动发展；
+                                        4、促进成果转化：促进企业科技成果转化
+                                    </p>
+                                    <p class="answer_link">
+                                        <a target="_blank" href="http://p.qiao.baidu.com/cps/chat?siteId=11406523&userId=20408321">在线咨询</a>
+                                        <a target="_blank" href="http://g.hights.cn/produce/newResearch_detail">查看详情</a>
+                                    </p>
+                                </div>
+                                <div class="serve">
+                                    <h2>粒度化服务<s class="serve_icon"></s></h2>
+                                    <div class="serve_box">
+                                        <ul>
+                                            <li><a href="javascript:void(0)">申请表</a><s class="hot_icon"></s></li>
+                                            <li><a href="javascript:void(0)">工作报告</a></li>
+                                            <li><a href="javascript:void(0)">科研项目梳理</a></li>
+                                            <li><a href="javascript:void(0)">科技查新报告</a></li>
+                                            <li><a href="javascript:void(0)">合作共建辅导</a></li>
+                                            <li><a href="javascript:void(0)">研发机构组建相关资料</a></li>
+                                            <li><a href="javascript:void(0)">成果收入梳理及归集</a></li>
+                                            <li><a href="javascript:void(0)">研发费用投入归集</a><s class="hot_icon"></s></li>
+                                            <li><a href="javascript:void(0)">人员构成情况梳理</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="recommend">
+                                    <h2>优秀服务商推荐<a href="/ht-biz/service/index/index">查看更多服务商></a></h2>
+                                    <div class="facilitator">
+                                        <div>
+                                            <s class="facilitator_icon"></s>
+                                            <p><img src="/statics/images/nav_logo.png" alt=""></p>
+                                            <h2>广州博士信息技术研究院有限公司</h2><span>简介：博士科技是一家以创新生态视野构建成果转化体系的科创服务机构，深刻洞悉、精准把握科技成果转化与创新群体的内在逻辑关系，打造出全体系的标准化服务产品，推动创新生态发展，加速生态体系完善升级。</span>
+                                        </div>
+                                        <div>
+                                            <s class="facilitator_icon"></s>
+                                            <p><img src="/statics/images/nav_logo.png" alt=""></p>
+                                            <h2>深圳博士创新技术转移有限公司</h2><span>简介：深圳博士创新技术转移有限公司是博士科技集团在深圳运营上市的主体公司。2015年公司发展迎来重大机遇，在深圳市政府的大力支持下，公司落址于南山区深圳虚拟大学园（国家技术转移南方中心秘书处）。</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div v-cloak v-show="curProduct==7">
+                                <h2>项目验收/绩效评价</h2>
+                                <div class="select_answer clearfix">
+                                    <p class="answer">
+                                        1、政府财政补贴：享受各级政府配套补贴；
+                                        2、提高品牌知名度：承担各级政府科技项目，彰显科研实力，提升市场竞争力；
+                                        3、获得科研资金扶持：享受项目立项资金扶持，减轻企业开发投入风险；
+                                        4、推动企业发展：有利于企业融资上市
+                                    </p>
+                                    <p class="answer_link">
+                                        <a target="_blank" href="http://p.qiao.baidu.com/cps/chat?siteId=11406523&userId=20408321">在线咨询</a>
+                                        <a target="_blank" href="http://g.hights.cn/produce/produceCommon">查看详情</a>
+                                    </p>
+                                </div>
+                                <div class="serve">
+                                    <h2>粒度化服务<s class="serve_icon"></s></h2>
+                                    <div class="serve_box">
+                                        <ul>
+                                            <li><a href="javascript:void(0)">验收申请报告撰写</a><s class="hot_icon"></s></li>
+                                            <li><a href="javascript:void(0)">项目验收总结报告、项目评价报告撰写</a></li>
+                                            <li><a href="javascript:void(0)">成果查新报告</a></li>
+                                            <li><a href="javascript:void(0)">答辩PPT制作</a></li>
+                                            <li><a href="javascript:void(0)">现场答辩辅导</a></li>
+                                            <li><a href="javascript:void(0)">经费决算表、支出明细表及支出凭证辅导</a></li>
+                                            <li><a href="javascript:void(0)">项目专项审计报告出具</a></li>
+                                            <li><a href="javascript:void(0)">现场答辩辅导</a><s class="hot_icon"></s></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="recommend">
+                                    <h2>优秀服务商推荐<a href="/ht-biz/service/index/index">查看更多服务商></a></h2>
+                                    <div class="facilitator">
+                                        <div>
+                                            <s class="facilitator_icon"></s>
+                                            <p><img src="/statics/images/nav_logo.png" alt=""></p>
+                                            <h2>广州博士信息技术研究院有限公司</h2><span>简介：博士科技是一家以创新生态视野构建成果转化体系的科创服务机构，深刻洞悉、精准把握科技成果转化与创新群体的内在逻辑关系，打造出全体系的标准化服务产品，推动创新生态发展，加速生态体系完善升级。</span>
+                                        </div>
+                                        <div>
+                                            <s class="facilitator_icon"></s>
+                                            <p><img src="/statics/images/nav_logo.png" alt=""></p>
+                                            <h2>深圳博士创新技术转移有限公司</h2><span>简介：深圳博士创新技术转移有限公司是博士科技集团在深圳运营上市的主体公司。2015年公司发展迎来重大机遇，在深圳市政府的大力支持下，公司落址于南山区深圳虚拟大学园（国家技术转移南方中心秘书处）。</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product_r">
+                        <!-- <h2>专题资源<span>项目专属资源在线分享</span></h2> -->
+                        <h2><i>资源包</i> · 下载<span>项目专属资源在线分享</span></h2>
+                        <div th:replace="~{commom::package}"></div>
+                    </div>
+                </div>
+            </section>
+            <!-- 6 -->
+            <section class="system_wrap clearfix">
+                <div class="system">
+                    <h2><s class="icon_tiem"></s>企业科技创新体系建设</h2>
+                    <p>增强企业核心竞争力，助力区域创新能力提升<s class="icon_tiem_menu"></s></p>
+                    <div class="system_content clearfix">
+                        <div class="system_l">
+                            <div class="s1">
+                                科技财税管理体系
+                                <div class="round">
+                                    <div class="circle"></div>
+                                    <div class="circle_bottom animation "></div>
+                                    <div class="circle_bottom2 animation2 "></div>
+                                </div>
+                            </div>
+
+                            <div class="s2">研发团队管理体系
+                                <div class="round">
+                                    <div class="circle"></div>
+                                    <div class="circle_bottom animation "></div>
+                                    <div class="circle_bottom2 animation2 "></div>
+                                </div>
+                            </div>
+                            <div class="s3">科技成果管理体系
+                                <div class="round">
+                                    <div class="circle"></div>
+                                    <div class="circle_bottom animation "></div>
+                                    <div class="circle_bottom2 animation2 "></div>
+                                </div>
+                            </div>
+                            <div class="s4">科研立项管理体系
+                                <div class="round">
+                                    <div class="circle"></div>
+                                    <div class="circle_bottom animation "></div>
+                                    <div class="circle_bottom2 animation2 "></div>
+                                </div>
+                            </div>
+                            <div class="s5">知识产权管理体系
+                                <div class="round1">
+                                    <div class="circle"></div>
+                                    <div class="circle_bottom animation "></div>
+                                    <div class="circle_bottom2 animation2 "></div>
+                                </div>
+                            </div>
+                            <div class="s6">研发机构管理体系
+                                <div class="round1">
+                                    <div class="circle"></div>
+                                    <div class="circle_bottom animation "></div>
+                                    <div class="circle_bottom2 animation2 "></div>
+                                </div>
+                            </div>
+                            <div class="system_introduce">
+                                <h2>科技创新六大体系</h2>
+                                <p>全方位指导企业将科技创新提升到战略高度，发现企业科技创新中的短板，整合线下资源，把握行业发展趋势，制定规划，帮助企业建立以自身为主体、市场为导向、产学研相结合的创新体系，以提升核心竞争力和可持续发展。
+                                </p>
+                            </div>
+                        </div>
+                        <div class="system_r clearfix">
+                            <h2>企业体系化建设工具</h2>
+                            <p>以“科技创新六大体系”为导向，整合高企云线上线下资源，为企业提供定制化的创新工具</p>
+                            <img src="/statics/images/menu_icon2.jpg" alt="">
+                            <div class="system_details clearfix">
+                                <div>
+                                    <a target="_blank" href="http://g.hights.cn/beetl/sproject/index">了解详情<s class="system_details_icon"></s></a>
+                                    <h2>科研项目管理系统</h2>
+                                    <span>安全好用的数字化项目管控工具</span>
+                                    <p class="system_details_icon1"></p>
+                                </div>
+                                <div>
+                                    <a target="_blank" href="/ht-biz/inquire/physical/index">了解详情<s class="system_details_icon"></s></a>
+                                    <h2>创新能力体检诊疗系统</h2>
+                                    <span>专业的企业创新能力评估诊断工具</span>
+                                    <p class="system_details_icon2"></p>
+                                </div>
+                                <a href="http://p.qiao.baidu.com/cps/chat?siteId=11406523&userId=20408321" class="zixun clearfix">在线咨询我们</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- 7 -->
+            <!-- <section class="exchange_wrap clearfix">
+                <div class="exchange">
+                    <h2>学习交流</h2>
+                    <p>更加直观的视频指导，更加全面的互动交流</p>
+                    <div class="exchange_box clearfix">
+                        <div class="exchange1 clearfix">
+                            <h2><b>在线培训</b>·精品课程<a href="">查看更多>></a></h2>
+                            <div class="course clearfix">
+                                <div class="clearfix">
+                                    <a href="">
+                                        <p><img src="/statics/images/s1.jpg" alt=""></p>
+                                        <h3>高企申请材料准备之科技成果转化证明材料 第一节</h3>
+                                        <span>主讲人：孙老师</span>
+                                    </a>
+                                </div>
+                                <div class="clearfix">
+                                    <a href="">
+                                        <p><img src="/statics/images/s2.jpg" alt=""></p>
+                                        <h3>高企申请材料准备之科技成果转化证明材料 第一节</h3>
+                                        <span>主讲人：孙老师</span>
+                                    </a>
+                                </div>
+                                <div class="clearfix">
+                                    <a href="">
+                                        <p><img src="/statics/images/s3.jpg" alt=""></p>
+                                        <h3>高企申请材料准备之科技成果转化证明材料 第一节</h3>
+                                        <span>主讲人：孙老师</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="exchange2 clearfix">
+                            <h2>高企云社区<a href="">进入高企云社区></a></h2>
+                            <div class="community">
+                                <div>
+                                    <a href="">
+                                        <h2>中小企业创新专项项目提交资料是什么时候？</h2>
+                                        <p class="comment">
+                                            <span>九尺长剑</span>
+                                            <span>发表于 <i> 广东 / 广州 / 惠普政策</i></span>
+                                            <span><s class="comment_icon"></s>21</span>
+                                        </p>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <h2>中小企业创新专项项目提交资料是什么时候？</h2>
+                                        <p class="comment">
+                                            <span>九尺长剑</span>
+                                            <span>发表于 <i> 广东 / 广州 / 惠普政策</i></span>
+                                            <span><s class="comment_icon"></s>21</span>
+                                        </p>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <h2>中小企业创新专项项目提交资料是什么时候？</h2>
+                                        <p class="comment">
+                                            <span>九尺长剑</span>
+                                            <span>发表于 <i> 广东 / 广州 / 惠普政策</i></span>
+                                            <span><s class="comment_icon"></s>21</span>
+                                        </p>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <h2>中小企业创新专项项目提交资料是什么时候？</h2>
+                                        <p class="comment">
+                                            <span>九尺长剑</span>
+                                            <span>发表于 <i> 广东 / 广州 / 惠普政策</i></span>
+                                            <span><s class="comment_icon"></s>21</span>
+                                        </p>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <h2>中小企业创新专项项目提交资料是什么时候？</h2>
+                                        <p class="comment">
+                                            <span>九尺长剑</span>
+                                            <span>发表于 <i> 广东 / 广州 / 惠普政策</i></span>
+                                            <span><s class="comment_icon"></s>21</span>
+                                        </p>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <h2>中小企业创新专项项目提交资料是什么时候？</h2>
+                                        <p class="comment">
+                                            <span>九尺长剑</span>
+                                            <span>发表于 <i> 广东 / 广州 / 惠普政策</i></span>
+                                            <span><s class="comment_icon"></s>21</span>
+                                        </p>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <h2>中小企业创新专项项目提交资料是什么时候？</h2>
+                                        <p class="comment">
+                                            <span>九尺长剑</span>
+                                            <span>发表于 <i> 广东 / 广州 / 惠普政策</i></span>
+                                            <span><s class="comment_icon"></s>21</span>
+                                        </p>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <h2>中小企业创新专项项目提交资料是什么时候？</h2>
+                                        <p class="comment">
+                                            <span>九尺长剑</span>
+                                            <span>发表于 <i> 广东 / 广州 / 惠普政策</i></span>
+                                            <span><s class="comment_icon"></s>21</span>
+                                        </p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section> -->
+            <!--E=底部-->
+            <div th:replace="~{footer::copy}"></div>
+
+        </div>
+        <!-- 公共js部分 -->
+        <div th:replace="~{block/v4_index::copy}"></div>
+        <!-- over -->
+        <script type="text/javascript" th:src="@{/statics/js/index.js?v=0.0.6}"></script>
+        <script type="text/javascript" th:src="@{/statics/js/count.js?v=0.0.4}"></script>
+        <script>
+            // $(function(){
+            //     $("carousel-inner").children("item").eq(0).addClass("active");
+            // })
+            $('.title_list>li').mouseover(function(e){
+                $('.title_list>li').removeClass('active');
+                $(this).addClass('active');
+                $(this).children().stop().siblings(".drop_down").animate({
+                    'top':'30px',
+                    'opacity':'1',
+                },200);
+            });
+            $('.title_list>li').mouseout(function(e){
+                $(this).children().stop().siblings(".drop_down").animate({
+                    'top':'-30px',
+                    'opacity':'0'
+                },200);
+            })
+            
+        $(".xcx_h").mouseover(function () {
+            $(".xcx").css({
+                'visibility': 'visible'
+            })
+        })
+        $(".xcx_h").mouseleave(function () {
+            $(".xcx").css({
+                'visibility': 'visible'
+            })
+        })
+        </script>
+        <th:block th:include="block/statistics :: copy" />
+    </body>
+
+    </html>

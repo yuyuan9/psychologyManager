@@ -1,0 +1,91 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.doctor.ht</groupId>
+    <artifactId>ht</artifactId>
+    <version>${project.version}</version>
+  </parent>
+  <artifactId>ht-solr</artifactId>
+  <packaging>war</packaging>
+  <dependencies>
+    <dependency>
+        <groupId>com.doctor.ht</groupId>
+        <artifactId>commons-utils</artifactId>
+        <version>${project.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>com.doctor.ht</groupId>
+        <artifactId>ht-model</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
+  
+	<build>
+        <plugins>
+
+
+            <!--解决SpringBoot打包成jar后运行提示没有主清单属性-->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <fork>true</fork>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.1.1</version>
+                <configuration>
+                        <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+        
+       <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <!-- <include>**/*.xml</include>
+                    <include>**/*.yml</include>
+                    <include>**/*.properties</include>
+                    
+                    <include>**/*.css</include>
+                    <include>**/*.json</include>
+                    <include>**/*.js</include>
+                    <include>**/*.html</include> -->
+                    <include>**/*.*</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                   <!--  <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                    <include>**/*.json</include> -->
+                    <include>**/*.*</include>
+                </includes>
+            </resource>
+		</resources>
+
+        <finalName>ht-solr</finalName>
+    </build>
+</project>

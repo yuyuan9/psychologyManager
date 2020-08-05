@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.shiro.mapper.SysLogMapper">
+
+   <insert id="save" parameterType="com.ht.commons.utils.PageData">
+      insert into t_sys_log(
+          userId,
+          loginIp,
+          loginTime,
+          createtime,
+          logtype
+      ) values(
+	      #{userId},
+	      #{loginIp},
+	      #{loginTime},
+	      #{createtime},
+	      #{logtype}
+	      
+      )
+   </insert>
+   
+   <select id="findlistPage" resultType="java.lang.Integer">
+      select count(*) from t_sys_log 
+   </select>
+   
+   <!-- 累计 -->
+   <select id="findLoginDay" parameterType="com.ht.commons.utils.PageData" resultType="java.lang.Integer">
+     select count(c.userId) as count from (select t.userId,t.loginTime from (select l.id,l.userId,l.loginIp,date_format(l.loginTime,'%Y-%m-%d') as loginTime from t_sys_log l where loginTime BETWEEN #{starttime} and #{endtime} and userid=#{userId}) t group by t.userId,t.loginTime ) c
+   </select>
+   
+</mapper>

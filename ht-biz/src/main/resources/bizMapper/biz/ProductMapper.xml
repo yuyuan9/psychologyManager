@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.biz.mapper.ProductMapper">
+
+
+<!-- 后台接口-->
+
+    <select id="findallstautnum"    parameterType="java.lang.String" resultType="com.ht.commons.utils.PageData">
+        select count(staut) num,staut from  t_sys_product where staut <![CDATA[ <> ]]> 1 GROUP BY staut
+    </select>
+    
+    <select id="sysfindByPage" parameterType="com.ht.commons.utils.MyPage" resultType="com.ht.commons.utils.PageData">
+      select  pro.*,ser.banme,ser.shopimg from t_sys_product pro left join
+      t_sys_service ser on ser.createid =pro.createid  where  pro.staut <![CDATA[ <> ]]> 1
+        <if test="pd.banme!=null and pd.banme!=''">
+            and (
+            ser.banme LIKE CONCAT(CONCAT('%', #{pd.banme}),'%')
+            or ser.netryname LIKE CONCAT(CONCAT('%', #{pd.banme}),'%')
+            )
+        </if>
+        <if test="pd.provice!=null and pd.provice!=''">
+           and  pro.provice =#{pd.provice}
+        </if>
+        <if test="pd.city!=null and pd.city!=''">
+          and   pro.city =#{pd.city}
+        </if>
+        <if test="pd.area!=null and pd.area!=''">
+          and   pro.area =#{pd.area}
+        </if>
+        <if test="pd.staut!=null">
+          and pro.staut =#{pd.staut}
+        </if>
+        <if test="pd.productytpe!=null and pd.productytpe!=''">
+            and (
+            pro.producttypeone =#{pd.productytpe}
+            or  pro.producttypetwo =#{pd.productytpe}
+            or  pro.producttypethree =#{pd.productytpe}
+            )
+        </if>
+        order by pro.createdate desc
+    </select>
+<!-- 前端接口-->
+    <!-- 查询推荐的商品 -->
+    <select id="promoteproduct" parameterType="com.ht.commons.utils.PageData" resultType="com.ht.entity.biz.product.Product">
+        SELECT pro.* from t_sys_product  pro where  pro.createid =#{createid} and pro.staut =5
+        and pro.id <![CDATA[ <> ]]> #{productid} ORDER BY browsenum DESC
+    </select>
+
+    <select id="getnumprolist" parameterType="java.lang.String" resultType="com.ht.commons.utils.PageData">
+        select count(pro.producttypeone) num,type.name,type.id typeid from t_sys_product pro
+         LEFT JOIN t_sys_producttype type on type.id = pro.producttypeone
+         where pro.createid =#{createid} and pro.staut =5 GROUP BY pro.producttypeone
+    </select>
+
+    <select id="findstautnum"    parameterType="java.lang.String" resultType="com.ht.commons.utils.PageData">
+        select count(staut) num,staut from  t_sys_product where createid=#{userId}   GROUP BY staut
+    </select>
+
+
+    <!-- 项目类型查询 -->
+    <select id="getprolistbyser" parameterType="com.ht.commons.utils.MyPage" resultType="com.ht.entity.biz.product.Product">
+    select * from t_sys_product pro  where  pro.createid =#{pd.createid} and pro.staut =5
+    <if test="pd.producttypeone!=null and pd.producttypeone!=''">
+        and pro.producttypeone =#{pd.producttypeone}
+    </if>
+        ORDER BY pro.createdate desc
+</select>
+
+    <!--todo 图片 是否推荐  申报中-->
+    <select id="findpagepro" parameterType="com.ht.commons.utils.MyPage" resultType="com.ht.commons.utils.PageData">
+        select pro.* ,ser.shopname,ser.isagency,ser.isbond, ser.shopimg,ser.grade ,ser.netrytype,ser.createid,ser.id serid from t_sys_product pro  left join
+        t_sys_service ser on ser.createid =pro.createid  where pro.staut =5
+        <if test="pd.productname!=null and pd.productname!=''">
+            and pro.productname LIKE CONCAT(CONCAT('%', #{pd.productname}),'%')
+        </if>
+        <if test="pd.producttypeone!=null and pd.producttypeone!=''">
+            and pro.producttypeone =#{pd.producttypeone}
+        </if>
+        <if test="pd.producttypetwo!=null and pd.producttypetwo!=''">
+            and pro.producttypetwo =#{pd.producttypetwo}
+        </if>
+        <if test="pd.producttypethree!=null and pd.producttypethree!=''">
+            and pro.producttypethree =#{pd.producttypethree}
+        </if>
+        <if test="pd.plevel!=null and pd.plevel!='' ">
+            and pro.plevel =#{pd.plevel}
+        </if>
+
+        <if test="pd.provice!=null and pd.provice!=''">
+            and pro.provice =#{pd.provice}
+        </if>
+        <if test="pd.city!=null and pd.city!=''">
+            and pro.city =#{pd.city}
+        </if>
+        <if test="pd.area!=null and pd.area!=''">
+            and pro.area =#{pd.area}
+        </if>
+        <!-- 获取可以申报的项目 -->
+        <if test="pd.flag=='true'">
+            and (pro.endtime >= now() or applytimetype=2)
+        </if>
+        ORDER BY pro.createdate desc
+
+    </select>
+</mapper>

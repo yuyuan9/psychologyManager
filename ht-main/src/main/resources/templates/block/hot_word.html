@@ -1,0 +1,92 @@
+<!-- 政策速递 -->
+<div th:fragment="policy">
+    <div class="hot_search fl clearfix">
+        热门搜索：
+        <a href="/ht-biz/policydig/index?keyword=工程技术中心">工程技术中心</a>
+        <a href="/ht-biz/policydig/index?keyword=高新技术产品">高新技术产品</a>
+        <a href="/ht-biz/policydig/index?keyword=科技型中小企业">科技型中小企业</a>
+        <a href="/ht-biz/policydig/index?keyword=创新型企业">创新型企业</a>
+        <a href="/ht-biz/policydig/index?keyword=产业发展专项">产业发展专项</a>
+    </div>
+</div>
+<!-- over -->
+
+<!-- 文库 -->
+<div th:fragment="library">
+    <div class="search_ipt_top fl">
+        <span>热门搜索：</span>         
+        <a href="/ht-biz/library/index?keyword=高企申诉&curPolicy=8">高企申诉</a>
+        <a href="/ht-biz/library/index?keyword=工程技术中心&curPolicy=8">工程技术中心</a>
+        <a href="/ht-biz/library/index?keyword=高新技术产品&curPolicy=8">高新技术产品</a>
+        <a href="/ht-biz/library/index?keyword=行业政策&curPolicy=8">行业政策</a>
+        <a href="/ht-biz/library/index?keyword=区域政策&curPolicy=8">区域政策</a>
+    </div>
+</div>
+
+<!-- over -->
+
+<!-- 政策查询 -->
+<div th:fragment="search_zc">
+    <div class="hot_search fl clearfix">
+        热门搜索：     
+        <!-- <a href="/ht-biz/inquire/policy_details?keyword1=工程技术中心&theme=1">工程技术中心</a>
+        <a href="/ht-biz/inquire/policy_details?keyword1=高新技术产品&theme=1">高新技术产品</a>
+        <a href="/ht-biz/inquire/policy_details?keyword1=科技型中小企业&theme=1">科技型中小企业</a>
+        <a href="/ht-biz/inquire/policy_details?keyword1=创新型企业&theme=1">创新型企业</a>
+        <a href="/ht-biz/inquire/policy_details?keyword1=产业发展专项&theme=1">产业发展专项</a> -->
+
+        <a href="javascript:void(0);" @click="getWords1(1)">工程技术中心</a>
+        <a href="javascript:void(0);" @click="getWords1(2)">高新技术产品</a>
+        <a href="javascript:void(0);" @click="getWords1(3)">科技型中小企业</a>
+        <a href="javascript:void(0);" @click="getWords1(4)">创新型企业</a>
+        <a href="javascript:void(0);" @click="getWords1(5)">产业发展专项</a>
+    </div>
+</div>
+
+<!-- over -->
+
+<!-- 立项查询 -->
+<div th:fragment="search_lx">
+    <div class="hot_search fl clearfix">
+        热门搜索：     
+        <!-- <a href="/ht-biz/inquire/project_details?keyword2=工程技术中心&theme=2">工程技术中心</a>
+        <a href="/ht-biz/inquire/project_details?keyword2=高新技术产品&theme=2">高新技术产品</a>
+        <a href="/ht-biz/inquire/project_details?keyword2=科技型中小企业&theme=2">科技型中小企业</a>
+        <a href="/ht-biz/inquire/project_details?keyword2=创新型企业&theme=2">创新型企业</a>
+        <a href="/ht-biz/inquire/project_details?keyword2=产业发展专项&theme=2">产业发展专项</a> -->
+
+        <a href="javascript:void(0);" @click="getWords2(1)">工程技术中心</a>
+        <a href="javascript:void(0);" @click="getWords2(2)">高新技术产品</a>
+        <a href="javascript:void(0);" @click="getWords2(3)">科技型中小企业</a>
+        <a href="javascript:void(0);" @click="getWords2(4)">创新型企业</a>
+        <a href="javascript:void(0);" @click="getWords2(5)">产业发展专项</a>
+    </div>
+</div>
+
+<!-- over -->
+
+<!-- 全站搜索 -->
+<!-- 文库 -->
+<div th:fragment="totalSearch_qz">
+    <div class="total_top fl">
+        <span>热门搜索：</span>         
+        <a href="/ht-biz/search/index/totalSearch?keyword=高新技术企业">高新技术企业</a>
+        <a href="/ht-biz/search/index/totalSearch?keyword=工程技术中心">工程技术中心</a>
+        <a href="/ht-biz/search/index/totalSearch?keyword=科技型中小企业">科技型中小企业</a>
+        <a href="/ht-biz/search/index/totalSearch?keyword=创新型企业">创新型企业</a>
+        <a href="/ht-biz/search/index/totalSearch?keyword=产业发展专项">产业发展专项</a>
+    </div>
+</div>
+
+<!-- 交易中心 -->
+<div th:fragment="trading_lx">
+    <p class="hot clearfix">热门搜索:
+        <span><a target="_blank" href="/currency/trading/transaction_list?keyword=高新技术企业">高新技术企业</a></span>
+        <span><a target="_blank" href="/currency/trading/transaction_list?keyword=小巨人">小巨人</a></span>
+        <span><a target="_blank" href="/currency/trading/transaction_list?keyword=科研机构">科研机构</a></span>
+        <span><a target="_blank" href="/currency/trading/transaction_list?keyword=加计扣除">加计扣除</a></span>
+        <span><a target="_blank" href="/currency/trading/transaction_list?keyword=研发后补助">研发后补助</a></span>        
+    </p>
+</div>
+
+<!-- over -->

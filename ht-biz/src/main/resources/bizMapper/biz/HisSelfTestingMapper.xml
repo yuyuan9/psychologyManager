@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.biz.mapper.HisSelfTestingMapper">
+	<select id="findList" parameterType="com.ht.commons.utils.MyPage" resultType="com.ht.entity.biz.freeassess.HisSelfTesting">
+		select t.id,
+		   t.companyName,
+		   t.orgcode,
+		   t.createdate,
+		   t.province,
+		   t.city,
+		   t.area,
+		   t.productServ,
+		   t.total,
+		   t.intellectualProperty,
+		   t.totalAssets,
+		   s.userType createid
+    from t_hisselftesting t
+    left join t_sys_user s on t.createid=s.USER_ID
+    where 1=1
+    <if test="pd.keyword != null and pd.keyword !=''">
+    	and 
+    	(
+    		t.companyName LIKE binary CONCAT(CONCAT('%', #{pd.keyword}),'%')
+    		or
+    		t.orgcode LIKE binary CONCAT(CONCAT('%', #{pd.keyword}),'%')
+    		or
+    		t.createdate LIKE binary CONCAT(CONCAT('%', #{pd.keyword}),'%')
+    		or
+    		t.productServ LIKE binary CONCAT(CONCAT('%', #{pd.keyword}),'%')
+    	)
+    </if>
+     <if test="pd.province != null and pd.province !=''">
+     	and province LIKE binary CONCAT(CONCAT('%', #{pd.province}),'%')
+     </if>
+     <if test="pd.city != null and pd.city !=''">
+     	and city LIKE binary CONCAT(CONCAT('%', #{pd.city}),'%')
+     </if>
+     <if test="pd.area != null and pd.area !=''">
+     	and area LIKE binary CONCAT(CONCAT('%', #{pd.area}),'%')
+     </if>
+     <if test="pd.total != null">
+     	<if test="pd.total == 1">
+     		and total &lt; 60
+     	</if>
+     	<if test="pd.total == 2">
+     		and total &gt;= 60
+     	</if>
+     </if>
+     order by t.createdate desc
+	</select>
+</mapper>

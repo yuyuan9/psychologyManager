@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.biz.mapper.LibraryMapper">
+
+
+
+    <sql id="list">
+    id, reason, appimg, region, type, FUNCTION, title, content, pdfpath,originalfile zippath,
+    pdfsize, starlevel, person, STATUS, auditperson, libtype,
+    sort, keywords, description, downloadhoney, solrindex, updatetime, province, city,
+    area, createdate, createid, lastmodified,istop,uploadusername,technicalfield,industrialfield,osspath
+ </sql>
+    <sql id="listbyid">
+    id, reason, appimg, region, type, FUNCTION, title, content, pdfpath,originalfile, zippath,uploadusername,
+    pdfsize, browsecount,jbrowsecount, jdowncount, starlevel, person, STATUS, auditperson, libtype,
+    sort, keywords, description, downloadhoney, solrindex, updatetime, province, city,
+    area, createdate, createid, lastmodified,istop,jcollectioncount,forwardcount,jforwardcount,technicalfield,industrialfield,downcount,jdowncount,osspath
+ </sql>
+    <update id="updatereview" parameterType="java.lang.String" >
+        update t_library
+        <set>
+            status =#{status},
+            <if test="reason != null  and reason!='' ">reason=#{reason}</if>
+        </set>
+        where id=#{id}
+    </update>
+      <select id="promotelibrary" parameterType="com.ht.commons.utils.PageData"  resultType="com.ht.commons.utils.PageData">
+
+        select lib.id,lib.createId,lib.region,lib.title,lib.istop,lib.description,
+        lib.keywords,lib.libtype,lib.type,lib.person,lib.status,lib.createdate,lib.osspath,
+        lib.downloadhoney,lib.sort,lib.function,lib.area,lib.city,lib.province,lib.uploadusername,lib.technicalfield,lib.industrialfield
+        FROM t_library  lib
+        where lib.status =1
+        <if test="pd.keyword != null and pd.keyword != ''">
+             ${pd.keyword}
+        </if>
+        <!--<if test="pd.city != null and pd.city != ''">-->
+            <!--and   lib.city = #{pd.city}-->
+        <!--</if>-->
+
+        <!--<if test="pd.area != null and pd.area != ''">-->
+            <!--and   lib.area = #{pd.area}-->
+        <!--</if>-->
+
+        <!--&lt;!&ndash;项目类型&ndash;&gt;-->
+        <!--<if test="pd.type != null and pd.type != '' or pd.type == 0">-->
+            <!--and   lib.type = #{pd.type}-->
+        <!--</if>-->
+
+
+    </select>
+    <select id="myload" parameterType="com.ht.commons.utils.PageData"  resultType="com.ht.commons.utils.PageData">
+         select lib.id,lib.createId ,lib.createdate,lib.title,lib.reason,lib.`status`,(lib.browsecount+lib.jbrowsecount) as bro
+          from t_library lib where lib.createId=#{pd.createId} and lib.`status`=#{pd.status}  ORDER BY createdate desc
+    </select>
+
+    <select id="findByPage" parameterType="com.ht.commons.utils.PageData" resultType="com.ht.entity.biz.library.Library">
+
+      select * from  View_library lib where 1=1
+        <if test="pd.keywords!=null and pd.keywords!=''">
+            and
+            (
+            lib.`title` LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+            or
+            lib.`keywords` LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+            )
+        </if>
+
+        <if test="pd.province != null and pd.province != ''">
+            and   lib.province = #{pd.province}
+        </if>
+
+        <if test="pd.city != null and pd.city != ''">
+            and   lib.city = #{pd.city}
+        </if>
+
+        <if test="pd.area != null and pd.area != ''">
+            and   lib.area = #{pd.area}
+        </if>
+        <!--政策类型-->
+        <if test="pd.libtype != null" >
+            and   lib.libtype = #{pd.libtype}
+        </if>
+        <!--项目类型-->
+        <if test="pd.type != null and pd.type != ''">
+            and   lib.type = #{pd.type}
+        </if>
+        <if test="pd.uploadusername != null  and pd.uploadusername != ''">
+            and   lib.uploadusername =#{pd.uploadusername}
+        </if>
+        order  by lib.ordertype desc,lib.createdate desc
+</select>
+
+
+
+    <select id="sysfindByPage" parameterType="com.ht.commons.utils.PageData" resultType="com.ht.commons.utils.PageData">
+      /*  select lib.id,lib.createId ,u.`NAME` as username,lib.region,lib.title,lib.istop,
+        lib.keywords,lib.libtype,lib.type,lib.person,lib.status,lib.createdate,
+        lib.downloadhoney,lib.sort,lib.function,lib.area,lib.city,lib.province
+        FROM t_library  lib LEFT JOIN t_sys_user  u on u.USER_ID =lib.createId*/
+
+
+        select lib.id,lib.createId ,lib.uploadusername,lib.region,lib.title,lib.istop,
+        lib.keywords,lib.libtype,lib.type,lib.person,lib.status,lib.createdate,lib.description,
+        lib.downloadhoney,lib.sort,lib.function,lib.area,lib.city,lib.province,lib.regionid,
+        lib.collectioncount, lib.jcollectioncount,  lib.forwardcount,lib.jforwardcount, lib.browsecount,lib.jbrowsecount,lib.downcount,lib.jdowncount,lib.technicalfield,lib.industrialfield,lib.cold
+        FROM t_library  lib
+        where 1=1
+        <if test="pd.keywords!=null and pd.keywords!=''">
+            and
+            (
+            lib.`title` LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+            or
+            lib.`keywords` LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+            )
+        </if>
+        <if test="pd.province != null and pd.province != ''">
+            and   lib.province = #{pd.province}
+        </if>
+        <if test="pd.city != null and pd.city != ''">
+            and   lib.city = #{pd.city}
+        </if>
+
+        <if test="pd.area != null and pd.area != ''">
+            and   lib.area = #{pd.area}
+        </if>
+        <!--政策类型-->
+        <if test="pd.libtype != null ">
+            and   lib.libtype = #{pd.libtype}
+        </if>
+        <!--项目类型-->
+        <if test="pd.type != null and pd.type != '' ">
+            and   lib.type = #{pd.type}
+        </if>
+        <if test="pd.regionid!=null and pd.regionid!=''">
+          and  lib.regionid=#{pd.regionid}
+        </if>
+        <if test="pd.istop!=null ">
+            and  lib.istop=#{pd.istop}
+        </if>
+            and   lib.status =1
+
+       /* ORDER BY lib.istop DESC,lib.sort DESC ,lib.createdate desc*/
+        ORDER BY lib.createdate desc
+    </select>
+
+    <select id="sysfindByPagenopass" parameterType="com.ht.commons.utils.PageData" resultType="com.ht.commons.utils.PageData">
+        /*  select lib.id,lib.createId ,u.`NAME` as username,lib.region,lib.title,lib.istop,
+        lib.keywords,lib.libtype,lib.type,lib.person,lib.status,lib.createdate,
+        lib.downloadhoney,lib.sort,lib.function,lib.area,lib.city,lib.province
+        FROM t_library  lib LEFT JOIN t_sys_user  u on u.USER_ID =lib.createId*/
+
+        select lib.id,lib.createId ,lib.uploadusername,lib.region,lib.title,lib.istop,
+        lib.keywords,lib.libtype,lib.type,lib.person,lib.status,lib.createdate,lib.description,
+        lib.downloadhoney,lib.sort,lib.function,lib.area,lib.city,lib.province,lib.regionid,
+        lib.collectioncount, lib.jcollectioncount,  lib.forwardcount,lib.jforwardcount, lib.browsecount,lib.jbrowsecount,lib.downcount,lib.jdowncount,lib.technicalfield,lib.industrialfield,lib.cold
+        FROM t_library  lib
+        where 1=1
+        <if test="pd.keywords!=null and pd.keywords!=''">
+            and
+            (
+            lib.`title` LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+            or
+            lib.`keywords` LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+            )
+        </if>
+        <if test="pd.province != null and pd.province != ''">
+            and   lib.province = #{pd.province}
+        </if>
+        <if test="pd.city != null and pd.city != ''">
+            and   lib.city = #{pd.city}
+        </if>
+
+        <if test="pd.area != null and pd.area != ''">
+            and   lib.area = #{pd.area}
+        </if>
+        <!--政策类型-->
+        <if test="pd.libtype != null ">
+            and   lib.libtype = #{pd.libtype}
+        </if>
+        <!--项目类型-->
+        <if test="pd.type != null and pd.type != '' ">
+            and   lib.type = #{pd.type}
+        </if>
+        <if test="pd.regionid!=null and pd.regionid!=''">
+          and  lib.regionid=#{pd.regionid}
+        </if>
+        <if test="pd.istop!=null ">
+            and  lib.istop=#{pd.istop}
+        </if>
+        <!-- &lt;!&ndash;待审或者拒绝 &ndash;&gt;
+         <if test="pd.status != 0" >
+             and   lib.status = 0
+         </if>-->
+        <!-- 不需要审核-->
+        <!--  <if test="pd.status !=0 ">-->
+        and   lib.status =0
+        <!--       </if>-->
+
+        ORDER BY lib.istop DESC,lib.sort DESC ,lib.createdate desc
+    </select>
+
+    <select id="findall"   resultType="com.ht.entity.biz.library.Library">
+        select title,id from t_library limit 0,10
+    </select>
+
+    <select id="findlibrarybyid"  parameterType="java.lang.String" resultType="com.ht.commons.utils.PageData">
+      <!--  select <include refid="list"/> from t_library where id=#{id}-->
+        select <include refid="listbyid"/>
+        from t_library t where t.id=#{id}
+
+    </select>
+      <select id="findbyId"  parameterType="java.lang.String" resultType="com.ht.entity.biz.library.Library">
+      <!--  select <include refid="list"/> from t_library where id=#{id}-->
+        select <include refid="listbyid"/>
+        from t_library t where t.id=#{id}
+
+    </select>
+
+    <select id="readlistPage" parameterType="com.ht.commons.utils.MyPage" resultType="com.ht.commons.utils.PageData">
+        select id,title,createdate from t_library where libtype=4  ORDER BY createdate desc
+    </select>
+
+    <select id="maxsort" resultType="java.lang.Integer">
+        select max(sort) from t_library
+    </select>
+
+    <select id="getdownfilehoney" parameterType="java.util.List" resultType="java.lang.Integer">
+        select sum(downloadhoney) as money  from t_library where
+           id in
+            <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+    </select>
+
+
+    <select id="getlistByids" parameterType="com.ht.commons.utils.MyPage" resultType="com.ht.commons.utils.PageData">
+        select <include refid="list"/> from t_library where id in
+        <foreach collection="pd.list" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="findbytitle" parameterType="com.ht.commons.utils.PageData" resultType="com.ht.entity.biz.library.Library">
+
+      select t.title,t.id,t.pdfpath,t.originalfile from t_library t where  t.title LIKE CONCAT('%',#{title},'%') and t.id &lt;&gt; #{id}
+    </select>
+
+    <select id="countcole" parameterType="java.lang.String" resultType="java.lang.Integer">
+
+        select sum(cold) from t_library where createId =#{userId} and `status`=1
+    </select>
+
+    <select id="geelinkfindall" resultType="com.ht.commons.support.geelink.entity.Librarygelink" >
+         select * from t_library     where  status =1  ORDER BY createdate desc limit 0,100;
+    </select>
+    <select id="geelinkfindId" parameterType="java.lang.String" resultType="com.ht.commons.support.geelink.entity.Librarygelink" >
+        select * from t_library  where id =#{id};
+    </select>
+</mapper>

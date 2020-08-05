@@ -1,0 +1,51 @@
+.header_top {
+  padding-right: 0.26666667rem;
+}
+.operate s {
+  display: inline-block;
+  background: url("../images/library/index.png");
+  background-size: 3.62666667rem 3.08rem;
+}
+.operate .downLoad {
+  width: 1.06666667rem;
+}
+.operate .downLoad s {
+  width: 0.50666667rem;
+  height: 0.50666667rem;
+  background-position: -1.54666667rem -1.73333333rem;
+}
+.operate .collect {
+  margin-left: 0.4rem;
+}
+.operate .collect s {
+  width: 0.56rem;
+  height: 0.54666667rem;
+  background-position: -2.14666667rem -1.69333333rem;
+}
+.operate .share {
+  margin-left: 0.4rem;
+}
+.operate .share s {
+  width: 0.57333333rem;
+  height: 0.54666667rem;
+  background-position: -2.77333333rem -1.69333333rem;
+}
+.pdfView {
+  width: 100%;
+  height: 13.33333333rem;
+}
+#useobj {
+  width: 100%;
+  height: 11.3333vw;
+  line-height: 11.3333vw;
+  background: url("../../images/yidong_icons/personer.png") no-repeat;
+  background-size: 100% 100%;
+}
+.main_logo {
+  width: 22.6667vw;
+  height: 11.3333vw;
+  line-height: 11.3333vw;
+  background: url('../../images/yidong_icons/phone_icons.png') -0.5vw 1.6667vw no-repeat;
+  background-size: 40vw 40vw;
+  vertical-align: middle;
+}

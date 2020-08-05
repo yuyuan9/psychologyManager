@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+</head>
+<style>
+    [v-cloak] {
+        display: none;
+    }
+</style>
+
+<body>
+    <div th:fragment="copy">
+        <div th:replace="~{user_head::copy}"></div>
+        <section class="page_content">
+            <div class="contain">
+                <div class="page_nav service_nav clearfix">
+                    <div class="nav_l nav_l_images fl">
+                        <a class="imgs" href="/">
+                            <img src="/statics/images/logo_head1.png" alt="">
+                        </a>
+                        <span class="manage">服务商管理中心</span>
+                    </div>
+                    <div class="nav_r fr" style="margin-right: 0;">
+                        <div class="service_head clearfix">
+                            <!-- <div v-cloak class="service_head_l fl">
+                                <div v-cloak v-if="headImg == null"><a href="/ht-biz/usercenter/user/index"><img src="/statics/images/user/head.png" alt=""></a></div>
+                                <div v-cloak v-else ><a href="/ht-biz/usercenter/user/index"><img :src="'http://47.92.70.12:9090'+headImg" alt=""></a></div>
+                            </div> -->
+                            <div class="service_head_r fl">
+                                <!-- <span v-cloak class="service_name"><a href="/ht-biz/usercenter/user/index">{{username}}</a></span> -->
+                                <span class="servive_goback"><a href="/ht-biz/usercenter/user/index"> &lt;返回个人云中心</a></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>

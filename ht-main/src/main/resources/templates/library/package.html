@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head lang="zh-CN">
+    <title>政策汇编 - 高企云</title>
+    <meta name="keywords" content="资源包专题,高企云文库资源包" />
+    <meta name="description" content="高企云文库资源包整理热门政策的历年通知，历年公示名单." />
+    <!-- 公共头部 -->
+    <th:block th:include="block/headlink :: test('政策汇编')" />
+    <!-- 结束 -->
+
+    <link rel="stylesheet" th:href="@{/statics/css/policydig/pagination.css?v=0.0.2}">
+    <link rel="stylesheet" th:href="@{/statics/css/library/library.css?v=0.0.2}">
+    <link rel="stylesheet" th:href="@{/statics/css/footer.css?v=0.0.2}">
+    <link rel="stylesheet" th:href="@{/statics/css/library/package.css?v=0.0.2}">
+    <style>
+        .layui-layer-dialog {
+            width: 427px !important;
+        }
+        .navigation{
+            width: 1200px;
+            height: 20px;
+            margin: 0 auto;
+            position: relative;
+            top: -31px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap" id="user">
+        <div th:replace="~{user_head::copy}"></div>
+    </div>
+    <div id="box"></div>
+    <div id="box1"></div>
+    <div id="library"></div>
+    <div class="wrap" id="package">
+        <div id="box">
+            <section class="head clearfix">
+                <div th:replace="~{library_nav::copy}"></div>
+            </section>
+            <div class="warp pack_bg_w" id="pack1">
+                <div class="navigation clearfix">
+                    <p class="bread_nav fl"><a>当前位置：</a> 
+                        <a href="/">首页</a> &gt; 
+                        <a href="/ht-biz/library/package">政策汇编</a>
+                    </p>
+                </div>
+                <div class="package_tit">
+                    <div class="package_tit_con">
+                        <h2>单点政策资源包</h2>
+                        <p>根据当下最新或热门的政策应用产品，通过政策汇总、政策解读、模板范文、视频培训等形式为企业内部项目申报人员或项目服务人员提供最全面、最专业的政策应用链条式辅导。</p>
+                    </div>
+                    <div class="wenku point_one">
+                        <div v-for="(list,index) in items">
+                            <s v-cloak v-if="index==0">最新</s>
+                            <s v-cloak v-else></s>
+                            <img v-bind:src="'http://47.92.70.12:9090' + list.displaymap" alt="">
+                            <p v-html="list.name"></p>
+                            <div class="price">
+                                <p>
+                                    <span>原价：<s v-html="list.original"></s>honey</span>
+                                    <i>限时价：<b v-html="list.benefit"></b>honey</i>
+                                </p>
+                                <a :href="'/ht-biz/resouce/findbyid?id='+list.id" target="_blank"
+                                    :title="list.name">立即查看></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="more" style="padding-bottom: 50px;">
+                        <span @click="lookMore(1)">查看更多</span>
+                    </div>
+                </div>
+            </div>
+            <div class="wrap pack_bg" id="pack2">
+                <div class="package_tit pack_bg">
+                    <div class="package_tit_con">
+                        <h2>行业政策资源包</h2>
+                        <p>面向国内重点产业，通过政策汇总、政策导图、政策解读、专家讲解等形式来展现其在国家及各省市区的产业政策导向和布局。</p>
+                    </div>
+                    <div class="ziyuan">
+                        <div v-for="(list,index) in policy">
+                            <s v-cloak v-if="index==0">最新</s>
+                            <s v-cloak v-else></s>
+                            <div class="zy_img">
+                                <img v-bind:src="'http://47.92.70.12:9090' + list.displaymap" alt="">
+                            </div>
+                            <div class="price">
+                                <h2 v-html="list.name"></h2>
+                                <p>简介：<s class="jianjie" v-html="list.profile"></s></p>
+                                <p>包含地区：{{list.ableregion}}</p>
+                                <!-- <p>
+                                    <s v-html="list.province"></s>
+                                    <s v-html="list.city"></s>
+                                    <s v-html="list.area"></s>
+                                </p> -->
+                                <p class="foot_price">
+                                    <i>限时价：<b v-html="list.benefit"></b>honey</i>
+                                    <span>原价：<s v-html="list.original"></s>honey</span>
+                                    <a :href="'/ht-biz/resouce/findbyid?id='+list.id" target="_blank"
+                                        :title="list.name">立即查看></a>
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="more1">
+                        <span @click="lookMore(2)">查看更多</span>
+                    </div>
+                </div>
+            </div>
+            <div class="wrap select_wrap" id="pack3">
+                <div class="package_tit ">
+                    <div class="package_tit_con">
+                        <h2>区域政策资源包</h2>
+                        <p>重点省市区域，通过政策汇总、政策导图、政策解读、专家讲解等形式来展现该区域具体包含的政策类型，支持的产业，重点支持对象，支持力度等。</p>
+                    </div>
+                    <!--<div class="select">-->
+                    <!--<s>地区范围:</s>-->
+                    <!--&lt;!&ndash;地区范围&ndash;&gt;-->
+                    <!--<div class="choice region">-->
+                    <!--<span class="choice_content" :class="{active:isRegion==1}"-->
+                    <!--@click="isRegion=1;province='省级'; city='市级';isCityActive=0;area='区级';showArea=true;isAreaActive=0;pitchCity='';pitchArea='';selectArea();">国家级</span>-->
+                    <!--&lt;!&ndash; 省级 &ndash;&gt;-->
+                    <!--<span v-cloak class="choice_content region_modify" :class="{active:isRegion==2}"-->
+                    <!--@click.stop.prevent="isProvince=true;">-->
+                    <!--<s id="province_text">{{province}}</s><i class="arrow"></i>-->
+                    <!--<ul v-cloak class="province" v-show="isProvince">-->
+                    <!--<li v-cloak v-for="(region, index) in regionData" @click.self="toggleBox"-->
+                    <!--@click.stop.prevent="province = region.n;isProvince=false;isRegion=2;city='市级';pitchCity='';isCityActive=0;area='区级';pitchArea='';isAreaActive=0;selectArea();">-->
+                    <!--{{region.n}}</li>-->
+                    <!--</ul>-->
+                    <!--</span>-->
+                    <!--&lt;!&ndash; 市级 &ndash;&gt;-->
+                    <!--<span v-cloak class="choice_content region_modify" :class="{active:isCityActive==1}"-->
+                    <!--@click.stop.prevent="getCityData();">-->
+                    <!--{{city}}<i class="arrow"></i>-->
+                    <!--<ul v-cloak class="city" v-show="isCity">-->
+                    <!--<li v-cloak v-for="(c, index) in cityData"-->
+                    <!--@click.stop.prevent="IschoseCity(c.n);selectArea();">{{c.n}}</li>-->
+                    <!--</ul>-->
+                    <!--</span>-->
+                    <!--&lt;!&ndash; 区级 &ndash;&gt;-->
+                    <!---->
+                    <!--<span v-cloak class="choice_content region_modify" @click.stop.prevent="stopThings()" :class="{active:isAreaActive==1}" v-show="showArea">-->
+                    <!--{{area}}<i class="arrow"></i>-->
+                    <!--<ul v-cloak class="area" v-show="isArea">-->
+                    <!--<li v-for="(a, index) in areaData"-->
+                    <!--@click.stop.prevent="area = a.n;isArea=false;if(isCityActive==1){isAreaActive=1};selectArea();">-->
+                    <!--{{a.n}}</li>-->
+                    <!--</ul>-->
+                    <!--</span>-->
+                    <!--</div>-->
+
+                    <!---->
+                    <!--<s>主管部门:</s>-->
+                    <!--<p class="lib_area_p">-->
+                    <!--<span @click="curTwo=0;selectArea(0,8)" :class="{active:curTwo==0}">不限</span>-->
+                    <!--<span @click="curTwo=1;selectArea(1,8)" :class="{active:curTwo==1}">人民政府</span>-->
+                    <!--<span @click="curTwo=2;selectArea(2,8)" :class="{active:curTwo==2}">科技局</span>-->
+                    <!--<span @click="curTwo=3;selectArea(3,8)" :class="{active:curTwo==3}">知识产权局</span>-->
+                    <!--<span @click="curTwo=4;selectArea(4,8)" :class="{active:curTwo==4}">人社局</span>-->
+                    <!--<span @click="curTwo=5;selectArea(5,8)" :class="{active:curTwo==5}">经信委</span>-->
+                    <!--<span @click="curTwo=6;selectArea(6,8)" :class="{active:curTwo==6}">工信委</span>-->
+                    <!--<span @click="curTwo=7;selectArea(7,8)" :class="{active:curTwo==7}">发改委</span>-->
+                    <!--<span @click="curTwo=8;selectArea(8,8)" :class="{active:curTwo==8}">工商局</span>-->
+                    <!--</p>-->
+                    <!--</div>-->
+                    <div class="wenku select_con">
+                        <div v-for="(list,index) in policyList">
+                            <s v-cloak v-if="index==0">最新</s>
+                            <s v-cloak v-else></s>
+                            <img v-bind:src="'http://47.92.70.12:9090' + list.displaymap" alt="">
+                            <p v-html="list.name"></p>
+                            <div class="price">
+                                <p>
+                                    <span>原价：<s v-html="list.original"></s>honey</span>
+                                    <i>限时价：<b v-html="list.benefit"></b>honey</i>
+                                </p>
+                                <a :href="'/ht-biz/resouce/findbyid?id='+list.id" target="_blank"
+                                    :title="list.name">立即查看></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- S=分页-->
+                    <!--<div class="page" id="wrap">-->
+                    <!--<mypagenation :page="page" @btn-click="clickPage"></mypagenation>-->
+                    <!--</div>-->
+                    <div class="more2 " style="padding-bottom: 50px;">
+                        <span @click="lookMore(3)">查看更多</span>
+                    </div>
+                    <!-- E=分页-->
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>COPYRIGHT © 版权归属 广州高企云信息科技有限公司 粤ICP备16007486号-1</p>
+        </footer>
+    </div>
+
+
+
+    <!-- 公共js部分 -->
+    <th:block th:include="block/liblink :: copy" />
+    <!-- over -->
+    <script type="text/javascript" th:src="@{/statics/js/mypagination.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/library/package.js?v=0.0.2}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/more.js?v=0.1.0}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/more1.js?v=0.1.0}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/morepolicy.js?v=0.1.0}"></script>
+    <script>
+        $(".xcx_h").mouseover(function () {
+            $(".xcx").css({
+                'visibility': 'visible'
+            })
+        })
+        $(".xcx_h").mouseleave(function () {
+            $(".xcx").css({
+                'visibility': 'hidden'
+            })
+        })
+    </script>
+    <th:block th:include="block/statistics :: copy" />
+</body>
+
+</html>

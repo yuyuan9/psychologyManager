@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+<link rel="stylesheet" th:href="@{/statics/app/css/reset.css}">
+<link rel="stylesheet" th:href="@{/statics/app/css/index/initial_result.css}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@2.2/lib/index.css">
+
+<head>
+   <title>初步匹配</title>
+<style>
+    [v-cloak] {
+        display: none;
+    }
+</style>
+</head>
+<body>
+    <div id="app_match_list" class="i_result" v-cloak>
+        <div class="to">
+            <a href="/ht-biz/app/policymatch/index">
+                <i class="to_initial dib"></i>
+                <span class="initial_p">初步匹配</span>
+            </a>
+        </div>
+        <!-- 匹配结果 -->
+        <div class="search_result">
+            <div class="result">
+                <div class="result_t dib">已为您匹配<span class="result_total">{{total}}</span>条结果</div>
+            </div>
+            <p class="result_line"></p>
+            <div>
+                <van-list v-model="loading" :finished="finished" finished-text="没有更多了"  :error.sync="error" error-text="请求失败，点击重新加载" @load="matchData" > 
+                    <div class="zc_item" v-for="list in matchList">
+                        <a :href="'/ht-biz/app/policymatch/matchdetails?id='+list.id" class="name_cy">
+                            <i class="dib data_classfy">科研立项</i>
+                            <p class="data_name dib">{{list.projectName}}</p><i class="data_details dib"></i>
+                        </a>
+                            <p class="data_b">
+                                <span class="dib sbyy">申报意义:
+                                    <span class="dib sb_sense">{{list.applyMean}}</span>
+                                </span>
+                                <span class="dib peitao peitao1">申报时间:
+                                    <span class="dib sb_time">{{list.applyTime}}</span>
+                                </span>
+                            </p>
+                        <p class="line"></p>
+                    </div>
+                </van-list>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" th:src="@{/statics/app/js/vue.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/layer.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/htajax.js}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vant@2.2/lib/vant.min.js"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/policymatch/match_list.js?v=0.010}"></script>
+</body>
+
+</html>

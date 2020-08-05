@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.biz.mapper.SolrSearchRecordMapper">
+	<select id="selectUser" parameterType="com.ht.entity.biz.solr.recore.SolrSearchRecord" resultType="java.lang.String">
+		select DISTINCT(createid) from t_solr_search_record where highlight=#{highlight} and solrCore=#{solrCore}
+	</select>
+	<update id="updateStatus" parameterType="com.ht.entity.biz.solr.recore.SolrSearchRecord">
+	   	update t_solr_search_record set status=1,remark=#{remark} where highlight=#{highlight} and solrCore=#{solrCore}
+	</update>
+</mapper>

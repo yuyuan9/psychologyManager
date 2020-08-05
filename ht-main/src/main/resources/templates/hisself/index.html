@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <title>全国高企评估支撑系统</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="shortcut icon" href="/statics/images/favicon.ico">
+    <link rel="icon" href="/statics/images/favicon.ico" type="image/x-icon" />
+    <link rel="Bookmark" href="/statics/images/favicon.ico">
+    <link rel="SHORTCUT ICON" href="/statics/images/favicon.ico" />
+
+    <link rel="stylesheet" th:href="@{/statics/css/reset.css?v=0.0.2}">
+    <link rel="stylesheet" th:href="@{/statics/lib/element-ui/index.css?v=0.0.2}">
+
+    
+    <link rel="stylesheet" th:href="@{/statics/css/rotate.css?v=0.0.2}">
+    <link rel="stylesheet" th:href="@{/statics/css/hisself/index.css?v=0.0.2}">
+    <link rel="stylesheet" th:href="@{/statics/css/hisself/datepicker.css?v=0.0.2}">    
+    <link rel="stylesheet" th:href="@{/statics/css/v4_footer.css?v=0.0.2}">
+    <link rel="stylesheet" th:href="@{/statics/css/user_head.css?v=0.0.3}">
+    <style>
+        .navigation{
+            width: 1200px;
+            height: 20px;
+            margin: 0 auto;
+            position: relative;
+            top: 1px;
+        }
+        .navigation>p>a{color:#fff;}
+    </style>
+    <!--[if lt IE 9]>
+    <script src="${ctx}/static/ht/v3/lib/html5shiv/html5shiv.min.js"></script>
+    <script src="${ctx}/static/ht/v3/lib/respond.js/respond.js"></script>
+    <![endif]-->
+
+    <!--[if lt IE 9]>
+
+        <div class="warp">
+            <div id="warn" class="warn">
+                <div class="warnImg">
+                    <img src="/static/ht/v3/images/browser.png" alt="">
+                    <p>您当前浏览器兼容性太低</p>
+                    <i class="close"></i>
+                </div>
+                <div class="warnTit">
+                    <p>系统不支持您所使用的浏览器，推荐使用Google Chrome（<a
+                            href="https://dl.softmgr.qq.com/original/Browser/72.0.3626.121_chrome_installer.exe">下载Google
+                            Chrome</a>）、IE9.0及以上版本</p>
+                    <span>如有疑问，烦请联系技术支持：400-166-3308</span>
+                </div>
+            </div>
+        </div>
+    
+    <![endif]-->
+</head>
+
+<body>
+    <!--S=logo、导航-->
+    <div class="wrap" id="user">
+        <div th:replace="~{user_head::copy}"></div>
+    </div>
+    <!--E=logo、导航-->
+    <!--S=免费评估-->
+    <!--S=头部-->
+    <div class="estimate_top ac sz_estimate_top">
+
+        <div class="centre ac" style=" 
+        background: -webkit-linear-gradient(left,#1355c5,#1975e6);
+        background: -o-linear-gradient(left,#1355c5,#1975e6);
+        background: -moz-linear-gradient(left,#1355c5,#1975e6);
+        background: linear-gradient(left,#1355c5,#1975e6);">
+            <div class="centre_t clearfix">
+                <div class="line line_left fl"></div>
+                <p class="fl top_title">
+                    <!-- <span id="site"></span> -->
+                    全国高企评估系统
+                </p>
+
+                <div class="line line_right fl"></div>
+            </div>
+            <div class="centre_b ac">
+                <p class="top_text">科 学 评 测 ， 综 合 分 析</p>
+            </div>
+            <div class="navigation clearfix">
+                <p class="bread_nav fl"><a>当前位置：</a> 
+                    <a href="/">首页</a> &gt; 
+                    <a href="/ht-biz/hisself/hisself_index">免费评估</a> &gt; 
+                    <a href="/ht-biz/hisself/index">信息编辑</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <!--E=头部-->
+    <!--&lt;!&ndash;S=-tab切换->-->
+    <form action="" id="inputForm">
+        <input type="hidden" name="regionNum" value="1" />
+        <input type="hidden" name="id" />
+        <div id="inputForm0" v-cloak>
+            <div class="tab_info clearfix sz_tab_info">
+                <div class="contain" id="estimate">
+                    <div>
+                        <ul class="nav nav-tabs">
+                            <li class="li1 ac active"><a href="javascript:void(0);" v-on:click="isActive=0"
+                                    class=" first">
+                                    <div class="step step1">1</div>
+                                    <p class="step_title">基本信息</p>
+                                </a></li>
+                            <li class="li2" :class="{active:isActive==1||isActive==2||isActive==3}"
+                                @click="nextSetp('a_knowledge1')"><a href="javascript:void(0);" id="a_finance">
+                                    <div class="line line1 fl"></div>
+                                    <div class="step step2">2</div>
+                                    <p class="step_title">财务信息</p>
+                                </a></li>
+                            <li class="li3" :class="{active:isActive==2||isActive==3}"
+                                v-on:click="nextSetp('a_manage1')"><a href="javascript:void(0);" id="a_knowledge">
+                                    <div class="line line2 fl"></div>
+                                    <div class="step step3">3</div>
+                                    <p class="step_title">知识产权</p>
+                                </a></li>
+
+                            <li class="li4" :class="{active:isActive==3}" v-on:click="nextSetp('end')"><a
+                                    href="javascript:void(0);" id="a_manage">
+                                    <div class="line line3 fl"></div>
+                                    <div class="step step4">4</div>
+                                    <p class="step_title">研发管理</p>
+                                </a></li>
+
+                            <!-- <a class="zc" @click="zcClick('all')">暂存</a> -->
+
+                        </ul>
+
+
+                        <div class="tab-content">
+
+                            <div class="tab-pane" v-show="isActive==0" id="basic">
+                                <div class="basic_form clearfix">
+
+                                    <p><span>*</span>注册地址：</p>
+
+                                    <div class="clearfix">
+                                        <select class="fl" id="province" name="province" @change="changePro" style="background:#fff;">
+                                            <option value="">--请选择--</option>
+                                        </select>  
+                                        <select id="city" class="fl" name="city" @change="changeCity" style="background:#fff;">
+                                            <option value="">--选择市--</option>
+                                        </select>  
+                                        <select id="area" name="area" class="fl" style="background:#fff;">
+                                            <option value=''>--选择区--</option>
+                                        </select>
+                                        <!-- <input class="fl" style="margin-left:285px" type="text" name="detailadrr" v-model="detailadrr" id="detailadrr" placeholder="请输入详细地址" > -->
+                                        <br/>
+                                    </div>
+
+
+                                    <div id="huan">
+                                        <p><span>*</span><s class="code_text">社会统一信用代码/组织机构代码：</s></p>
+                                        <input type="text" name="orgcode" v-model="orgcode" class="enterprise"  @blur="initData()"/>
+                                        <br />
+                                    </div>
+                                    <p><span>*</span>企业名称：</p>
+                                    <input type="text" name="companyName" v-model="companyName" class="enterprise1" @focus="changeChose();"/>
+                                    <br />
+
+                                    <p><span>*</span>注册时间：</p>
+                                    <input type="data" class="time" id="regDate" name="regDate" placeholder="如：2000-01-01" @focus="changeChose();"/>
+
+                                    <br />
+
+                                    <p><span>*</span>联系人：</p>
+                                        <input type="text" class="touch" name="contact" v-model="contact" placeholder="姓名" @focus="changeChose();"/>
+                                        <input type="text" v-model="phone" class="tel" name="phone" placeholder="电话" @focus="changeChose();"/>
+                                        <input type="text" v-model="email" class="email" name="email" placeholder="邮箱" @focus="changeChose();"/>
+                                    <br />
+
+                                    <p><span>*</span>主营产品技术领域：</p>
+                                    <select id="productServ" v-model="productServ" name="productServ" class="situation fl"
+                                        onchange="techied(this.value,'productServ')">
+                                        <option value='0'>--请选择--</option>
+                                    </select>
+                                    <br />
+
+                                    <p><span>*</span>产品认定情况：</p>
+                                    <select class="situation" v-model="productCogn" name="productCogn" id="situation1">
+                                        <option value="">--请选择--</option>
+                                        <option value="重点新产品">重点新产品</option>
+                                        <option value="高新技术产品">高新技术产品</option>
+                                        <option value="名牌产品">名牌产品</option>
+                                        <option value="其他">其他</option>
+                                        <option value="无">无</option>
+                                    </select>
+                                    <br />
+
+                                    <p><span>*</span>近三年年平均科技成果转化数量：</p>
+                                    <input type="text" class="smallInput" v-model="thirdfruit" name="thirdfruit" /><s class="unit">项</s>
+                                    <div id="oneFruitDisplay" class="munber">
+                                        <s class="other_s">
+                                            <span>*</span>近一年科技成果转化数量：</s>
+                                        <input type="text" class="smallInput smallInput1" v-model="onefruit" name="onefruit" /><s
+                                            class="unit">项</s>
+                                    </div>
+
+                                    <div id="oneFruitDisplay" class="munber_gd">
+                                        <s class="other_s">
+                                            <span>*</span>近两年科技成果转化数量：</s>
+                                        <input type="text" class="smallInput smallInput1" v-model="onefruit" name="onefruit" /><s
+                                            class="unit">项</s>
+                                    </div>
+                                    <br />
+
+                                    <p><i class="question question1"></i><span>*</span>职工总数：</p>
+                                    <input type="text" class="smallInput" v-model="workerTotal" name="workerTotal" /><s class="unit">人</s>
+
+                                    <s class="other_s" style="margin-left: 74px;"><span>*</span>其中科技人员数：</s><input
+                                        type="text" class="smallInput smallInput1" v-model="developmentTotal" name="developmentTotal" /><s
+                                        class="unit">人</s>
+                                    <br />
+                                    <div class="munber" id="dazhuan">
+                                        <p><i class="question question2"></i><span>*</span>大专以上学历科技人员数：</p><input
+                                            type="text" class="smallInput" v-model="juniorTechTotal" name="juniorTechTotal" /><s
+                                            class="unit">人</s>
+                                        <s class="other_s"><span>*</span>其中从事研究开发人员数：</s><input type="text"
+                                            class="smallInput smallInput1" v-model="sciencePsersons" name="sciencePsersons" /><s
+                                            class="unit">人</s>
+                                        <br />
+                                    </div>
+
+
+                                    <div class="munber3">
+                                        <p><span>*</span>2008年后是否认定为高企：</p>
+                                        <div class="chose_div">
+                                            <input type="hidden" name="cog2008" :value="cog2008"/>
+                                            <s class="chose_option" :class="{active:cog2008==true}"
+                                                @click="cog2008=true">是</s>
+                                            <s class="chose_option chose_option2 activeColor"
+                                                :class="{active:cog2008==false}" @click="cog2008=false">否</s>
+                                        </div>
+                                        <br />
+                                    </div>
+
+
+                                    <div class="compliance_div" style="position: relative;">
+                                        <p><i class="question last"></i><span>*</span>合规运营：</p>
+
+                                        <div class="chose_div">
+                                            <input type="hidden" name="compop" :value="compop" />
+
+                                            <s class="chose_option" :class="{active: compop==true}"
+                                                @click="compop=true">是</s>
+                                            <s class="chose_option chose_option2" :class="{active: compop==false}"
+                                                @click="compop=false">否</s>
+                                        </div>
+                                    </div>
+                                    <br />
+
+                                    <div>
+                                        <button type="button" class="basic_next"
+                                            v-on:click="changeChose();nextSetp('a_finance')">下一步
+                                        </button>
+                                        <!-- <a class="zc zc1" @click="zcClick('basic')">暂存</a> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" v-show="isActive==1" id="finance">
+                                <div class="finance_form2 clearfix">
+                                    <div class="basic_form finance_form">
+                                        <p style="margin-top: 0;"><span>*</span>近三年净资产：</p>
+                                        <span class="span span_year">{{lastyear2}}年：</span><input type="text"
+                                            name="assetFirstValue" v-model="assetFirstValue" class="year financeSmallInput" value="0"
+                                            onfocus="if (value =='0'){value =''}"
+                                            onblur="if (value ==''){value='0'}" /><span
+                                            class="span span_first">万元</span>
+                                        <span class="span span_year">{{lastyear1}}年：</span><input type="text"
+                                            name="assetSecondValue" v-model="assetSecondValue" class="year financeSmallInput" value="0"
+                                            onfocus="if (value =='0'){value =''}"
+                                            onblur="if (value ==''){value='0'}" /><span class="span">万元</span>
+                                        <span class="span span_year">{{thisyear}}年：</span><input type="text"
+                                            class="year financeSmallInput" name="assetThirdValue" v-model="assetThirdValue" value="0"
+                                            onfocus="if (value =='0'){value =''}"
+                                            onblur="if (value ==''){value='0'}" /><span class="span">万元</span>
+                                        <br />
+
+                                        <p class="finance_form_p2"><span>*</span>近三年销售收入：</p>
+                                        <span class="span span_year">{{lastyear2}}年：</span><input type="text"
+                                            name="saleFirstValue" v-model="saleFirstValue" class="year financeSmallInput financeSmallInput2"
+                                            value="0" onfocus="if (value =='0'){value =''}"
+                                            onblur="if (value ==''){value='0'}" /><span class="span span2">万元</span>
+                                        <span class="span span_year">{{lastyear1}}年：</span><input type="text"
+                                            name="saleSecondValue" v-model="saleSecondValue" class="year financeSmallInput financeSmallInput2"
+                                            value="0" onfocus="if (value =='0'){value =''}"
+                                            onblur="if (value ==''){value='0'}" /><span class="span span2">万元</span>
+                                        <span class="span span_year">{{thisyear}}年：</span><input type="text"
+                                            name="saleThirdValue" v-model="saleThirdValue" class="year financeSmallInput financeSmallInput2"
+                                            value="0" onfocus="if (value =='0'){value =''}"
+                                            onblur="if (value ==''){value='0'}" /><span class="span span2">万元</span>
+                                    </div>
+                                    <br />
+
+                                    <div class="manage_form clearfix">
+                                        <p>
+                                            <span>*</span>研发费用：年研发费用占同期销售收入总额比例：
+                                        </p>
+                                        <!-- <ul class="yanfa1">
+                                            <li><input type="radio" name="saleyfrate" value="A" id="21A" /> <label
+                                                    for="21A">A、销售收入≤5000万，≥5%</label></li>
+                                            <li><input type="radio" name="saleyfrate" value="B" id="21B" /> <label
+                                                    for="21B">B、5000万＜销售收入≤2亿，≥4%</label></li>
+                                            <li><input type="radio" name="saleyfrate" value="C" id="21C" /> <label
+                                                    for="21C">C、销售收入＞2亿，≥3%</label></li>
+                                            <li><input type="radio" name="saleyfrate" value="D" id="21D" /> <label
+                                                    for="21D">D、近<span class="change">1</span>年研发费用，＜3%</label></li>
+                                        </ul> -->
+                                        <!-- 全国 -->
+                                        <ul class="yanfa2">
+                                            <!-- <span>全国</span> -->
+                                            <li><input type="radio" name="saleyfrate3" value="A" id="21A" /> <label
+                                                    for="21A">A、销售收入≤5000万，≥5%</label></li>
+                                            <li><input type="radio" name="saleyfrate3" value="B" id="21B" /> <label
+                                                    for="21B">B、5000万＜销售收入≤2亿，≥4%</label></li>
+                                            <li><input type="radio" name="saleyfrate3" value="C" id="21C" /> <label
+                                                    for="21C">C、销售收入＞2亿，≥3%</label></li>
+                                        </ul>
+                                        <!-- 金华 -->
+                                        <ul class="yanfa3">
+                                            <!-- <span>金华</span> -->
+                                            <li><input type="radio" name="saleyfrate1" value="A" id="21A" /> <label
+                                                    for="21A">A、销售收入≤5000万，≥5%</label></li>
+                                            <li><input type="radio" name="saleyfrate1" value="B" id="21B" /> <label
+                                                    for="21B">B、5000万＜销售收入≤2亿，≥4%</label></li>
+                                            <li><input type="radio" name="saleyfrate1" value="C" id="21C" /> <label
+                                                    for="21C">C、销售收入＞2亿，≥3%</label></li>
+                                            <li><input type="radio" name="saleyfrate1" value="D" id="21D" /> <label
+                                                    for="21D">D、近1年研发费用，≥3%</label></li>
+                                            <li><input type="radio" name="saleyfrate1" value="E" id="21E" /> <label
+                                                    for="21D">E、近1年研发费用，＜3%</label></li>
+                                        </ul>
+                                        <!-- <ul class="yanfa4">
+                                            <li><input type="radio" name="saleyfrate" value="A" id="21A" /> <label
+                                                    for="21A">A、销售收入≤5000万，≥5%</label></li>
+                                            <li><input type="radio" name="saleyfrate" value="B" id="21B" /> <label
+                                                    for="21B">B、5000万＜销售收入≤2亿，≥4%</label></li>
+                                            <li><input type="radio" name="saleyfrate" value="C" id="21C" /> <label
+                                                    for="21C">C、销售收入＞2亿，≥3%</label></li>
+                                            <li><input type="radio" name="saleyfrate" value="D" id="21D" /> <label
+                                                    for="21D">D、近2年研发费用，≥3%</label></li>
+                                        </ul> -->
+                                        <!-- 淮安 苏州 广州-->
+                                        <ul class="yanfa5">
+                                            <!-- <span>淮安 苏州 广州</span> -->
+                                            <li><input type="radio" name="saleyfrate2" value="A" id="21A" /> <label
+                                                    for="21A">A、销售收入≤5000万，≥5%</label></li>
+                                            <li><input type="radio" name="saleyfrate2" value="B" id="21B" /> <label
+                                                    for="21B">B、5000万＜销售收入≤2亿，≥4%</label></li>
+                                            <li><input type="radio" name="saleyfrate2" value="C" id="21C" /> <label
+                                                    for="21C">C、销售收入＞2亿，≥3%</label></li>
+                                            <li><input type="radio" name="saleyfrate2" value="D" id="21D" /> <label
+                                                    for="21D">D、近2年研发费用，≥3%</label></li>
+                                            <li><input type="radio" name="saleyfrate2" value="E" id="21E" /> <label
+                                                    for="21D">E、近2年研发费用，＜3%</label></li>
+                                        </ul>
+                                        
+
+                                        <div class="munber1" style="margin-top:20px">
+                                            <p>
+                                                <span>*</span>境内研发投入比例占全部研发费用比例：
+                                            </p>
+                                            <ul>
+                                                <li><input type="radio" name="jnyfrate" value="A" id="22A" /> <label
+                                                        for="22A">A、≥60%</label>
+                                                </li>
+                                                <li><input type="radio" name="jnyfrate" value="B" id="22B" /> <label
+                                                        for="22B">B、＜60%</label>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <p>
+                                            <span>*</span>高新技术产品（服务）收入：申报前一年高新技术产品（服务）收入占当年总收入的比例：
+                                        </p>
+                                        <!-- 金华 淮安 苏州 -->
+                                        <ul class="high1">
+                                            <li><input type="radio" name="prodrate1" value="A" id="23A" /> <label
+                                                    for="23A">A、≥60%</label>
+                                            </li>
+                                            <li><input type="radio" name="prodrate1" value="B" id="23B" /> <label
+                                                    for="23B">B、50%≤R＜60%</label>
+                                            </li>
+                                            <li><input type="radio" name="prodrate1" value="C" id="23C" /> <label
+                                                    for="23C">C、＜50%</label>
+                                            </li>
+                                        </ul>
+                                        <!-- 广州 -->
+                                        <ul class="high2">
+                                            <li><input type="radio" name="prodrate2" value="A" id="23A" /> <label
+                                                    for="23A">A、≥60%</label>
+                                            </li>
+                                            <li><input type="radio" name="prodrate2" value="B" id="23B" /> <label
+                                                    for="23B">B、≥40%</label>
+                                            </li>
+                                            <li><input type="radio" name="prodrate2" value="C" id="23C" /> <label
+                                                    for="23C">C、＜40%</label>
+                                            </li>
+                                        </ul>
+                                        <!-- 全国-->
+                                        <ul class="high3">
+                                            <li><input type="radio" name="prodrate3" value="A" id="23A" /> <label
+                                                    for="23A">A、≥60%</label>
+                                            </li>
+                                            <li><input type="radio" name="prodrate3" value="C" id="23C" /> <label
+                                                    for="23C">C、＜60%</label>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="finance_btn ac">
+                                        <button type="button" class="finance_next" @click="isActive=0">上一步
+                                        </button>
+                                        <button type="button" class="finance_next" @click="nextSetp('a_knowledge')">下一步
+                                        </button>
+                                        <!-- <a class="zc zc1" @click="zcClick('finance')">暂存</a> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane clearfix" v-show="isActive==2" id="knowledge">
+                                <div class="knowledge_form">
+                                    <div class="type_I clearfix">
+                                        <p class="title_type ac clearfix">I 类</p>
+
+                                        <div class="X_12  clearfix">
+                                            <div class="X_12_l fl">
+                                                <input type="hidden" name="x1" />
+                                                <p>发明专利（X1）：
+                                                    <p>自主研发：</p><input type="text" v-model="x1self" name="x1self" value="0"
+                                                        onfocus="if (value =='0'){value =''}"
+                                                        onblur="if (value ==''){value='0'}"
+                                                        @blur="calcX();" /><span>项</span>
+
+                                                    <p>受让、受赠和并购等：</p><input type="text" v-model="x1eg" name="x1eg" value="0"
+                                                        onfocus="if (value =='0'){value =''}"
+                                                        onblur="if (value ==''){value='0'}"
+                                                        @blur="calcX();" /><span>项</span>
+                                            </div>
+                                            <div class="X_12_r fl">
+                                                <input type="hidden" name="x2" />
+                                                <p>植物新物种（X2）：
+                                                    <p>自主研发：</p><input type="text" v-model="x2self" name="x2self"  value="0"
+                                                        onfocus="if (value =='0'){value =''}"
+                                                        onblur="if (value ==''){value='0'}"
+                                                        @blur="calcX();" /><span>项</span>
+                                                    <p>受让、受赠和并购等：</p><input type="text" v-model="x2eg" name="x2eg" value="0"
+                                                        onfocus="if (value =='0'){value =''}"
+                                                        onblur="if (value ==''){value='0'}"
+                                                        @blur="calcX();" /><span>项</span>
+                                            </div>
+                                        </div>
+                                        <div class="X_12 X_34 clearfix">
+                                            <div class="X_12_l fl">
+                                                <input type="hidden" name="x3" />
+                                                <p>国家级农作物品种（X3）：<p>自主研发：</p><input type="text" v-model="x3self" name="x3self" value="0"
+                                                        onfocus="if (value =='0'){value =''}"
+                                                        onblur="if (value ==''){value='0'}"
+                                                        @blur="calcX();" /><span>项</span>
+                                                    <p>受让、受赠和并购等：</p><input type="text" v-model="x3eg" name="x3eg" value="0"
+                                                        onfocus="if (value =='0'){value =''}"
+                                                        onblur="if (value ==''){value='0'}"
+                                                        @blur="calcX();" /><span>项</span>
+                                            </div>
+                                            <div class="X_12_r fl">
+                                                <input type="hidden" name="x4" />
+                                                <p>国家新药（X4）：<p>自主研发：</p><input type="text" v-model="x4self" name="x4self" value="0"
+                                                        onfocus="if (value =='0'){value =''}"
+                                                        onblur="if (value ==''){value='0'}"
+                                                        @blur="calcX();" /><span>项</span>
+                                                    <p>受让、受赠和并购等：</p><input type="text" v-model="x4eg" name="x4eg" value="0"
+                                                        onfocus="if (value =='0'){value =''}"
+                                                        onblur="if (value ==''){value='0'}"
+                                                        @blur="calcX();" /><span>项</span>
+                                            </div>
+                                        </div>
+                                        <div class="X_12 X_56 clearfix">
+                                            <div class="X_12_l fl">
+                                                <input type="hidden" name="x5" />
+                                                <p>国家一级中药保护品种（X5）：</p>
+                                                <p>自主研发：</p> <input type="text" v-model="x5self" name="x5self" value="0"
+                                                    onfocus="if (value =='0'){value =''}"
+                                                    onblur="if (value ==''){value='0'}"
+                                                    @blur="calcX();" /><span>项</span>
+                                                <p>受让、受赠和并购等：</p> <input type="text" v-model="x5eg" name="x5eg" value="0"
+                                                    onfocus="if (value =='0'){value =''}"
+                                                    onblur="if (value ==''){value='0'}"
+                                                    @blur="calcX();" /><span>项</span>
+                                            </div>
+                                            <div class="X_12_r fl">
+                                                <input type="hidden" name="x6" />
+                                                <p>集成电路布局设计专有权（X6）：</p>
+                                                <p>自主研发：</p><input type="text" v-model="x6self" name="x6self" value="0"
+                                                    onfocus="if (value =='0'){value =''}"
+                                                    onblur="if (value ==''){value='0'}"
+                                                    @blur="calcX();" /><span>项</span>
+                                                <p>受让、受赠和并购等：</p><input type="text" v-model="x6eg" name="x6eg" value="0"
+                                                    onfocus="if (value =='0'){value =''}"
+                                                    onblur="if (value ==''){value='0'}"
+                                                    @blur="calcX();" /><span>项</span>
+                                            </div>
+                                        </div>
+                                        <div class="total fr">
+                                            <p style="font-size: 14px;color: #999;padding: 20px 0;">
+                                                <span style="color: #333;font-size: 14px;"><s>合计（X）</s><span>项</span><b
+                                                        id="xtotal_span">0</b></span>
+                                                <p style="margin-right: -52px">无专利的可不填，系统会自动默认为“0”</p>
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                    <div class="type_I type_II clearfix">
+                                        <p class="title_type ac clearfix">II 类
+                                            <span>（注：按Ⅱ类评价的知识产权在申请高新技术企业时，仅限使用一次）</span></p>
+
+                                        <div class="X_12  clearfix">
+                                            <div class="X_12_l fl">
+
+                                                <p>实用新型专利（Y1）：<input type="hidden" name="y1" /></p>
+                                                <p>自主研发：</p><input type="text" v-model="y1self" name="y1self" value="0"
+                                                    onfocus="if (value =='0'){value =''}"
+                                                    onblur="if (value ==''){value='0'}" @blur="calcY();" />
+                                                <span>项</span>
+                                                <p>受让、受赠和并购等：</p><input type="text" v-model="y1eg" name="y1eg" value="0"
+                                                    onfocus="if (value =='0'){value =''}"
+                                                    onblur="if (value ==''){value='0'}"
+                                                    @blur="calcY();" /><span>项</span>
+                                            </div>
+                                            <div class="X_12_r fl">
+                                                <p>外观设计专利（Y2）：<input type="hidden" name="y2" /> </p>
+                                                <p>自主研发：</p><input type="text" v-model='y2self' name="y2self" value="0"
+                                                    onfocus="if (value =='0'){value =''}"
+                                                    onblur="if (value ==''){value='0'}"
+                                                    @blur="calcY();" /><span>项</span>
+                                                <p>受让、受赠和并购等：</p><input type="text" v-model="y2eg" name="y2eg" value="0"
+                                                    onfocus="if (value =='0'){value =''}"
+                                                    onblur="if (value ==''){value='0'}"
+                                                    @blur="calcY();" /><span>项</span>
+                                            </div>
+                                        </div>
+                                        <div class="X_12 X_34 clearfix">
+                                            <div class="X_12_l fl">
+                                                <p>软件著作权（Y3）：<input type="hidden" name="y3" /></p>
+                                                <p>自主研发：</p><input type="text" v-model="y3self" name="y3self" value="0"
+                                                    onfocus="if (value =='0'){value =''}"
+                                                    onblur="if (value ==''){value='0'}"
+                                                    @blur="calcY();" /><span>项</span>
+                                                <p>受让、受赠和并购等：</p><input type="text" v-model="y3eg" name="y3eg" value="0"
+                                                    onfocus="if (value =='0'){value =''}"
+                                                    onblur="if (value ==''){value='0'}"
+                                                    @blur="calcY();" /><span>项</span>
+                                            </div>
+                                        </div>
+                                        <div class="total fr">
+                                            <p style="font-size: 14px;color: #999;padding:20px 0;">
+                                                <span style="font-size: 14px;color:#333;"><s>合计（Y）</s><span>项</span><b
+                                                        id="ytotal_span">0</b></span>
+                                                <p style="margin-right: -52px">无专利的可不填，系统会自动默认为“0”</p>
+                                            </p>
+
+
+                                        </div>
+
+                                    </div>
+                                    <div class="type_I type_other clearfix">
+                                        <p class="title_type ac clearfix">其 他（加 分 项）</p>
+
+                                        <div class="other">
+                                            <p>组织/参与制定标准、检测方法、技术规范的情况</p>
+                                            <input type="radio" name="other" value="true" />是
+                                            <input type="radio" name="other" value="false" />否
+                                        </div>
+                                    </div>
+                                    <div class="ac">
+                                        <button type="button" class="knowledge_next"
+                                            v-on:click="nextSetp('a_finance')">上一步
+                                        </button>
+                                        <button type="button" class="knowledge_next"
+                                            v-on:click="nextSetp('a_manage')">下一步
+                                        </button>
+                                        <!-- <a class="zc zc1" @click="zcClick('knowledge')">暂存</a> -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane" v-show="isActive==3" id="manage">
+                                <div class="manage_form clearfix">
+                                    <p>
+                                        <s style="color: #fe8910">*</s>1、是否制定了企业研究开发的组织管理制度、建立了研发投入核算体系、编制了研发费用辅助账:
+                                    </p>
+                                    <ul>
+                                        <li><input type="radio" name="compsys" value="A" id="1A" /> <label
+                                                for="1A">A、3项都满足</label></li>
+                                        <li><input type="radio" name="compsys" value="B" id="1B" /> <label
+                                                for="1B">B、满足2项</label></li>
+                                        <li><input type="radio" name="compsys" value="C" id="1C" /> <label
+                                                for="1C">C、满足1项</label></li>
+                                        <li><input type="radio" name="compsys" value="D" id="1D" /> <label
+                                                for="1D">D、都不满足</label></li>
+                                    </ul>
+                                    <p>
+                                        <s style="color: #fe8910">*</s>2、是否设立研发机构、是否开展产学研合作：
+                                    </p>
+                                    <ul>
+                                        <li><input type="radio" name="cooper" value="A" id="2A" /> <label
+                                                for="2A">A、设立研发机构并开展产学研合作</label>
+                                        </li>
+                                        <li><input type="radio" name="cooper" value="B" id="2B" /> <label
+                                                for="2B">B、设立研发机构但无产学研合作</label>
+                                        </li>
+                                        <li><input type="radio" name="cooper" value="C" id="2C" /> <label
+                                                for="2C">C、无研发机构无产学研合作</label></li>
+                                    </ul>
+                                    <p>
+                                        <s style="color: #fe8910">*</s>3、是否建立了科技成果转化的组织实施与激励奖励制度，建立开放式的创新创业平台：
+                                    </p>
+                                    <ul>
+                                        <li><input type="radio" name="platform" value="A" id="3A" /> <label
+                                                for="3A">A、建立了科技成果转化的组织实施与激励奖励制度，且有开放式的创新创业平台</label>
+                                        </li>
+                                        <li><input type="radio" name="platform" value="B" id="3B" /> <label
+                                                for="3B">B、建立了科技成果转化的组织实施与激励奖励制度，无开放式的创新创业平台</label>
+                                        </li>
+                                        <li><input type="radio" name="platform" value="C" id="3C" /> <label
+                                                for="3C">C、没有科技成果转化的组织实施与激励奖励制度，无开放式的创新创业平台</label>
+                                        </li>
+                                    </ul>
+                                    <p>
+                                        <s style="color: #fe8910">*</s>4、是否建立了科技人员的培养进修、职工技能培训、优秀人才引进，以及人才绩效评价奖励制度：
+                                    </p>
+                                    <ul>
+                                        <li><input type="radio" name="personnel" value="A" id="4A" /> <label for="4A">A、
+                                                是</label></li>
+                                        <li><input type="radio" name="personnel" value="B" id="4B" /> <label for="4B">B、
+                                                否</label></li>
+                                    </ul>
+                                </div>
+                                <div class="ac finance_btn">
+                                    <button type="button" class="manage_next" v-on:click="nextSetp('a_knowledge')">上一步
+                                    </button>
+                                    <button type="button" class="manage_next" v-on:click="inputFormSubmit">提交</button>
+                                    <!-- <a class="zc zc1" @click="zcClick('manage')">暂存</a> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!--&lt;!&ndash;E=-tab切换->-->
+        <!--E=免费评估-->
+    </form>
+    <!--E=底部-->
+    <footer>
+        <div class="copyright ac"><p>COPYRIGHT © 版本归属 广州高企云信息科技有限公司 粤ICP备16007486号-1</p></div>
+    </footer>
+
+ 
+    <!-- 公共js部分 -->
+    <th:block th:include="block/footlink :: copy" />
+    <!-- over -->
+    
+    <script type="text/javascript" th:src="@{/statics/js/hisself/bootstrap-datepicker.js?v=0.0.5}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/hisself/index.js?v=0.2.2}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/count.js}"></script>
+    <script>
+        $('.title_list>li').mouseover(function(e){
+                $('.title_list>li').removeClass('active');
+                $(this).addClass('active');
+                $(this).children().stop().siblings(".drop_down").animate({
+                    'top':'30px',
+                    'opacity':'1',
+                },200);
+            });
+            $('.title_list>li').mouseout(function(e){
+                $(this).children().stop().siblings(".drop_down").animate({
+                    'top':'-30px',
+                    'opacity':'0'
+                },200);
+            })
+
+        //    re_init_area();
+        $('#regDate').datepicker({
+            format: 'yyyy-mm-dd'
+        });
+
+        $(".activeColor").click(function () {
+            $(".activeColor").addClass("active");
+        })
+
+        $(function () {
+            setTimeout(function () {
+                $(".activeColor").removeClass("active");
+            }, 1000)
+
+            $('i.question.question1').mouseover(function () {
+                layer.tips(
+                    '科技人员数：是指在企业从事研发活动和其他技术活动的，累积实际工作在183天以上的人员，包括：直接科技人员及科技辅助人员。<br>国高要求： 科技人员占比≥10%。',
+                    'i.question1', {
+                        tips: [2, '#587eec'],
+                        time: 3000
+                    });
+            });
+
+            $('i.question.question2').mouseover(function () {
+                layer.tips('企业研究开发人员主要包括研究人员、技术人员和辅助人员三类。<br>市高要求： 大专以上科技人员占比≥15%；其中研发人员占比≥7%。',
+                    'i.question2', {
+                        tips: [2, '#587eec'],
+                        time: 3000
+                    });
+            });
+
+            $('i.question.last').mouseover(function () {
+                layer.tips('合规运营：申请认定前一年内企业在产品研发、生产经营过程中，环保达标，三年内无违法生产经营记录和知识产权纠纷。', 'i.last', {
+                    tips: [2, '#587eec'],
+                    time: 3000
+                });
+            });
+        });
+
+        function techied(a, b) {
+            var vtechfield = a.split("&");
+            var selectId = a.split("&");
+            var c=selectId[1];
+            if (c != '3') {
+               layer.msg("请选择三级细分类型");
+                $("#" + b).find("option[value='" + a + "']").attr("selected", false);
+                // $("#" + b).find("option[value='0']").attr("selected", true);
+                $("#" + b).find("option").eq(0).prop("selected",true)
+            } 
+        }
+    </script>
+    <!-- <% var ctx=request.contextPath; %> -->
+    <meta charset="utf-8">
+    <div style="display:none;">
+        <script async src="https://s95.cnzz.com/z_stat.php?id=1258557238&web_id=1258557238" language="JavaScript">
+        </script>
+        <script>
+            var _hmt = _hmt || [];
+            (function () {
+                var hm = document.createElement("script");
+                hm.src = "https://hm.baidu.com/hm.js?33b5f85349e1071d13e98f93debf5719";
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(hm, s);
+            })();
+            $(function(){
+                //$(".chose_option2 ").removeClass("active");
+            })
+        </script>
+    </div>
+</body>
+
+</html>

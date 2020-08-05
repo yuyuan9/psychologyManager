@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- 公共头部 -->
+    <th:block th:include="block/headlink :: test('兑换中心')" /> 
+    <!-- 结束 -->
+    <link rel="stylesheet" th:href="@{/statics/css/user/index.css?v=0.0.2}">
+    <style>
+        .coin_goback {
+            background: #fafafa;
+            font-size: 16px;
+            color: #333333;
+        }
+        .coin_comfirm {
+            background: #bbbbbb;
+            border-radius: 5px;
+            color: #eeeeee;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="user">
+        <div th:replace="~{user_head::copy}"></div>
+        <div th:replace="~{header::copy}"></div>
+    </div>
+    <div class="wrap" id="box">
+        <section>
+            <div class="voucher_center">
+                <h3>当前位置：<a href="/ht-biz/usercenter/user/index">个人中心</a>><a href="/ht-biz/usercenter/user/honey">honey值&金币</a>><a href="/ht-biz/usercenter/user/exchange_coin">金币兑换</a></h3>
+                <div class="voucher_content voucher_content_coin">
+                    <h3>金币兑换(账号金币余额：<i v-cloak>{{money}}</i>)</h3>
+                    <input type="text"  v-model="gold" value="" @mouseleave="protocol()" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" placeholder="请填写需要兑换金币数量">
+                    <p class="change_honey">兑换honey值: <i>{{gold}}</i></p>
+                    <div class="voucher_content_coin">
+                        <input type="button" id="submitRegs" class="coin_comfirm" @click="conversion()" value="确认兑换">
+                    </div>
+                    <div class="voucher_content_coin">
+                        <input type="button" class="coin_goback" value="返回" @click="prev()">
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+        <div class="submitInfo" v-cloak>
+            <div class="submitInfoHeader clearfix">
+                <i @click="close"></i>
+                <s></s>
+            </div>
+            <h3>兑换成功</h3>
+            <p>兑换详情可前往个人中心查看</p>
+        </div>
+    </div>
+    <!-- 公共js部分 -->
+    <th:block th:include="block/footlink :: copy" /> 
+    <!-- over -->
+    <script type="text/javascript" th:src="@{/statics/js/user/coin.js?v=0.0.2}"></script>
+    <script>
+        $(".xcx_h").mouseover(function(){
+            $(".xcx").css({
+                'visibility':'visible'
+            })
+        })
+        $(".xcx_h").mouseleave(function(){
+            $(".xcx").css({
+                'visibility':'hidden'
+            })
+        })
+    </script>
+    <th:block th:include="block/statistics :: copy" />
+</body>
+
+</html>

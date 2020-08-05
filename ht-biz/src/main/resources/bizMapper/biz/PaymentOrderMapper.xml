@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.biz.mapper.PaymentOrderMapper">
+	<select id="findList" parameterType="com.ht.commons.utils.MyPage" resultType="com.ht.commons.utils.PageData">
+		select t.*,
+			s.username,
+			s.phone,
+			s.nikeName,
+			s.trueName,
+			s.userType
+		from t_paymentorder t
+		left join t_sys_user s on t.createid=s.USER_ID
+		where 1=1
+	<if test="pd.phone !=null and pd.phone !=''">
+	 	and s.phone like binary CONCAT(CONCAT('%', #{pd.phone}),'%')
+	</if>
+	<if test="pd.paymentType !=null and pd.paymentType !=''">
+		<choose>
+			<when test="pd.paymentType == 'alipay'">
+				and t.paymentType='alipay'
+			</when>
+			<when test="pd.paymentType == 'WeChat'">
+				and t.paymentType='WeChat'
+			</when>
+			<otherwise>
+				and t.paymentType not in('alipay','WeChat')
+			</otherwise>
+		</choose>
+	</if>
+	<if test="pd.beginDate !=null and pd.beginDate !='' and pd.endDate !=null  and pd.endDate !=''">
+		and t.createdate between #{pd.beginDate} and #{pd.endDate}
+	</if> 
+	order by t.createdate desc
+	</select>
+	
+	<select id="selectAmount" parameterType="java.lang.String" resultType="java.lang.Integer">
+		select sum(amount) from t_paymentorder where paymentType=#{paymentType}
+	</select>
+	<!-- 通过id获取支付信息 -->
+  <select id="findById" parameterType="com.ht.commons.utils.PageData" resultType="com.ht.commons.utils.PageData">
+      select p.*
+		from t_paymentorder p
+        where  1=1 
+       	<if test="id != null and id != ''">
+     	 	 and p.id=#{id}
+     	 </if>
+     	 <if test="paymentNo != null and paymentNo != ''">
+     	   and  p.paymentNo=#{paymentNo}
+     	 </if> 
+     	 <if test="businessId != null and businessId != ''">
+     	   and  p.businessId=#{businessId}
+     	 </if> 
+     	  <if test="businessType != null and businessType != ''">
+     	   and  p.businessType=#{businessType}
+     	 </if> 
+     	 <if test="paymentCash != null and paymentCash != ''">
+     	   and  p.paymentCash=#{paymentCash}
+     	 </if> 
+     	 
+    </select>
+    <!-- 修改 -->
+	<update id="edit" parameterType="com.ht.commons.utils.PageData">
+		update  t_paymentorder
+			set transactionNo	= #{transactionNo},
+				status			= #{status},
+				paymentDate 	= #{paymentDate},
+				<if test="paymentType != null and paymentType != ''">
+				 paymentType	= #{paymentType},
+				</if>
+				paymentAmount	= #{paymentAmount}
+			where 
+			   1=1
+			<if test="paymentNo != null and paymentNo != ''">
+     	 		 and paymentNo=#{paymentNo}
+     	 	</if>
+     	 	<if test="orderNo != null and orderNo != ''">
+     	 		 and orderNo=#{orderNo}
+     	 	</if>
+			
+	</update>
+</mapper>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- 公共头部 -->
+    <th:block th:include="block/headlink :: test('个人云中心')" /> 
+    <!-- 结束 -->
+    <link rel="stylesheet" th:href="@{/statics/css/user/pagination.css}">
+    <link rel="stylesheet" th:href="@{/statics/css/user/index.css?v=0.0.1}">
+    <link rel="stylesheet" th:href="@{/statics/css/inquire/msgbox.css?v=0.0.1}">
+    <style>
+        .page-bar-ul {
+            position: relative;
+            left: 0px;
+        }
+        .user_content>.user_list{
+            height: 882px;
+        }
+        .user_content>.user_details {
+            height: 882px;
+            background: #fff;
+        }
+        .page_box{
+            background: transparent;
+        }
+        #bor{
+            border:1px solid #ff5733!important;
+            background:#fff!important;
+            color: #ff5733!important;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="user">
+        <div th:replace="~{user_head::copy}"></div>
+        <div th:replace="~{header::copy}"></div>
+    </div>
+    <div class="wrap" id="box">
+        <section>
+            <div class="user_content clearfix">
+                <div class="user_list fl clearfix">
+                    <div th:replace="~{user_part::copy}"></div>
+                </div>
+                <div class="user_details fl">
+                    <div class="inform">
+                        <div class="myOrder">
+                            <h2>我的订单</h2>
+                            <ul class="order_list">
+                                <li v-cloak v-for="(list,index) in orderList">
+                                    <h3>
+                                        <s v-if="list.status == 0" class="wait">待服务</s>
+                                        <s v-if="list.status == 1" class="ok">已完成</s>
+                                        <s v-if="list.status == 2" class="refuse">被拒接</s>
+                                        <a target="_blank" :href="'/ht-biz/product/toproseroder?id='+list.productId">{{list.productName}}</a>
+                                        <i @click="callOff1(list.id,list.productName);"></i>
+                                    </h3>
+                                    <p>
+                                        <span>{{list.createdate | date1}}</span>
+                                        <span>订单编号：{{list.number}}</span>
+                                        <span>数量：{{list.productCounts}}</span>
+                                        <span>总价：
+                                            <i v-if="list.productPrice>0">{{list.productPrice}}元</i>
+                                            <i v-if="list.productPrice<=0">面议</i>
+                                        </span>
+                                    </p>
+                                    <div class="clearfix">
+                                        <h4>
+                                            <a target="_blank" :href="'/ht-biz/product/getlistprobyshop?id='+list.shopid">
+                                                <i><img :src="'http://47.92.70.12:9090' +list.shopimg" alt=""></i>
+                                                <span>服务商：{{list.shopname}}</span>
+                                            </a>
+                                            
+                                        </h4>
+                                        <a target="_blank" :href="'/ht-biz/service/index/order_details?id='+list.id"><s>详情</s></a>
+                                        <a v-cloak v-if="list.status == 2" @click="reason(list.refuse);" href="javascript:viod(0);"><s style="background:#267de9;color: #fff;">拒接原因</s></a>
+                                        <a v-cloak v-if="list.status == 0" @click="callOff(list.id,list.productName);" href="javascript:viod(0);"><s id="bor">取消订单</s></a>
+                                    </div>
+                                </li>
+                            </ul>
+                            <!-- 分页 -->
+                            <div class="page_box ac">
+                                <mypagenation :page="page" @btn-click="clickPage"></mypagenation>
+                            </div>
+                            <!-- 分页 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section v-cloak>
+            <!-- 添加弹框-->
+            <div v-cloak class="contract_mask" v-show="honeyInfo1"></div>
+            <div v-cloak class="read_over" v-show="honeyInfo1">
+                <div id="look" class="next_page">
+                    <div class="table_top">
+                        <p>拒接原因</p>
+                        <s class="fa close_login fr" @click="honeyInfo1=false"></s>
+                    </div>
+                    <div class="table_bottom ac middle_ipt">
+                        <p style="margin-top: 60px;margin-bottom: 60px;">拒接原因：{{refuse}}</p>
+                    </div>
+                    <div class="table_bottom ac">
+                        <p>
+                            <a href="javascript:void(0)" class="use_honey buy_honey ac" @click="honeyInfo1=false">取消</a>
+                            <a href="javascript:void(0)" class="use_honey ac" @click="honeyInfo1=false">确认</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section v-cloak>
+            <!-- 订单取消提示-->
+            <div v-cloak class="contract_mask" v-show="honeyInfo2"></div>
+            <div v-cloak class="read_over" v-show="honeyInfo2">
+                <div id="look" class="next_page">
+                    <div class="table_top">
+                        <p>订单取消提示<i>(取消的订单将在列表删除)</i></p>
+                        <s class="fa close_login fr" @click="honeyInfo2=false"></s>
+                    </div>
+                    <div class="table_bottom ac middle_ipt">
+                        <p style="margin-top: 60px;margin-bottom: 60px;">取消订单：{{offproductName}}</p>
+                    </div>
+                    <div class="table_bottom ac">
+                        <p>
+                            <a href="javascript:void(0)" class="use_honey buy_honey ac" @click="honeyInfo2=false">取消</a>
+                            <a href="javascript:void(0)" class="use_honey ac" @click="getCancel(1)">确认</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section v-cloak>
+            <!-- 订单删除提示-->
+            <div v-cloak class="contract_mask" v-show="honeyInfo3"></div>
+            <div v-cloak class="read_over" v-show="honeyInfo3">
+                <div id="look" class="next_page">
+                    <div class="table_top">
+                        <p>订单删除提示<i>(删除后将无法恢复)</i></p>
+                        <s class="fa close_login fr" @click="honeyInfo3=false"></s>
+                    </div>
+                    <div class="table_bottom ac middle_ipt">
+                        <p style="margin-top: 60px;margin-bottom: 60px;">删除订单：{{offproductName}}</p>
+                    </div>
+                    <div class="table_bottom ac">
+                        <p>
+                            <a href="javascript:void(0)" class="use_honey buy_honey ac" @click="honeyInfo3=false">取消</a>
+                            <a href="javascript:void(0)" class="use_honey ac" @click="getCancel(2)">确认</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- 删除成功 -->
+        <div v-cloak class="submitaudit submitaudit1" v-show="auditframe">
+            <div class="submitAuditHeader clearfix">
+                <i @click="auditframe=false"></i>
+                <s></s>
+            </div>
+            <h3>删除成功</h3>
+        </div>
+        <!-- 取消成功 -->
+        <div v-cloak class="submitaudit submitaudit1" v-show="auditframe1">
+            <div class="submitAuditHeader clearfix">
+                <i @click="auditframe1=false"></i>
+                <s></s>
+            </div>
+            <h3>取消成功</h3>
+        </div>
+        <footer>
+            <div>COPYRIGHT © 版权归属 广州高企云信息科技有限公司 粤ICP备16007486号-1</div>
+        </footer>
+    </div>
+    <!-- 公共js部分 -->
+    <th:block th:include="block/footlink :: copy" /> 
+    <!-- over -->
+    <script type="text/javascript" th:src="@{/statics/js/user/myorder.js?v=0.0.5}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/user/part_tab.js?v=0.0.3}"></script>
+    <th:block th:include="block/statistics :: copy" />
+</body>
+
+</html>

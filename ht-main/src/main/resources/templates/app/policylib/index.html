@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+<link rel="stylesheet" th:href="@{/statics/app/css/reset.css}">
+<link rel="stylesheet" th:href="@{/statics/app/css/style.css}">
+<link rel="stylesheet" th:href="@{/statics/app/css/index/policyzx.css}">
+<link rel="stylesheet" th:href="@{/statics/app/css/vant_common.css}">
+
+<head>
+   <title>政策查询</title>
+<style>
+    [v-cloak] {
+        display: none;
+    }
+    .van-dropdown-menu__title {
+        font-size: 3.2vw;
+    }
+</style>
+</head>
+<body>
+    <div id="app-policycx" v-cloak class="policy_cx">
+        <div class="main_bg">
+            <div class="zc_hd">
+                <a href="/ht-biz/app/index/index?refer=1">
+                    <i class="to_zc dib"></i>
+                    <span class="zccx">政策查询</span>
+                    <span class="zc_t">项目政策、区域政策、产业政策·全面评估规划</span>
+                </a>
+            </div>
+            <div class="zc_icom">
+                <input type="text" name="keyword" v-model="keyword" id="" placeholder="请输入..." class="zc_input dib">
+                <i class="zc_search dib" @click="policyData(1)"></i>
+            </div>
+        </div>
+        <!-- 查找结果 -->
+        <div class="search_r">
+            <div class="result">
+                <div class="total dib">已为您匹配<span class="r_total">{{total}}</span>条结果</div>
+                <!-- 地区选择 -->
+                <div class="dib diqu" @click="showPopup">{{area || city || province}}</div><i class="pull" @click="showPopup"></i>
+                <!-- 年份 -->
+                <div class="dib year">
+                    <van-dropdown-menu style="height: 10.4vw;" >
+                        <van-dropdown-item v-model="value1" :options="option1" @change="yearchange"></van-dropdown-item>
+                    </van-dropdown-menu>
+                </div>
+            
+            </div>
+            <div>
+                <van-list v-model="loading" :finished="finished" finished-text="没有更多了"  :error.sync="error" error-text="请求失败，点击重新加载" @load="policyData" > 
+                    <div class="zc_item" v-for="list in policyList">
+                        <!-- <a :href="'/ht-biz/app/policylib/details?id='+list.id"> -->
+                        <a href="javascript:void(0);" @click="policylibDetails(list.id)">
+                            <p class="c_name dib"  v-html="list.projecname">{{list.projecname}}</p><i class="c_details dib"></i>
+                        </a>
+                        <p class="c_b">
+                            <span class="dib sbtj"  >申报条件：<span v-html="list.applyterm">{{list.applyterm}}</span></span>
+                            <span class="dib peitao" >经费及配套：<span  v-html="list.fundfacilitie">{{list.fundfacilitie}}</span></span>
+                        </p>
+                    </div>
+                </van-list>
+            </div>
+            <!-- 无结果页 -->
+            <div class="hasno" id="noresult" style="display: none;">
+                <div class="no_result"></div>
+                <p class="N">无搜索结果</p>
+                <p class="huan">试试换一下关键词或搜索条件吧</p>
+            </div>
+        </div>
+         <!-- 地区弹窗 -->
+         <threelink :show="show" @comfirm="queren" @cancel="btn"></threelink>
+    </div>
+
+    <script type="text/javascript" th:src="@{/statics/app/js/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/vue.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/jquery.area.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/layer.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/htajax.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/vant.min.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/component/threeLink.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/policylib/policylib.js}"></script>
+
+</body>
+
+</html>

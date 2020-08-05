@@ -1,0 +1,252 @@
+html,body{
+    color: #EEF6F8;
+}
+.intro_bg{
+    width: 100%;
+    height: 440px;
+}
+.intro_bg a{
+    display: inline-block;
+    width: 100%;
+    height: 440px;
+    background: url("../../images/physical/intro_banner.png");
+}
+.doctor_intro{
+    height: 570px;
+    background-color: #fff;
+}
+.doctor_intro .contain{
+    padding-top: 61px;
+}
+.doctor_intro .intro_l_first{
+    width: 500px;
+}
+.doctor_intro .intro_l .img{
+    display: inline-block;
+    width: 477px;
+    height: 448px;
+    background: url("../../images/physical/intro_l_img.png");
+}
+.intro_title .title_icon{
+    display: inline-block;
+    width: 32px;
+    height: 24px;
+    background: url("../../images/physical/intro_icons.png") 0 -4px;
+    margin-right: 10px;
+}
+.intro_title{
+    font-size: 32px;
+    color: #2e4974;
+}
+.intro_little_title{
+    font-size: 38px;
+    color: #e9edf3;
+}
+.line_x{
+    display: inline-block;
+    width: 45px;
+    height: 4px;
+    background-color: #0099E8;
+    margin: 50px 0;
+}
+.intro_r .intro_line{
+    font-size: 20px;
+    color: #2e4974;
+}
+.intro_r .intro_line{
+    margin-top: 10px;
+}
+.intro_r .intro_text{
+    margin-top: 35px;
+    font-size: 14px;
+    color: #7487a3;
+    line-height: 26px;
+}
+
+.doctor_content{
+    background-color: #EEF6F8;
+}
+.doctor_content .intro_little_title{
+    margin-left: 42px;
+}
+.doctor_content .line_x{
+    margin: 35px 0;
+}
+.doctor_content .intro_l .img{
+    width: 506px;
+    height: 457px;
+    background: url("../../images/physical/doctor_r_img.png");
+}
+
+.reply_guide{
+    background-color: #fff;
+    padding-top: 75px;
+}
+.reply_guide .guide_step .contain{
+    padding: 90px 39px 180px 39px;
+}
+.reply_guide .step{
+    float: left;
+    width: 265px;
+    border: 1px solid #4481E7;
+    padding: 20px;
+    margin-left: 20px;
+}
+.reply_guide .step .title1{
+    color: #333;
+    font-size: 18px;
+    margin-top: 30px;
+}
+.reply_guide .step .text{
+    color: #999;
+    font-size: 14px;
+    line-height: 26px;
+    margin-top: 30px;
+}
+.reply_guide .step_icon{
+    display: inline-block;
+    background: url("../../images/physical/intro_icons.png");
+}
+.reply_guide .step_icon_div{
+    background-color: #fff;
+}
+.reply_guide .step_icon_div1{
+    width: 90px;
+    margin-top: -61px;
+    margin-left: 67px;
+}
+.reply_guide .step_icon1{
+    width: 80px;
+    height: 82px;
+    background-position: -32px 0;
+}
+.reply_guide .step_b{
+    margin-top: 50px;
+}
+.reply_guide .step_btn{
+    display: inline-block;
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    color: #fff;
+    border-radius: 4px;
+    background-color: #19AE83;
+    font-size: 14px;
+}
+.reply_guide .step_num{
+    font-size: 50px;
+    color: #EAF1FF;
+    line-height: 20px;
+    margin-right: -10px;
+}
+.reply_guide .step:first-of-type{
+    margin-left: 0;
+}
+.reply_guide .step2 .step_b{
+    margin-top: 30px;
+}
+.reply_guide .step_icon_div2 .step_icon2{
+    width: 82px;
+    height: 70px;
+    background-position: -114px -8px;
+}
+.reply_guide .step_icon_div2{
+    width: 92px;
+    margin-top: -55px;
+    margin-left: 66px;
+}
+.reply_guide .step2 .title1,.reply_guide .step2 .text{
+    margin-top: 20px;
+}
+.reply_guide .step2{
+    margin-top: 40px;
+}
+.reply_guide .step2 .step_num{
+    margin-right: -20px;
+}
+.reply_guide .step3 .step_icon3{
+    width: 86px;
+    height: 88px;
+    background-position: -7px -98px;
+}
+.reply_guide .step_icon_div3 {
+    width: 96px;
+    margin-top: -64px;
+    margin-left: 68px;
+}
+.reply_guide .step3{
+    margin-top: 0;
+}
+.reply_guide .step4 .step_icon4{
+    width: 82px;
+    height: 88px;
+    background-position: -106px -93px;
+}
+.reply_guide .step_icon_div4 {
+    width: 96px;
+    margin-top: -68px;
+    margin-left: 68px;
+}
+.reply_guide .step4 .step_b{
+    margin-top: 52px;
+}
+
+.explain{
+    padding-bottom: 120px;
+}
+.explain_bg{
+    width: 890px;
+    height: 277px;
+    background: url("../../images/physical/explain_bg.png");
+    margin: -90px auto;
+    padding: 30px 40px;
+    color: #fff;
+}
+.explain_bg .title1{
+    font-size: 18px;
+}
+.explain_bg .text{
+    font-size: 14px;
+    margin-top: 34px;
+    line-height: 22px;
+}
+
+
+.contact_us{
+    position: fixed;
+    top: 480px;
+    right: 5px;
+    background-color: #fff;
+    padding: 20px;
+    color: #0099E8;
+    border-radius: 4px;
+    font-size: 18px;
+    box-shadow: 0 0 4px 6px rgba(219,219,219,0.2);
+}
+.contact_us .contact_icon{
+    display: inline-block;
+    width: 26px;
+    height: 28px;
+    vertical-align: middle;
+    background: url("../../images/physical/intro_icons.png") -3px -36px;
+    margin-right: 10px;
+    margin-top: -5px;
+}
+.contact_us .phone{
+    font-weight: bold;
+    margin-top: 2px;
+}
+.contact_us .online{
+    display: inline-block;
+    color: #fff;
+    margin-top: 15px;
+    font-size: 14px;
+    padding: 5px 30px;
+    background-color: #2091FF;
+    filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr='#2091FF',endColorStr='#68B5FF',gradientType='1');
+    background: -moz-linear-gradient(left, #2091FF, #68B5FF);
+    background: -o-linear-gradient(left,#2091FF, #68B5FF);
+    background: -webkit-gradient(linear, 0% 0%, 100% 0%, from(#2091FF), to(#68B5FF));
+    border-radius: 4px;
+    box-shadow: 0 2px 6px 4px rgba(219,219,219,0.9);
+}

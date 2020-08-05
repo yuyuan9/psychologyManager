@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- 公共头部 -->
+    <th:block th:include="block/headlink :: test('个人云中心')" /> 
+    <!-- 结束 -->
+    <link rel="stylesheet" th:href="@{/statics/css/pick-pcc.min.1.0.1.css?v=0.0.1}">
+    <link rel="stylesheet" th:href="@{/statics/css/user/pagination.css}">
+    <link rel="stylesheet" th:href="@{/statics/css/user/index.css?v=0.0.2}">
+    <link rel="stylesheet" th:href="@{/statics/css/inquire/msgbox.css?v=0.0.1}">
+    <style>
+        .page-bar-ul {
+            position: relative;
+            left: 0px;
+        }
+        .user_content>.user_list{
+            height: 882px;
+        }
+        .user_content>.user_details {
+            height: 882px;
+            background: #fff;
+        }
+        .page_box{
+            background: transparent;
+        }
+        .next_page {
+            height: 711px;
+            margin-top: -355px;
+        }
+        .pick-show{
+            padding-left: 14px!important;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="user">
+        <div th:replace="~{user_head::copy}"></div>
+        <div th:replace="~{header::copy}"></div>
+    </div>
+    <div class="wrap" id="box">
+        <section>
+            <div class="user_content clearfix">
+                <div class="user_list fl clearfix">
+                    <div th:replace="~{user_part::copy}"></div>
+                </div>
+                <div class="user_details fl">
+                    <div class="inform">
+                        <div class="myCart">
+                            <h2>购物车管理</h2>
+                            <ul class="cart_list">
+                                <li v-for="(list,index) in cartList">
+                                    <h3>
+                                        <a target="_blank" :href="'/ht-biz/product/toproseroder?id='+list.productId">
+                                            {{list.productname}}
+                                        </a>
+                                        <i :id="list.productId" @click="deleteProduct($event,list.productname)"></i>
+                                    </h3>
+                                    <p>
+                                        <span>
+                                            <a target="_blank" :href="'/ht-biz/product/getlistprobyshop?id='+list.shopid">服务商：{{list.shopname}}</a>
+                                        </span>
+                                        <span :class="{active:list.isscience == 0}">价格：
+                                            <i v-cloak v-if="list.pricetype == 1">￥{{list.price}}元</i>
+                                            <i v-cloak v-if="list.pricetype == 2">￥{{list.price}}元 - {{list.pricetwo}}元</i>
+                                            <i v-cloak v-if="list.pricetype == 3">面议</i>
+                                        </span>
+                                        <span v-if="list.isscience == 1" > <i class="bzmoney">补助金额：{{list.subsidy}}元</i></span>
+                                        <s @click="placeOrder(list.productname,list.serviceId,list.productId,list.price,list.id,list.pricetype,list.price,list.pricetwo);compute();">立即下单</s>
+                                    </p>
+                                </li>
+                            </ul>
+                            <!-- 分页 -->
+                            <div class="page_box ac">
+                                <mypagenation :page="page" @btn-click="clickPage"></mypagenation>
+                            </div>
+                            <!-- 分页 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section v-cloak>
+            <div v-cloak class="contract_mask" v-show="reminder"></div>
+            <div v-cloak class="read_over" v-show="reminder">
+                <div id="look" class="next_page">
+                    <div class="table_top">
+                        <p>产品下单<i>（产品下单目前不需要付款）</i></p>
+                        <s class="fa close_login fr" @click="reminder=false"></s>
+                    </div>
+                    <div class="table_bottom_box1 overbooking">
+                        <p>
+                            <span>下单产品：</span>
+                            {{productname}}
+                        </p>
+                        <p class="price">
+                            <span>单价：</span>
+                            <s>{{priceOrder}}</s><i v-if="priceOrder!='面议'">元</i>
+                        </p>
+                    </div>
+                    <div class="table_bottom_box1">
+                        <p class="other_info" @click="userOrder()">
+                            使用其他企业信息下单>>
+                        </p>
+                        <p>
+                            <span><i>*</i>数量：</span>
+                            <input type="text" name="number" v-model="number" id="shuliang" @blur="compute()" placeholder="请输入数量">
+                        </p>
+                        <p>
+                            <span><i>*</i>企业名字：</span>
+                            <input type="text" name="companyName" v-model="companyName" placeholder="请输入企业名字">
+                        </p>
+                        <p class="clearfix">
+                            <span class="fl"><i>*</i>所在地区：</span>
+                            <a href="javascript:void(0)" style="width: 200px;" class="pick-area1 pick-area5 fl" name="请选择省/请选择市/请选择区"></a>
+                        </p>
+                        <p><span><i>*</i>联系人：</span><input type="text" name="name" v-model="name" placeholder="请填写您的姓名"></p>
+                        <p><span><i>*</i>手机号码：</span><input type="text" name="phone" v-model="phone" placeholder="请输入手机号码"></p>
+                        <p><span class="beizhu_s"><i></i>备注：</span>
+                            <textarea name="beizhu" id="beizhu" v-model="beizhu" maxlength="300" rows="20" placeholder="填写个人基本信息"></textarea>
+                        </p>
+                    </div>
+                    <div class="table_bottom_box1 overbooking-top">
+                        <p class="price">
+                            <span>总价：</span>
+                            <s>{{needMoney}}</s><i v-if="priceOrder!='面议'">元</i>
+                        </p>
+                    </div>
+                    <div class="table_bottom ac">   
+                        <div class="table_bottom_box">
+                            <input type="button" id="submitRegs" class="use_honey ac dddd" @click="Overbooking()" value="确认">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div v-cloak class="contract_mask" v-show="userOrderInfo" style="z-index:1003;"></div>
+            <div v-cloak class="read_over" v-show="userOrderInfo">
+                <div id="look" class="next_page2">
+                    <div class="table_top">
+                        <p>历史企业信息</p>
+                        <s class="fa close_login fr" @click="userOrderInfo=false"></s>
+                    </div>
+                    <div class="accessory1 clearfix">
+                        <div class="info-company-box">
+                            <div  v-for="(list,index) in orderList" class="clearfix">
+                                <div class="company-tit2 fl"  @click="mun=list.id;choiceDefault(list.companyName,list.province,list.city,list.area,list.phone,list.linkman,list.remark)" :class="{active:mun==list.id}">
+                                    <h2>{{list.companyName}}</h2>
+                                    <p><span>
+                                        <i v-if="list.province != ''">{{list.province}}/</i>
+                                        <i v-if="list.city != ''">{{list.city}}/</i>
+                                        <i v-if="list.area != ''">{{list.area}}</i>
+                                    </span> <i>{{list.linkman}}</i>|<i>{{list.phone}}</i></p>
+                                </div>
+                                <div class="control2 fl">
+                                    <p @click="deleteOrder(list.id)">删除</p>
+                                    <p @click="setDefault(list.id)">设为默认</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+        <section v-cloak>
+            <!-- 添加弹框-->
+            <div v-cloak class="contract_mask" v-show="honeyInfo3"></div>
+            <div v-cloak class="read_over" v-show="honeyInfo3">
+                <div id="look" class="next_page" style="height:300px;">
+                    <div class="table_top">
+                        <p>订单删除提示<i>(删除后将无法恢复)</i></p>
+                        <s class="fa close_login fr" @click="honeyInfo3=false"></s>
+                    </div>
+                    <div class="table_bottom ac middle_ipt">
+                        <p style="margin-top: 60px;margin-bottom: 60px;">删除订单：{{offproductName}}</p>
+                    </div>
+                    <div class="table_bottom ac">
+                        <p>
+                            <a href="javascript:void(0)" class="use_honey buy_honey ac" @click="honeyInfo3=false">取消</a>
+                            <a href="javascript:void(0)" class="use_honey ac" @click="getCancel()">确认</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- 删除成功 -->
+        <div v-cloak class="submitaudit submitaudit1" v-show="auditframe">
+            <div class="submitAuditHeader clearfix">
+                <i @click="auditframe=false"></i>
+                <s></s>
+            </div>
+            <h3>删除成功</h3>
+        </div>
+        <!-- 设为默认成功 -->
+        <div v-cloak class="submitaudit submitaudit1" v-show="auditframe1">
+            <div class="submitAuditHeader clearfix">
+                <i @click="auditframe1=false"></i>
+                <s></s>
+            </div>
+            <h3>设为默认成功</h3>
+        </div>
+        <!-- 下单成功 -->
+        <div v-cloak class="submitaudit submitaudit1" v-show="auditframe2">
+            <div class="submitAuditHeader clearfix">
+                <i @click="auditframe2=false"></i>
+                <s></s>
+            </div>
+            <h3>下单成功</h3>
+        </div>
+        <footer>
+            <div>COPYRIGHT © 版权归属 广州高企云信息科技有限公司 粤ICP备16007486号-1</div>
+        </footer>
+    </div>
+    <!-- 公共js部分 -->
+    <th:block th:include="block/footlink :: copy" /> 
+    <!-- over -->
+    <script type="text/javascript" th:src="@{/statics/js/pick-pcc.min.1.0.1.js?v=0.0.3}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/user/cart.js?v=0.0.8}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/user/part_tab.js?v=0.0.2}"></script>
+    <th:block th:include="block/statistics :: copy" />
+</body>
+
+</html>

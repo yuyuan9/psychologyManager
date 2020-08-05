@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+</head>
+
+<body>
+    <div th:fragment="copy">
+        <div class="search clearfix">
+            <div class="search_l fl clearfix">
+                <div class="search_logo fl">
+                    <a href="/ht-biz/library/index?curPolicy=8">
+                        <img src="/statics/images/library/lib_logo.png" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="search_r fl clearfix">
+                <div class="search_ipt fl clearfix">
+                    <div class="search_ipt_bottom fl clearfix">
+                        <input class="fl" v-model="keywords" type="text" @keyup.enter="conceal=1;key = 1;getRegion(0);" placeholder="请输入政策关键字，如“高新技术企业”">
+                        <s class="fl" @click="conceal=1;key = 1;getRegion(0);" >
+                            <i></i>
+                        </s>
+                    </div>
+                    <!-- 提取片段 -->
+                    <div th:replace="~{block/hot_word::library}"></div>
+                    <!-- over -->
+                </div>
+                <div class="search_xcx fl clesrfix">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.biz.mapper.CustomerSendMapper">
+<resultMap type="com.ht.entity.policydig.CustomerSend" id="CustomerSendResultMap">
+<id column="id" property="id"/>
+<result column="ip" property="ip"/>
+<result column="packageId" property="packageId"/>
+<result column="interfaceName" property="interfaceName"/>
+<result column="customerId" property="customerId"/>
+<result column="createdate" property="createdate"/>
+<result column="createid" property="createid"/>
+<result column="lastmodified" property="lastmodified"/>
+<result column="regionid" property="regionid"/>
+</resultMap>
+
+<select id="findlistPage" resultType="com.ht.commons.utils.PageData" parameterType="com.ht.commons.utils.MyPage">
+ select
+ t.id, 
+ IFNULL(p.name,'--') policyPackageName,p.msg,p.email,IFNULL(c.name,'--') customerName,t.createdate,IFNULL(c.phone,'--') phone from t_customer_send t 
+ LEFT JOIN t_policy_package p on t.packageId=p.id
+ LEFT JOIN t_customer_info c on t.customerId=c.id
+ where 1=1
+ <if test="pd.keyword!=null and pd.keyword!=''">
+ 	and 
+ 	(
+ 		p.name like CONCAT(CONCAT('%', #{pd.keyword}),'%')
+ 		or 
+ 		c.name like CONCAT(CONCAT('%', #{pd.keyword}),'%')
+ 		or 
+ 		c.phone like CONCAT(CONCAT('%', #{pd.keyword}),'%')
+ 	)
+ </if>
+</select>
+</mapper>

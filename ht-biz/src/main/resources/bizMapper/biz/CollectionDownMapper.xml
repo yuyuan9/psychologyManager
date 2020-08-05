@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.biz.mapper.CollectionDownMapper">
+
+
+    <!-- 开启二级缓存 -->
+    <!--<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>-->
+
+
+    <!-- type=0  我的收藏 ，type=1 我的下载 -->
+    <select id="findcolletionbyUserId"  parameterType="com.ht.commons.utils.PageData" resultType="com.ht.commons.utils.PageData">
+      select col.id,col.targetId,col.createdate ,
+        CASE col.clazzName
+          WHEN 'com.fh.entity.system.Library' THEN '文库'
+          WHEN 'com.ht.entity.biz.library.ResourcePage' THEN '资源包'
+          WHEN 'com.ht.entity.policydig.PolicyDig' THEN '政策速递'
+          ELSE '其他'
+          END as clazzName,
+
+        CASE col.clazzName
+          WHEN 'com.fh.entity.system.Library' THEN (lib.browsecount+lib.jbrowsecount)
+          WHEN 'com.ht.entity.biz.library.ResourcePage' THEN (res.browsecount+res.jbrowsecount)
+          WHEN 'com.ht.entity.policydig.PolicyDig' THEN dig.browsecount
+          ELSE '其他'
+          END as bro,
+        CASE col.clazzName
+        WHEN 'com.fh.entity.system.Library' THEN lib.title
+        WHEN 'com.ht.entity.biz.library.ResourcePage' THEN res.`name`
+        WHEN 'com.ht.entity.policydig.PolicyDig' THEN dig.`title`
+        ELSE '其他'
+        END as libname
+
+           FROM t_collection_down  col
+           LEFT JOIN t_library  lib on lib.id=col.targetId
+           LEFT JOIN t_resource_page res on  res.id = col.targetId
+           LEFT JOIN t_policy_dig dig on  dig.id = col.targetId
+           where   col.createId=#{pd.createid}
+         <if test="pd.type != null">
+            and col.type =#{pd.type}
+        </if>
+        order by col.createdate desc
+    </select>
+
+
+</mapper>

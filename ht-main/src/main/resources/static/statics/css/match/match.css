@@ -1,0 +1,134 @@
+.page_content {
+    border-bottom: 1px solid #ccc;
+}
+.part2_top_choice .choice .choice_title {
+    width: 123px;
+}
+.wrap{
+    height: auto;
+    min-width: auto;
+}
+.result{
+    line-height: 46px;
+}
+.choice_content{
+    cursor: pointer;
+}
+.t1{width: 244px;}
+.t2{width: 90px;}
+.t3{width: 188px;}
+.t4{width: 190px;}
+.t5{width: 175px;}
+.t6{width: 155px;}
+.t7{width: 150px;}
+table>tbody .t1 td span {
+  width: 225px;
+}
+table>tbody .t2 td s {
+    width: 90px;
+    padding-left: 15px;
+}
+table>tbody .t3 td s {
+    width: 180px;
+    padding-left: 15px;
+}
+table>tbody .t4 td s {
+  width: 165px;
+}
+table>tbody .t5 td s {
+  width: 150px;
+}
+table>tbody .t6 td s {
+  width: 130px;
+}
+table>tbody .t7 td s {
+  width: 120px;
+}
+.t6>.tips1>P{width: auto;}
+.t3>.tips1>P{width: 500px;}
+.t4>.tips1>P{width: 400px;}
+
+.mainHolder {
+  width: 1200px;
+  height: 209px;
+  background: transparent;
+  position: absolute;
+  bottom: -20px;
+}
+.textHolder {
+  width: 100%;
+  height: 189px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+.textHolder::before {
+  content: '';
+  position: absolute;
+  top:0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(255, 255, 255, .85);
+  filter: blur(20px);
+}
+.textHolder::after {
+  content: "";
+  position: absolute;
+  top:0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(255, 255, 255, .3);
+  filter: blur(10px);
+}
+.textHolder>h3{
+  text-align: center;
+  font-size: 20px;
+  color: #3c64d7;
+  font-weight: bold;
+  position: relative;
+  z-index: 999;
+  margin-top: 45px;
+}
+.textHolder>h3>i{
+  color: #f6332e;
+}
+.textHolder>p {
+  width: 170px;
+  height: 40px;
+  margin: 0 auto;
+  margin-top: 30px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 16px;
+  color: #fff;
+  position: relative;
+  z-index: 999;
+  cursor: pointer;
+  background: -webkit-linear-gradient(left, #ff7d4a, #ff4a2b);
+  background: -o-linear-gradient(left, #ff7d4a, #ff4a2b);
+  background: -moz-linear-gradient(left, #ff7d4a, #ff4a2b);
+  background: linear-gradient(left, #ff7d4a, #ff4a2b);
+  border-radius: 5px;
+}
+.part2_list_content{
+  position: relative;
+  /* overflow: hidden; */
+}
+.part2_top_choice .choice span.choice_content {
+  margin-right: 20px;
+}
+
+.not-find1 {
+  padding: 50px 0;
+}
+
+.not-find1>a {
+  display: block;
+  width: 400px;
+  height: 199px;
+  margin: 0 auto;
+  background: url("../../images/match/nofind-mach.png")no-repeat center;
+}

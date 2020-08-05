@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+<link rel="stylesheet" th:href="@{/statics/app/css/reset.css}">
+<link rel="stylesheet" th:href="@{/statics/app/css/login/login.css}">
+
+<head>
+   
+<style>
+</style>
+</head>
+<body>
+    <div id="l-r">
+        <div class="reset">
+            <div class="w">
+                <div class="w1"></div>
+                <div class="reset_tip"><i class="dib to_login"></i>设置密码</div>
+            </div>
+            <!-- 重置密码 -->
+            <div class="login-info clearfix">
+                <div class="phone">
+                    <i class="login-icon">*</i>
+                    <span class="login-title">手机号码:</span>
+                    <input type="text" placeholder="请输入您的手机号码">
+                    <!-- <p class="line"></p> -->
+                </div>
+                <div class="phone">
+                    <i class="login-icon">*</i>
+                    <span class="login-title">图形验证:</span>
+                    <input type="text" placeholder="请输入右边图形验证码">
+                    <div class="r_img fr"><img src="" alt=""></div>
+                    <!-- <p class="line"></p> -->
+                </div>
+                <div class="phone">
+                    <i class="login-icon">*</i>
+                    <span class="login-title">短信验证:</span>
+                    <input type="text" placeholder="请输入短信验证码">
+                    <div class="fr">
+                        <button class="r_code">点击获取</button>
+                    </div>
+                    <!-- <p class="line"></p> -->
+                </div>
+                <div class="phone">
+                    <i class="login-icon">*</i>
+                    <span class="login-title">设置密码:</span>
+                    <input type="password" placeholder="请设置账号密码">
+                    <!-- <p class="line"></p> -->
+                </div>
+                <div class="phone">
+                    <i class="login-icon">*</i>
+                    <span class="login-title">确认密码:</span>
+                    <input type="password" placeholder="请再次确认账号密码">
+                    <!-- <p class="line"></p> -->
+                </div>
+                <div>
+                    <button class="r_btn"  @click="isShow = true">确认修改</button>
+                </div>
+            </div>
+            <!-- 重置密码弹窗 -->
+            <div class="reser_main clearfix" v-if="isShow == true">
+                <div class="reset_s"></div>
+                <div class="reset_ts">密码设置成功</div>
+                <div class="dl">
+                    <a href="">立即登录</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" th:src="@{/statics/app/js/vue.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/reset/reset.js}"></script>
+</body>
+
+</html>

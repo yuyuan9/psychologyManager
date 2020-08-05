@@ -1,0 +1,33 @@
+
+  /* 弹框 */
+.submitaudit {width:340px;height:230px;z-index:999;position: fixed;top:27%;left: 50%;margin-left:-170px;cursor: pointer;
+    -moz-box-shadow: 10px 10px 15px #888888; 
+box-shadow: 10px 10px 15px #888888;
+    /* display: none; */
+    background:#fff;
+}
+.submitaudit1 {
+    width:340px;height:230px;z-index:999;position: fixed;top:27%;left: 50%;margin-left:-170px;cursor: pointer;
+    -moz-box-shadow: 10px 10px 15px #888888; 
+box-shadow: 10px 10px 15px #888888;
+    /* display: none; */
+    background:#fff;
+}
+.submitaudit>h3{
+    width: 100%;
+    background: #fff;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 0;
+}
+.submitAuditHeader {width:340px;height:158px;background:#fff;position:relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+.submitAuditHeader i {width:18px;height:18px;display:inline-block;background:url("../images/register_icon.png")-42px -3px;vertical-align:middle;position:absolute;top:4px;right:4px;cursor:pointer;}
+.submitAuditHeader s {margin-top:15px;width:165px;height:131px;display:inline-block;background:url("../images/user/user_coin.png");vertical-align:middle;float: left;padding: 18px;box-sizing: border-box;margin-left: 23px;}
+.submitAuditHeader h3 {font-size:16px;color:#333333;float: left;margin-top: 20px;}
+.submitAuditHeader h3 {font-size:14px;color:#999999;margin-top: 5px;}

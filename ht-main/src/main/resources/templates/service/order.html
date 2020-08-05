@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+     <!-- 公共头部 -->
+     <th:block th:include="block/headlink :: test('产品管理')" /> 
+     <!-- 结束 -->
+    <link rel="stylesheet" th:href="@{/statics/css/user/pagination.css}">
+    <link rel="stylesheet" th:href="@{/statics/css/service/index.css?v=0.0.2}">
+    <link rel="stylesheet" th:href="@{/statics/css/inquire/msgbox.css?v=0.0.1}">
+    <style>
+        .service_content>.service_details{
+            width: 973px;
+            height: 865px;
+            margin-left: 15px;
+            background-color: #fff;
+        }
+       .tit-r{display: inline;}
+    </style>
+</head>
+
+<body>
+    <div id="user">
+        <div th:replace="~{servive_nav::copy}"></div>
+    </div>
+    <div class="wrap" id="box">
+        <section>
+            <div class="service_content clearfix">
+                <div class="service_list fl clearfix">
+                    <div th:replace="~{service_com::copy}"></div>
+                </div>
+                <div class="service_details fl">
+                    <div class="info">
+                        <div class="info_detail">
+                            
+                            <div class="order_content company_info">
+                                <h2>订单管理</h2> 
+                                <div class="product_manage">
+                                    <div v-cloak class="doc_tit1 clearfix">
+                                        <div v-cloak @click="bar=0;getOrder()" :class="{active:bar==0}" class="fl">全部服务（{{total1}}）</div>
+                                        <div v-cloak @click="bar=1;getOrder()" :class="{active:bar==1}" class="fl">待服务（{{total2}}）</div>
+                                        <div v-cloak @click="bar=2;getOrder()" :class="{active:bar==2}" class="fl">交易完成（{{total3}}）</div>
+                                        <div v-cloak @click="bar=3;getOrder()" :class="{active:bar==3}" class="fl">拒接订单（{{total4}}）</div>
+                                        <!-- <div class="addPro"><i></i>添加产品</div> -->
+                                    </div>
+                                    <!-- * 全部服务 -->
+                                    <div v-cloak v-show="bar==0" class="product_details">
+                                        <ul class="product_name allservice">
+                                            <li class="p1">产品名称</li>
+                                            <li class="p2">价格（元）</li>
+                                            <li class="p3">下单用户</li>
+                                            <li class="p4">订单状态</li>
+                                            <li class="p5">下单时间</li>
+                                            <li class="p6">操作</li>
+                                        </ul>
+                                        <ul v-for="(list,index) in toSubmitList" class="product_details_ul allservice different">
+                                            <li class="p1">
+                                                <a class="fl" target="_blank" :href="'/ht-biz/service/index/order_status?id='+list.id"><i>{{index+1}}</i>{{list.productName}}</a> 
+                                            </li>
+                                            <li class="p2">
+                                                <span v-if="list.productPrice>0">{{list.productPrice}}</span>
+                                                <span v-if="list.productPrice==0">面议</span>
+                                            </li>
+                                            <li class="p3">{{list.createid}}</li>
+                                            <li class="p4">
+                                                <!-- status=0待服务status=1交易完成status=2拒接服务 -->
+                                                <i v-if="list.status == 0">待服务</i>
+                                                <i v-if="list.status == 1">交易完成</i>
+                                                <i v-if="list.status == 2">拒接服务</i>
+                                            </li>
+                                            <li class="p5">{{list.createdate | date}}</li>
+                                            <li class="p6 clearfix">
+                                                <!-- <span @click="getrefuse(list.id,list.createid,list.productName)" class="fu1">拒绝</span>
+                                                <span @click="sureService(list.id,list.createid,list.productName,list.productCounts,list.productPrice,list.serviceCast)" class="fu2">开始服务</span> -->
+                                                 <s class="fl" v-if="list.status == 0">
+                                                    <span @click="getrefuse(list.id,list.createid,list.productName)" class="fu1">拒绝</span>
+                                                    <span @click="sureService(list.id,list.createid,list.productName,list.productCounts,list.productPrice,list.serviceCast)" class="fu2">开始服务</span>
+                                                </s>
+                                                <s class="fl" v-else-if="list.status == 1">
+                                                    <span @click=deleteService(list.id,list.createid,list.productName,list.productCounts,list.productPrice,list.serviceCast) class="fu1">删除</span>
+                                                </s>
+                                                <s class="fl" v-else-if="list.status == 2">
+                                                    <span   @click=deleteService(list.id,list.createid,list.productName,list.productCounts,list.productPrice,list.serviceCast) class="fu1">删除</span>
+                                                </s>
+                                                <a class="fl" target="_blank" :href="'/ht-biz/service/index/order_status?id='+list.id"><span class="fu3">详情</span></a> 
+                                            </li>
+                                        </ul>
+                                        
+                                    </div>
+                                    <!-- * 待服务 -->
+                                    <div v-cloak v-show="bar==1" class="product_details">
+                                        <ul class="product_name allservice">
+                                            <li class="p1">产品名称</li>
+                                            <li class="p2">价格（元）</li>
+                                            <li class="p3">下单用户</li>
+                                            <li class="p4">订单状态</li>
+                                            <li class="p5">下单时间</li>
+                                            <li class="p6">操作</li>
+                                        </ul>
+                                        <ul v-for="(list,index) in toSubmitList" class="product_details_ul allservice different">
+                                            <li class="p1">
+                                                <a class="fl" target="_blank" :href="'/ht-biz/service/index/order_status?id='+list.id"><i>{{index+1}}</i>{{list.productName}}</a> 
+                                            </li>
+                                            <li class="p2">
+                                                <span v-if="list.productPrice>0">{{list.productPrice}}</span>
+                                                <span v-if="list.productPrice==0">面议</span>
+                                            </li>
+                                            <li class="p3">{{list.createid}}</li>
+                                            <li class="p4">
+                                                <!-- status=0待服务status=1交易完成status=2拒接服务 -->
+                                                <i v-if="list.status == 0">待服务</i>
+                                                <i v-if="list.status == 1">交易完成</i>
+                                                <i v-if="list.status == 2">拒接服务</i>
+                                            </li>
+                                            <li class="p5">{{list.createdate | date}}</li>
+                                            <li class="p6">
+                                                <span @click="getrefuse(list.id,list.createid,list.productName)" class="fu1">拒绝</span>
+                                                <span @click="sureService(list.id,list.createid,list.productName,list.productCounts,list.productPrice,list.serviceCast)" class="fu2">开始服务</span>
+                                                <a target="_blank" :href="'/ht-biz/service/index/order_status?id='+list.id"><span class="fu3">详情</span></a> 
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- * 交易完成 -->
+                                    <div v-cloak v-show="bar==2" class="product_details">
+                                        <ul class="product_name allservice duan">
+                                            <li class="p1">产品名称</li>
+                                            <li class="p2">价格（元）</li>
+                                            <li class="p3">下单用户</li>
+                                            <li class="p4">订单状态</li>
+                                            <li class="p5">下单时间</li>
+                                            <li class="p6">操作</li>
+                                        </ul>
+                                        <ul v-for="(list,index) in toSubmitList" class="product_details_ul allservice duan different">
+                                            <li class="p1">
+                                                <a class="fl" target="_blank" :href="'/ht-biz/service/index/order_status?id='+list.id"><i>{{index+1}}</i>{{list.productName}}</a> 
+                                            </li>
+                                            <li class="p2">
+                                                <span v-if="list.productPrice>0">{{list.productPrice}}</span>
+                                                <span v-if="list.productPrice==0">面议</span>
+                                            </li>
+                                            <li class="p3">{{list.createid}}</li>
+                                            <li class="p4">
+                                                <!-- status=0待服务status=1交易完成status=2拒接服务 -->
+                                                <i v-if="list.status == 0">待服务</i>
+                                                <i v-if="list.status == 1">交易完成</i>
+                                                <i v-if="list.status == 2">拒接服务</i>
+                                            </li>
+                                            <li class="p5">{{list.createdate | date}}</li>
+                                            <li class="p6">
+                                                <span @click=deleteService(list.id,list.createid,list.productName,list.productCounts,list.productPrice,list.serviceCast) class="fu1">删除</span>
+                                                <a target="_blank" :href="'/ht-biz/service/index/order_status?id='+list.id"><span class="fu3">详情</span></a> 
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- * 拒接订单 -->
+                                    <div v-cloak v-show="bar==3" class="product_details">
+                                        <ul class="product_name allservice duan">
+                                            <li class="p1">产品名称</li>
+                                            <li class="p2">价格（元）</li>
+                                            <li class="p3">下单用户</li>
+                                            <li class="p4">订单状态</li>
+                                            <li class="p5">下单时间</li>
+                                            <li class="p6">操作</li>
+                                        </ul>
+                                        <ul v-for="(list,index) in toSubmitList" class="product_details_ul allservice duan different">
+                                            <li class="p1">
+                                                <a class="fl" target="_blank" :href="'/ht-biz/service/index/order_status?id='+list.id"><i>{{index+1}}</i>{{list.productName}}</a> 
+                                            </li>
+                                            <li class="p2">
+                                                <span v-if="list.productPrice>0">{{list.productPrice}}</span>
+                                                <span v-if="list.productPrice==0">面议</span>
+                                            </li>
+                                            <li class="p3">{{list.createid}}</li>
+                                            <li class="p4">
+                                                <!-- status=0待服务status=1交易完成status=2拒接服务 -->
+                                                <i v-if="list.status == 0">待服务</i>
+                                                <i v-if="list.status == 1">交易完成</i>
+                                                <i v-if="list.status == 2">拒接服务</i>
+                                            </li>
+                                            <li class="p5">{{list.createdate | date}}</li>
+                                            <li class="p6">
+                                                <span @click=deleteService(list.id,list.createid,list.productName,list.productCounts,list.productPrice,list.serviceCast) class="fu1">删除</span>
+                                                <a target="_blank" :href="'/ht-biz/service/index/order_status?id='+list.id"><span class="fu3">详情</span></a> 
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <!-- 分页 -->
+                                    <div class="page_box ac">
+                                        <mypagenation :page="page" @btn-click="clickPage"></mypagenation>
+                                    </div>
+                                    <!-- 分页 -->
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section v-cloak>
+            <!-- 产品拒接提示-->
+            <div v-cloak class="contract_mask" v-show="honeyInfo1"></div>
+            <div v-cloak class="read_over" v-show="honeyInfo1">
+                <div id="look" class="next_page">
+                    <div class="table_top">
+                        <p>产品拒接提示</p>
+                        <s class="fa close_login fr" @click="honeyInfo1=false"></s>
+                    </div>
+                    <div class="middle_ipt jiedan">
+                        <!-- <p style="margin-top: 20px;margin-bottom:20px;margin-left: 50px;">拒接产品：{{proname}}</p>
+                        <p style="margin-top: 20px;margin-bottom:20px;margin-left: 50px;">下单人：{{username}}</p> -->
+                        <p><span class="ntit-l">拒接产品：</span><i class="ntit-r">{{proname}}</i></p>
+                        <p><span class="ntit-l">下单人：</span><i class="ntit-r">{{username}}</i></p>
+                        <p class="clearfix" style="margin-top: 20px;">
+                            <span class="ntit-l fl">拒接理由：</span>
+                            <i  class="ntit-r fl">
+                                <textarea v-model="refuse" style="width: 320px;height: 69px;" name="reason" placeholder="请填写拒接理由"></textarea>
+                            </i>
+                            
+                        </p>
+                    </div>
+                    <div class="table_bottom ac table_bottom_xian">
+                        <p>
+                            <a href="javascript:void(0)" class="use_honey buy_honey ac" @click="cancel()">取消</a>
+                            <a href="javascript:void(0)" class="use_honey ac" @click="sureFuse()">确认拒接</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+         <section v-cloak>
+            <!-- 产品拒接提示-->
+            <div v-cloak class="contract_mask" v-show="honeyInfo2"></div>
+            <div v-cloak class="read_over" v-show="honeyInfo2">
+                <div id="look" class="next_page">
+                    <div class="table_top">
+                        <p>产品接单提示</p>
+                        <s class="fa close_login fr" @click="honeyInfo2=false"></s>
+                    </div>
+                    <div class="middle_ipt jiedan clearfix">
+                        <p><span class="tit-l">拒接产品：</span><i class="tit-r">{{proname}}</i></p>
+                        <p><span class="tit-l">下单人：</span><i class="tit-r">{{username}}</i></p>
+                        <p><span class="tit-l">产品单价：</span>
+                            <i class="tit-r" v-if="productPrice>0">{{productPrice}}元</i>
+                            <i class="tit-r" v-if="productPrice==0">面议</i>
+                        </p>
+                        <p><span class="tit-l">数量：</span><i class="tit-r">{{productCounts}}</i></p>
+                        <p><span class="tit-l">产品总价：</span>
+                            <i class="tit-r color" v-if="serviceCast>0">{{serviceCast}}<s>元</s></i>
+                            <i class="tit-r color" v-if="serviceCast==0">面议</i>
+                        </p>
+                    </div>
+                    <div class="table_bottom ac table_bottom_xian">
+                        <p>
+                            <a href="javascript:void(0)" class="use_honey buy_honey ac" @click="cancel()">取消</a>
+                            <a href="javascript:void(0)" class="use_honey ac" @click="sureOrder()">开始服务</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section v-cloak>
+            <!-- 产品拒接提示-->
+            <div v-cloak class="contract_mask" v-show="honeyInfo3"></div>
+            <div v-cloak class="read_over" v-show="honeyInfo3">
+                <div id="look" class="next_page" style="height: 300px;">
+                    <div class="table_top">
+                        <p>产品删除提示</p>
+                        <s class="fa close_login fr" @click="honeyInfo3=false"></s>
+                    </div>
+                    <div class="middle_ipt jiedan clearfix" style="height: 150px;">
+                        <p style="margin-top: 60px; font-size: 18px;"><span class="tit-l">删除订单：</span><i class="tit-r">{{proname}}</i></p>
+                        <!-- <p><span class="tit-l">下单人：</span><i class="tit-r">{{username}}</i></p>
+                        <p><span class="tit-l">产品单价：</span>
+                            <i class="tit-r" v-if="productPrice>0">{{productPrice}}元</i>
+                            <i class="tit-r" v-if="productPrice==0">面议</i>
+                        </p>
+                        <p><span class="tit-l">数量：</span><i class="tit-r">{{productCounts}}</i></p>
+                        <p><span class="tit-l">产品总价：</span>
+                            <i class="tit-r color" v-if="serviceCast>0">{{serviceCast}}<s>元</s></i>
+                            <i class="tit-r color" v-if="serviceCast==0">面议</i>
+                        </p> -->
+                    </div>
+                    <div class="table_bottom ac table_bottom_xian">
+                        <p>
+                            <a href="javascript:void(0)" class="use_honey buy_honey ac" @click="cancel()">取消</a>
+                            <a href="javascript:void(0)" class="use_honey ac" @click="sureDetele()">删除</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- 恭喜您，该订单接单成功 -->
+        <div v-cloak class="submitaudit" v-show="saveframe">
+            <div class="submitAuditHeader clearfix">
+                <i @click="saveframe=false"></i>
+                <s></s>
+            </div>
+            <h3>恭喜您，该订单接单成功</h3>
+        </div>
+        <!-- 该订单已拒接 -->
+        <div v-cloak class="submitaudit" v-show="saveframe2">
+            <div class="submitAuditHeader clearfix">
+                <i @click="saveframe2=false"></i>
+                <s></s>
+            </div>
+            <h3>该订单已拒接</h3>
+        </div>
+        <!-- 该订单已拒接 -->
+        <div v-cloak class="submitaudit" v-show="saveframe3">
+            <div class="submitAuditHeader clearfix">
+                <i @click="saveframe3=false"></i>
+                <s></s>
+            </div>
+            <h3>删除成功</h3>
+        </div>
+        <footer>
+            <div class="copyright ac">
+                <p>COPYRIGHT © 版本归属 广州高企云信息科技有限公司 粤ICP备16007486号-1</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- 公共js部分 -->
+    <th:block th:include="block/footlink :: copy" /> 
+    <!-- over -->
+    <script type="text/javascript" th:src="@{/statics/js/service/order.js?v=0.0.3}"></script>
+    <th:block th:include="block/service_each :: copy" />
+    <th:block th:include="block/statistics :: copy" />
+    
+</body>
+
+</html>

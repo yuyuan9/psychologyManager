@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+</head>
+
+<body>
+    <div th:fragment="copy">
+        <section class="head clearfix">
+                <div class="search clearfix">
+                    <div class="search_l fl clearfix">
+                        <div class="search_logo fl">
+                            <a href="/ht-biz/policydig/index"><img src="/statics/images/policydig/zcsd.png" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="search_r fl clearfix">
+                        <div class="search_ipt fl clearfix">
+    
+                            <div class="search_ipt_top fl clearfix">
+                                <input class="fl" v-model="keyword" @keyup.enter="conceal=1;getContent();" type="text" placeholder="请输入你想了解的地区政策关键字">
+                                <s class="fl" @click="conceal=1;getContent();">
+                                    <i></i>
+                                </s>    
+                            </div>
+                            <!-- 提取片段 -->
+                            <div th:replace="~{block/hot_word::policy}"></div>
+                            <!-- over -->
+                        </div>
+                        <div class="search_xcx fl clesrfix">
+                        </div>
+                    </div>
+                    <div style="clear: both"></div>
+                    <!-- <div class="navigation clearfix">
+                        <p class="bread_nav fl">
+                            <a>当前位置：</a>
+                            <a href="/">首页</a> > <a href="/ht-biz/policydig/index">政策速递</a>
+                        </p>
+                        
+                    </div> -->
+                </div>
+    
+        </section>
+    </div>
+</body>
+
+</html>

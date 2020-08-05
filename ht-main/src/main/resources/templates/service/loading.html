@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+     <!-- 公共头部 -->
+     <th:block th:include="block/headlink :: test('等待审核')" /> 
+     <!-- 结束 -->
+    <link rel="stylesheet" th:href="@{/statics/css/service/index.css?v=0.0.1}">
+    <style>
+        /* 媒体查询 适应屏幕 */
+        @media (min-width: 1024px){
+        } /*>=1024的设备*/
+        @media (min-width: 1100px) {
+        } /*>=1024的设备*/
+        @media (min-width: 1280px) {
+        } 
+        @media (min-width: 1366px) {
+        }  
+        @media (min-width: 1440px) {
+        } 
+        @media (min-width: 1680px) {
+        } 
+        @media (min-width: 1920px) {
+        } 
+        .page_content{
+            background: #fff;
+        }
+        body{
+            height: 100%;
+        }
+        .wrap {
+            width: 100%;
+            height: 100%;
+            min-height: 920px;
+            position: relative;
+        }
+        .register_box {
+            width: 100%;
+        }
+        #box{
+            width: 100%;
+        }
+        .box_img{
+            text-align: center;
+            margin-top: 120px;
+            /* display: flex;
+            justify-content: center;
+            align-items: center; */
+        }
+        .box_img>h2{
+            text-align: center;
+            color: #000;
+            font-size: 25px;
+            font-weight: 600;
+            margin: 20px 0;
+        }
+        .box_img>p{
+            text-align: center;
+            color: #000;
+            font-size: 18px;
+        }
+        .btn>a{
+            display: inline-block;
+            border: 1px solid red;
+            border-radius: 5px;
+            text-align: center;
+            width: 245px;
+            height: 36px;
+            line-height: 36px;
+            margin-top: 20px;
+        }
+        .btn>a:nth-child(2){
+            background: -webkit-linear-gradient(left,#ff4a2b,#ff7a4a);
+            background: -o-linear-gradient(left,#ff4a2b,#ff7a4a);
+            background: -moz-linear-gradient(left,#ff4a2b,#ff7a4a);
+            background: linear-gradient(left,#ff4a2b,#ff7a4a);
+            color: #fff;
+        }
+        .btn>a:nth-child(1){
+            background: #fff;
+            color: #ff4a2b;
+        }
+        footer {
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            height: 50px;
+            font-size: 14px;
+            background-color: #232323;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <!-- 头部 -->
+        <div th:replace="~{service_head::copy}"></div>
+        <!--  -->
+
+        <div id="box">
+            <div class="box_img">
+                <img src="/statics/images/service/service_audit.png" alt="">
+                <h2>正在审核中</h2>
+                <p>您所提交的信息正在审核中，请耐心等待</p>
+                <p class="btn">
+                    <a href="/ht-biz/service/index/index" class="">返回</a> 
+                    <a href="/ht-biz/usercenter/user/index" class="">前往个人云中心</a> 
+                </p>
+            </div>
+            
+            <footer>
+                <div class="copyright ac">
+                    <p>COPYRIGHT © 版本归属 广州高企云信息科技有限公司 粤ICP备16007486号-1</p>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <!-- 公共js部分 -->
+    <th:block th:include="block/footlink :: copy" /> 
+    <!-- over -->
+    <th:block th:include="block/service_each :: copy" />
+    <th:block th:include="block/statistics :: copy" />
+</body>
+
+</html>

@@ -1,0 +1,110 @@
+.i_result {
+    width: 100%;
+    height: 100vh;
+    background-color: #ffffff;
+}
+.to {
+    margin: 0 4.2667vw 7.4667vw 4.2667vw;
+    padding-top: 4.2667vw;
+}
+.initial_p {
+    font-size: 4.2667vw;
+    color: #333333;
+    font-weight:500;
+}
+.to_initial {
+    width: 2.1333vw;
+    height: 3.2vw;
+    background: url("../../images/yidong_icons/phone_icons.png") -35.2667vw -13.5333vw no-repeat;
+    background-size: 40vw 40vw;
+    margin-right: 2.1333vw;
+}
+.result {
+    padding-right: 1.5333vw;
+}
+.result_t {
+    font-size: 3.2vw;
+    color: #999999;
+}
+.result_t1 {
+    width: 50%;
+}
+.result_scale {
+    width: 49%;
+}
+.result_total {
+    color: #F33838;
+}
+.search_result {
+    padding: 0 4.2667vw;
+    background-color: #ffffff;
+}
+.result_line {
+    border-bottom: 0.8vw solid #4B88F8;
+    margin-top: 3.2vw;
+}
+.result_lines {
+    border-bottom: 0.8vw solid #4B88F8;
+    margin-top: 1.2vw;
+}
+.data_name {
+    width: 69.8667vw;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    font-size: 3.7333vw;
+    color: #333333;
+}
+.data_classfy {
+    font-size: 2.6667vw;
+    color: #F04E40;
+    padding: 0.5333vw;
+    background-color: #FEEDEC;
+    margin-right: 1.6vw;
+}
+.name_cy {
+    /* display: block; */
+    margin-top: 3.7333vw;
+    display: flex;
+}
+.data_b {
+    font-size: 2.6667vw;
+    margin-top: 1.6vw;
+    color: #999999;
+    display: flex;
+}
+.sbyy{
+    display: flex;
+    margin-right: 7.4667vw;
+}
+.peitao {
+    display: flex;
+}
+.sb_sense {
+    width: 41.6vw;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+.sb_time {
+    width: 16vw;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+.line {
+    border-bottom: 1px solid #DBDBDB;
+    margin-top: 3.2vw;
+}
+.result_line {
+    border-bottom: 0.8vw solid #4B88F8;
+    margin-top: 3.2vw;
+}
+.data_details {
+    width: 2.1333vw;
+    height: 4vw;
+    background: url("../../images/yidong_icons/phone_icons.png") -32.7667vw -8.1333vw no-repeat;
+    background-size: 40vw 40vw;
+    vertical-align: middle;
+    margin-left: 4.8vw;
+}

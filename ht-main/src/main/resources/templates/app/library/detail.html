@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="keyword" content="${keywords}" />
+    <meta name="description" content="${description}" />
+    <meta name="applicable-device" content="mobile">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <!-- 是否启动webapp功能，会删除默认的苹果工具栏和菜单栏。 -->
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <!-- 这个主要是根据实际的页面设计的主体色为搭配来进行设置。 -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <!-- 忽略页面中的数字识别为电话号码,email识别 -->
+    <meta name="format-detection" content="telephone=no, email=no"/>
+    <!-- 启用360浏览器的极速模式(webkit) -->
+    <meta name="renderer" content="webkit">
+    <!-- 避免IE使用兼容模式 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 针对手持设备优化，主要是针对一些老的不识别viewport的浏览器，比如黑莓 -->
+    <meta name="HandheldFriendly" content="true">
+    <!-- 微软的老式浏览器 -->
+    <meta name="MobileOptimized" content="320">
+    <!-- uc强制竖屏 -->
+    <meta name="screen-orientation" content="portrait">
+    <!-- QQ强制竖屏 -->
+    <meta name="x5-orientation" content="portrait">
+    <!-- UC强制全屏 -->
+    <meta name="full-screen" content="yes">
+    <!-- QQ强制全屏 -->
+    <meta name="x5-fullscreen" content="true">
+    <!-- UC应用模式 -->
+    <meta name="browsermode" content="application">
+    <!-- QQ应用模式 -->
+    <meta name="x5-page-mode" content="app">
+    <!-- windows phone 点击无高光 -->
+    <meta name="msapplication-tap-highlight" content="no">
+    <title th:text="${title}">111</title>
+    <link rel="shortcut icon" href="/statics/images/favicon.ico">
+    <link rel="icon" href="/statics/images/favicon.ico" type="image/x-icon" />
+    <link rel="Bookmark" href="/statics/images/favicon.ico">
+    <link rel="SHORTCUT ICON" href="/statics/images/favicon.ico" />
+
+    <link rel="stylesheet" th:href="@{/statics/app/css/library/mobilereset.css?v=0.0.3}">
+    <link rel="stylesheet" th:href="@{/statics/app/css/library/common.css?v=0.0.3}">
+    <link rel="stylesheet" th:href="@{/statics/app/css/library/library_detail.css?v=0.0.2}">
+    <style>
+            [v-cloak] {
+                display: none;
+            }
+            /* nav .ht_nav li:nth-of-type(3) a {
+                color: #010832;
+            }
+            .pdf_top {
+                width: 100%;
+                height: 50px;
+                line-height: 50px;
+                background: #494949;
+                color: #fff;
+                text-align: center;
+            }
+            .pdf_top #prev,.pdf_top #next {
+                margin-left: 10px;
+                margin-right: 10px;
+                background: #414141;
+                font-size: 12px;
+                padding: 0 4px;
+            }
+            .pdf_top #small {
+                margin-left: 60px;
+                margin-right: 5px;
+                background: #414141;
+                font-size: 12px;
+                padding: 0 4px;
+            }
+            .pdf_top #big {
+                margin-left: 5px;
+                background: #414141;
+                font-size: 12px;
+                padding: 0 4px;
+            }
+            .document .doc_body .body_footer {
+                border-top: 1px solid #dbdbdb;
+            }
+            .recName{
+                display: inline-block;
+                width: 750px;
+                font-size: 20px;
+                color: #333;
+                font-weight: bold;
+                height: 28px;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+            .discuss_btn {
+                margin-top: -9px;
+            } */
+            .pdf_top {
+                width: 100%;
+                height: 80px;
+                line-height: 80px;
+                background: #494949;
+                color: #fff;
+                font-size: 0.3rem;
+            } 
+            
+            .pdf_top #small, .pdf_top #big {
+                display: inline-block;
+                height: 80px;
+                background: #414141;
+                color: #fff;
+                padding: 0 20px;
+                font-size: 0.3rem;
+                margin-right: 16px;
+                margin-left: 20px;
+            }
+            .pdf_top #big {
+                /* margin-left: 5px;
+                background: #414141;
+                font-size: 12px;
+                padding: 0 4px; */
+            }      
+            .pdf_top #prev,.pdf_top #next {
+                display: inline-block;
+                height: 80px;
+                background: #414141;
+                color: #fff;
+                padding: 0 20px;
+                font-size: 0.3rem;
+                margin-right: 16px;
+            }
+        </style>
+</head>
+<body>
+<div id="useobj">
+    <h3 class="main_logo"></h3>
+</div>
+
+<div id="box" v-cloak>
+		<div class="header_top ac">
+			<a href="javascript:history.go(-1)" class="left fl">
+				<s class="back fl"></s>
+			</a>
+			<span style="margin-left:-322px;" >阅读量：<span style="color:#fe8910;" th:text="${libary.browsecount}"></span>次</span>
+
+			<div class="operate fr">
+				<!-- <a v-cloak v-if="loginInfo.code==0" href="javascript:void(0)" class="downLoad fl" @click="downloadFile()"><s></s></a>
+				<a v-cloak v-else :href="'/beetl/app/vo_login.html?returnUrl='+returnurl" class="downLoad fl" @click="downloadFile()"><s></s></a>
+				<a v-cloak v-if="loginInfo.code==0" href="javascript:void(0)" class="downLoad collect fl" @click="doCheckCollection()"><s></s></a>
+                <a v-cloak v-else :href="'/beetl/app/vo_login.html?returnUrl='+returnurl" class="downLoad collect fl" @click="doCheckCollection()"><s></s></a> -->
+                <a v-cloak v-if="loginInfo.code==0" href="javascript:void(0)" class="downLoad fl" @click="downloadFile()"></a>
+				<a v-cloak v-else :href="'/beetl/app/vo_login.html?returnUrl='+returnurl" class="downLoad fl" @click="downloadFile()"></a>
+				<a v-cloak v-if="loginInfo.code==0" href="javascript:void(0)" class="downLoad collect fl" @click="doCheckCollection()"></a>
+				<a v-cloak v-else :href="'/beetl/app/vo_login.html?returnUrl='+returnurl" class="downLoad collect fl" @click="doCheckCollection()"></a>
+				<!--<a href="javascript:void(0)" class="downLoad share fl"><s></s></a>-->
+			</div>
+		</div>
+
+		<div class="pdfView" style="height: auto">
+			<div class="pdf_top">
+				<button id="prev">上一页</button>
+				<span>页码: <span id="page_num"></span> / <span id="page_count"></span></span>
+				<button id="next">下一页</button>
+				<button id="small">缩小</button>
+				<span id="pdf_size">100%</span>
+				<button id=big>放大</button>
+			</div>
+			<div class="pdf_show" style="width: 100%;overflow:auto;">
+				<canvas id="the-canvas"></canvas>
+			</div>
+
+			<!-- <div id="free_bottom" v-if="docDatas.downloadhoney==''||docDatas.downloadhoney==null" class="discuss1 btn_discuss1 clearfix"
+			 style="text-align: center;">
+				<div class="share share23"><s></s>
+					<p style="display:inline-block; font-size: 18px;color: #fff;">分享到：<p>
+							<div id="socialShare"></div>
+							<b class="shareclose">X</b>
+				</div>
+				<div class="discuss_left" id="share_free">
+					<div class="btn_page page_free">
+						<button class="prev" id="prev_down">上一页</button>
+						<span class="p_num">第<span class="page_num" id="page_num_down"></span>页</span><span style="color:white;">/ 第<span
+							 id="page_count_down"></span>页</span>
+						<button class="next" id="next_down">下一页</button>
+					</div>
+					<p class="sharweb" style="color:white"><b class="share_icon"></b>转发</p>
+					<span v-cloak id="sharweb" style="color:white;" class="collection shareweb " v-show="isCollection==false" @click="doCollection">
+						<s class="collection_icon"></s>
+						<span>收 藏</span>
+					</span>
+					<span id="sharweb" style="color:white;" v-cloak class="collection finish_collection active" v-show="isCollection==true">
+						<s class="collection_icon"></s>
+						<span>已收藏</span>
+					</span>
+				</div>
+				<div class='discuss_right' style="margin-top: -1px;">
+					<a href="javascript:void(0)" class="downloadhoney" @click="doDownload">
+						<s class="download_icon"></s>
+						<span>下载文档</span>
+					</a>
+				</div>
+			</div>
+
+			<div id="free_bottom2" v-if="docDatas.downloadhoney!=''" class="discuss1 btn_discuss1 clearfix">
+				<div class="share24"><s></s>
+					<p style="display:inline-block; font-size: 18px;color: #fff;">分享到：<p>
+							<div id="socialShare1"></div>
+							<b class="shareclose24">X</b>
+				</div>
+				<div class="discuss_left">
+					<div class="btn_page" style="margin-right:20px;">
+						<button class="prev" id="prev_down">上一页</button>
+						<span class="p_num">第<span class="page_num" id="page_num_down"></span>页</span> <span style="color:white;">/
+							第<span id="page_count_down"></span>页</span>
+						<button class="next" id="next_down">下一页</button>
+					</div>
+					<p class="sharweb" id="share_pay" style="color:white"><b class="share_icon"></b>转发</p>
+					<div id='shareweb1' style="width: 80px;padding:0px 2px 0px 2px;height: 50px;float:right;margin-left:5px;color:white;background-color: #414141;"
+					 v-cloak class="collection" v-show="isCollection==false" @click="doCollection">
+						<s class="collection_icon"></s>
+						<span>收 藏</span>
+					</div>
+					<div v-cloak class="collection finish_collection active" :class='{active:isCollection==true}' style="width: 80px;padding:0px 2px 0px 2px;float:right;margin-left:5px;height: 50px;color:white;background-color: #414141;"
+					 v-show="isCollection==true">
+						<s class="collection_icon"></s>
+						<span>已收藏</span>
+					</div>
+
+				</div>
+				<div class='discuss_right'>
+					<div v-cloak class="collection coll1" style="display:inline-block;">
+						<span v-if="docDatas.downloadhoney==''||docDatas.downloadhoney==null"><b class="icon_honey"></b>0<i>honey</i></span>
+						<span v-else><b class="icon_honey"></b>{{docDatas.downloadhoney}}<i>honey</i></span>
+					</div>
+					<input type="button" class='downloadhoney' @click="doDownload" value="下载文档">
+					<a href="javascript:void(0)" class="downloadhoney" @click="doDownload">
+						<s class="download_icon"></s>
+						<span>下载文档</span>
+					</a>
+				</div>
+			</div> -->
+
+
+			<!--  <iframe width="100%" height="100%" :src="'${ctx}/plugins/generic/web/viewer.html?file='+pdfData.pdfpath"></iframe> -->
+		</div>
+	</div>
+<footer class="footer ac">
+        高企云咨询:400-166-3308
+    </footer>
+
+    <script type="text/javascript" th:src="@{/statics/app/js/library/jquery.min.js?v=0.0.1}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/library/reset.js?v=0.0.1}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/library/vue.js?v=0.0.1}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/layer/layer.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/build/pdf.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/build/pdf.worker.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/library/moment.min.js?v=0.0.1}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/library/htajax.js?v=0.0.3}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/library/myuser.js?v=0.0.2}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/library/library_detail.js?v=0.0.2}"></script>
+    <script  th:inline="javascript" >
+  //懒加载方法
+  function test(name) {
+        if (name) {
+            this.layerIndex = layer.load(0, {
+                offset: ['50%', "42%"],
+                shade: false
+            })
+        } else {
+            layer.close(this.layerIndex); //完成加载后关闭loading
+        }
+    }
+
+    $(function () {
+            test(true);
+            // isdownloaded();
+            var id0 = $('.getId').val();
+            var pdfDoc = null,
+                pageNum = 1,
+                pageRendering = false,
+                pageNumPending = null,
+                scale = 1,
+                scaleChange = false,
+                canvas = document.getElementById('the-canvas'),
+                ctx = canvas.getContext('2d');
+            canvas.height = 600;
+            //下载接口 url
+            var url = '';
+            var id = [[${libary.id}]];
+            url = "/ht-biz/library/seekExperts?id=" + id;
+            // /upload_file/seekExperts
+            function renderPage(num) {
+                pageRendering = true;
+                // Using promise to fetch the page
+                pdfDoc.getPage(num).then(function (page) {
+                    var viewport = page.getViewport(1);
+                    if (!scaleChange) {
+                        var desiredWidth = "900";
+                        scale = desiredWidth / viewport.width;
+                    }
+                    viewport = page.getViewport(scale);
+                    canvas.height = viewport.height;
+                    canvas.width = viewport.width;
+                    // Render PDF page into canvas context
+                    var renderContext = {
+                        canvasContext: ctx,
+                        viewport: viewport
+                    };
+                    var renderTask = page.render(renderContext);
+                    // Wait for rendering to finish
+                    renderTask.promise.then(function () {
+                        pageRendering = false;
+                        if (pageNumPending !== null) {
+                            // New page rendering is pending
+                            renderPage(pageNumPending);
+                            pageNumPending = null;
+                        }
+                    });
+                    
+                });
+                // Update page counters
+                // $("#page_num_down_one").html(num);
+                // $(".page_last").html(pdfDoc.numPages-num);
+                document.getElementById('page_num').innerHTML = num;
+                // document.getElementById('page_count').textContent = num;
+            }
+            /**
+             * If another page rendering in progress, waits until the rendering is
+             * finised. Otherwise, executes rendering immediately.
+             */
+            function queueRenderPage(num) {
+                if (pageRendering) {
+                    pageNumPending = num;
+                } else {
+                    renderPage(num);
+                }
+            }
+            /**
+             * Displays previous page.
+             */
+            function onPrevPage() {
+                // $("html,body").animate({"scrollTop":"150"},300);
+                if (pageNum <= 1) {
+                    
+                    // $('.payshow').hide(300);
+                    return;
+                }
+                pageNum--;
+                $("#look").hide();
+                // $(".contract_mask").hide();
+                // $('.payshow').hide(300);
+                // $('.freeshow').hide(300);
+                queueRenderPage(pageNum);
+            }
+             document.getElementById('prev').addEventListener('click', onPrevPage);
+            // document.getElementById('prev_down_one').addEventListener('click', onPrevPage);
+            // document.getElementById('pdf_prev').addEventListener('click', onPrevPage);
+            function onNextPage() {
+                // if (data.data.downloadhoney != 'null' && data.data.downloadhoney > 0) {
+							
+				// 		}
+                        // if (pageNum >= Math.floor(pdfDoc.numPages / 2)) {
+						// 		layer.msg('<span style="font-size:0.4rem;">请下载查看后续内容</span>');
+						// 		return;
+						// 	}
+						if (pageNum >= pdfDoc.numPages) {
+							return;
+						}
+						pageNum++;
+						queueRenderPage(pageNum);
+                //只能看1半，提示下载
+                // $("html,body").animate({"scrollTop":"150"},300);
+                //if (data.data.downloadhoney != 'null' && data.data.downloadhoney > 0) {}
+                // if (pageNum >= Math.floor(pdfDoc.numPages / 2)) {
+                    //layer.msg('请下载查看后续内容');
+                    // $("#look").show();
+                    // $(".contract_mask").show();
+                    // $(".close_login").click(function(){
+                    //     $("#look").hide();
+                    //     $(".contract_mask").hide();
+                    // })
+                    // $('.payshow').show(300);
+                    // return;
+                // }
+                // if (pageNum >= pdfDoc.numPages) {
+                //     $('.freeshow').show(300)
+                //     return;
+                // }
+                // pageNum++;
+                // queueRenderPage(pageNum);
+            }
+            document.getElementById('next').addEventListener('click', onNextPage);
+            // document.getElementById('next_down_one').addEventListener('click', onNextPage);
+            // document.getElementById('pdf_next').addEventListener('click', onNextPage);
+            /**
+             * Asynchronously downloads PDF.
+             */
+            PDFJS.getDocument(url).then(function (pdfDoc_) {
+                pdfDoc = pdfDoc_;
+                document.getElementById('page_count').textContent = pdfDoc.numPages;
+                // $("#page_count_down_one").html(pdfDoc.numPages);
+                // $(".page_last").html(pdfDoc.numPages-num);
+                // document.getElementById('page_count').textContent = pdfDoc.numPages;
+                // document.getElementById('page_count_down').textContent = pdfDoc.numPages;
+                // Initial/first page rendering
+                renderPage(pageNum);
+                test(false);
+            });
+            //放大
+            document.getElementById('big').addEventListener('click', function () {
+                scale += 0.1;
+                queueRenderPage(pageNum);
+                var sizeNum = (Math.round(scale * 10000) / 100) + '%';
+                document.getElementById('pdf_size').innerHTML = sizeNum;
+                scaleChange = true;
+            });
+            //初始化放大120%
+            // document.getElementById('pdf_size').innerHTML = '130%';
+            //缩小
+            document.getElementById('small').addEventListener('click', function () {
+                if (scale > 0.1) {
+                    scale -= 0.1;
+                    queueRenderPage(pageNum);
+                    var sizeNum = (Math.round(scale * 10000) / 100) + '%';
+                    document.getElementById('pdf_size').innerHTML = sizeNum;
+                } else {
+                    scale = 0;
+                    var sizeNum = (Math.round(scale * 10000) / 100) + '%';
+                    document.getElementById('pdf_size').innerHTML = sizeNum;
+                }
+                scaleChange = true;
+
+            });
+
+        });
+
+        
+        </script>
+<div style="display:none;"><script async src="http://s95.cnzz.com/z_stat.php?id=1258557238&web_id=1258557238" language="JavaScript"></script></div>
+<div style="display:none;"><script async src="https://s22.cnzz.com/z_stat.php?id=1263265470&web_id=1263265470" language="JavaScript"></script></div>
+<div style="display:none;">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?33b5f85349e1071d13e98f93debf5719";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<th:block th:include="block/statistics :: copy" />
+</div>
+
+</body>
+</html>

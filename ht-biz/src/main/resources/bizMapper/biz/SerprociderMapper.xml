@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.biz.mapper.SerprociderMapper">
+        <sql id="list">
+            select ser.id,ser.banme,ser.serverstars,ser.bmoney,ser.pronice,ser.city,ser.contacts,ser.phone,ser.isagency,ser.shopimg,
+            ser.grade,ser.browse,
+            ser.area,ser.businesscope,ser.createdate,ser.stats,ser.detailedphone,netryname,netrytype,ser.email,ser.agencyimg,ser.isbond,ser.createid,
+            u.trueName  ,u.active from t_sys_service ser LEFT JOIN t_sys_user u on u.USER_ID =ser.createid
+        </sql>
+
+        <select id="sysfindByPage" parameterType="com.ht.commons.utils.MyPage" resultType="com.ht.commons.utils.PageData">
+          <include refid="list"/> where 1=1 
+            <if test="pd.banme!=null and pd.banme!=''">
+                and (
+                		ser.banme LIKE CONCAT(CONCAT('%', #{pd.banme}),'%') 
+                		or ser.netryname LIKE CONCAT(CONCAT('%', #{pd.banme}),'%')
+                	) 
+            </if>
+       <!--     <if test="pd.stats!=null  and pd.stats!=''">
+                and  ser.stats =#{pd.stats}
+            </if>-->
+            order by ser.createdate desc
+        </select>
+
+    <!-- 查询服务详情 或查询我的服务商 serId 和userId只能传一个参数-->
+    <select id="findById" parameterType="com.ht.commons.utils.PageData" resultType="com.ht.commons.utils.PageData">
+     select ser.*, u.trueName ,u.active,u.userType,u.remark,
+        u.regProvince,u.regcity,u.regarec
+       from t_sys_service ser LEFT JOIN t_sys_user u on u.USER_ID =ser.createid
+      where  1=1 
+        <if test="serId!=null and serId!=''">
+            and    ser.id=#{serId}
+        </if>
+        <if test="userId!=null and userId!=''">
+            and    u.USER_ID =#{userId}
+        </if>
+        order by ser.createdate desc
+    </select>
+
+    <select id="findByPage" parameterType="com.ht.commons.utils.MyPage" resultType="com.ht.commons.utils.PageData">
+        <include refid="list"/> where 1=1
+        <if test="pd.banme!=null and pd.banme!=''">
+                and (
+                		ser.banme LIKE CONCAT(CONCAT('%', #{pd.banme}),'%') 
+                		or ser.netryname LIKE CONCAT(CONCAT('%', #{pd.banme}),'%')
+                	) 
+        </if>
+
+     
+        order by ser.createdate desc
+    </select>
+	<update id="updateIsblond" parameterType="com.ht.commons.utils.PageData">
+		update t_sys_service set isbond=#{isbond} where createid=#{id}
+	</update>
+</mapper>

@@ -1,0 +1,126 @@
+.personage {
+    width: 100%;
+    height: 100vh;
+    background-color: #ffffff;
+}
+.personage_bg {
+    width: 100%;
+    height: 26.1333vw;
+    background: url("../../images/yidong_icons/personer.png") no-repeat;
+    background-size: 100% 100%;
+}
+.personage_t {
+    font-size: 4.8vw;
+    font-weight: 800;
+    color: #ffffff;
+    padding: 4.8vw 4.2667vw 3.2vw 4.2667vw;
+}
+.personage_info {
+    width: 81.8667vw;
+    height: 13.6667vw;
+    margin: 0 auto;
+    padding: 6.6667vw 4.8vw 6.1333vw 4.2667vw;
+    background-color: #ffffff;
+    box-shadow:0px 2px 60px 0px rgba(17,10,109,0.08);
+}
+.uesername {
+    font-size: 4.8vw;
+    margin-bottom: 2.6667vw;
+    font-weight: 800;
+    color: #252C3C;
+}
+.pc_tips {
+    font-size: 3.2vw;
+    color: #999999;
+}
+.per_cell {
+    padding: 0 5.6vw;
+    margin-top: 1.6vw;
+}
+.reset_password {
+    padding:  7.4667vw 0 0 0;
+    /* border-bottom: 1px solid #D7D7D7; */
+}
+.perdonage_cell {
+    display: inline-block;
+    font-size: 4.2667vw;
+    color: #333333;
+    /* padding: 4.5333vw 0 4.5333vw 5.0667vw; */
+}
+.reset_icon {
+    width: 4.2667vw;
+    height: 5.3333vw;
+    background: url("../../images/yidong_icons/phone_icons.png") -26vw -1.5vw no-repeat;
+    background-size: 40vw 40vw;
+    margin-right: 5.3333vw;
+}
+.about {
+    width: 4.8vw;
+    height: 4.8vw;
+    background: url("../../images/yidong_icons/phone_icons.png") -31.2vw -2.2vw no-repeat;
+    background-size: 40vw 40vw;
+    margin-right: 5.3333vw;
+}
+.contact {
+    width: 5.0667vw;
+    height: 4.8vw;
+    background: url("../../images/yidong_icons/phone_icons.png") -25.6vw -8.5vw no-repeat;
+    background-size: 40vw 40vw;
+    margin-right: 5.3333vw;
+}
+.to_page {
+    width: 2.6vw;
+    height: 3.2vw;
+    background: url("../../images/yidong_icons/phone_icons.png") -33.2667vw -9.1333vw no-repeat;
+    background-size: 40vw 40vw;
+    margin-left: 56.8vw;
+}
+.to_page1 {
+    margin-left: 51.8vw;
+}
+.about_hights,.contact_us {
+    padding: 4.2667vw 0 0 0;
+}
+.line {
+    border-bottom: 0.1333vw solid #D7D7D7;
+    margin-left: 9.6vw;
+    margin-top: 4.5333vw;
+}
+/* 底部 */
+.b_b {
+    width: 100vw;
+    height: 12.2667vw;
+    margin: 0 auto;
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    background-color: #ffffff;
+}
+.shouye,.personage {
+    flex: 1;
+    padding-top: 1.0667vw;
+    justify-content: center; /* 水平居中 */
+    align-items: center;     /* 垂直居中 */
+}
+.sy_icom {
+    width: 6.9333vw;
+    height: 5.3333vw;
+    background: url("../../images/yidong_icons/phone_icons.png") -1vw -14.9vw no-repeat;
+    background-size: 40vw 40vw;
+    margin: 0 auto;
+}
+.sy_tip,.ps_tip {
+    font-size: 2.6667vw;
+    margin-top: 1.0667vw;
+    text-align: center;
+}
+.active {
+    color: #3F6CDF;
+}
+.ps_icom {
+    width: 4.2667vw;
+    height: 4.8vw;
+    background: url("../../images/yidong_icons/phone_icons.png") -14vw -14.6vw no-repeat;
+    background-size: 40vw 40vw;
+    margin: 0 auto;
+}

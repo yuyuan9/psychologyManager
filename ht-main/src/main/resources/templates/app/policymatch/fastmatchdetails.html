@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+<link rel="stylesheet" th:href="@{/statics/app/css/reset.css}">
+<link rel="stylesheet" th:href="@{/statics/app/css/index/initial_details.css}">
+
+<head>
+   <title>项目详情</title>
+<style>
+     [v-cloak] {
+        display: none;
+    }
+</style>
+</head>
+<body>
+    <div id="app_match_details" class="i_details" v-cloak>
+        <div class="skip" @click="back()">
+            <i class="dib items"></i>
+            <span class="items_details">项目详情</span>
+        </div>
+        <!-- 项目详情 -->
+        <div class="details">
+            <h3 class="items_name">{{entity.projectName}}</h3>
+            <p class="cell">
+                <span class="cell_titles dib">项目分类：</span>
+                <span class="cell_contents dib">{{entity.type}}</span>
+            </p>
+            <p class="cell">
+                <span class="cell_titles dib">申报条件：</span>
+                <span class="cell_contents dib">{{entity.applyCon}}</span>
+            </p>
+            <p class="cell">
+                <span class="cell_titles dib">申报意义：</span>
+                <span class="cell_contents dib">{{entity.applyMean}}</span>
+            </p>
+            <p  class="cell">
+                <span class="cell_titles dib">申报时间：</span>
+                <span class="cell_contents dib">{{entity.applyTime}}</span>
+            </p>
+            <p  class="cell">
+                <span class="cell_titles dib">申报领域：</span>
+                <span class="cell_contents dib">{{entity.applyField2}}</span>
+            </p>
+            <p  class="cell">
+                <span class="cell_titles dib">申报企业规模：</span>
+                <span class="cell_contents dib">{{entity.applyScale2}}</span>
+            </p>
+        </div>
+        <div class="expresss_bt">
+            <span class="go_back" @click="back()">返回</span>
+            <a href="http://p.qiao.baidu.com/cps/chat?siteId=11406523&userId=20408321" class="consult">
+                <span><i class="dib consult_icon"></i>政策咨询</span>
+            </a>
+        </div>
+    </div>
+    <script type="text/javascript" th:src="@{/statics/app/js/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/vue.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/layer.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/htajax.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/policymatch/match_details.js?v=0.010}"></script>
+</body>
+
+</html>

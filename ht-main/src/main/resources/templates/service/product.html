@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+     <!-- 公共头部 -->
+     <th:block th:include="block/headlink :: test('产品管理')" /> 
+     <!-- 结束 -->
+    <link rel="stylesheet" th:href="@{/statics/css/user/pagination.css}">
+    <link rel="stylesheet" th:href="@{/statics/css/service/index.css?v=0.0.2}">
+    <link rel="stylesheet" th:href="@{/statics/css/inquire/msgbox.css?v=0.0.2}">
+    <style>
+        .service_content>.service_details{
+            width: 973px;
+            height: 910px;
+            margin-left: 15px;
+            background-color: #fff;
+        }
+        .service_content>.service_list{
+            height: 910px;
+        }
+        .page-bar-ul{
+            left: 0;
+        }
+        .next_page1{
+            height: 250px;
+        }
+        .next_page .table_bottom1 p {
+            color: #333;
+            font-size: 20px;
+            display: flex;
+            justify-content: left;
+        }
+        .table_bottom_xian{
+            border-top: 1px solid #eeeeee;
+        }
+        .check{margin-top: 20px;margin-bottom:20px;margin-left: 70px;width: 400px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;display: block!important;}
+    </style>
+</head>
+
+<body>
+    <div id="user">
+        <div th:replace="~{servive_nav::copy}"></div>
+    </div>
+    <div class="wrap" id="box">
+        <section>
+            <div class="service_content clearfix">
+                <div class="service_list fl clearfix">
+                    <div th:replace="~{service_com::copy}"></div>
+                </div>
+                <div class="service_details fl">
+                    <div class="info">
+                        <div class="info_detail">
+                            <div class="product_content company_info">
+                                <h2>产品管理</h2>
+                                <div class="product_manage">
+                                    <div v-cloak class="doc_tit clearfix">
+                                        <div v-cloak @click="bar=0;getProduct();" :class="{active:bar==0}" class="fl">上线产品（{{online}}）</div>
+                                        <div v-cloak @click="bar=1;getProduct();" :class="{active:bar==1}" class="fl">待提交（{{toSubmit}}）</div>
+                                        <div v-cloak @click="bar=2;getProduct();" :class="{active:bar==2}" class="fl">待审核（{{toAudit}}）</div>
+                                        <div v-cloak @click="bar=3;getProduct();" :class="{active:bar==3}" class="fl">下线产品（{{offline}}）</div>
+                                        <div v-cloak @click="bar=4;getProduct();" :class="{active:bar==4}" class="fl hideBefore">审核不通过（{{fails}}）</div>
+                                        <a href="/ht-biz/service/index/product_add" target="_blank"><div class="addPro"><i></i>添加产品</div></a>
+                                    </div>
+                                    <!-- * 上线产品 -->
+                                    <div v-cloak v-show="bar==0" class="product_details">
+                                        <ul class="product_name online">
+                                            <li class="p1">产品名称</li>
+                                            <li class="p2">产品级别</li>
+                                            <li class="p3">价格（元）</li>
+                                            <li class="p4">补助金额</li>
+                                            <li class="p5">浏览量</li>
+                                            <li class="p6">上线时间</li>
+                                            <li class="p7">操作</li>
+                                        </ul>
+                                        <ul v-cloak v-for="(list,index) in onlineList" class="product_details_ul online">
+                                            <li class="p1"><i>{{index+1}}</i>{{list.productname}}</li>
+                                            <li class="p2">
+                                                <span v-if="list.plevel == 1&&list.producttypeone==28">国家</span>
+                                                <span v-if="list.plevel == 2&&list.producttypeone==28">省级</span>
+                                                <span v-if="list.plevel == 3&&list.producttypeone==28">市级</span>
+                                                <span v-if="list.plevel == 4&&list.producttypeone==28">区级</span>
+                                            </li>
+                                            <li class="p3">
+                                                <span v-if="list.pricetype == 1">{{list.price}}</span>
+                                                <!-- <span v-if="list.pricetype == 2">{{list.price}}</span> -->
+                                                <span v-if="list.pricetype == 3">面议</span>
+                                            </li>
+                                            <li class="p4">
+                                                <span>{{list.subsidy}}</span>
+                                            </li>
+                                            <li class="p5">{{list.browsenum}}</li>
+                                            <li class="p6">{{list.createdate | date}}</li>
+                                            <li class="p7">
+                                                <span class="xiaxian" @click="changeStaut(3,list.productname,list.id)">下线</span>
+                                                <span class="xiangqing"><a :href="'/ht-biz/service/index/product_details?id='+list.id" target="blank">详情</a></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- * 待提交 -->
+                                    <div v-cloak v-show="bar==1" class="product_details">
+                                        <ul class="product_name waitsubmit">
+                                            <li class="p1">产品名称</li>
+                                            <li class="p2">产品级别</li>
+                                            <li class="p3">价格（元）</li>
+                                            <li class="p4">编辑时间</li>
+                                            <li class="p5">操作</li>
+                                        </ul>
+                                        <ul v-cloak v-for="(list,index) in toSubmitList" class="product_details_ul waitsubmit">
+                                            <li class="p1"><i>{{index+1}}</i>{{list.productname}}</li>
+                                            <li class="p2">
+                                                <span v-if="list.plevel == 1">国家</span>
+                                                <span v-if="list.plevel == 2">省级</span>
+                                                <span v-if="list.plevel == 3">市级</span>
+                                                <span v-if="list.plevel == 4">区级</span>
+                                            </li>
+                                            <li class="p3">
+                                                <span v-if="list.pricetype == 1">{{list.price}}</span>
+                                                <span v-if="list.pricetype == 2">{{list.price}}</span>
+                                                <span v-if="list.pricetype == 3">面议</span>
+                                            </li>
+                                            <li class="p4">{{list.createdate | date}}</li>
+                                            <li class="p5">
+                                                <span class="cz1" @click="remove(list.id,list.productname)">删除</span>
+                                                <span class="cz2" @click="proEdit(list.id)">编辑</span>
+                                                <span class="cz3"><a :href="'/ht-biz/service/index/product_details?id='+list.id" target="blank">详情</a></span>
+                                                <span class="cz4" @click="changeStaut(2,list.productname,list.id)">提交审核</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- * 待审核 -->
+                                    <div v-cloak v-show="bar==2" class="product_details">
+                                        <ul class="product_name waitaudit">
+                                            <li class="p1">产品名称</li>
+                                            <li class="p2">产品级别</li>
+                                            <li class="p3">价格（元）</li>
+                                            <li class="p4">编辑时间</li>
+                                            <li class="p5">操作</li>
+                                        </ul>
+                                        <ul v-cloak v-for="(list,index) in toAuditList" class="product_details_ul waitaudit">
+                                            <li class="p1"><i>{{index+1}}</i>{{list.productname}}</li>
+                                            <li class="p2">
+                                                <span v-if="list.plevel == 1">国家</span>
+                                                <span v-if="list.plevel == 2">省级</span>
+                                                <span v-if="list.plevel == 3">市级</span>
+                                                <span v-if="list.plevel == 4">区级</span>
+                                            </li>
+                                            <li class="p3">
+                                                <span v-if="list.pricetype == 1">{{list.price}}</span>
+                                                <!-- <span v-if="list.pricetype == 2">{{list.price}}</span> -->
+                                                <span v-if="list.pricetype == 3">面议</span>
+                                            </li>
+                                            <li class="p4">
+                                                {{list.createdate | date}}
+                                            </li>
+                                            <li class="p5">
+                                                <span class="cz1"><a :href="'/ht-biz/service/index/product_details?id='+list.id" target="blank">详情</a></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- * 下线产品 -->
+                                    <div v-cloak v-show="bar==3" class="product_details">
+                                        <ul class="product_name offline">
+                                            <li class="p1">产品名称</li>
+                                            <li class="p2">产品级别</li>
+                                            <li class="p3">价格（元）</li>
+                                            <li class="p4">提交时间</li>
+                                            <li class="p5">操作</li>
+                                        </ul>
+                                        <ul v-cloak v-for="(list,index) in offlineList" class="product_details_ul offline">
+                                            <li class="p1"><i>{{index+1}}</i>{{list.productname}}</li>
+                                            <li class="p2">
+                                                <span v-if="list.plevel == 1">国家</span>
+                                                <span v-if="list.plevel == 2">省级</span>
+                                                <span v-if="list.plevel == 3">市级</span>
+                                                <span v-if="list.plevel == 4">区级</span>
+                                            </li>
+                                            <li class="p3">
+                                                <span v-if="list.pricetype == 1">{{list.price}}</span>
+                                                <span v-if="list.pricetype == 2">{{list.price}}</span>
+                                                <span v-if="list.pricetype == 3">面议</span>
+                                            </li>
+                                            <li class="p4">{{list.createdate | date}}</li>
+                                            <li class="p5">
+                                                <span class="cz1" @click="remove(list.id,list.productname)">删除</span>
+                                                <span class="cz2" @click="proEdit(list.id)">编辑</span>
+                                                <span class="cz3"><a :href="'/ht-biz/service/index/product_details?id='+list.id" target="blank">详情</a></span>
+                                                <span class="cz4" @click="changeStaut(2,list.productname,list.id)">提交审核</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- * 审核不通过 -->
+                                    <div v-cloak v-show="bar==4" class="product_details">
+                                        <ul class="product_name nopass">
+                                            <li class="p1">产品名称</li>
+                                            <li class="p2">产品级别</li>
+                                            <li class="p3">价格（元）</li>
+                                            <li class="p4">编辑时间</li>
+                                            <li class="p5">操作</li>
+                                        </ul>
+                                        <ul v-cloak v-for="(list,index) in failsList" class="product_details_ul nopass">
+                                            <li class="p1"><i>{{index+1}}</i>{{list.productname}}</li>
+                                            <li class="p2">
+                                                <span v-if="list.plevel == 1">国家</span>
+                                                <span v-if="list.plevel == 2">省级</span>
+                                                <span v-if="list.plevel == 3">市级</span>
+                                                <span v-if="list.plevel == 4">区级</span>
+                                            </li>
+                                            <li class="p3">
+                                                <span v-if="list.pricetype == 1">{{list.price}}</span>
+                                                <span v-if="list.pricetype == 2">{{list.price}}</span>
+                                                <span v-if="list.pricetype == 3">面议</span>
+                                            </li>
+                                            <li class="p4">{{list.createdate | date}}</li>
+                                            <li class="p5">
+                                                <span class="cz1" @click="opinion(list.productname,list.resond,list.id)">审核意见</span>
+                                                <span class="cz1" @click="remove(list.id,list.productname)">删除</span>
+                                                <span class="cz2"><a :href="'/ht-biz/service/index/product_details?id='+list.id" target="blank">详情</a></span>
+                                                <span class="cz4" @click="changeStaut(2,list.productname,list.id)">提交审核</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- 分页 -->
+                                    <div v-if="page.totalResult>0" class="page_box ac">
+                                        <mypagenation :page="page" @btn-click="clickPage"></mypagenation>
+                                    </div>
+                                    <!-- 分页 -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section v-cloak>
+            <!-- 删除-->
+            <div v-cloak class="contract_mask" v-show="Stauts5"></div>
+            <div v-cloak class="read_over" v-show="Stauts5">
+                <div id="look" class="next_page next_page1">
+                    <div class="table_top">
+                        <p>产品删除提示<i>(产品删除后将无法恢复)</i></p>
+                        <s class="fa close_login fr" @click="Stauts5=false"></s>
+                    </div>
+                    <div class="table_bottom ac middle_ipt" >
+                        <p style="margin-top: 40px;margin-bottom:40px">删除产品：{{boxname}}</p>
+                    </div>
+                    <div class="table_bottom table_bottom_xian ac">
+                        <p>
+                            <a href="javascript:void(0)" class="use_honey buy_honey ac" @click="Stauts5=false">取消</a>
+                            <a href="javascript:void(0)" class="use_honey ac" @click="shan()">确认</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section v-cloak>
+            <!-- 产品下线提示 -->
+            <div v-cloak class="contract_mask" v-show="Stauts3"></div>
+            <div v-cloak class="read_over" v-show="Stauts3">
+                <div id="look" class="next_page next_page1">
+                    <div class="table_top">
+                        <p>产品下线提示<i>(可在下线产品中编辑产品再上线)</i></p>
+                        <s class="fa close_login fr" @click="Stauts3=false"></s>
+                    </div>
+                    <div class="table_bottom ac middle_ipt" >
+                        <p style="margin-top: 40px;margin-bottom:40px">下线产品：{{boxname}}</p>
+                    </div>
+                    <div class="table_bottom table_bottom_xian ac">
+                        <p>
+                            <a href="javascript:void(0)" class="use_honey buy_honey ac" @click="Stauts3=false">取消</a>
+                            <a href="javascript:void(0)" class="use_honey ac" @click="getChange(3)">确认</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section v-cloak>
+            <!-- 产品提交审核 -->
+            <div v-cloak class="contract_mask" v-show="Stauts2"></div>
+            <div v-cloak class="read_over" v-show="Stauts2">
+                <div id="look" class="next_page next_page1">
+                    <div class="table_top">
+                        <p>产品提交审核<i></i></p>
+                        <s class="fa close_login fr" @click="Stauts2=false"></s>
+                    </div>
+                    <div class="table_bottom ac middle_ipt" >
+                        <p style="margin-top: 40px;margin-bottom:40px">提交审核：{{boxname}}</p>
+                    </div>
+                    <div class="table_bottom table_bottom_xian ac">
+                        <p>
+                            <a href="javascript:void(0)" class="use_honey buy_honey ac" @click="Stauts2=false">取消</a>
+                            <a href="javascript:void(0)" class="use_honey ac" @click="getChange(2)">确认</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section v-cloak>
+            <!-- 审核意见  -->
+            <div v-cloak class="contract_mask" v-show="Stauts4"></div>
+            <div v-cloak class="read_over" v-show="Stauts4">
+                <div id="look" class="next_page next_page1">
+                    <div class="table_top">
+                        <p>审核意见<i>(重新编辑后可再次提交审核)</i></p>
+                        <s class="fa close_login fr" @click="Stauts4=false"></s>
+                    </div>
+                    <div class="table_bottom1 middle_ipt" >
+                        <p class="check">审核产品：{{yijianname}}</p>
+                        <p class="check">审核意见：{{word}}</p>
+                    </div>
+                    <div class="table_bottom table_bottom_xian ac">
+                        <p>
+                            <a href="javascript:void(0)" class="use_honey buy_honey ac" @click="productDetalis()">产品详情</a>
+                            <a href="javascript:void(0)" class="use_honey ac"  @click="proEditBox()">编辑</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- 提交审核成功弹窗 -->
+        <div v-cloak class="submitaudit" v-show="saveframe">
+            <div class="submitAuditHeader clearfix">
+                <i @click="saveframe=false"></i>
+                <s></s>
+            </div>
+            <h3>提交审核成功</h3>
+        </div>
+        <!-- 下线成功弹窗 -->
+        <div v-cloak class="submitaudit submitaudit1" v-show="auditframe">
+            <div class="submitAuditHeader clearfix">
+                <i @click="auditframe=false"></i>
+                <s></s>
+            </div>
+            <h3>下线成功</h3>
+        </div>
+        <!-- 删除成功弹窗 -->
+        <div v-cloak class="submitaudit submitaudit1" v-show="shanframe">
+            <div class="submitAuditHeader clearfix">
+                <i @click="shanframe=false"></i>
+                <s></s>
+            </div>
+            <h3>删除成功</h3>
+        </div>
+
+        <footer>
+            <div class="copyright ac">
+                <p>COPYRIGHT © 版本归属 广州高企云信息科技有限公司 粤ICP备16007486号-1</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- 公共js部分 -->
+    <th:block th:include="block/footlink :: copy" /> 
+    <!-- over -->
+    <th:block th:include="block/service_each :: copy" />
+    <th:block th:include="block/statistics :: copy" />
+    <script type="text/javascript" th:src="@{/statics/js/service/product.js?v=0.0.5}"></script>
+
+</body>
+
+</html>

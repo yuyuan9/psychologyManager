@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- 公共头部 -->
+    <th:block th:include="block/headlink :: test('免费评估')" /> 
+    <!-- 结束 -->
+    <link rel="stylesheet" th:href="@{/statics/css/hisself/hisself_index.css?v=0.0.5}">
+</head>
+
+
+<body>
+    <div id="user">
+        <div th:replace="~{user_head::copy}"></div>
+    </div>
+    <div class="wrap" id="box">
+        <!-- 登录组件 -->
+        <mylogin :islogin="false" @close-login="isLogin=!false"></mylogin>
+        <!-- over -->
+        <!-- 1 -->
+        <div th:replace="~{header::copy}"></div>
+        <!-- 2 -->
+        <section class="hisself_banner clearfix">
+            <div class="hisself_banner_box">
+                <a href="javascript:void(0);" @click="turn(1);">
+                    <img src="/statics/images/hisself/tinified/hisself_banner.png" alt="" class="hisself_banner_img">
+                </a>
+            </div>
+        </section>
+        <!-- 3内容 -->
+        <section class="hisself_contain clearfix">
+            <div class="hisself_title">
+                <h3>高新技术企业在线评估规划系统介绍</h3>
+                <p>Product&nbsp;introduction</p>
+            </div>
+            <div class="hisself_introduce">
+                <div class="hisself_introduce_l fl">
+                    <div class="introduce_l1 fl">
+                        <img src="/statics/images/hisself/tinified/undraw_investing_7u74.jpg" alt=""
+                            class="introduce_l1_img">
+                    </div>
+                    <div class="introduce_l_r fr">
+                        <p class="introduce_l_title">智能评测高企分数</p>
+                        <p class="introduce_l_title">科学规划企业项目申报建议</p>
+                        <p class="introduce_l_tip">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通过企业基本信息、财务信息、知识产权信息和组织管理水平信息四大指标数据的填写，给出科学且准确的评测结果，评测结果包括评估分数和申报建议。
+                        </p>
+                    </div>
+                </div>
+                <div class="hisself_introduce_r fr">
+                    <div class="introduce_l2 fl">
+                        <img src="/statics/images/hisself/tinified/undraw_pie_graph_x9dy.jpg" alt=""
+                            class="introduce_l2_img">
+                    </div>
+                    <div class="introduce_r_r fr">
+                        <p class="introduce_l_title">数据综合分析</p>
+                        <p class="introduce_l_title">导出项目匹配表和企业现状对比表</p>
+                        <p class="introduce_l_tip">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;结合企业填报数据，给出企业现状对比表，让企业清晰自身现状与高企认定申报要求之间的匹配度，从而更有针对性地在有距离的指标上提前布局规划；同时提供所在区域相关政策应用产品，为企业规划年度项目申请计划提供有价值的参考。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- 4评估系统 -->
+        <section class="hisself_assess">
+            <div class="hisself_title hisself_title1">
+                <h3>定制化高企评估系统</h3>
+                <p>Customized&nbsp;evaluation&nbsp;system</p>
+            </div>
+            <div class="assess_comtain">
+                <p class="comtain_tips">为满足全国范围内用户对于高新技术企业认定的评估需求</p>
+                <p class="comtiin_tips2">高企云根据各省市不同级别的高企培育、高企认定政策</p>
+                <p class="comtiin_tips2">陆续开通了具有各地特色的高企评估子系统</p>
+                <div class="assess_subsystem">
+                    <span><a href="javascript:void(0);" @click="turn(2);">苏州高企培育支撑系统</a></span>
+                    <span><a href="javascript:void(0);" @click="turn(3);">淮安高企评估系统</a></span>
+                    <span><a href="javascript:void(0);" @click="turn(4);">金华高企评估系统</a></span>
+                    <span><a href="javascript:void(0);" @click="turn(5);">广州高企评估系统</a></span>
+                </div>
+                <div class="comtiin_tips3">如果您对高新技术企业认定的评估系统有特殊的定制要求，可在线联系我们为您规划系统</div>
+                <div class="assess_btn">
+                    <a href="http://p.qiao.baidu.com/cps/chat?siteId=11406523&userId=20408321" target="_blank">联系我们&nbsp;></a>
+                </div>
+            </div>
+        </section>
+        <!--E=底部-->
+        <div th:replace="~{footer::copy}"></div>
+
+    </div>
+     <!-- 公共js部分 -->
+    <th:block th:include="block/liblink :: copy" /> 
+    <!-- over -->
+    <script type="text/javascript" th:src="@{/statics/js/component/mylogin.js?v=1.0.2}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/hisself/hisself_index.js?v=0.1.2}"></script>
+    <script>
+        $('.title_list>li').mouseover(function(e){
+                $('.title_list>li').removeClass('active');
+                $(this).addClass('active');
+                $(this).children().stop().siblings(".drop_down").animate({
+                    'top':'30px',
+                    'opacity':'1',
+                },200);
+            });
+            $('.title_list>li').mouseout(function(e){
+                $(this).children().stop().siblings(".drop_down").animate({
+                    'top':'-30px',
+                    'opacity':'0'
+                },200);
+            })
+        $(".xcx_h").mouseover(function () {
+            $(".xcx").css({
+                'visibility': 'visible'
+            })
+        })
+        $(".xcx_h").mouseleave(function () {
+            $(".xcx").css({
+                'visibility': 'hidden'
+            })
+        })
+    </script>
+</body>
+</html>

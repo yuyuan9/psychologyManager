@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.solr.mapper.PolicylibMapper">
+	<select id="findlistPage" parameterType="com.ht.commons.utils.MyPage" resultType="com.ht.entity.biz.solr.policylib.Policylib">
+		select * from t_policy_lib
+	</select>
+</mapper>

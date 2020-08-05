@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- 公共头部 -->
+    <th:block th:include="block/headlink :: test('“博士科技”提出的创新全链孵化服务体系全景图')" /> 
+    <!-- 结束 -->
+    <link rel="stylesheet" th:href="@{/statics/other/css/index.css?v=1.1.3}">
+</head>
+<body>
+    <div class="wrap" id="father">
+        <!-- 遮罩层 -->
+        <!-- <div class="shade"></div> -->
+        <!-- over -->
+        <div class="stars" style="width: 100%;height: 630px;position: absolute;top: 0;min-width: 1200px">
+            <div class="star"></div>
+            <div class="star pink"></div>
+            <!-- <div class="star blue"></div> -->
+            <div class="star yellow"></div>
+            <div class="star purple"></div>
+        </div>
+        <header>
+            <img src="/statics/other/img/logo.png" alt="">
+            <h2>“博士科技”提出的</h2>
+            <h2>创新全链孵化服务体系全景图</h2>
+        </header>
+        <div class="box clearfix">
+            <div class="panorama_head clearfix">
+                <img class="img_head" src="/statics/other/img/innovate_c.png" alt="">
+                <div class="head_btn xq">
+                    
+                </div>
+                <div class="head_btn zc">
+                    市场模式
+                </div>
+                <div class="head_btn sc">
+                    创新支撑
+                </div>
+                <div class="line_icon1" style="display: none">
+                    <div class="round sc1">
+                        <div class="circle"></div>
+                        <div class="circle_bottom animation "></div>
+                        <div class="circle_bottom2 animation2 "></div>
+                    </div>
+                    <div class="round sc2">
+                        <div class="circle"></div>
+                        <div class="circle_bottom animation "></div>
+                        <div class="circle_bottom2 animation2 "></div>
+                    </div>
+                    <div class="round sc3">
+                        <div class="circle"></div>
+                        <div class="circle_bottom animation "></div>
+                        <div class="circle_bottom2 animation2 "></div>
+                    </div>
+                    <!-- <div class="round sc4">
+                        <div class="circle"></div>
+                        <div class="circle_bottom animation "></div>
+                        <div class="circle_bottom2 animation2 "></div>
+                    </div> -->
+                </div>
+                <div class="line_icon2" >
+                    <div class="round zc1">
+                        <div class="circle"></div>
+                        <div class="circle_bottom animation "></div>
+                        <div class="circle_bottom2 animation2 "></div>
+                    </div>
+                    <div class="round zc2">
+                        <div class="circle"></div>
+                        <div class="circle_bottom animation "></div>
+                        <div class="circle_bottom2 animation2 "></div>
+                    </div>
+                    <div class="round zc3">
+                        <div class="circle"></div>
+                        <div class="circle_bottom animation "></div>
+                        <div class="circle_bottom2 animation2 "></div>
+                    </div>
+                </div>
+                <div class="line_icon3" style="display: none">
+                        <div class="round sb1">
+                            <div class="circle"></div>
+                            <div class="circle_bottom animation "></div>
+                            <div class="circle_bottom2 animation2 "></div>
+                        </div>
+                        <div class="round sb2">
+                            <div class="circle"></div>
+                            <div class="circle_bottom animation "></div>
+                            <div class="circle_bottom2 animation2 "></div>
+                        </div>
+                        <div class="round sb3">
+                            <div class="circle"></div>
+                            <div class="circle_bottom animation "></div>
+                            <div class="circle_bottom2 animation2 "></div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <div class="item_head clearfix">
+            <div class="item1 clearfix" style="display: none">
+                
+                <div class="content1 clearfix">
+                    <div class="con_captain fl captain1 clearfix">
+                        <div class="kk">创新资源
+                            <div class="round d1">
+                                <div class="circle"></div>
+                                <div class="circle_bottom animation "></div>
+                                <div class="circle_bottom2 animation2 "></div>
+                            </div>
+                            <div class="round d2">
+                                <div class="circle"></div>
+                                <div class="circle_bottom animation "></div>
+                                <div class="circle_bottom2 animation2 "></div>
+                            </div>
+                        </div>
+                        <div class="options">
+                            <h3>1.人才资源及运营模式
+                                <div class="round d_h3">
+                                    <div class="circle"></div>
+                                    <div class="circle_bottom animation "></div>
+                                    <div class="circle_bottom2 animation2 "></div>
+                                </div>
+                            </h3>
+                            <p>博士俱乐部<i></i></p>
+                            <p>金博奖<i></i></p>
+                            <p>创新挑战赛承办<i></i></p>
+                            <p>产业智囊团<i></i></p>
+                            <p>博士创新之旅<i></i></p>
+                        </div>
+                        <div class="options" style="margin-top: 20px">
+                            <h3>2.成果项目资源及运营模式
+                                <div class="round d_h3">
+                                    <div class="circle"></div>
+                                    <div class="circle_bottom animation "></div>
+                                    <div class="circle_bottom2 animation2 "></div>
+                                </div>
+                            </h3>
+                            <p>创新创业项目库<i></i></p>
+                            <p>科技成果库<i></i></p>
+                            <p>高地孵化器<i></i></p>
+                            <p>产业专利池<i></i></p>
+                        </div>
+                        <div class="options" style="margin-top: 20px">
+                            <h3>3.金融资本资源及运营模式
+                                <div class="round d_h3">
+                                    <div class="circle"></div>
+                                    <div class="circle_bottom animation "></div>
+                                    <div class="circle_bottom2 animation2 "></div>
+                                </div>
+                            </h3>
+                            <p>科技成果转化基金<i></i></p>
+                            <p>产业投资基金<i></i></p>
+                            <p>知识产权运营基金<i></i></p>
+                        </div>
+                        <div class="options" style="margin-top: 20px">
+                            <h3>4.合作主体资源
+                                <div class="round d_h3">
+                                    <div class="circle"></div>
+                                    <div class="circle_bottom animation "></div>
+                                    <div class="circle_bottom2 animation2 "></div>
+                                </div>
+                            </h3>
+                            <p>海内外高校院所<i></i></p>
+                            <p>专业科技服务机构<i></i></p>
+                            <p>科技企业库<i></i></p>
+                        </div>
+                    </div>
+                    <div class="con_captain fl captain2 clearfix">
+                        <div class="kk">平台工具
+                            <div class="round d1">
+                                <div class="circle"></div>
+                                <div class="circle_bottom animation "></div>
+                                <div class="circle_bottom2 animation2 "></div>
+                            </div>
+                            <div class="round d2">
+                                <div class="circle"></div>
+                                <div class="circle_bottom animation "></div>
+                                <div class="circle_bottom2 animation2 "></div>
+                            </div>
+                        </div>
+                        <div class="options_btn" >
+                            <h3>博士云平台
+                                <div class="round d_h3">
+                                    <div class="circle"></div>
+                                    <div class="circle_bottom animation "></div>
+                                    <div class="circle_bottom2 animation2 "></div>
+                                </div>
+                            </h3>
+                            <div class="options_box">
+                                <h3><s></s>孵化圈子平台</h3>
+                                <p>解决企业在创新发展过程中一站式创新资源获取需求，包括找技术、找人才、找项目、找资金、找服务等</p>
+                                <i class="look">查看产品</i>
+                                <div class="info">
+                                    <h3>孵化圈子平台<s class="close">x</s></h3>
+                                    <p>
+                                        <span>平台所解决的问题：</span>
+                                        <s>解决企业在创新发展过程中一站式创新资源获取需求，包括找技术、找人才、找项目、找资金、找服务等</s>
+                                    </p>
+                                    <p>
+                                        <span>简介：</span>
+                                        <s>通过面向不同对象输出多样化实用工具整合产业资源、技术资源、人才资源、 资金资源及服务资源，以一站式成果转化链条服务为核心服务产品，打造成果转化生态平台</s>
+                                    </p>
+                                    <p>
+                                        <span>案例：</span>
+                                        <s>企业端：企业开放式创新管理系统</s>
+                                        <s>人才端：创新名片</s>
+                                        <s>伯乐端：技术转移全流程系统（乐孵）</s>
+                                        <s>服务机构端：服务对接支撑系统</s>
+                                        <s>投资机构端：项目投融资管理系统</s>
+                                        <s>政府端：技术市场集群系统</s>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="options_btn" >
+                            <div class="options_box">
+                                <h3><s></s>高企云子平台</h3>
+                                <p>解决企业创新能力培育及提升需求</p>
+                                <i class="look">查看产品</i>
+                                <div class="info">
+                                    <h3>孵化圈子平台<s class="close">x</s></h3>
+                                    <p>
+                                        <span>平台所解决的问题：</span>
+                                        <s>解决企业创新能力培育及提升需求</s>
+                                    </p>
+                                    <p>
+                                        <span>简介：</span>
+                                        <s>以“一站式企业创新能力培育平台”为定位，提供政策全链条服务（短期：以政策为切入点培育企业创新意识）→粒度化服务交易服务（中期：通过粒度化服务解读企业创新的难点、痛点问题）→研发体系贯标服务（长期：培育企业体系化的思维，完善内部创新体系）→区域数据分析服务（统计分析企业基本信息、创新数据信息、从而进行增量企业创新培育和存量企业成长管理）</s>
+                                    </p>
+                                    <p>
+                                        <span>案例：</span>
+                                        <s>企业端：政策通、服务交易跟踪系统、科研项目管理系统、报表管理系统、企业创新体检系统</s>
+                                        <s>服务机构端：政策通、服务交易跟踪系统</s>
+                                        <s>政府端：高企培育支撑系统</s>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="options_btn">
+                            <div class="options_box">
+                                <h3><s></s>创新资源大数据子平台</h3>
+                                <p>解决创新资源要素标准化描述、快速匹配对接及数据高效管理应用</p>
+                                <i class="look">查看产品</i>
+                                <div class="info">
+                                    <h3>孵化圈子平台<s class="close">x</s></h3>
+                                    <p>
+                                        <span>平台所解决的问题：</span>
+                                        <s>解决创新资源要素标准化描述、快速匹配对接及数据高效管理应用</s>
+                                    </p>
+                                    <p>
+                                        <span>简介：</span>
+                                        <s>通过大数据技术和区块链技术，以博士科技独立研发的企业、人才、项目、成果、需求等创新资源全要素数据模型为基础，标准化采集及管理创新资源数据并以需求为牵引形成智能匹配推荐，实现特定区域的创新资源大数据管理及共享应用</s>
+                                    </p>
+                                    <p>
+                                        <span>案例：</span>
+                                        <s>合伙人端：创新资源管理及共享系统</s>
+                                        <s>园区端：企业数据管理及应用服务系统</s>
+                                        <s>政府端：产业升级大数据支撑系统</s>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="con_captain fl captain3 clearfix">
+                        <div class="kk">创新服务
+                            <div class="round d1">
+                                <div class="circle"></div>
+                                <div class="circle_bottom animation "></div>
+                                <div class="circle_bottom2 animation2 "></div>
+                            </div>
+                            <div class="round d2">
+                                <div class="circle"></div>
+                                <div class="circle_bottom animation "></div>
+                                <div class="circle_bottom2 animation2 "></div>
+                            </div>
+                        </div>
+                        <div class="options">
+                            <h3>1.企业服务产品体系
+                                <div class="round d_h3">
+                                    <div class="circle"></div>
+                                    <div class="circle_bottom animation "></div>
+                                    <div class="circle_bottom2 animation2 "></div>
+                                </div>
+                            </h3>
+                            <p>企业科技创新体检与规划<i></i></p>
+                            <p>企业创新管理体系建设<i></i></p>
+                            <p>企业创新资源导入与管理<i></i></p>
+                            <p>企业创新工具应用<i></i></p>
+                            <p>企业创新资质建设与管理<i></i></p>
+                        </div>
+                        <div class="options" style="margin-top: 20px">
+                            <h3>2.政府服务产品体系
+                                <div class="round d_h3">
+                                    <div class="circle"></div>
+                                    <div class="circle_bottom animation "></div>
+                                    <div class="circle_bottom2 animation2 "></div>
+                                </div>
+                            </h3>
+                            <p>区域产业科技发展诊断规划<i></i></p>
+                            <p>政策体系优化顾问<i></i></p>
+                            <p>科技服务业提升工程<i></i></p>
+                            <p>企业技术需求挖掘<i></i></p>
+                            <p>创新活动策划举办<i></i></p>
+                            <p>新型产业园区与孵化器建设运营<i></i></p>
+                            <p>区域技术市场建设运营<i></i></p>
+                            <p>区域产业创新发展中心建设运营<i></i></p>
+                            <p>产业创新综合体建设运营<i></i></p>
+                        </div>
+                        <div class="options" style="margin-top: 20px">
+                            <h3>3.人才服务产品体系
+                                <div class="round d_h3">
+                                    <div class="circle"></div>
+                                    <div class="circle_bottom animation "></div>
+                                    <div class="circle_bottom2 animation2 "></div>
+                                </div>
+                            </h3>
+                            <p>企业专家顾问对接<i></i></p>
+                            <p>高层次人才猎头<i></i></p>
+                            <p>产学研合作对接<i></i></p>
+                            <p>成果专利交易对接<i></i></p>
+                            <p>创业项目孵化<i></i></p>
+                        </div>
+                    </div>
+                    <div class="con_captain fl captain4 clearfix">
+                        <div class="kk">创新培训
+                            <div class="round d1">
+                                <div class="circle"></div>
+                                <div class="circle_bottom animation "></div>
+                                <div class="circle_bottom2 animation2 "></div>
+                            </div>
+                            <div class="round d2">
+                                <div class="circle"></div>
+                                <div class="circle_bottom animation "></div>
+                                <div class="circle_bottom2 animation2 "></div>
+                            </div>
+                        </div>
+                        <div class="options">
+                            <h3>1.科技成果转化培训
+                                <div class="round d_h3">
+                                    <div class="circle"></div>
+                                    <div class="circle_bottom animation "></div>
+                                    <div class="circle_bottom2 animation2 "></div>
+                                </div>
+                            </h3>
+                            <p>技术转移机构及技术经理人培训<i></i></p>
+                            <p>“科技伯乐”技术经纪人培育<i></i></p>
+                            <p>区域技术市场建设运营培训<i></i></p>
+                            <p>技术需求挖掘培训<i></i></p>
+                        </div>
+                        <div class="options" style="margin-top: 20px">
+                            <h3>2.企业创新培训
+                                <div class="round d_h3">
+                                    <div class="circle"></div>
+                                    <div class="circle_bottom animation "></div>
+                                    <div class="circle_bottom2 animation2 "></div>
+                                </div>
+                            </h3>
+                            <p>借力政策提升企业创新能力<i></i></p>
+                            <p>知识产权管理培训<i></i></p>
+                            <p>科技财金培训<i></i></p>
+                            <p>研发项目管理培训<i></i></p>
+                            <p>研发管理体系建设培训<i></i></p>
+                        </div>
+                        <div class="options" style="margin-top: 20px">
+                            <h3>3.人才创新创业培训
+                                <div class="round d_h3">
+                                    <div class="circle"></div>
+                                    <div class="circle_bottom animation "></div>
+                                    <div class="circle_bottom2 animation2 "></div>
+                                </div>
+                            </h3>
+                            <p>创新方法培训<i></i></p>
+                            <p>借力政策推动人才创新创业<i></i></p>
+                            <p>创业项目成长与管理<i></i></p>
+                            <p>创业融资培训<i></i></p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="item2 clearfix">
+                <div class="item2_head clearfix">
+                    <!-- <img class="item2_head_img" src="img/enterprise.png" alt=""> -->
+                    <div class="item2_head_btn1"></div>
+                    <div class="item2_head_btn2"></div>
+                    <div class="item2_head_btn3"></div>
+                </div>
+                <div class="item2_con clearfix">
+                    <div class="item2_details details1 fl" style="visibility:hidden;">
+                        <div class="xian1"></div>
+                        <div class="options_btn_details " >
+                            <h3>1.能力价值转换
+                                <div class="round details1_h3">
+                                    <div class="circle"></div>
+                                    <div class="circle_bottom animation "></div>
+                                    <div class="circle_bottom2 animation2 "></div>
+                                </div>
+                            </h3>
+                            <div class="options_box_deta">
+                                <h3><s></s>人才品牌建设</h3>
+                                <div class="options_box_deta_div clearfix">
+                                    <p>提升个人影响力，形成个人IP</p>
+                                    <i class="look">查看产品</i>
+                                    <div class="info in1 pop-up1">
+                                        <h3>博士智库系统
+                                            <div class="relevance correlation1">
+                                                <i class="rrIcon"></i>
+                                                <h4>关联服务</h4>
+                                                <!-- <p class="aff1">研发能力转换<i class="lookProduct">查看产品</i></p>
+                                                <p class="aff2">成果转让<i class="lookProduct">查看产品</i></p>
+                                                <p class="aff3">人才<i class="lookProduct">查看产品</i></p>
+                                                <p class="aff4">技术<i class="lookProduct">查看产品</i></p>
+                                                <p class="aff5">落地环境<i class="lookProduct">查看产品</i></p>
+                                                <p class="aff6">团队建设<i class="lookProduct">查看产品</i></p> -->
+                                                <p class="aff7">资源渠道<i class="lookProduct">查看产品</i></p>
+                                                <p class="aff8">招引活动<i class="lookProduct">查看产品</i></p>
+                                            </div>
+                                            <s class="close">x</s>
+                                        </h3>
+                                        <p>
+                                            <span>简介：</span>
+                                            <s>为专家人才建立创新名片，梳理了解其研究领域、成果及项目情况，精准匹配输出给到相应领域企业做科研专家、技术顾问的签约合作，具体参与企业的科研工作或不定期指导企业研发相关工作，协助企业对接产业相关资源，引导企业产品研发方向及技术合作开展等。</s>
+                                        </p>
+                                        <p>
+                                            <span>案例：</span>
+                                            <s>为诺奖专家对接通桥医疗、奥翼电子等企业；为教授博士专家对接皓品、玖的等企业</s>
+                                        </p>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="options_box_deta">
+                                <h3><s></s>研发能力转化</h3>
+                                <div class="options_box_deta_div clearfix">
+                                    <p>寻找适配对象，输出研发能力，实现能力价值转化</p>
+                                    <i class="look">查看产品</i>
+                                    <div class="info in1  pop-up2">
+                                        <h3>博士产学研精准对接系统
+                                            <div class="relevance correlation2">
+                                                <i class="rrIcon"></i>
+                                                <h4>关联服务</h4>
+                                                <!-- <p class="aff9">个人品牌建设<i class="lookProduct">查看产品</i></p>
+                                                <p class="aff2">成果转让<i class="lookProduct">查看产品</i></p>
+                                                <p class="aff3">人才<i class="lookProduct">查看产品</i></p>
+                                                <p class="aff4">技术<i class="lookProduct">查看产品</i></p>
+                                                <p class="aff5">落地环境<i class="lookProduct">查看产品</i></p>
+                                                <p class="aff6">团队建设<i class="lookProduct">查看产品</i></p> -->
+                                                <p class="aff7">资源渠道<i class="lookProduct">查看产品</i></p>
+                                                <p class="aff8">招引活动<i class="lookProduct">查看产品</i></p>
+                                            </div>
+                                            <s class="close">x</s></h3>
+                                        <p>
+                                            <span>简介：</span>
+                                            <s>基于专家的研发领域，匹配相应领域需求的企业进行产学研合作，如技术研发委托合作、技术攻关合作开发，或与企业合作实施相应的新产品、新技术、新工艺、新材料开发和推广应用等合作，并跟踪进展发展。</s>
+                                        </p>
+                                        <p>
+                                            <span>案例：</span>
+                                            <s>将广工团队对接到湖南杰珂研发合作、将华工团队对接到千松科技研发合作等</s>
+                                        </p>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                        <div class="options_btn_details " >
+                            <h3>2.科技成果转换
+                                <div class="round details1_h3">
+                                    <div class="circle"></div>
+                                    <div class="circle_bottom animation "></div>
+                                    <div class="circle_bottom2 animation2 "></div>
+                                </div>
+                            </h3>
+                            <div class="options_box_deta">
+                                <h3><s></s>成果转让</h3>
+                                <div class="options_box_deta_div clearfix">
+                                    <p>通过转让使成果效益最大化</p>
+                                    <i class="look">查看产品</i>
+                                    <div class="info in1  pop-up3">
+                                        <h3>博士技术转移全流程系统
+                                            <div class="relevance correlation3">
+                                                <i class="rrIcon"></i>
+                                                <h4>关联服务</h4>
+                                                <!-- <p class="aff9">个人品牌建设<i class="lookProduct">查看产品</i></p>
+                                                <p class="aff1">研发能力转换<i class="lookProduct">查看产品</i></p>
+                                                <p class="aff3">人才<i class="lookProduct">查看产品</i></p>
+                                                <p class="aff4">技术<i class="lookProduct">查看产品</i></p>
+                                                <p class="aff5">落地环境<i class="lookProduct">查看产品</i></p>
+                                                <p class="aff6">团队建设<i class="lookProduct">查看产品</i></p> -->
+                                                <p class="aff7">资源渠道<i class="lookProduct">查看产品</i></p>
+                                                <p>成果库<i class="lookProduct">查看产品</i></p>
+                                            </div>
+                                            <s class="close">x</s></h3>
+                                        <p>
+                                            <span>简介：</span>
+                                            <s>为科技成果提供宣传推广平台，筛选匹配有相应需求的企业进行横向转让合作，可以是成果转让、技术入股或授权许可等多种形式合作</s>
+                                        </p>
+                                        <p>
+                                            <span>案例：</span>
+                                            <s>每年转化近千项，如累计为华南理工转化300多项、太原理工转化50多项、苏州大学转化30多项等</s>
+                                        </p>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="options_box_deta">
+                                <h3 style="height: 70px;line-height:56px;"><s></s>创业项目孵化</h3>
+                                <div class="options_child clearfix">
+                                    <div class="open_win1">
+                                        <h3>商业计划书策划</h3>
+                                        <p>设计项目发展路径，打造商业模式</p>
+                                    </div>
+                                    <div class="open_win2">
+                                        <i class="look">查看产品</i>
+                                        <div class="info in1 pop-up4">
+                                            <h3>博士BP通
+                                                <div class="relevance correlation4">
+                                                    <i class="rrIcon"></i>
+                                                    <h4>关联服务</h4>
+                                                    <!-- <p class="aff6">团队建设<i class="lookProduct">查看产品</i></p> -->
+                                                    <p class="aff10">孵化服务体系<i class="lookProduct">查看产品</i></p>
+                                                </div>
+                                            <s class="close">x</s></h3>
+                                            <p>
+                                                <span>简介：</span>
+                                                <s>在客观公正的前提下协助项目公司优化商业计划及策略规划，对路演材料、发展战略、运营数据等展示方案进行优化，协助商业计划书的策划和撰写。</s>
+                                            </p>
+                                            <p>
+                                                <span>案例：</span>
+                                                <s>毛博士-高性能天然植物表面活性剂，齐博士-锥形束专科影像设备，武博士-肝细胞修复补片的应用开发</s>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="options_child clearfix">
+                                    <div class="open_win1">
+                                        <h3>寻找孵化载体</h3>
+                                        <p>找到适合发展、有助于项目发展的区域和载体落地</p>
+                                    </div>
+                                    <div class="open_win2">
+                                        <i class="look">查看产品</i>
+                                        <div class="info in1 pop-up5">
+                                            <h3>博士一站式落地入孵服务系统
+                                                <div class="relevance correlation5">
+                                                    <i class="rrIcon"></i>
+                                                    <h4>关联服务</h4>
+                                                    <!-- <p class="aff11">政策资讯<i class="lookProduct">查看产品</i></p>
+                                                    <p class="aff12">产业载体<i class="lookProduct">查看产品</i></p>
+                                                    <p class="aff1">研发能力转换<i class="lookProduct">查看产品</i></p>
+                                                    <p class="aff2">成果转让<i class="lookProduct">查看产品</i></p>
+                                                    <p class="aff3">人才<i class="lookProduct">查看产品</i></p>
+                                                    <p class="aff4">技术<i class="lookProduct">查看产品</i></p>
+                                                    <p class="aff5">落地环境<i class="lookProduct">查看产品</i></p>
+                                                    <p class="aff6">团队建设<i class="lookProduct">查看产品</i></p> -->
+                                                    <p class="aff7">资源渠道<i class="lookProduct">查看产品</i></p>
+                                                    <p class="aff8">招引活动<i class="lookProduct">查看产品</i></p>
+                                                </div>
+                                                <s class="close">x</s>
+                                            </h3>
+                                            <p>
+                                                <span>简介：</span>
+                                                <s>依据区域产业发展研究及政策研究，基于成果项目的需求，提供相应区域内的产业基础、人才科技政策等深度解读服务，并为项目做落地择优制定选址落地、入驻园区、政策匹配、建设发展等规划建议服务，并协助项目谈判议价争取最优的落地政策和服务支持。</s>
+                                            </p>
+                                            <p>
+                                                <span>案例：</span>
+                                                <s>夏博士AR微显示芯片项目落户东莞，马博士智能计算机辅助设计系统项目落户苏州，陈博士医用高分子弹性材料项目落户厦门</s>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="options_child clearfix">
+                                    <div class="open_win1">
+                                        <h3>融资</h3>
+                                        <p>获得投资资金</p>
+                                    </div>
+                                    <div class="open_win2">
+                                        <i class="look">查看产品</i>
+                                        <div class="info in1 pop-up6">
+                                            <h3>博士融资服务系统
+                                                <div class="relevance correlation6">
+                                                    <i class="rrIcon"></i>
+                                                    <h4>关联服务</h4>
+                                                    <p class="aff13">资金<i class="lookProduct">查看产品</i></p>
+                                                </div>
+                                                <s class="close">x</s>
+                                            </h3>
+                                            <p>
+                                                <span>简介：</span>
+                                                <s>为项目提供融资方案的深度解读服务，提供成果转化投资专项基金，提供路演机会和与投资人对接接洽的机会；在路演及业绩推介会等活动开展前，对演讲嘉宾进行专项培训，提升现场演讲的效果，协助项目实现融资推动项目落地发展。</s>
+                                            </p>
+                                            <p>
+                                                <span>案例：</span>
+                                                <s>梁博士-VR技术研发及其产品产业化，陈博士-虚拟现实技术动作捕捉设备中试及产业化，蒋博士-医药检验检测平台搭建及产业化等</s>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="options_child clearfix">
+                                    <div class="open_win1">
+                                        <h3>团队建设</h3>
+                                        <p>找到合适的人才，建设核心优秀团队</p>
+                                    </div>
+                                    <div class="open_win2">
+                                        <i class="look">查看产品</i>
+                                        <div class="info in1 pop-up7">
+                                            <h3>博士才聘通
+                                                <div class="relevance correlation7">
+                                                    <i class="rrIcon"></i>
+                                                    <h4>关联服务</h4>
+                                                    <!-- <p class="aff14">商业计划书<i class="lookProduct">查看产品</i></p>
+                                                    <p class="aff10">孵化服务体系<i class="lookProduct">查看产品</i></p>
+
+                                                    <p class="aff1">研发能力转换<i class="lookProduct">查看产品</i></p>
+                                                    <p class="aff2">成果转让<i class="lookProduct">查看产品</i></p>
+                                                    <p class="aff3">人才<i class="lookProduct">查看产品</i></p>
+                                                    <p class="aff4">技术<i class="lookProduct">查看产品</i></p>
+                                                    <p class="aff5">落地环境<i class="lookProduct">查看产品</i></p>
+                                                    <p class="aff6">团队建设<i class="lookProduct">查看产品</i></p> -->
+                                                    <p class="aff7">资源渠道<i class="lookProduct">查看产品</i></p>
+                                                    <p class="aff8">招引活动<i class="lookProduct">查看产品</i></p>
+                                                </div>
+                                                <s class="close">x</s>
+                                            </h3>
+                                            <p>
+                                                <span>简介：</span>
+                                                <s>依赖博士俱乐部人才智库，根据项目公司发展需要，为其科研团队建设、技术人员招聘、专家顾问聘用等方面提供人员测评、面试协助、聘用推荐及聘后跟踪服务等，帮助企业组建打造核心团队。</s>
+                                            </p>
+                                            <p>
+                                                <span>案例：</span>
+                                                <s>陈博士-基于云计算的社会网络海量数据挖掘分析平台组建5人核心团队；周博士-纳米脂质微胶囊超临界流体制造项目组建7人核心团队</s>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item2_details details2 fl"  style="visibility:hidden;">
+                        <div class="xian2"></div>
+                        <div class="options_btn_details2 clearfix" >
+                            <h3>1.创新把脉
+                                <div class="round d_h3">
+                                    <div class="circle"></div>
+                                    <div class="circle_bottom animation "></div>
+                                    <div class="circle_bottom2 animation2 "></div>
+                                </div>
+                            </h3>
+                            <div class="options_box_details2 clearfix">
+                                <p>企业创新现状、短板的把脉及提升规划建议</p>
+                                <i class="look">查看产品</i>
+                                <div class="info in1 pop-up8">
+                                    <h3>企业体检系统
+                                        <div class="relevance correlation8">
+                                            <i class="rrIcon"></i>
+                                            <h4>关联服务</h4>
+                                            <!-- <i class="aff15">创新体检<i class="lookProduct">查看产品</i></p> -->
+                                            <p class="aff16">要素库<i class="lookProduct">查看产品</i></p>
+                                        </div>
+                                        <s class="close">x</s>
+                                    </h3>
+                                    <p>
+                                        <span>简介：</span>
+                                        <s>以“科技顾问六大体系”为核心，为中小企业的科学管理与科技创新提供的一项全面的、专业化的诊断方法</s>
+                                    </p>
+                                    <p>
+                                        <span>案例：</span>
+                                        <s>天诺营销企业体检：摸家底、探体系、找问题、提建议、定规划、挖需求</s>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="options_btn_details2 clearfix" >
+                            <h3>2.创新管理
+                                <div class="round d_h3">
+                                    <div class="circle"></div>
+                                    <div class="circle_bottom animation "></div>
+                                    <div class="circle_bottom2 animation2 "></div>
+                                </div>
+                            </h3>
+                            <div class="options_box_details2 clearfix">
+                                <p>规范创新过程管理，提升创新效率</p>
+                                <i class="look">查看产品</i>
+                                <div class="info in1 pop-up9">
+                                    <h3>博士创新体系建设系统
+                                        <div class="relevance correlation9">
+                                            <i class="rrIcon"></i>
+                                            <h4>关联服务</h4>
+                                            <!-- <i class="aff17">创新效率与能力<i class="lookProduct">查看产品</i></p> -->
+                                            <p class="aff18">企业创能力提升<i class="lookProduct">查看产品</i></p>
+                                        </div>
+                                        <s class="close">x</s>
+                                    </h3>
+                                    <p>
+                                        <span>简介：</span>
+                                        <s>独创性从科技创新六大体系出发，通过“诊断—规划—实施”的方式，协助企业建立规范完善的创新管理体系</s>
+                                    </p>
+                                    <p>
+                                        <span>案例：</span>
+                                        <s>罗西尼表业六大体系管理体系建设：建立研发机构、研发团队、科技财金、科研立项、科技成果、知识产权管理体系</s>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="options_btn_details2 clearfix" >
+                            <h3>3.政策
+                                <div class="round d_h3">
+                                    <div class="circle"></div>
+                                    <div class="circle_bottom animation "></div>
+                                    <div class="circle_bottom2 animation2 "></div>
+                                </div>
+                            </h3>
+                            <div class="options_child clearfix">
+                                <div class="open_win1">
+                                    <h3><s></s>政策资讯</h3>
+                                    <p>提供实时、精准政策信息，快速了解全面、丰富的行业/区域政策资讯</p>
+                                </div>
+                                <div class="open_win2">
+                                    <i class="look">查看产品</i>
+                                    <div class="info in1 pop-up10">
+                                        <h3>博士政策通
+                                            <div class="relevance correlation10">
+                                                <i class="rrIcon"></i>
+                                                <h4>关联服务</h4>
+                                                <p class="aff19">政策获取<i class="lookProduct">查看产品</i></p>
+                                            </div>
+                                            <s class="close">x</s>
+                                        </h3>
+                                        <p>
+                                            <span>简介：</span>
+                                            <s>利用平台工具进行政策推送、政策解读、政策大数据查询、政策智能匹配，为科技型企业及时提供全面系统的科技政策资讯</s>
+                                        </p>
+                                        <p>
+                                            <span>案例：</span>
+                                            <s>高企云掌上政策通</s>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="options_child clearfix">
+                                <div class="open_win1">
+                                    <h3><s></s>政策获取</h3>
+                                    <p>政策红利获取及项目、财务规范管理</p>
+                                </div>
+                                <div class="open_win2">
+                                    <i class="look">查看产品</i>
+                                    <div class="info in1 pop-up11">
+                                        <h3>博士创新资质管理
+                                            <div class="relevance correlation11">
+                                                <i class="rrIcon"></i>
+                                                <h4>关联服务</h4>
+                                                <p class="aff11">政策资讯<i class="lookProduct">查看产品</i></p>
+                                            </div>
+                                            <s class="close">x</s>
+                                        </h3>
+                                        <p>
+                                            <span>简介：</span>
+                                            <s>政策申报有序可控、未雨绸缪，通过政策申报获得创新资质名片及享受政策扶持，激励企业创新规范发展，协助企业不断积累科技创新要素</s>
+                                        </p>
+                                        <p>
+                                            <span>案例：</span>
+                                            <s>科技顾问会员、科财管家</s>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="options_btn_details2 clearfix" >
+                            <h3>4.市场
+                                <div class="round d_h3">
+                                    <div class="circle"></div>
+                                    <div class="circle_bottom animation "></div>
+                                    <div class="circle_bottom2 animation2 "></div>
+                                </div>
+                            </h3>
+                            <div class="options_box_details2 clearfix">
+                                <p>获取技术、人才、上下游客户等产业资源，提升市场竞争力</p>
+                                <i class="look">查看产品</i>
+                                <div class="info in1 pop-up12" >
+                                    <h3>博士市场通
+                                        <div class="relevance correlation12">
+                                            <i class="rrIcon"></i>
+                                            <h4>关联服务</h4>
+                                            <p class="aff20">产业集群<i class="lookProduct">查看产品</i></p>
+                                        </div>
+                                        <s class="close">x</s>
+                                    </h3>
+                                    <p>
+                                        <span>简介：</span>
+                                        <s>集聚产业链上下游资源，资源互联互通，建立上下游供销平台</s>
+                                    </p>
+                                    <p>
+                                        <span>案例：</span>
+                                        <s>虚拟现实产业创新联盟、软件快速开发技术创新联盟</s>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="options_btn_details2 clearfix" >
+                            <h3>5.创新效率与能力
+                                <div class="round d_h3">
+                                    <div class="circle"></div>
+                                    <div class="circle_bottom animation "></div>
+                                    <div class="circle_bottom2 animation2 "></div>
+                                </div>
+                            </h3>
+                            <div class="options_box_details2 clearfix">
+                                <p>提升创新效率和创新能力的信息化工具</p>
+                                <i class="look">查看产品</i>
+                                <div class="info in1 pop-up13">
+                                    <h3>博士创新工具
+                                        <div class="relevance correlation13">
+                                            <i class="rrIcon"></i>
+                                            <h4>关联服务</h4>
+                                            <p class="aff21">创新管理<i class="lookProduct">查看产品</i></p>
+                                            <!-- <p class="aff22">信息<i class="lookProduct">查看产品</i></p> -->
+                                            <p class="aff23">企业创新能力提升<i class="lookProduct">查看产品</i></p>
+                                        </div>
+                                        <s class="close">x</s>
+                                    </h3>
+                                    <p>
+                                        <span>简介：</span>
+                                        <s>为企业提供或定制开发科研信息化管理系统，减低企业获取创新信息的成本、提成企业创新效率</s>
+                                    </p>
+                                    <p>
+                                        <span>案例：</span>
+                                        <s>科研项目管理系统、企业体检系统、元数据管理系统、政策库、立项库、政策智能匹配库等</s>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="options_btn_details2 clearfix" >
+                            <h3>6.创新资源
+                                <div class="round d_h3">
+                                    <div class="circle"></div>
+                                    <div class="circle_bottom animation "></div>
+                                    <div class="circle_bottom2 animation2 "></div>
+                                </div>
+                            </h3>
+                            <div class="options_child clearfix">
+                                <div class="open_win1">
+                                    <h3><s></s>人才</h3>
+                                    <p>解决高端人才引进难题，实施人才发展战略，提高企业自主创新能力</p>
+                                </div>
+                                <div class="open_win2">
+                                    <i class="look">查看产品</i>
+                                    <div class="info in1 pop-up14">
+                                        <h3>博士才聘通
+                                            <div class="relevance correlation14">
+                                                <i class="rrIcon"></i>
+                                                <h4>关联服务</h4>
+                                                <!-- <p class="aff1">研发能力转换<i class="lookProduct">查看产品</i></p>
+                                                <p class="aff2">成果转让<i class="lookProduct">查看产品</i></p>
+                                                <p class="aff3">人才<i class="lookProduct">查看产品</i></p>
+                                                <p class="aff4">技术<i class="lookProduct">查看产品</i></p>
+                                                <p class="aff5">落地环境<i class="lookProduct">查看产品</i></p>
+                                                <p class="aff6">团队建设<i class="lookProduct">查看产品</i></p> -->
+                                                <p class="aff7">资源渠道<i class="lookProduct">查看产品</i></p>
+                                                <p class="aff8">招引活动<i class="lookProduct">查看产品</i></p>
+                                            </div>
+                                            <s class="close">x</s>
+                                        </h3>
+                                        <p>
+                                            <span>简介：</span>
+                                            <s>基于广东博士创新发展促进会汇聚的万名高端人才，为企业引进人才及团队</s>
+                                        </p>
+                                        <p>
+                                            <span>案例：</span>
+                                            <s>为通桥医疗、奥翼电子等聘请诺奖专家顾问；为皓品、玖的等对接教授博士专家顾问</s>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="options_child clearfix">
+                                <div class="open_win1">
+                                    <h3><s></s>技术</h3>
+                                    <p>破解技术发展瓶颈，挖掘技术需求，加快技术进步，提高企业效益</p>
+                                </div>
+                                <div class="open_win2">
+                                    <i class="look">查看产品</i>
+                                    <div class="info in1 pop-up15">
+                                        <h3>技术转移全流程系统
+                                            <div class="relevance correlation15">
+                                                <i class="rrIcon"></i>
+                                                <h4>关联服务</h4>
+                                                <!-- <p class="aff1">研发能力转换<i class="lookProduct">查看产品</i></p>
+                                                <p class="aff2">成果转让<i class="lookProduct">查看产品</i></p>
+                                                <p class="aff3">人才<i class="lookProduct">查看产品</i></p>
+                                                <p class="aff4">技术<i class="lookProduct">查看产品</i></p>
+                                                <p class="aff5">落地环境<i class="lookProduct">查看产品</i></p>
+                                                <p class="aff6">团队建设<i class="lookProduct">查看产品</i></p> -->
+                                                <p class="aff7">资源渠道<i class="lookProduct">查看产品</i></p>
+                                                <p class="aff8">招引活动<i class="lookProduct">查看产品</i></p>
+                                            </div>
+                                            <s class="close">x</s>
+                                        </h3>
+                                        <p>
+                                            <span>简介：</span>
+                                            <s>基于成果大数据库，实现关键词自动匹配，同时线下提供需求对接服务，满足企业的技术成果引进需求</s>
+                                        </p>
+                                        <p>
+                                            <span>案例：</span>
+                                            <s>为某家具定制企业对接新材料专家团队，引进一项利用农作物碎料及MDI生产零甲醛家具板材的技术</s>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="options_child clearfix">
+                                <div class="open_win1">
+                                    <h3><s></s>资金</h3>
+                                    <p>企业发展过程中各维度所需资金</p>
+                                </div>
+                                <div class="open_win2">
+                                    <i class="look">查看产品</i>
+                                    <div class="info in1 pop-up16">
+                                        <h3>融资服务系统
+                                            <div class="relevance correlation16">
+                                                <i class="rrIcon"></i>
+                                                <h4>关联服务</h4>
+                                                <!-- <i class="aff24">融资<i class="lookProduct">查看产品</i></p> -->
+                                                <p class="aff25">双创金融基金<i class="lookProduct">查看产品</i></p>
+                                            </div>
+                                            <s class="close">x</s></h3>
+                                        <p>
+                                            <span>简介：</span>
+                                            <s>为企业提供各个阶段各种形式的资金，以支撑企业发展壮大</s>
+                                        </p>
+                                        <p>
+                                            <span>案例：</span>
+                                            <s>为玖的、幻境、高瓷、国标等投资，并提供全方位科技服务，助其快速发展</s>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="options_child clearfix">
+                                <div class="open_win1">
+                                    <h3><s></s>信息</h3>
+                                    <p>尽可能在一个平台上集中获取创新的政策、服务机构、技术成果、人才专家等资源，降低有效信息获取成本</p>
+                                </div>
+                                <div class="open_win2">
+                                    <i class="look">查看产品</i>
+                                    <div class="info in1 pop-up17">
+                                        <h3>博士云
+                                            <div class="relevance correlation17">
+                                                <i class="rrIcon"></i>
+                                                <h4>关联服务</h4>
+                                                <!-- <i class="aff17">创新效率与能力<i class="lookProduct">查看产品</i></p> -->
+                                                <p class="aff26">平台<i class="lookProduct">查看产品</i></p>
+                                            </div>
+                                            <s class="close">x</s></h3>
+                                        <p>
+                                            <span>简介：</span>
+                                            <s>高企云平台：通过政策全链服务、创新粒度交易服务等助力企业创新能力培育；<br/>
+                                                孵化圈平台：通过整合各类创新要素资源，运用大数据技术连接产业需求与供给，为产业升级赋能。</s>
+                                        </p>
+                                        <p>
+                                            <span>案例：</span>
+                                            <s>博士政策通、服务交易系统、企业开放式创新管理系统、创新名片、技术转移全流程系统</s>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item2_details details3 fl" style="visibility:hidden;">
+                        <div class="xian3"></div>
+                        <div class="options_btn_details3" >
+                            <h3>1.创新环境优化
+                                <div class="round details3_h3">
+                                    <div class="circle"></div>
+                                    <div class="circle_bottom animation "></div>
+                                    <div class="circle_bottom2 animation2 "></div>
+                                </div>
+                                <p class="hp">掌握产业科技创新现状，优化政策设计，强化公共服务能力，提升创新资源配置效率</p>
+                            </h3>
+                            <div class="details3_h3_child">
+                                <div>
+                                    <s></s>政策
+                                    <div class="open_win999">
+                                        <i class="look">查看产品</i>
+                                        <div class="info in2 pop-up18">
+                                            <h3>区域产业科技体检
+                                                <div class="relevance_l correlation18">
+                                                    <i class="rrIcon_l"></i>
+                                                    <h4>关联服务</h4>
+                                                    <p class="aff11">政策资讯<i class="lookProduct">查看产品</i></p>
+                                                    <p class="aff19">政策获取<i class="lookProduct">查看产品</i></p>
+                                                </div>
+                                                <s class="close">x</s></h3>
+                                            <p>
+                                                <span>简介：</span>
+                                                <s>面向区域重点支柱产业、战略新兴产业、创新政策体系、创新资源禀赋、创新支撑载体、创新服务体系等方面开展调研，摸清产业及科技的优势与短板，挖掘产业潜力与需求，形成产业科技发展战略规划，引导政策设计、创新资源引进配置、创新服务开展及创新活动举办。</s>
+                                            </p>
+                                            <p>
+                                                <span>案例：</span>
+                                                <s>《苏州高新区狮山横塘街道科技创新街区三年落实行动计划》、《东莞市科技成果双转化行动计划》、《东莞市加快发展科技服务业实施办法》、广西柳州科技创新资源调研、南京溧水产业调研</s>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="details3_h3_child">
+                                <div>
+                                    <s></s>数据
+                                    <div class="open_win999">
+                                        <i class="look">查看产品</i>
+                                        <div class="info in2 pop-up19">
+                                            <h3>区域创新大数据
+                                                <div class="relevance_l correlation19">
+                                                    <i class="rrIcon_l"></i>
+                                                    <h4>关联服务</h4>
+                                                    <p class="aff3">人才<i class="lookProduct">查看产品</i></p>
+                                                    <p class="aff27">企业<i class="lookProduct">查看产品</i></p>
+                                                    <p class="aff2">成果转让<i class="lookProduct">查看产品</i></p>
+                                                    <p class="aff28">创新把脉<i class="lookProduct">查看产品</i></p>
+                                                </div>
+                                                <s class="close">x</s>
+                                            </h3>
+                                            <p>
+                                                <span>简介：</span>
+                                                <s>基于博士科技“创新大数据平台”、“创新要素管理系统”等平台，结合区域需求搭建涵盖创新人才库、科技企业库、科技成果库、创新服务机构库、创新政策库等模块的区域创新数据库并以此为依托开展创新数据采集与跟踪。</s>
+                                            </p>
+                                            <p>
+                                                <span>案例：</span>
+                                                <s>苏州高新区企业科技创新要素管理与决策支持系统、苏州高新区高新技术企业培育支撑系统、广西壮族自治区科技厅专家库</s>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="details3_h3_child">
+                                <div>
+                                    <s></s>平台
+                                    <div class="open_win999">
+                                        <i class="look">查看产品</i>
+                                        <div class="info in2 pop-up20">
+                                            <h3>区域科技管理服务支撑平台
+                                                <div class="relevance_l correlation20">
+                                                    <i class="rrIcon_l"></i>
+                                                    <h4>关联服务</h4>
+                                                    <p class="aff17">创新效率与能力<i class="lookProduct">查看产品</i></p>
+                                                    <p class="aff22">信息<i class="lookProduct">查看产品</i></p>
+                                                </div>
+                                                <s class="close">x</s></h3>
+                                            <p>
+                                                <span>简介：</span>
+                                                <s>基于博士科技的“孵化圈”、“经验海”、“活动海”、“高企云”等创新服务平台体系及系列科技创新工具集，协助区域建设和完善科技创新服务管理公共平台，提升科技管理与服务效率，加速各种创新要素资源的集聚与流通配置。</s>
+                                            </p>
+                                            <p>
+                                                <span>案例：</span>
+                                                <s>百色技术交易平台；宿迁技术交易服务中心线上平台、镇海科技市场线上平台、江门技术交易服务平台、龙岗区综合创新服务平台“科技服务”板块</s>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="details3_p">人才库<i></i></p>
+                            <p class="details3_p">企业库<i></i></p>
+                            <p class="details3_p">成果库<i></i></p>
+                            <p class="details3_p">企业库<i></i></p>
+                        </div>
+
+                        <div class="options_btn_details3" style="margin-top:10px;">
+                            <h3>2.人才项目引培
+                                <div class="round details3_h3">
+                                    <div class="circle"></div>
+                                    <div class="circle_bottom animation "></div>
+                                    <div class="circle_bottom2 animation2 "></div>
+                                </div>
+                                <p class="hp">强化创新创业载体支撑能力，加速创新创业人才、项目引进与培育</p>
+                            </h3>
+                            <div class="details3_h3_child">
+                                <div>
+                                    <s></s>招才引智
+                                </div>
+                            </div>
+                            <div class="details3_h3_child bg">
+                                <div>
+                                    <i>资源渠道</i>
+                                    <div class="open_win999">
+                                        <i class="look">查看产品</i>
+                                        <div class="info in2 pop-up21">
+                                            <h3>金博奖、博士创新之旅、创新挑战赛
+                                                <div class="relevance_l correlation21">
+                                                    <i class="rrIcon_l"></i>
+                                                    <h4>关联服务</h4>
+                                                    <p class="aff1">研发能力转换<i class="lookProduct">查看产品</i></p>
+                                                    <p class="aff2">成果转让<i class="lookProduct">查看产品</i></p>
+                                                    <p class="aff3">人才<i class="lookProduct">查看产品</i></p>
+                                                    <p class="aff4">技术<i class="lookProduct">查看产品</i></p>
+                                                    <p class="aff5">落地环境<i class="lookProduct">查看产品</i></p>
+                                                    <p class="aff6">团队建设<i class="lookProduct">查看产品</i></p>
+                                                    <!-- <p class="aff7">资源渠道<i class="lookProduct">查看产品</i></p>
+                                                    <p class="aff8">招引活动<i class="lookProduct">查看产品</i></p> -->
+                                                </div>
+                                                <s class="close">x</s></h3>
+                                            <p style="height: 200px;overflow:auto;">
+                                                <span>简介：</span>
+                                                <s>金博奖：针对区域的产业需求，可举办金博奖的地区分赛或行业分赛，通过“以赛引才”的方式助力区域吸引国内外高层次人才及优质项目落地孵化。</s><br/>
+                                                <s>博士创新之旅：“走出去、引进来”的精准引才模式，通过参观考察、科技游学、培训研讨、推介对接等方式，推动供需双方的匹配对接，吸引人才参观考察区域双创环境，鼓励创新创业项目落地转化，并促进科技创新经验的跨区域交流。</s><br/>
+                                                <s>创新挑战赛：协助科技管理部门引进创新挑战赛落地区域举办分赛，通过挖掘集聚企业的技术需求，跨区域对接人才团队及高校院所等资源，解决企业技术难题。</s>
+                                            </p>
+                                            <p style="height: 200px;overflow:auto;">
+                                                <span>案例：</span>
+                                                <s>金博奖：金博奖华东赛区（落地于苏州高新区）、金博奖扬州分赛场</s><br/>
+                                                <s>博士创新之旅：常熟招才引智武汉行、昆山-广州科技创新对接会、2018年“春晖杯”项目南通市创业环境推介交流会、2017年创新创业环境广东推介洽谈会、2018年常熟梅李上海理工大学专场对接会</s><br/>
+                                                <s>创新挑战赛：第二届、第三届创新挑战赛海门专场，第三届创新挑战赛扬州专场，第四届创新挑战赛南京江宁专场，南通专场</s>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="details3_h3_child bg">
+                                <div>
+                                    <i>招引活动</i>
+                                    <div class="open_win999">
+                                        <i class="look">查看产品</i>
+                                        <div class="info in2 pop-up22">
+                                            <h3>高地孵化器、产业智囊团、产业专利池、区域技术市场
+                                                <div class="relevance_l correlation22">
+                                                    <i class="rrIcon_l"></i>
+                                                    <h4>关联服务</h4>
+                                                    <p class="aff1">研发能力转换<i class="lookProduct">查看产品</i></p>
+                                                    <p class="aff2">成果转让<i class="lookProduct">查看产品</i></p>
+                                                    <p class="aff3">人才<i class="lookProduct">查看产品</i></p>
+                                                    <p class="aff4">技术<i class="lookProduct">查看产品</i></p>
+                                                    <p class="aff5">落地环境<i class="lookProduct">查看产品</i></p>
+                                                    <p class="aff6">团队建设<i class="lookProduct">查看产品</i></p>
+                                                </div>
+                                                <s class="close">x</s></h3>
+                                            <p style="height: 200px;overflow:auto;">
+                                                <span>简介：</span>
+                                                <s>高地孵化器：在创新资源丰富、创新活动活跃的地区设立虚拟的高地孵化器，通过博士科技的资源发现猎寻、创新环境推广、创新政策宣导等运营服务工作，为区域对接引进创新创业人才、科技企业乃至集群化产业等高端资源，融合孵化服务、金融投资、财政扶持等助力，加速资源异地孵化过后落地区域实现产业化。</s><br/>
+                                                <s>产业智囊团：依托博士科技的人才库及资源渠道，面向区域产业需求，跨区域征集专家打造科技创新智囊团，为区域以产业创新发展顾问、企业创新顾问等形式输出专家智慧。</s><br/>
+                                                <s>产业专利池：围绕优势产业及战略新兴产业，联合龙头企业及区域内外的高校院所、人才团队，建设产业专利池，以专利众筹、专利基金等模式，引入国内外的优质专利，开展行业化、联盟化的专利池共享运营计划，推动专利交叉授权、专利集成化运营，助力专利技术在行业内快速扩散。</s><br/>
+                                                <s>区域技术市场：基于博士科技构建的技术转移运营底层操作系统，从技术转移体系规划设计、线上平台建设与运营、线下服务体系建设与能力提升、供需资源挖掘集聚、要素资源导入与运营、活动策划举办、服务机构引培与管理、技术经理人培养等方面为区域技术市场建设运营提供全面的支撑与服务，加速创新要素资源的流通配置与转化。</s>
+                                            </p>
+                                            <p style="height: 200px;overflow:auto;">
+                                                <span>案例：</span>
+                                                <s>高地孵化器：菏泽高新技术产业开发区产业创新发展中心</s>
+                                                <s>产业智囊团：新昌县轴承产业智囊团</s>
+                                                <s>产业专利池：轨道交通产业专利池（筹建中）</s>
+                                                <s>区域技术市场：扬州、佛山、镇海、江门等17家区域技术市场</s>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="details3_h3_child">
+                                <div>
+                                    <s></s>双创项目培育
+                                </div>
+                            </div>
+                            <div class="details3_h3_child bg">
+                                <div>
+                                    <i>产业载体</i>
+                                    <div class="open_win999">
+                                        <i class="look">查看产品</i>
+                                        <div class="info in2 pop-up23">
+                                            <h3>产业载体
+                                                <div class="relevance_l correlation23">
+                                                    <i class="rrIcon_l"></i>
+                                                    <h4>关联服务</h4>
+                                                    <p class="aff5">落地环境<i class="lookProduct">查看产品</i></p>
+                                                </div>
+                                                <s class="close">x</s></h3>
+                                            <p>
+                                                <span>简介：</span>
+                                                <s>以创新模式建立招商引资、招才引智的渠道与方式，链接金融资本形成自主投资基金，引入智慧园区管理平台等方式，形成全生命周期孵化服务体系，为科技孵化器、产业园区构建完善的创业孵化体系和生活服务体系，营造 “生活无忧、创业无限”的产业载体，助力创业团队与企业快速孵化成长，破解“千园一面”、招商引资无渠道、孵化服务支撑乏力、盈利模式不清晰等园区运营的的痛点。</s>
+                                            </p>
+                                            <p>
+                                                <span>案例：</span>
+                                                <s>深圳国际创新创业服务平台</s>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="details3_h3_child bg">
+                                <div>
+                                    <i>孵化服务体系</i>
+                                    <div class="open_win999">
+                                        <i class="look">查看产品</i>
+                                        <div class="info in2 pop-up24">
+                                            <h3>孵化服务体系
+                                                <div class="relevance_l correlation24">
+                                                    <i class="rrIcon_l"></i>
+                                                    <h4>关联服务</h4>
+                                                    <p class="aff14">商业计划书<i class="lookProduct">查看产品</i></p>
+                                                    <p class="aff6">团队建设<i class="lookProduct">查看产品</i></p>
+                                                </div>
+                                                <s class="close">x</s></h3>
+                                            <p>
+                                                <span>简介：</span>
+                                                <s>以企业科技体检为工具，全面挖掘呈现企业的深层次创新服务需求，并以真实需求为牵引，以线下创新服务联盟、线上创新服务众包等方式相结合，吸引专业服务机构为区域内的人才、企业服务，形成完整、规范、协同的孵化服务体系。</s>
+                                            </p>
+                                            <p>
+                                                <span>案例：</span>
+                                                <s>昆山市科技服务行业协会</s>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="details3_h3_child bg">
+                                <div>
+                                    <i>创新载体</i>
+                                    <div class="open_win999">
+                                        <i class="look">查看产品</i>
+                                        <div class="info in2 pop-up25">
+                                            <h3>创新载体
+                                                <!-- <div class="relevance_l correlation25">
+                                                    <i class="rrIcon_l"></i>
+                                                    <h4>关联服务</h4>
+                                                    <p>落地环境<i class="lookProduct">查看产品</i></p>
+                                                </div> -->
+                                                <s class="close">x</s></h3>
+                                            <p>
+                                                <span>简介：</span>
+                                                <s>导入在相关技术领域有专业优势的国内外高校院所与人才团队，以新型研发机构、重点实验室、产业技术创新公共服务平台等方式落地区域，形成以需求为导向、以服务为衔接、以金融为支撑、以政府为主导、市场化运作的产业协同创新新型载体。</s>
+                                            </p>
+                                            <p>
+                                                <span>案例：</span>
+                                                <s>虚拟现实研究院</s>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="details3_h3_child bg">
+                                <div>
+                                    <i>双创金融基金</i>
+                                    <div class="open_win999">
+                                        <i class="look">查看产品</i>
+                                        <div class="info in2 pop-up26">
+                                            <h3>双创金融基金
+                                                <div class="relevance_l correlation26">
+                                                    <i class="rrIcon_l"></i>
+                                                    <h4>关联服务</h4>
+                                                    <p class="aff24">融资<i class="lookProduct">查看产品</i></p>
+                                                    <p class="aff13">资金<i class="lookProduct">查看产品</i></p>
+                                                </div>
+                                                <s class="close">x</s></h3>
+                                            <p>
+                                                <span>简介：</span>
+                                                <s>在政府基金引导下，与当地产业企业、投资机构等共同设立双创投资基金，形成涵盖知识产权运营基金、科技成果转化基金、产业投资基金等形式在内的梯次化、多层次的双创金融投资体系，为人才项目的孵化与企业的成长提供全链条的金融支撑。</s>
+                                            </p>
+                                            <p>
+                                                <span>案例：</span>
+                                                <s>博士柳汇科技成果转化基金、广州利通知识产权基金</s>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="options_btn_details3" style="margin-top:15px;">
+                            <h3>3.科技企业提升
+                                <div class="round details3_h3">
+                                    <div class="circle"></div>
+                                    <div class="circle_bottom animation "></div>
+                                    <div class="circle_bottom2 animation2 "></div>
+                                </div>
+                                <p class="hp">了解区域企业的创新数据、创新需求，并通过资源配置与服务引导，推动企业提升创新能力，成为区域创新体系的主导力量</p>
+                            </h3>
+                            <div class="details3_h3_child bg">
+                                <div>
+                                    <i>创新体检</i>
+                                    <div class="open_win999">
+                                        <i class="look">查看产品</i>
+                                        <div class="info in2 pop-up27">
+                                            <h3>博士创新体验中心
+                                                <div class="relevance_l correlation27">
+                                                    <i class="rrIcon_l"></i>
+                                                    <h4>关联服务</h4>
+                                                    <p class="aff28">创新把脉<i class="lookProduct">查看产品</i></p>
+                                                </div>
+                                                <s class="close">x</s></h3>
+                                            <p>
+                                                <span>简介：</span>
+                                                <s>以实体空间为区域内企业创新需求、创新成果、标杆式科技产品、企业创新案例及科技服务内容等资源集聚和进一步凸显呈现提供显性化的展示平台，引领企业创新意识、活跃创新氛围；同时作为创新服务的窗口，导入企业科技体检、创新体系建设咨询、技术交易等专业科技服务产品，为企业提供一站式的创新服务。</s>
+                                            </p>
+                                            <p>
+                                                <span>案例：</span>
+                                                <s>深圳龙岗大运软件企业健康体检诊疗中心、苏州昆山区域体检、镇海鄞州企业体检</s>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="details3_h3_child bg">
+                                <div>
+                                    <i>企业创新能力提升</i>
+                                    <div class="open_win999">
+                                        <i class="look">查看产品</i>
+                                        <div class="info in2 pop-up28">
+                                            <h3>企业创新能力建设工程
+                                                <div class="relevance_l correlation28">
+                                                    <i class="rrIcon_l"></i>
+                                                    <h4>关联服务</h4>
+                                                    <p class="aff21">创新管理<i class="lookProduct">查看产品</i></p>
+                                                    <p class="aff17">创新效率与能力<i class="lookProduct">查看产品</i></p>
+                                                </div>
+                                                <s class="close">x</s></h3>
+                                            <p>
+                                                <span>简介：</span>
+                                                <s>以 “一检（创新体检）、四管（四大管理：创新资质管理、创新体系管理、创新资源管理、创新工具管理）、一孵（软孵化）、一投（投融资）”的全链服务， 真正实现技术转移和成果转化，加速知识转化为财富</s>
+                                            </p>
+                                            <p>
+                                                <span>案例：</span>
+                                                <s>苏州高新区高新技术企业培育工程，苏州高新区枫桥街道、狮山街道科技创新指标能力提升工程</s>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="options_btn_details3" style="margin-top:30px;">
+                            <h3>4.产业升级与培育
+                                <div class="round details3_h3">
+                                    <div class="circle"></div>
+                                    <div class="circle_bottom animation "></div>
+                                    <div class="circle_bottom2 animation2 "></div>
+                                </div>
+                                <p class="hp">以创新资源与专业服务助力产业挖潜增效，解决产业共性关键技术难题，加速产业集群化发展，推动战略新兴产业培育与传统产业升级</p>
+                            </h3>
+                            <div class="details3_h3_child bg">
+                                <div>
+                                    <i>产业共性技术问题</i>
+                                    <div class="open_win999">
+                                        <i class="look">查看产品</i>
+                                        <div class="info in2 pop-up29">
+                                            <h3>产业共性难题攻关
+                                                <!-- <div class="relevance_l correlation29">
+                                                    <i class="rrIcon_l"></i>
+                                                    <h4>关联服务</h4>
+                                                    <p>创新管理<i class="lookProduct">查看产品</i></p>
+                                                    <p>创新效率与能力<i class="lookProduct">查看产品</i></p>
+                                                </div> -->
+                                                <s class="close">x</s></h3>
+                                            <p>
+                                                <span>简介：</span>
+                                                <s>以产业调研、行业论坛等方式挖掘区域产业发展的共性关键技术难题，结合科教财政引导、企业联合投入、遴选院校承接的方式进行立项，实现跨区域的研发与产业化合作，破解创新资源配置失衡、研发活动与市场脱节导致产业重大技术升级受阻的难题。</s>
+                                            </p>
+                                            <p>
+                                                <span>案例：</span>
+                                                <s>金城保密“基于自主安全SoC 的高端智能彩色激光打印复印机的研制与应用”</s>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="details3_h3_child bg">
+                                <div>
+                                    <i>产业与科技规划</i>
+                                    <div class="open_win999">
+                                        <i class="look">查看产品</i>
+                                        <div class="info in2 pop-up30">
+                                            <h3>产业创新发展中心
+                                                <!-- <div class="relevance_l correlation30">
+                                                    <i class="rrIcon_l"></i>
+                                                    <h4>关联服务</h4>
+                                                    <p>创新管理<i class="lookProduct">查看产品</i></p>
+                                                    <p>创新效率与能力<i class="lookProduct">查看产品</i></p>
+                                                </div> -->
+                                                <s class="close">x</s></h3>
+                                            <p>
+                                                <span>简介：</span>
+                                                <s>以创新服务为引领、以创新资源为支撑，推动科技成果高质量转化、孵化与产业化的泛行业综合性服务载体。产业创新发展中心以政府为主导，博士科技参与建设并逐步实现市场化运营，以“创新服务×创新资源”为核心运营逻辑，通过挖掘产业的需求与发展潜力，以创新服务联盟、科技服务众包等模式打造专业化、协同化的完整创新服务体系形成带动衔接作用，吸引科技成果、人才团队、双创项目等创新创业资源引进落地，支撑带动产业升级。</s>
+                                            </p>
+                                            <p>
+                                                <span>案例：</span>
+                                                <s>溧水产业创新发展中心</s>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="details3_h3_child bg">
+                                <div>
+                                    <i>产业集群</i>
+                                    <div class="open_win999">
+                                        <i class="look">查看产品</i>
+                                        <div class="info in2 pop-up31">
+                                            <h3>产业创新综合体
+                                                <div class="relevance_l correlation31">
+                                                    <i class="rrIcon_l"></i>
+                                                    <h4>关联服务</h4>
+                                                    <p class="aff29">市场<i class="lookProduct">查看产品</i></p>
+                                                </div>
+                                                <s class="close">x</s></h3>
+                                            <p>
+                                                <span>简介：</span>
+                                                <s>面向新兴、前沿、战略性产业，以产业协同创新、协同发展为主要任务，采取龙头、骨干企业带动+产业平台支撑+创新服务驱动模式引领产业集群创新发展，促进各类创新资源有效融合，结合科技成果转化基金、产业投资基金的运营，推动科技成果高质量转化、孵化与产业化，加速带动传统产业升级转型，进而提升区域创新能力与核心竞争力的综合性服务载体。</s>
+                                            </p>
+                                            <p>
+                                                <span>案例：</span>
+                                                <s>佛山陶瓷产业创新综合体、菏泽市5g通信产业创新综合体</s>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="item3 clearfix" style="display: none">
+                <div class="last_box">
+                    <div class="last_a fl">
+                        <div class="last_details " >
+                            <h3>1.科技伯乐Ｘ平台
+                                <div class="round details1_h3">
+                                    <div class="circle"></div>
+                                    <div class="circle_bottom animation "></div>
+                                    <div class="circle_bottom2 animation2 "></div>
+                                </div>
+                            </h3>
+                            <p>
+                                    科技伯乐是博士科技定义的一类离创新要素最近的各类专业人士以兼职的形式参与技术转移活动的人群，博士科技将这些科技伯乐发动起来以兼职形式，依托博士科技研发的丰富技术转移创新工具支撑，从而实现以最高的效率、最低的成本做最擅长的事，顺便也完成了技术转移的某一个专业环节，不过不同领域不同专业能力的科技伯乐互补形成成果转化生态
+                            </p>
+                        </div>
+                    </div>
+                    <div class="last_a fl">
+                        <div class="last_details " >
+                            <h3>２.创新合伙人
+                                <div class="round details1_h3">
+                                    <div class="circle"></div>
+                                    <div class="circle_bottom animation "></div>
+                                    <div class="circle_bottom2 animation2 "></div>
+                                </div>
+                            </h3>
+                            <p>
+                                    基于十八年的探索和实践，博士科技已经走出一条具有博士特色的科技成果转化之路，于2017年启动了创新合伙人招募计划，创新性提出以“合伙人”形式整合资源、把博士科技成熟的模式在全国推广，壮大自己，回报社会
+                            </p>
+                        </div>
+                    </div>
+                    <div class="last_a fl">
+                        <div class="last_details " >
+                            <h3>３.产业创新综合体
+                                <div class="round details1_h3">
+                                    <div class="circle"></div>
+                                    <div class="circle_bottom animation "></div>
+                                    <div class="circle_bottom2 animation2 "></div>
+                                </div>
+                            </h3>
+                            <p>
+                                    面向新兴、前沿、战略性产业，以产业协同创新、协同发展为主要任务，采取龙头、骨干企业带动+产业平台支撑+创新服务驱动模式引领产业集群创新发展，促进各类创新资源有效融合，结合科技成果转化基金、产业投资基金的运营，推动科技成果高质量转化、孵化与产业化，加速带动传统产业升级转型，进而提升区域创新能力与核心竞争力的综合性服务载体
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+
+        </footer>
+    </div>
+    <script th:src="@{/statics/other/js/jquery-3.4.1.min.js}"></script>
+    <script th:src="@{/statics/other/js/index.js?v=0.0.3}"></script>
+    <th:block th:include="block/statistics :: copy" />
+</body>
+</html>

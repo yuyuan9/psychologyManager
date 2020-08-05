@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.biz.mapper.GuaranteeMoneyMapper">
+	<select id="findlist" parameterType="com.ht.commons.utils.MyPage" resultType="com.ht.commons.utils.PageData">
+		select 
+		s.shopname,
+		s.banme,
+		s.netrytype,
+		t.status,
+		t.project,
+		t.cast,
+		t.beginDate,
+		t.endDate,
+		t.id,
+		t.createdate,
+		t.createid,
+		t.lastmodified,
+		t.regionid
+		from t_guarantee_money t
+		left join t_sys_user u on t.createid=u.USER_ID
+		left join t_sys_service s on u.USER_ID=s.createid 
+		where 1=1
+		<if test="pd.banme!=null and pd.banme!=''">
+			and s.banme LIKE CONCAT(CONCAT('%', #{pd.banme}),'%')
+		</if>
+		order by t.createdate desc
+	</select>
+	<select id="getoneById" parameterType="java.lang.String" resultType="com.ht.entity.biz.product.GuaranteeMoney">
+	select * from t_guarantee_money where createid=#{createid} and status=1 order by createdate desc limit 0,1
+	</select>
+	<update id="updateStatus" parameterType="com.ht.commons.utils.PageData">
+	    update t_guarantee_money set status=#{status} where paymentOrderId=#{paymentOrderId}
+	</update>
+	<select id="findusergtm" parameterType="com.ht.commons.utils.MyPage" resultType="com.ht.entity.biz.product.GuaranteeMoney">
+		select 
+		t.*,
+		to_days(t.endDate) - to_days(now())+1 days
+		from t_guarantee_money t
+		where 1=1 and t.status in (1,2)
+		<if test="pd.createid!=null and pd.createid!=''">
+			and t.createid=#{pd.createid}
+		</if>
+		order by t.status,t.createdate desc
+	</select>
+	<select id="quarzlist" parameterType="com.ht.commons.utils.PageData" resultType="com.ht.entity.biz.product.GuaranteeMoney">
+		select * from t_guarantee_money where status=1 and (regionid is null or regionid!=#{newdate}) limit ${a},${b}
+	</select>
+</mapper>

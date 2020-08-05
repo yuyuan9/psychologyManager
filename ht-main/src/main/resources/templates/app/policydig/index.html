@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+<link rel="stylesheet" th:href="@{/statics/app/css/reset.css?v=0.01}">
+<link rel="stylesheet" th:href="@{/statics/app/css/index/zcsd_index.css?v=0.02}">
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@2.2/lib/index.css"> -->
+<link rel="stylesheet" th:href="@{/statics/app/css/vant_common.css?v=0.01}">
+
+<head>
+   
+<style>
+ [v-cloak] {
+    display: none;
+ }
+</style>
+</head>
+<body>
+    <div class="app_policy" id="app_policydig">
+        <div class="app_pbg">
+            <div class="DW_t">
+                <a href="/app/index/index" class="sd_name">
+                    <i class="dib to_acsd"></i>
+                    <span class="zcsd" onclick="javascript:location.href='/ht-biz/app/index/index'">政策速递</span>
+                    <span class="zc_tip">最新政策·一触即达</span>
+                </a>
+                <div class="area">
+                    <i class="dib DW"></i>
+                    <span class="city city1" @click="showPopup" v-cloak>{{area || city || province}}</span>
+                </div>
+            </div>
+            <!-- 搜索框 -->
+            <div class="policydig">
+                <input type="text" name="digSearchKey" v-model="keyword" id="digSearchKey" placeholder="请输入您要查询的政策关键词，如疫情防控" class="dig_input"><i class="dig_icon dib" @click="digSearch"></i>
+            </div>
+            <!-- 三个tab栏 -->
+            <div class="tabs clearfix">
+                <div class="tab tab-1 fl">
+                    <span class="dib Tab_title Tab_title1 Tab_title2" :class="{active:index==1}" @click="changetab(1)">申报通知</span>
+                    <i class="bt_icon"></i>
+                </div>
+                <div class="tab tab-2 fl">
+                    <span class="dib Tab_title Tab_title1" :class="{active:index==3}" @click="changetab(3)">公示名录</span>
+                    <i class="bt_icon"></i>
+                </div>
+                <div class="tab tab-2 fl">
+                    <span class="dib Tab_title" :class="{active:index==2}" @click="changetab(2)">政府文件</span>
+                    <i class="bt_icon"></i>
+                </div>
+            </div>
+            <!-- 数据列表 -->
+            <div class="dataList">
+                <van-list v-model="loading" :finished="finished" finished-text="没有更多了"  :error.sync="error" error-text="请求失败，点击重新加载" @load="projectData" class="List_nav">
+                    <div class="list_item" v-for="list in projectList">
+                        <!-- <a :href="'/ht-biz/app/policydig/details?id='+list.id+'&index='+index"> -->
+                        <a href="javascript:void(0);" @click="todetails(list.id)">
+                            <p class="list_title" v-cloak>{{list.title}}</p>
+                            <p class="list_d">
+                                <span class="list_diqu" v-cloak>{{list.province}}{{list.city}}{{list.area}}</span>
+                                <span class="list_data" v-cloak>{{list.datetime|date}}</span>
+                                <span class="list_sb" v-if="list.nature==1 && list.status>0" v-cloak>正在申报</span>
+                                <span class="list_sb list_jz" v-if="list.nature==1 && list.status<=0" v-cloak>已截止申报</span>
+                            </p>
+                        </a>
+                        <!-- <p class="line"></p> -->
+                    </div>
+                </van-list>
+            </div>
+        </div>
+         <!-- 地区弹窗 -->
+        <threelink :show="show" @comfirm="queren" @cancel="btn"></threelink>
+    </div>
+    
+    <script type="text/javascript" th:src="@{/statics/app/js/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/vue.js}"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vant@2.2/lib/vant.min.js"></script> -->
+    <script type="text/javascript" th:src="@{/statics/app/js/vant.min.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/layer.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/htajax.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/moment.min.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/component/threeLink.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/policydig/policydig.js?v=0.08}"></script>
+</body>
+
+</html>

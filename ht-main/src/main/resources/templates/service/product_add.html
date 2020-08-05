@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+     <!-- 公共头部 -->
+     <th:block th:include="block/headlink :: test('产品添加')" /> 
+     <!-- 结束 -->
+    <link rel="stylesheet" th:href="@{/statics/css/service/index.css?v=0.0.4}">
+    <link rel="stylesheet" th:href="@{/statics/css/hisself/datepicker.css?v=0.0.1}">    
+    <link rel="stylesheet" th:href="@{/statics/lib/dist/summernote.css?v=0.0.4}">
+    <link rel="stylesheet" th:href="@{/statics/css/service/product_add.css?v=0.1.0}">
+    <style>
+        .copyright{
+            line-height: 28px;
+        }
+        label{
+            font-weight: normal;
+        }
+        .product_details1{display: none;}
+    </style>
+</head>
+
+<body>
+    <div id="user">
+        <div th:replace="~{servive_nav::copy}"></div>
+    </div>
+    <div class="wrap" id="box">
+        <section>
+            <div class="add_position clearfix">当前位置：<a href="/ht-biz/service/index/product">产品管理</a>><a>产品添加</a></div>
+        </section>
+        <!-- 产品类型 -->
+        <section>
+            <div class="add clearfix">
+                <div class="product_add fl">
+                    <div class="info">
+                        <div class="info_add">
+                            <div class="add_info">
+                                <span class="product_title">产品添加</span>
+                                <span class="add_tips">请先确认选择产品类型再编辑产品信息</span>
+                            </div>
+                            <div class="product_lx clearfix">
+                                <div style="width: 100px;" class="plx_l fl">产品类型</div>
+                                <div class="plx_r fr">
+                                    <ul class="plx_r_t">
+                                        <li v-for="(list,index) in productList" v-cloak :class="{active:isShow==index}" :id="list.id"  @click="isShow=index;getId($event,index)">{{list.name}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 服务信息-添加产品 -->
+        <section>
+            <div class="info_add sevice_info add_2 clearfix">
+                <div class="plx_l lx_1 fl">服务信息</div>
+                <div class="psild">
+                    <div class="plx_r fr">
+                        <p class="plx_r_l lx_1 plx_l1 fl"><i>*</i>产品类型：</p>
+                        <p class="fl">
+                            <span v-show="proname !=''" v-cloak class="cplx">{{proname}}</span>
+
+                            <div class="pro_classfy clearfix">
+                                <select id="tier1" name="tier1" v-model="producttypetwoname"  class="fl" @change="gettier1($event)">
+                                    <option value="" id="default1">--请选择--</option>
+                                    <option v-for="(list,index) in childList" :value="list.id">{{list.name}}</option>
+                                </select>  
+                                <select id="tier2" name="tier2" v-model="producttypethreename" class="fl" @change="gettier2($event)">
+                                    <option value="" id="default2">--请选择--</option>
+                                    <option v-for="(list,index) in childList2" :value="list.id">{{list.name}}</option>
+                                </select>  
+                            </div>
+                        </p> 
+                    </div>
+                    <div class="plx_r lx_3 clearfix">
+                        <p class="plx_r_l fl"><i>*</i>产品名称：</p>
+                        <p class="plx_r_r ipt_text fl">
+                            <input type="text" name="proname" v-model="productname" placeholder="请输入产品名称" maxlength="40">
+                        </p> 
+                    </div>
+                    <div class="plx_r lx_3 clearfix" v-show="granular">
+                        <p class="plx_r_l fl"><i>*</i>产品级别：</p>
+                        <div class="plx_r_n fl">
+                            <ul class="jibie">
+                                <li class="ziti diqu">
+                                    <input type="radio" name="region" value="1" />
+                                    <label>国家级</label>
+                                </li>
+                                <li class="ziti diqu">
+                                    <input type="radio" name="region" value="2"  />
+                                     <label>省级</label>
+                                </li>
+                                <li class="ziti diqu">
+                                    <input type="radio" name="region" value="3"  /> 
+                                    <label>市级</label>
+                                </li>
+                                <li class="ziti diqu">
+                                    <input type="radio" name="region" value="4"  /> 
+                                    <label>区级</label>
+                                </li>
+                            </ul>
+                        </div> 
+                    </div>
+                    <div class="plx_r lx_3 clearfix">
+                        <p class="plx_r_l fl"><i>*</i>产品所属区域：</p>
+
+                        <select class="p_diqu fl" id="province" name="province" @change="changePro">
+                            <option value="" selected>--请选择--</option>
+                        </select>  
+                        <select class="p_diqu fl" id="city" name="city" @change="changeCity" >
+                            <option value="" selected>--选择市--</option>
+                        </select>  
+                        <select class="p_diqu fl" id="area" name="area">
+                            <option value='' selected>--选择区--</option>
+                        </select>
+                    </div>
+                    <div class="plx_r lx_5 clearfix">
+                        <p class="plx_r_l fl"><i>*</i>产品价格（单价）：</p>
+                        <div class="plx_r_n fl">
+                            <label for="radio" @change="priceCheck()">
+                                <ul class="jiage">
+                                    <li class="ziti price2">
+                                        <input type="radio" name="price" value="1"/>
+                                        <input type="text" name="price1" v-model="price1" disabled="disabled" placeholder="一口价" maxlength="20" class="price1 biankuang"><s>&nbsp;元</s>
+                                    </li>
+                                    <!-- <li class="ziti price2">
+                                        <input type="radio" name="price" value="2"/>
+                                            <input type="text" name="price2" v-model="price2" disabled="disabled" class="price1 biankuang" placeholder="区间价"><s>&nbsp;元</s>
+                                            - <input type="text" name="price3" v-model="price3" disabled="disabled" class="price1 biankuang" placeholder="区间价"><s>&nbsp;元</s>
+                                    </li> -->
+                                    <li class="ziti price2">
+                                        <input type="radio" name="price" value="3" /> 
+                                        <label>价钱面议</label>
+                                    </li>
+                                </ul>
+                            </label>
+                            
+                        </div> 
+                    </div>
+                    <div class="plx_r lx_6 clearfix" v-show="granular">
+                        <p class="plx_r_l fl"><i>*</i>申报时间：</p>
+                        <div class="plx_r_n fl">
+                            <label for="radio" @change="timeCheck()">
+                                <ul class="jiage">
+                                    <li class="ziti price2">
+                                        <input type="radio" name="declare" value="1"/>
+                                        <span class="nav_down">
+                                            <input type="data" id="Date1" name="Date1" disabled="disabled" placeholder="选择起始时间" class="time">
+                                            <i class="arrow"></i>
+                                        </span>
+                                        
+                                        <s>-</s>
+                                        <span class="nav_down">
+                                            <input type="data" id="Date2" name="Date2" disabled="disabled" placeholder="选择截止时间" class="time">
+                                            <i class="arrow"></i>
+                                        </span>
+                                        
+                                    </li>
+                                    <li class="ziti price2">
+                                        <input type="radio" name="declare" value="2"/> 
+                                        <label>全年申报</label>
+                                    </li>
+                                </ul>
+                            </label>
+                            
+                        </div> 
+                    </div>
+                    <div class="plx_r lx_6 clearfix" v-show="general">
+                        <p class="plx_r_l fl"><i>*</i>完成时间：</p>
+                        <div class="plx_r_n fl">
+                            <input class="time" type="text" name="finishtime" v-model="finishtime" maxlength="20"/><s>&nbsp;（请填写具体时间或天数）</s>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+             <div class="info_add sevice_info add_2 clearfix">
+                <p v-show="granular" class="b_line"></p>
+                <div v-show="granular" class="plx_l fl">产品信息</div>
+                <div class="psild" v-show="granular">
+                    <div class="plx_r lx_7 clearfix">
+                        <p class="plx_r_l fl"><i>*</i>申报对象：</p>
+                        <p class="plx_r_r ipt_text2 fl">
+                            <input type="text" name="object" v-model="applyobject" placeholder="请输入申报的对象" maxlength="300">
+                        </p> 
+                    </div>
+                    <div class="plx_r lx_7 clearfix">
+                        <p class="plx_r_l fl"><i>*</i>支持方式：</p>
+                        <p class="plx_r_r ipt_text2 fl">
+                            <input type="text" name="way" v-model="supportmode" placeholder="请输入政府对该项目的支持方式" maxlength="300">
+                        </p> 
+                    </div>
+                    <div class="plx_r lx_7 clearfix">
+                        <p class="plx_r_l fl"><i>*</i>主管部门：</p>
+                        <p class="plx_r_r ipt_text2 fl">
+                            <input type="text" name="department" v-model="departmet" placeholder="请输入该政策产品的主管部门，如广东省科技厅" maxlength="300">
+                        </p> 
+                    </div>
+                    <div class="plx_r lx_7 clearfix">
+                        <p class="plx_r_l fl"><i></i>项目补助金额：</p>
+                        <p class="plx_r_r ipt_text2 fl">
+                            <input type="text" name="money" v-model="subsidy" placeholder="输入政府对该项目的补助金额" maxlength="300">
+                        </p> 
+                    </div>
+                </div>
+                <p class="b_line"></p>
+                <div class="plx_l fl">图文描述</div>
+                <div>
+                    <p v-show="granular" class="plx_r_r plx_r2 fl"><i></i>推荐图文结合描述，图片支持jpg，png格式，推荐尺寸：长度不限，宽度800</p> 
+                    <div class="plx_r clearfix" v-show="granular">
+                        <p class="plx_r_l plx_r_l2 plx_l3 fl"><i>*</i>申报好处：</p>
+                        <div class="form_list_shop upload clearfix test">
+                            <div class="ipt_r fl">
+                                <div class="haochu"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="plx_r clearfix" v-show="granular">
+                        <p class="plx_r_l plx_r_l2 plx_l3 fl"><i>*</i>产品介绍：</p>
+                        <div class="form_list_shop upload clearfix test">
+                            <div class="ipt_r fl">
+                                <div class="jieshou"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="plx_r clearfix">
+                        <p class="plx_r_l plx_r_l2 plx_l3 fl"><i></i>服务内容：</p>
+                        <div class="form_list_shop upload clearfix test">
+                            <div class="ipt_r fl">
+                                <div class="neirong"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="plx_r clearfix">
+                        <p class="plx_r_l plx_r_l2 plx_l3 fl"><i></i>其他：</p>
+                        <div class="form_list_shop upload clearfix test">
+                            <div class="ipt_r fl">
+                                <div class="other_test"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="plx_r clearfix" style="padding-bottom: 50px;">
+                        <p class="plx_r_l plx_r_l2 fl"><i></i>其他：</p>
+                        <p class="plx_r_r plx_text fl">
+                            <textarea type="text" id="other" v-model="other" name="other" placeholder="请输入需要对产品或者服务补充的内容（限300字）" class="wenben"></textarea>
+                        </p> 
+                    </div> -->
+                </div>
+             </div>
+        </section>
+
+        <!-- <section>
+            <div class="padd_btn clearfix">
+                <div class="add">
+                    <span id="goTop" class="d_btn">回到顶部<span class="toTop"></span></span>
+                    <button class="preview biankuang">预览</button>
+                    <button class="preview biankuang">保存</button>
+                    <button class="audit">提交审核</button>
+                </div>
+            </div>
+        </section> -->
+         <section>
+            <div class="submit_form">
+                <div class="submit_form_btn clearfix">
+                    <div class="gotop fl" id="goTop"><i></i>回到顶部</div>
+                    <!-- <input type="button" class="information-edit-back" value="返回">          -->
+                    <input type="button" name="preview" class="tj fl" id="preview" @click="lookmore();" value="预览">
+                    <input type="button"  class="tj fl" id="save" value="保存"  @click="settled(1)">
+                    <input type="button" name="affirm" class="tj fl" id="affirm" @click="settled(2)" value="提交审核">
+                </div>
+            </div>
+        </section>
+        <!-- 保存弹窗 -->
+        <div v-cloak class="submitaudit" v-show="saveframe">
+            <div class="submitAuditHeader clearfix">
+                <i @click="saveframe=false"></i>
+                <s></s>
+            </div>
+            <h3>保存成功</h3>
+        </div>
+        <!-- 提交审核弹窗 -->
+        <div v-cloak class="submitaudit submitaudit1" v-show="auditframe">
+            <div class="submitAuditHeader clearfix">
+                <i @click="auditframe=false"></i>
+                <s></s>
+            </div>
+            <h3>提交审核成功</h3>
+        </div>
+        <!-- 预 览-->
+        <section>
+            <div v-cloak id="proid" class="product_details1" >
+                <h2>产品详情
+                </h2>
+                <div class="service_box" >
+                    <div class="product_service service_info">
+                        <h3><i></i>服务信息</h3>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>产品名称</td>
+                                    <td>{{Rproductname}}</td>
+                                </tr>
+                                <tr>
+                                    <td>产品类型</td>
+                                    <td>{{Rproducttypeonename}}/{{Rproducttypetwoname}}/{{Rproducttypethreename}}</td>
+                                </tr>
+                                <tr v-if="isscience==true">
+                                    <td>产品级别</td>
+                                    <td >{{Rplevelname}}</td>
+                                </tr>
+                                <tr>
+                                    <td>产品所属区域</td>
+                                    <td>{{Rprovice}}{{Rcity}}{{Rarea}}</td>
+                                </tr>
+                                <tr>
+                                    <td>产品价格</td>
+                                    <td>
+                                        <span v-if="Rpricetype == 1">{{Rprice}}元</span>
+                                        <span v-if="Rpricetype == 2">{{Rprice}}元</span>
+                                        <span v-if="Rpricetype == 3">面议</span>
+                                    </td>
+                                </tr>
+                                <tr v-if="isscience==false">
+                                    <td>完成时间</td>
+                                    <td>
+                                        <span>{{finishtime}}</span>
+                                    </td>
+                                </tr>
+                                <tr v-if="isscience==true">
+                                    <td>申报时间</td>
+                                    <td>
+                                        <span v-if="Rapplytimetype == 1">{{Rbegintime | date}}-{{Rendtime | date}}</span>
+                                        <span v-if="Rapplytimetype == 2">全年申报</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div v-if="isscience==true" class="product_service product_info">
+                        <h3><i></i>产品信息</h3>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>申报对象</td>
+                                    <td>{{Rapplyobject}}</td>
+                                </tr>
+                                <tr>
+                                    <td>支持方式</td>
+                                    <td>{{Rsupportmode}}</td>
+                                </tr>
+                                <tr>
+                                    <td>主管部门</td>
+                                    <td>{{Rdepartmet}}</td>
+                                </tr>
+                                <tr>
+                                    <td>项目补助金额</td>
+                                    <td>{{Rsubsidy}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div  v-if="isscience==true" class="product_service advantage">
+                        <h3><i></i>申报好处</h3>
+                        <div class="advantage_img" v-html="Rapplybenefit">
+                        </div>
+                        <p></p>
+                    </div>
+                    <div  v-if="isscience==true" class="product_service advantage">
+                        <h3><i></i>产品介绍</h3>
+                        <div class="advantage_img" v-html="Rproductinfo">
+                        </div>
+                        <p></p>
+                    </div>
+                        <div class="product_service advantage">
+                        <h3><i></i>服务内容</h3>
+                        <div class="advantage_img" v-html="Rservicecontent">
+                        </div>
+                        <p></p>
+                    </div>
+                    <div class="product_service other">
+                        <h3><i></i>其他</h3>
+                        <div class="other_img" v-html="Rother">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer>
+            <div class="copyright ac">
+                <p>COPYRIGHT © 版本归属 广州高企云信息科技有限公司 粤ICP备16007486号-1</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- 公共js部分 -->
+    <th:block th:include="block/footlink :: copy" /> 
+    <script type="text/javascript" th:src="@{/statics/js/hisself/bootstrap-datepicker.js?v=0.0.5}"></script>
+    <script type="text/javascript" th:src="@{/statics/lib/dist/summernote.js?v=0.0.2}"></script>
+    <script type="text/javascript" th:src="@{/statics/lib/dist/lang/summernote-zh-CN.js?v=0.0.1}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/service/summer.js?v=0.0.2}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/service/product_add.js?v=0.1.3}"></script>
+    <!-- over -->
+    <th:block th:include="block/statistics :: copy" />
+    <script>
+        $('#Date1').datepicker({
+            format: 'yyyy-mm-dd'
+        });
+        $('#Date2').datepicker({
+            format: 'yyyy-mm-dd'
+        });
+        $("#goTop").on("click", function () {
+            $('html , body').stop().animate({scrollTop: 0},'slow');
+        })
+    </script>
+</body>
+
+</html>

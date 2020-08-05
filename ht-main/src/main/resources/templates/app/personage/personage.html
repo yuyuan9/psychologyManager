@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+<link rel="stylesheet" th:href="@{/statics/app/css/reset.css}">
+<link rel="stylesheet" th:href="@{/statics/app/css/personage/personage.css}">
+
+<head>
+   
+<style>
+</style>
+</head>
+<body>
+    <div id="app_usercenter" class="personage">
+        <div class="personage_bg">
+            <div class="personage_t">个人中心</div>
+            <!-- 个人信息 -->
+            <div class="personage_info">
+                <p class="uesername" >{{username}}</p>
+                <p class="pc_tips">管理账号、体验更全功能可登录www.hights.cn官网</p>
+            </div>
+            <div class="per_cell">
+                <div class="reset_password">
+                    <a href="/ht-biz/app/login/reset">
+                        <i class="dib reset_icon"></i>
+                        <span class="perdonage_cell dib">修改密码</span>
+                        <i class="dib to_page"></i>
+                    </a>
+                    <div class="line"></div>
+                </div>
+                <div class="about_hights">
+                    <a href="/ht-biz/app/usercenter/hights_introduct">
+                        <i class="dib about"></i>
+                        <span class="perdonage_cell dib" >关于高企云</span>
+                        <i class="dib to_page to_page1"></i>
+                    </a>
+                    <div class="line"></div>
+                </div>
+                <div class="contact_us">
+                    <a href="http://p.qiao.baidu.com/cps/chat?siteId=11406523&userId=20408321">
+                        <i class="dib contact"></i>
+                        <span class="perdonage_cell dib">联系我们</span>
+                        <i class="dib to_page"></i>
+                    </a>
+                    <div class="line"></div>
+                </div>
+            </div>
+             <!-- 底部 -->
+             <div class="b_b">
+                <div class="shouye">
+                    <p class="sy_icom"></p>
+                    <p class="sy_tip"><a href="/ht-biz/app/index/index">首页</a></p>
+                </div>
+                <div class="personage">
+                    <p class="ps_icom"></p>
+                    <p class="ps_tip"><a href="/ht-biz/app/usercenter/personage" class="active">个人中心</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" th:src="@{/statics/app/js/vue.js}"></script>
+    
+     <script type="text/javascript" th:src="@{/statics/app/js/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/vue.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/layer.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/htajax.js}"></script>
+    <script type="text/javascript" th:src="@{/statics/app/js/personage/personage.js?v=0.04}"></script>
+</body>
+
+
+
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- 公共头部 -->
+    <th:block th:include="block/headlink :: test('查询')" /> 
+    <!-- 结束 -->
+    <link rel="stylesheet" th:href="@{/statics/css/inquire/index.css?v=0.0.2}">    
+    <link rel="stylesheet" th:href="@{/statics/css/v4_footer.css?v=0.0.1}">
+
+</head>
+<body>
+    <div id="user">
+        <div th:replace="~{user_head::copy}"></div>
+    </div>
+    
+    <div class="wrap" id="vc">
+        <!-- 登录组件 -->
+        <mylogin :islogin="false" @close-login="isLogin=!false"></mylogin>
+        <!-- over -->
+        <div th:replace="~{header::copy}"></div>
+        
+        
+        <section class="banner_box">
+            <div class="banner">
+                <div class="banner_tab1" v-show="theme==0">
+                </div>
+                <div class="banner_tab2" v-show="theme==1">
+                </div>
+                <div class="banner_tab3" v-show="theme==2">
+                </div>
+                <div class="banner_tab1" v-show="theme==3">
+                </div>
+            </div>
+            <div class="search_ipt">
+                <div class="ipt_tit">
+                    <h3 @click="theme=0" :class="{active:theme==0}">高企查询<s></s></h3>
+                    <h3 @click="theme=1" :class="{active:theme==1}">政策查询<s></s></h3>
+                    <h3 @click="theme=2" :class="{active:theme==2}">立项查询<s></s></h3>
+                    <h3 @click="theme=3" :class="{active:theme==3}">中小企查询<s></s></h3>
+                </div>
+                
+                <div v-cloak class="ipt1" v-show="theme==0">
+                    <div class="search_ipt_con fl clearfix">
+                        <div class="search_ipt_top fl clearfix">
+                            <p class="fl"><i></i></p>
+                            <input class="fl" v-model="keyword0" @keyup.enter="getContent(0)" type="text" placeholder="请输入您想了解的企业名称，如“高企云”">
+                            <s class="fl" @click="getContent(0)">高企查询</s>
+                        </div>
+                    </div>
+                </div>
+                <div v-cloak class="ipt2" v-show="theme==1">
+                    <div class="search_ipt_con fl clearfix">
+                        <div class="search_ipt_top fl clearfix">
+                            <p class="fl"><i></i></p>
+                            <input class="fl" v-model="keyword1" @keyup.enter="getContent(2)" type="text" placeholder="请输入您想了解的政策关键词，如高新技术企业">
+                            <s class="fl" @click="getContent(2)">政策查询</s>
+                        </div>
+                        <div th:replace="~{block/hot_word::search_zc}"></div>
+                    </div>
+                </div>
+                <div v-cloak class="ipt3" v-show="theme==2">
+                    <div class="search_ipt_con fl clearfix">
+                        <div class="search_ipt_top fl clearfix">
+                            <p class="fl"><i></i></p>
+                            <input class="fl" v-model="keyword2" @keyup.enter="getContent(1)" type="text" placeholder="请输入您想了解的项目关键词或企业名称，如高新技术企业或高企云">
+                            <s class="fl" @click="getContent(1)" >立项查询</s>
+                        </div>
+                        <div th:replace="~{block/hot_word::search_lx}"></div>
+                    </div>
+                </div>
+                <div v-cloak class="ipt1" v-show="theme==3">
+                    <div class="search_ipt_con fl clearfix">
+                        <div class="search_ipt_top fl clearfix">
+                            <p class="fl"><i></i></p>
+                            <input class="fl" v-model="keyword3" @keyup.enter="getContent(3)" type="text" placeholder="请输入您想了解的企业名称，如“高企云”">
+                            <s class="fl" @click="getContent(3)">中小企查询</s>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="system_title">
+                <h2>系统介绍</h2>
+                <p>System  Introduction</p>
+            </div>
+            <div class="system_content" v-show="theme==0">
+                <div class="sys_con_l fl">
+                    <img style="margin-top: 45px;" src="/statics/images/inquire/sjpc.jpg" alt="">
+                </div>
+                <!-- <div class="sys_con_r fl">
+                    <h3>关于企政查</h3>
+                    <p>通过整合政策大数据库和政策立项库，输入企业名称即可获取企业基本信息、历史立项、知识产权情况，同事获得企业所在区域政策项目匹配结果及同行标杆企业作为规划参考。</p>
+                    <p>是企业全面了解自身，提前做好政策布局规划不可或缺的综合性工具。</p>
+                    <i></i>
+                </div> -->
+                <div class="sys_con_r fl">
+                    <h3>科技大数据查询系统：</h3>
+                    <p style="margin-top:20px;">高企云汇总了全国各省市重要的科技创新项目立项数据，形成各个项目单独的查询系统，方便用户进行集中、全面的查询，是用户进行同行类比、政策规划的重要参考。</p>
+                    <h4>关于全国高新技术企业查询系统：</h4>
+                    <p style="margin-top:20px;">作为科技大数据查询系统首推数据库，全国高企查询系统为用户免费提供全国36个省市有效期内的高企数据，用户可通过地区、认定时间、认定批次等条件进行高新技术企业的查询。</p>
+                    <i></i>
+                    <p style="margin-top:15px;">更多科技大数据查询系统，敬请期待......</p>
+                    <p style="margin-top:5px;">广东省工程技术中心查询系统、广东省新型研发机构查询系统、广东省企业技术中心查询系统、全国科技型中小企业查询系统......</p>
+                </div>
+            </div>
+            <div class="system_content" v-show="theme==1">
+                <div class="sys_con_l fl">
+                    <img src="/statics/images/inquire/sys3.png" alt="">
+                </div>
+                <div class="sys_con_r fl">
+                    <h3>关于政策大数据查询应用系统</h3>
+                    <p>政策大数据查询应用系统汇集了全国范围内科技、经信、发改、人社等部门发布的各类型政策，用以满足企业科技顾问、区域科技顾问服务实施中的政策检索、政策规划、条件对比、政策评估、互动交流等需求。</p>
+                    <p>系统将每条政策进行智能标记（包括政策所属类型、技术领域、产业领域、适用对象等信息）和统计，为用户提供更加精准的政策匹配结果，供各用户进行政策检索、分析、统计、下载调用等，实现信息共享的同时将政策应用价值最大化。</p>
+                    <i class="tip_picture"></i>
+                </div>
+            </div>
+            <div class="system_content" v-show="theme==2">
+                <div class="sys_con_l fl">
+                    <img src="/statics/images/inquire/sys1.png" alt="">
+                </div>
+                <div class="sys_con_r fl">
+                    <h3>关于政策立项查询应用系统</h3>
+                    <p>政策立项查询应用系统整体规划基于科技、经信、发改、文化等部门的项目立项名单（包括高新技术企业、高新技术产品、工程中心、企业技术中心、产学研项目等）而设计的数据库平台。满足企业科技项目申报规划的项目检索、同行对比、项目参考、领域参考、分类统计等需求。</p>
+                    <i></i>
+                </div>
+            </div>
+            <div class="system_content" v-show="theme==3">
+                <div class="sys_con_l fl">
+                    <img style="margin-top: 45px;" src="/statics/images/inquire/sjpc.jpg" alt="">
+                </div>
+                <!-- <div class="sys_con_r fl">
+                    <h3>关于企政查</h3>
+                    <p>通过整合政策大数据库和政策立项库，输入企业名称即可获取企业基本信息、历史立项、知识产权情况，同事获得企业所在区域政策项目匹配结果及同行标杆企业作为规划参考。</p>
+                    <p>是企业全面了解自身，提前做好政策布局规划不可或缺的综合性工具。</p>
+                    <i></i>
+                </div> -->
+                <div class="sys_con_r fl">
+                    <h3>科技大数据查询系统：</h3>
+                    <p style="margin-top:20px;">高企云汇总了全国各省市重要的科技创新项目立项数据，形成各个项目单独的查询系统，方便用户进行集中、全面的查询，是用户进行同行类比、政策规划的重要参考。</p>
+                    <h4>关于全国高新技术企业查询系统：</h4>
+                    <p style="margin-top:20px;">作为科技大数据查询系统首推数据库，全国高企查询系统为用户免费提供全国36个省市有效期内的高企数据，用户可通过地区、认定时间、认定批次等条件进行高新技术企业的查询。</p>
+                    <i></i>
+                    <p style="margin-top:15px;">更多科技大数据查询系统，敬请期待......</p>
+                    <p style="margin-top:5px;">广东省工程技术中心查询系统、广东省新型研发机构查询系统、广东省企业技术中心查询系统、全国科技型中小企业查询系统......</p>
+                </div>
+            </div>
+        </section>
+        <!--E=底部-->
+        <div th:replace="~{footer::copy}"></div>
+        <!-- 浮窗 -->
+        <div class="airView">
+            <div class="guanbi"></div>
+            <img src="/statics/images/inquire/airview.jpg" alt="">
+            <p>移动端查政策</p>
+            <p>关注政策海</p>
+        </div>
+    </div>
+    <!-- 公共js部分 -->
+    <th:block th:include="block/footlink :: copy" /> 
+    <!-- over -->
+    <script type="text/javascript" th:src="@{/statics/js/component/mylogin.js?v=1.0.3}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/inquire/index.js?v=0.1.3}"></script>
+    
+    <script>
+        $('.title_list>li').mouseover(function(e){
+                $('.title_list>li').removeClass('active');
+                $(this).addClass('active');
+                $(this).children().stop().siblings(".drop_down").animate({
+                    'top':'30px',
+                    'opacity':'1',
+                },200);
+            });
+            $('.title_list>li').mouseout(function(e){
+                $(this).children().stop().siblings(".drop_down").animate({
+                    'top':'-30px',
+                    'opacity':'0'
+                },200);
+            })
+        $(".xcx_h").mouseover(function () {
+            $(".xcx").css({
+                'visibility': 'visible'
+            })
+        })
+        $(".xcx_h").mouseleave(function () {
+            $(".xcx").css({
+                'visibility': 'hidden'
+            })
+        })
+    </script>
+    <th:block th:include="block/statistics :: copy" />
+</body>
+</html>

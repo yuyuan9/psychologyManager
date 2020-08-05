@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="keyword" content="" />
+<meta name="description" content="" />
+<meta name="applicable-device" content="mobile">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+<!-- 是否启动webapp功能，会删除默认的苹果工具栏和菜单栏。 -->
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<!-- 这个主要是根据实际的页面设计的主体色为搭配来进行设置。 -->
+<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+<!-- 忽略页面中的数字识别为电话号码,email识别 -->
+<meta name="format-detection" content="telephone=no, email=no"/>
+<!-- 启用360浏览器的极速模式(webkit) -->
+<meta name="renderer" content="webkit">
+<!-- 避免IE使用兼容模式 -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- 针对手持设备优化，主要是针对一些老的不识别viewport的浏览器，比如黑莓 -->
+<meta name="HandheldFriendly" content="true">
+<!-- 微软的老式浏览器 -->
+<meta name="MobileOptimized" content="320">
+<!-- uc强制竖屏 -->
+<meta name="screen-orientation" content="portrait">
+<!-- QQ强制竖屏 -->
+<meta name="x5-orientation" content="portrait">
+<!-- UC强制全屏 -->
+<meta name="full-screen" content="yes">
+<!-- QQ强制全屏 -->
+<meta name="x5-fullscreen" content="true">
+<!-- UC应用模式 -->
+<meta name="browsermode" content="application">
+<!-- QQ应用模式 -->
+<meta name="x5-page-mode" content="app">
+<!-- windows phone 点击无高光 -->
+<meta name="msapplication-tap-highlight" content="no">		<title>高企云政策速递</title>
+		<style>
+	        [v-cloak]{
+	            display: none;
+	        }
+	        body {
+	        	background: #1268f2;
+	        }
+	        #box {
+	        	background: #1268f2 url("/statics/images/policydig/app/index_bg.png") right top no-repeat;
+	      		padding-top: 375px;
+	        }
+	        * {
+	        	padding: 0;
+	        	margin: 0;
+	        }
+	        li {
+	        	list-style: none;
+	        }
+	        .list a {
+	        	display: block;
+				background: #fff;
+				padding: 40px 35px 50px 35px;
+				margin: 0 20px 25px;
+				text-decoration: none;
+				border-radius: 10px;
+	        }
+	        .list:last-of-type a{
+				margin-bottom: 125px;
+	        }
+	        .list a h3 {
+	        	font-size: 34px;
+				color: #333;
+				margin-bottom: 40px;
+				font-weight: normal;
+	        }
+	        .list a .date {
+	        	font-size: 28px;
+	        	color: #ff5e48;
+	        }
+	        .botom {
+	        	position: relative;
+	        	background: #fff;
+	        	padding: 25px;
+	        }
+	        .botom p {
+	        	font-size: 28px;
+	        	color: #1268f2;
+	        }
+	        .botom p.phone {
+	        	font-size: 30px;
+	        	font-weight: bold;
+	        }
+	        .botom a:last-of-type {
+			    position: absolute;
+			    right: 30px;
+			    top: 16%;
+			    display: block;
+			    width: 48%;
+			    padding: 24px 0;
+			    text-align: center;
+			    color: #fff;
+			    background: #ff5e48;
+			    font-size: 0.5rem;
+			    text-decoration: none;
+			    border-radius: 20px;
+	        }
+    	</style>
+	</head>
+<body>
+	<div id="box">
+		<ul>
+			<li v-cloak class="list" v-for="list in listDatas">
+				<a :href="'/ht-biz/policydig/app/policy_details?id='+ list.titleid">
+					<h3>{{list.title}}</h3>
+					<p v-cloak class="date" >申报时间：{{list.createdate|date}}</p><span style="font-size:28px;">地区{{list.city}}{{list.area}}</span>
+				</a>
+			</li>
+		</ul>
+		<div class="botom">
+			<p>服务热线</p>
+			<p class="phone">400-166-3308</p>
+			<a href="http://p.qiao.baidu.com/cps/chat?siteId=11406523&userId=20408321">政策咨询</a>
+		</div>
+
+	</div>
+
+<script type="text/javascript" th:src="@{/statics/js/policydig/app/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/statics/js/policydig/app/reset.js?v=1.0.2}"></script>
+<script type="text/javascript" th:src="@{/statics/js/policydig/app/vue.js}"></script>
+<script type="text/javascript" th:src="@{/statics/js/layer/layer.js}"></script>
+<script type="text/javascript" th:src="@{/statics/js/policydig/app/moment.min.js}"></script>
+<script type="text/javascript" th:src="@{/statics/js/policydig/app/htajax.js}"></script>
+<script type="text/javascript" th:src="@{/statics/js/policydig/app/getUrl.js}"></script>
+
+<script>
+	var box = new Vue({
+        el: '#box',
+        data: function() {
+        	return {
+        		listDatas: []
+        	}
+        },
+        created: function () {
+        	this.initPage(); 
+        },
+        methods: {
+			initPage: function () {
+            	this.getListDatas();
+            },
+            getListDatas: function() {
+				var name=UrlParm.parm("packageId");
+				//console.log(name);
+				arr=name.split('@');
+				//console.log(name.split('@'));
+				var packageId = arr[0];
+				var customerId = arr[1];
+            	htajax.get('/ht-biz/policydig/interval?packageId='+packageId+'&customerId='+customerId,function(data) {
+					//console.log(data);
+            		if(data.code == 10000){
+						box.listDatas = data.data;
+            		}
+            	},function(data) {
+            		//错误回调
+            	});
+            }
+        }
+
+    })
+    Vue.filter('date', function (value, formatString) {
+    	formatString = formatString || 'YYYY年MM月DD日';
+    	return moment(value).format(formatString);
+	});
+</script>
+<th:block th:include="block/statistics :: copy" />
+</body>
+</html>

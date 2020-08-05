@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- 公共头部 -->
+    <th:block th:include="block/headlink :: test('个人云中心-用户信息')" />
+    <!-- 结束 -->
+    <link rel="stylesheet" th:href="@{/statics/css/pick-pcc.min.1.0.1.css?v=0.0.1}">
+    <link rel="stylesheet" th:href="@{/statics/css/style.css?v=0.0.1}">
+    <link rel="stylesheet" th:href="@{/statics/css/user/index.css?v=0.0.1}">
+    <link rel="stylesheet" th:href="@{/statics/css/inquire/msgbox.css?v=0.0.1}">
+    <link rel="stylesheet" th:href="@{/statics/css/alertmsg.css?v=0.0.1}">
+    <style>
+        .user_headImg>div>img {
+            width: 100%;
+        }
+        .pick-show {
+            padding-left: 12px !important;
+        }
+        .table_top p{
+            height: 48px;
+        }
+        .next_page{
+            height: 450px;
+        }
+        .user_content>.user_details{
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="user">
+        <div th:replace="~{user_head::copy}"></div>
+        <div th:replace="~{header::copy}"></div>
+    </div>
+    <div class="wrap" id="box">
+        <section>
+            <div class="user_content clearfix">
+                <div class="user_list fl clearfix">
+                    <div th:replace="~{user_part::copy}"></div>
+                </div>
+                <div class="user_details fl">
+                    <div class="info">
+                        <div class="info_head">
+                            <div class="user_headImg fl">
+                                <div class="tu" v-cloak v-if="headImg == null"><img src="/statics/images/user/head.png"
+                                        alt=""></div>
+                                <div class="tu" v-cloak v-if="headImg!=null"><img
+                                        :src="'http://47.92.70.12:9090'+headImg" alt=""></div>
+                            </div>
+                            <div class="user_name fl">
+                                <h3>欢迎您</h3>
+                                <p v-cloak>{{userInfoName}}</p>
+                            </div>
+                            <div class="material fl" id="app">
+                                <h3>资料完善度<i></i></h3>
+                                <p v-cloak class="p1">{{progressBar}}%</p>
+                                <p class="p2">
+                                    <el-progress :percentage="progressBar"></el-progress>
+                                </p>
+                            </div>
+                            <div class="grade fl">
+                                <h3>账号等级<i></i></h3>
+                                <p v-cloak>LV{{userGrade}}</p>
+                                <!-- <p v-cloak v-else class="star"> -->
+                                <!-- 星级组件 -->
+                                <!-- <star-rating :max="5" :current="value"></star-rating> -->
+                                <!-- over -->
+                                <!-- </p> -->
+                            </div>
+                            <div class="compile fl">
+                                <span @click="personInfo">编辑信息</span>
+                                <!-- <span @click="enterpriseInfo">编辑企业信息</span> -->
+                            </div>
+                        </div>
+                        <div class="info_detail">
+                            <div class="person_info"></div>
+                            <div class="company_info">
+                                <ul>
+                                    <!-- <li>
+                                        <i>联系人：</i>
+                                        <p v-cloak>{{userInfoName}}</p>
+                                        <span>企业账户联系人</span>
+                                    </li> -->
+                                    <li>
+                                        <i>手机号码：</i>
+                                        <p v-cloak class="change">{{userInfoPhone}}<i>
+                                                <!-- <s></s>修改手机号 --></i></p>
+                                        <!-- <span>若手机丢失或停用，请立即更换，避免账户被盗</span> -->
+                                    </li>
+                                    <li>
+                                        <i>账户密码：</i>
+                                        <p class="change">********<i>
+                                                <!-- <s></s>修改密码 --></i></p>
+                                        <!-- <span>建议您定期更换密码以保护账户安全</span> -->
+
+                                    </li>
+                                    <li>
+                                        <i>邮箱账号：</i>
+                                        <p v-cloak>{{userInfoEamil}}</p>
+                                        <!-- <span>邮箱可接收支付、政策资讯等信息</span> -->
+                                    </li>
+                                    <li class="bg_p">
+                                        <i>常驻城市：</i>
+                                        <p v-cloak>{{province}}-{{city}}-{{area}}</p>
+                                    </li>
+                                    <li class="bg_p">
+                                        <i>账户类型：</i>
+                                        <p v-cloak>{{userType}}</p>
+                                        <!-- <span>成为高企云VIP可享受更多VIP专项服务</span> -->
+                                    </li>
+                                    <li class="bg_p1">
+                                        <i>个人简介：</i>
+                                        <p v-cloak>{{peopleInfo}}</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="accessory1 clearfix">
+                            <h3 class="xx_gl">企业信息管理
+                                <a href="javascript:void(0);" @click="addCompanyInfo()" class="newadd">新增</a>
+                            </h3>
+                            <div class="info-company-box">
+                                <div v-for="(list,index) in orderList" class="clearfix">
+                                    <div class="company-tit fl"  @click="mun=index" :class="{active:mun==index}">
+                                        <h2>{{list.companyName}}</h2>
+                                        <p>
+                                            <span>
+                                                <i v-if="list.province != ''">{{list.province}}/</i>
+                                                <i v-if="list.city != ''">{{list.city}}/</i>
+                                                <i v-if="list.area != ''">{{list.area}}</i>
+                                            </span> 
+                                            <i>{{list.linkman}}</i>|<i>{{list.phone}}</i></p>
+                                    </div>
+                                    <div class="control fl">
+                                        <p @click="deleteOrder(list.id)">删除</p>
+                                        <p @click="newAddList(list.id)">编辑</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="accessory2 clearfix">
+                            <h3 class="xx_gl">附件</h3>
+                            <div>
+                                <img src="/statics/images/user/zm.jpg" alt="">
+                                <p>联系人身份证正面</p>
+                            </div>
+                            <div>
+                                <img src="/statics/images/user/fm.jpg" alt="">
+                                <p>联系人身份证反面</p>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div id="ids1">
+                <h3>请输入手机号码</h3>
+                <input type="text" :value="userInfoPhone" id="userInfoPhone" name="userInfoPhone" placeholder="输入手机号码">
+                <p class="submitPhone" @click="submitPhone">确定</p>
+            </div>
+
+            <div id="ids2">
+                <h3>手机号</h3>
+                <p class="phoneNum">{{userInfoPhone}}</p>
+                <h3>请输入密码</h3>
+                <input type="text" id="userInfoPassword" name="userInfoPassword" placeholder="请输入密码">
+                <p class="submitPhone" @click="submitPassword">确定</p>
+            </div>
+            <div id="ids3">
+                <div class="company_info_change">
+                    <ul>
+                        <li class="clearfix">
+                            <i style="margin-top: 50px;">头像图：</i>
+                            <div class="one">
+                                <div v-if="originalfile1 == ''||originalfile1 == null" class="upload_btn0 fl"
+                                    @click="openfile1()">
+                                    <!-- <img src="/statics/images/user/head.png" alt=""> -->
+                                </div>
+                                <div v-else-if="originalfile1 != ''" class="upload_img fl">
+                                    <img :src="'http://47.92.70.12:9090' + originalfile1" alt="">
+                                </div>
+                                <input type="file" name="file" class="file_ipt1 fl" id="file1"
+                                    @change="tirggerFile1($event)">
+                                <div class="upload_tit">
+                                    <h3><i>*</i>点击上传头像</h3>
+                                    <p>支持JPG、PNG、jif文件小于5M，推荐尺寸86*86，请确保图片清晰</p>
+                                </div>
+                            </div>
+                            <div class="one_path" v-show="originalfile1 != ''&&originalfile1 != null">
+                                <p>{{fileName1}}<i @click="fileName1='';pdfpath1='';originalfile1='';clearIpt()">删除</i>
+                                </p>
+                            </div>
+                        </li>
+                        <li class="clearfix">
+                            <i>昵称：</i>
+                            <p v-cloak>
+                                <input type="text" name="alterName" v-model="userInfoName" id="alterName">
+                            </p>
+                        </li>
+                        <li class="clearfix">
+                            <i>常驻城市：</i>
+                            <p v-cloak class="usertown fl">
+                                <a href="javascript:void(0)" class="pick-area pick-area4 fl" name="请选择省/请选择市/请选择区"></a>
+                                <!-- <input type="hidden" :value="usertown" class="pack-town"> -->
+                                <!-- <input type="text" placeholder="调用元素pick-area4，显示值的地方，方法在参数getVal中"> -->
+                            </p>
+                        </li>
+                        <li class="clearfix">
+                            <i>邮箱账号：</i>
+                            <p v-cloak>
+                                <input type="text" name="alterUserInfoEamil" v-model="userInfoEamil"
+                                    id="alterUserInfoEamil">
+                            </p>
+                        </li>
+                        <li>
+                            <i>个人简介：</i>
+                            <p v-cloak>
+                                <p class="limit xian fr">限300字</p>
+                                <textarea name="userInfo" id="userInfo" v-model="peopleInfo" maxlength="300" rows="20"
+                                    placeholder="填写个人基本信息" class="shuru"></textarea>
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bot">
+                    <div @click="submitAlter">提交</div>
+                    <div class="layui-layer-close">取消</div>
+                </div>
+            </div>
+        </section>
+        <section v-cloak>
+            <!-- 搜索提示的弹窗 -->
+            <div v-cloak class="contract_mask" v-show="reminder"></div>
+            <div v-cloak class="read_over" v-show="reminder">
+                <div id="look" class="next_page">
+                    <div class="table_top">
+                        <p>新增</p>
+                        <s class="fa close_login fr" @click="reminder=false"></s>
+                    </div>
+                    <div class="table_bottom_box1">
+                        <p>
+                            <span><i>*</i>企业名字：</span>
+                            <input type="text" name="companyName" v-model="companyName" placeholder="请输入企业名字">
+                        </p>
+                        <p class="clearfix">
+                            <span class="fl"><i>*</i>所在地区：</span>
+                            <a href="javascript:void(0)" style="width: 200px;" class="pick-area pick-area5 fl" name="请选择省/请选择市/请选择区"></a>
+                        </p>
+                        <p><span><i>*</i>联系人：</span><input type="text" name="name" v-model="name" placeholder="请填写您的姓名"></p>
+                        <p><span><i>*</i>手机号码：</span><input type="text" name="phone" v-model="phone" placeholder="请输入手机号码"></p>
+                        <p><span class="beizhu_s"><i></i>备注：</span>
+                            <textarea name="beizhu" v-model="beizhu" id="beizhu" maxlength="300" rows="20" placeholder="填写个人基本信息"></textarea>
+                        </p>
+                    </div>
+                    <div class="table_bottom ac" style="margin-top: 50px;padding-top: 20px;">   
+                        <div class="table_bottom_box">
+                            <input type="button" id="submitRegs" @click="submitRegs" class="use_honey ac dddd" value="确认">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- 新增成功 -->
+        <div v-cloak class="submitaudit" v-show="saveframe1">
+            <div class="submitAuditHeader clearfix">
+                <i @click="saveframe1=false"></i>
+                <s></s>
+            </div>
+            <h3>新增成功</h3>
+        </div>
+        <!-- 编辑成功 -->
+        <div v-cloak class="submitaudit" v-show="saveframe2">
+            <div class="submitAuditHeader clearfix">
+                <i @click="saveframe2=false"></i>
+                <s></s>
+            </div>
+            <h3>编辑成功</h3>
+        </div>
+        <!-- 删除成功 -->
+        <div v-cloak class="submitaudit" v-show="saveframe3">
+            <div class="submitAuditHeader clearfix">
+                <i @click="saveframe3=false"></i>
+                <s></s>
+            </div>
+            <h3>删除成功</h3>
+        </div>
+
+        <footer>
+            <div>COPYRIGHT © 版权归属 广州高企云信息科技有限公司 粤ICP备16007486号-1</div>
+        </footer>
+        <input type="hidden" id="ipt" value="广东省">
+    </div>
+    <!-- 公共js部分 -->
+    <th:block th:include="block/footlink :: copy" />
+    <!-- over -->
+    <script type="text/javascript" th:src="@{/statics/js/pick-pcc.min.1.0.1.js?v=0.0.3}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/user/info.js?v=0.0.6}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/user/part_tab.js?v=0.0.3}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/component/star.js?v=0.0.3}"></script>
+    <script type="text/x-template" id="star-rating">
+        <div class="star-rating">
+            <span v-for="n in max">&star;</span>
+            <div class="star-rating__current" :style="{width: getRating + '%'}">
+            <span v-for="n in max">&starf;</span>
+            </div>
+        </div>
+    </script>
+    <script>
+        setTimeout(function () {
+            var Main = {
+                methods: {
+                    format(percentage) {
+                        return percentage === 100 ? '满' : `${percentage}%`;
+                    }
+                }
+            };
+            var Ctor = Vue.extend(Main)
+            new Ctor().$mount('#app')
+        }, 5000)
+        // $(function(){
+        //     box.getUserInfo();
+        // })
+    </script>
+    <th:block th:include="block/statistics :: copy" />
+</body>
+
+</html>

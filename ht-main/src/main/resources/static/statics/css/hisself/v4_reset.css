@@ -1,0 +1,419 @@
+/*css 初始化 */
+html, body, div, ul, li, ol, dl, dd, dt, p, h1, h2, h3, h4, h5, h6, form, fieldset, legend, img {
+    margin: 0;
+    padding: 0;
+}
+
+/*@font-face {*/
+    /*/!* font-properties *!/*/
+    /*font-family: pictos;*/
+    /*src:url('pictos/pictos-web.woff'),*/
+    /*url('pictos/pictos-web.ttf'),*/
+    /*url('pictos/pictos-web.eot'); /!* IE9 *!/*/
+/*}*/
+@font-face {
+    /* font-properties */
+    font-family: YaHeiLight;
+    /*src: url('../fonts/Microsoft YaHei UI Light.ttf');*/
+    /*src: url('../fonts/Microsoft-Yahei-UI-Light.ttc');*/
+}
+
+@font-face {
+    font-family: 'SourceHanSansCNRegular';
+    src: url('/static/ht/v3/font/SourceHanSansCN-Regular/SourceHanSansCN-Medium.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+div {
+    padding: 0;
+}
+
+body {
+    font-size: 14px;
+    color: #010832;
+}
+
+
+.contain {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+/*@media screen and (min-width: 900px) {*/
+    /*.contain {*/
+        /*width: 1200px;*/
+        /*margin: 0 auto;*/
+    /*}*/
+/*}*/
+fieldset, img, input, button {
+    border: none;
+    padding: 0;
+    margin: 0;
+    outline-style: none;
+}
+
+ul, ol{
+    list-style: none;
+}
+
+/*去掉原样式中的小黑点*/
+input {
+    padding-top: 0;
+    padding-bottom: 0;
+    /*font-family: "SimSun", "宋体";*/
+    font-family: "microsoft yahei";
+}
+
+select, input {
+    vertical-align: middle;
+}
+
+/*输入字居中显示*/
+select, input, textarea {
+    font-size: 12px;
+    margin: 0;
+}
+
+/**/
+textarea {
+    resize: none;
+}
+
+/*防止拖动*/
+img {
+    border: 0;
+    vertical-align: middle; /*  去掉图片底部默认的3像素空白缝隙*/
+}
+
+table {
+    border-collapse: collapse; /*合并外连线*/
+}
+
+body {
+    font: 14px microsoft yahei, Arial, Verdana, "\5b8b\4f53"; /*unitedCode的写法，宋体的写法*/
+    color: #666; /*150%基于当前字体尺寸的百分比行间距*/
+    background-color: #f2f5f4;
+    min-width: 1200px;
+}
+
+
+.clearfix:before, .clearfix:after {
+    /*清除浮动，最好最标准的写法*/
+    content: "";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    *zoom: 1; /*IE/7/6*/
+    /*兼容IE6下的写法*/
+}
+
+a {
+    color: #010832;
+    text-decoration: none;
+    text-underline-position: none;
+}
+
+a:hover {
+    text-decoration: none;
+
+}
+
+h1, h2, h3, h4, h5, h6 {
+    text-decoration: none;
+    font-weight: normal;
+    font-size: 100%;
+}
+
+s, i, em {
+    font-style: normal;
+    text-decoration: none;
+}
+
+/*公共类*/
+.w {
+    /*版心 提取 */
+    width: 1210px;
+    margin: 0 auto;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+.al {
+    text-align: left;
+}
+
+.ac {
+    text-align: center;
+}
+
+.ar {
+    text-align: right;
+}
+
+.hide {
+    display: none;
+}
+
+a {
+    text-underline: none !important;
+}
+
+[v-cloak] {
+    /*display: none;*/
+}
+
+.line {
+    display: inline-block;
+    width: 4px;
+    height: 20px;
+    background-color: #fe8910;
+    border-radius: 4px;
+    margin-right: 20px;
+    vertical-align: middle;
+    margin-top: -5px;
+}
+
+.red_star {
+    color: #fe8910;
+    vertical-align: middle;
+    margin-top: -5px;
+    margin-right: 2px;
+}
+
+.icon{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/*css初始化完成*/
+
+.path {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+}
+
+.path ol {
+    padding: 0;
+    margin-left: 10px;
+}
+
+.mark_tip {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    line-height: 16px;
+    top: 24px;
+    left: 24px;
+    background: url(../../images/hisself/personalCenter.png) -124px -86px;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+.rank {
+    display: inline-block;
+    width: 45px;
+    height: 20px;
+    border-radius: 20px;
+    color: #fff;
+    font-size: 14px;
+    line-height: 20px;
+    background-color: #fe8910;
+    text-align: center;
+}
+
+.go {
+    display: inline-block;
+    width: 29px;
+    height: 29px;
+    vertical-align: middle;
+    margin-right: 5px;
+    margin-top: -3px;
+    background: url("../../images/hisself/help_icon.png") -488px -291px;
+}
+
+.aHover {
+    color: #fe8910;
+}
+
+.aHover:hover {
+    text-decoration: underline;
+}
+
+.little_title {
+    font-size: 12px;
+    color: #999;
+}
+
+.red_star {
+    color: #fe8910;
+    vertical-align: middle;
+    margin-top: -5px;
+    margin-right: 2px;
+}
+
+.word_blue {
+    color: #3953c3;
+}
+
+.word_blue:hover {
+    text-decoration: underline;
+}
+
+.win {
+    display: none;
+    width: 260px;
+    height: 160px;
+    background-color: #fff;
+    box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.2), -1px -1px 4px rgba(0, 0, 0, 0.2);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    position: fixed;
+    left: 50%;
+    margin-left: -130px;
+    /*bottom: 500px;*/
+    top: 50%;
+    margin-top: -130px;
+    border-radius: 4px;
+}
+
+.win .order_success {
+    display: inline-block;
+    width: 70px;
+    height: 70px;
+    background: url("../../images/hisself/video.png") -19px -86px;
+}
+
+.win p {
+    color: #999;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.win p span {
+    color: #45c922;
+}
+
+/*.win p:nth-of-type(3) {*/
+/*margin-top: 20px;*/
+/*}*/
+.win p:nth-of-type(3) {
+    margin-top: 5px;
+}
+
+.win p:nth-of-type(2) span {
+    color: #45c922;
+}
+
+.win .success_title {
+    font-size: 16px;
+    font-weight: 800;
+    color: #666;
+}
+
+/*//底部*/
+/*.loading_bottom {*/
+/*position: absolute;*/
+/*bottom: 0;*/
+/*}*/
+/*css初始化完成*/
+
+.center_bottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    background-color: #1B1B1B;
+    min-width: 1200px;
+    text-align: center;
+
+}
+
+.uptott {
+    position: relative;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    background-color: #1B1B1B;
+    min-width: 1200px;
+    text-align: center;
+}
+
+#box {
+    position: relative;
+}
+
+.order_none {
+    height: 210px;
+    width: 100%;
+    padding-top: 18px;
+}
+
+.order_none s {
+    display: inline-block;
+    width: 103px;
+    height: 104px;
+    background: url("../../images/hisself/vip_detail.png") -11px -321px;
+}
+
+.order_none p {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #999;
+}
+
+.order_none a {
+    display: inline-block;
+    width: 80px;
+    height: 30px;
+    border: 1px solid #fe8910;
+    color: #fe8910;
+    line-height: 30px;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+.order_none .goOrder {
+    background-color: #fe8910;
+    color: #fff;
+    margin-left: 20px;
+}
+
+#list7:hover s, #list7.active s {
+    background: url(../../images/hisself/server_center.png) -99px -34px;
+}
+
+#list7 s {
+    width: 22px;
+    height: 22px;
+    background: url(../../images/hisself/server_center.png) -99px -8px;
+}
+
+#list6 s {
+    width: 22px;
+    height: 21px;
+    background-position: -51px -83px;
+}
+
+.center .center_list_b li s {
+    display: inline-block;
+    background: url(../../images/hisself/personalCenter.png);
+    margin-right: 8px;
+    vertical-align: middle;
+    margin-top: -5px;
+}

@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- 公共头部 -->
+    <th:block th:include="block/headlink :: test('商铺修改')" />
+    <!-- 结束 -->
+    <link rel="stylesheet" th:href="@{/statics/css/service/index.css?v=0.0.2}">
+    <link rel="stylesheet" th:href="@{/statics/css/style.css?v=0.0.1}">
+    <link rel="stylesheet" th:href="@{/statics/css/service/shop_edit.css?v=0.0.4}">
+    <link rel="stylesheet" th:href="@{/statics/css/service/FraUpload.css?v=0.0.3}">
+    <link rel="stylesheet" th:href="@{/statics/css/service/business_shops.css?v=0.0.4}">
+    <link rel="stylesheet" th:href="@{/statics/lib/dist/summernote.css?v=0.0.1}">
+    <style>
+        .service_content>.service_list {height: 1426px;}
+        .m { width: 800px;margin-left: auto; margin-right: auto;}
+        .service_content>.service_details{ width: 1200px;margin-left:0;}
+        .service_content{margin-top: 0;}
+        #shopid{display: none;}
+        .copyright {margin-top: 0;}
+        .honor{text-align: left;}
+        .shop_r{width: 600px;}
+        #other{line-height: 12px;}
+        .upload_tit{margin-top: 6px;}
+        .upload_tit>p{margin-top: 6px;}
+    </style>
+</head>
+
+<body>
+    <div id="user">
+        <div th:replace="~{servive_nav::copy}"></div>
+    </div>
+    <div class="wrap" id="box">
+        <section>
+            <div class="order_d clearfix">当前位置：<a href="/ht-biz/service/index/shop">店铺管理</a>><a href="javascript:void(0);">店铺编辑</a></div>
+        </section>
+        <section>
+            <div class="service_content clearfix">
+                <!-- <div class="service_list fl clearfix">
+                    <div th:replace="~{service_com::copy}"></div>
+                </div> -->
+
+                <div class="service_details ser_top fl">
+                    <div class="info">
+                        <div class="info_detail">
+                            <div class="person_info"></div>
+                            <!-- <div class="shop_tips"><span
+                                    class="shop_title">【店铺装修建议】</span>图片展示更能表达信息，可用一张详情图来展示你想表达的信息，如果没有，可输入文字展示<i
+                                    class="fr close_tips">X</i></div> -->
+                            <div class="company_info clearfix">
+                                <h2 class="title_edit_1">店铺编辑<i>完整的店铺信息有助于产品的推广</i></h2>
+                                <div v-cloak class="change_form_box1">
+                                    <h3 class="jbxxxx">基本信息</h3>
+                                    <div class="form_list_shop upload clearfix">
+                                        <p class="ipt_l_edit fl"><i></i>店铺logo：</p>
+                                        <div class="ipt_r fl">
+                                            <div class="stroe">
+                                                <div v-if="originalfile1 == ''" class="upload_btn1 fl">
+                                                    <img src="/statics/images/service/defaultlogo.png" alt="">
+                                                </div>
+                                                <div v-else class="upload_img fl">
+                                                    <img :src="'http://47.92.70.12:9090' + originalfile1" alt="">
+                                                </div>
+                                                <input type="file" name="file" class="file_ipt fl" id="fileA"
+                                                    @change="tirggerFile($event, 'fileA')">
+                                                <div class="upload_tit">
+                                                    <h3><i></i>店铺logo</h3>
+                                                    <p>推荐尺寸：230*230，支持JPG、PNG、文件小于5M，请确保图片清晰</p>
+                                                    <p class="upload_tit_p" @click="openfile('file_ipt')">+重新上传</p>
+                                                </div>
+
+                                            </div>
+                                            <!-- <div v-cloak class="one_path" v-show="fileName1 != ''||originalfile1 != ''">
+                                                <p>{{fileName1}}<i @click="fileName1='';originalfile1='';clearFile1()">删除</i></p>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                    <div class="basic-information" style="padding-top: 0;">
+                                        
+                                        <div class="form_list_shop web clearfix" v-if="netrytype == 1">
+                                            <p class="ipt_l_edit fl"><i></i>企业网站：</p>
+                                            <p class="ipt_r fl">
+                                                <input type="text" name="web" id="web" v-model="web"
+                                                    placeholder="请输入您的企业网站">
+                                            </p>
+                                        </div>
+                                        <div class="form_list_shop web clearfix">
+                                            <p v-if="netrytype == 2" class="ipt_l_edit fl"><i></i>个人邮箱：</p>
+                                            <p v-if="netrytype == 1" class="ipt_l_edit fl"><i></i>企业邮箱：</p>
+                                            <p class="ipt_r fl">
+                                                <input type="text" name="email" id="email" v-model="email"
+                                                    placeholder="请输入您的邮箱">
+                                            </p>
+                                        </div>
+                                        <div class="form_list_shop duoinput clearfix">
+                                            <p v-if="netrytype == 2" class="ipt_l_edit fl"><i></i>个人简介：</p>
+                                            <p v-if="netrytype == 1" class="ipt_l_edit fl"><i></i>企业简介：</p>
+                                            <p class="ipt_r ipt_r_edit fl">
+                                                <textarea type="text" name="intro" id="intro" v-model="intro"
+                                                    placeholder="请输入您的基本介绍" maxlength="300"></textarea>
+                                                <i class="maxword">限300字</i>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="basic-information">
+                                        <h3 class="jbxx">荣誉资质</h3>
+                                        <div class="form_list_shop upload clearfix test">
+                                            <p class="ipt_l_edit_note fl" style="margin-left: 45px;"><i></i>荣誉资质：</p>
+                                            <div class="ipt_r fl">
+                                                <div class="summernote"></div>
+                                                <!-- <button id="print">打印</button> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="basic-information clearfix" style="border-bottom: none;">
+                                        <h3 class="jbxx">图文描述</h3>
+                                        <p class="jbxx_p">推荐图文结合描述，图片支持jpg，png格式，推荐尺寸：长度不限，宽度800</p>
+                                        <div class="basic_box honor">
+                                            <!-- <h3 class="jbxx">荣誉资质</h3> -->
+                                            <div class="form_list_shop upload clearfix test">
+                                                <p class="ipt_l_edit_note gap-t fl"><i></i>服务流程：</p>
+                                                <div class="ipt_r gap-t fl">
+                                                    <div class="summernote-lc"></div>
+                                                    <!-- <button id="print">打印</button> -->
+                                                </div>
+                                            </div>
+                                            <div class="form_list_shop upload clearfix test">
+                                                <p class="ipt_l_edit_note gap-t fl"><i></i>服务案例：</p>
+                                                <div class="ipt_r gap-t fl">
+                                                    <div class="summernote-al"></div>
+                                                    <!-- <button id="print">打印</button> -->
+                                                </div>
+                                            </div>
+                                            <div id="teams" class="form_list_shop upload clearfix test ">
+                                                <p class="ipt_l_edit_note gap-t fl"><i></i>服务团队：</p>
+                                                <div class="ipt_r gap-t fl">
+                                                    <div class="summernote-td"></div>
+                                                    <!-- <button id="print">打印</button> -->
+                                                </div>
+                                            </div>
+                                            <div class="form_list_shop upload clearfix test">
+                                                <p class="ipt_l_edit_note gap-t fl"><i></i>服务保障：</p>
+                                                <div class="ipt_r gap-t fl">
+                                                    <div class="summernote-bz"></div>
+                                                    <!-- <button id="print">打印</button> -->
+                                                </div>
+                                            </div>
+                                            <div class="form_list_shop upload clearfix test">
+                                                <p class="ipt_l_edit_note gap-t fl"><i></i>其他：</p>
+                                                <div class="ipt_r gap-t fl">
+                                                    <div class="summernote-other"></div>
+                                                    <!-- <button id="print">打印</button> -->
+                                                </div>
+                                            </div>
+                                            <!-- <div class="form_list_shop upload clearfix test">
+                                                <p class="ipt_l_edit_note fl"><i></i>其他：</p>
+                                                <p class="ipt_r gap-t fl">
+                                                    <textarea type="text" name="other" v-model="other" id="other" style="width: 818px;"
+                                                        placeholder="可输入需要补充的信息"></textarea>
+                                                </p>
+                                            </div> -->
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="form_list_shop upload clearfix">
+                                        <p class="ipt_l_edit fl"><i></i>店铺封面图：</p>
+                                        <div class="ipt_r fl">
+                                            <div class="stroe">
+                                                <div v-if="originalfile1 == ''" class="upload_btn1 fl"></div>
+                                                <div v-else class="upload_img fl">
+                                                    <img :src="'http://47.92.70.12:9090' + originalfile1" alt="">
+                                                </div>
+                                                <input type="file" name="file" class="file_ipt fl" id="fileA"
+                                                    @change="tirggerFile($event, 'fileA')">
+                                                <div class="upload_tit">
+                                                    <h3><i></i>店铺封面图</h3>
+                                                    <p>支持JPG、PNG、文件小于5M，推荐尺寸：1920*300，请确保图片清晰</p>
+                                                </div>
+
+                                            </div>
+                                            <div v-cloak class="one_path" v-show="fileName1 != ''||originalfile1 != ''">
+                                                <p>{{fileName1}}<i
+                                                        @click="fileName1='';originalfile1='';clearFile1()">删除</i></p>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                        <!-- <div class="form_list_shop upload clearfix"> -->
+                                        <!-- <p class="ipt_l_edit fl"><i></i>店铺详情介绍图：</p> -->
+                                        <!-- <div class="ipt_r fl">
+                                            <div class="stroe one" id="superme">
+                                                <div v-if="originalfile2 == ''" class="upload_btn2 fl"></div>
+                                                <div v-else class="upload_img1 fl">
+                                                    <div class="sup" v-for='list in originaldata'>
+                                                        <img :src="'http://47.92.70.12:9090' + list" alt="">
+                                                    </div>
+
+                                                </div>
+                                            </div> -->
+                                            <!-- <form enctype="multipart/form-data"> -->
+                                                <!-- <input type="hidden" id="imagepath" name="">  -->
+                                                <!-- 保存的图片id 用于表单提交 -->
+                                                <!-- <span id="upload_duixiang">上传</span> -->
+                                                <!-- 上传按钮 -->
+                                                <!-- <div class="show" style="display: none"></div>  -->
+                                                <!-- 输出图片 -->
+                                                <!--<pre id="geoJsonTxt"></pre> 输出文件的json数据 -->
+                                            <!-- </form> -->
+
+                                        <!-- </div> -->
+                                <!-- </div> -->
+                                
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+        
+        <section>
+            <div class="submit_form">
+                <div class="submit_form_btn clearfix">
+                    <div class="gotop fl" id="goTop"><i></i>回到顶部</div>
+                    <!-- <input type="button" class="information-edit-back" value="返回">          -->
+                    <input type="button" name="preview" class="tj fl" id="preview" @click="lookshit()" value="预览">
+                    <input type="button"  class="tj fl" id="save" @click="settled(1)" value="保存">
+                    <input type="button" name="affirm" class="tj fl" id="affirm" @click="settled(2)" value="确认">
+                </div>
+            </div>
+        </section>
+        <!-- 保存弹窗 -->
+        <div v-cloak class="submitaudit" v-show="saveframe">
+            <div class="submitAuditHeader clearfix">
+                <i @click="saveframe=false"></i>
+                <s></s>
+            </div>
+            <h3>保存成功</h3>
+        </div>
+        <!-- 提交审核弹窗 -->
+        <div v-cloak class="submitaudit submitaudit1" v-show="auditframe">
+            <div class="submitAuditHeader clearfix">
+                <i @click="auditframe=false"></i>
+                <s></s>
+            </div>
+            <h3>提交成功</h3>
+        </div>
+        <!-- 预览信息 -->
+        <section>
+            <div v-cloak id="shopid">
+                <div class="shops_content clearfix">
+                <!-- 公司类型的店铺基本信息 -->
+                <div class="business_infos clearfix">
+                    <div class="infos_bg">
+                        <!-- 为公司类型时展示的服务商基本信息 -->
+                        <div class="infos_in">
+                            <div class="fl in_l">
+                                <div class="fl shop_l">
+                                    <img v-if="originalfile1 == ''" src="/statics/images/inquire/qzcx.png" alt="" class="shop_l_img">
+                                    <img v-if="originalfile1 != ''" :src="'http://47.92.70.12:9090' + originalfile1" alt="" class="shop_l_img">
+                                   
+                                </div>
+                                <div class="fr shop_r">
+                                    <div class="sn">
+                                        <i class="sign hk"></i>
+                                        <span class="hk shop_name">{{lookshopname}}</span>
+                                        <i v-if="isbond == 1" class="hk baozhang"></i>
+                                        <i v-if="isagency == 1" class="hk rz"></i>
+                                    </div>
+                                    <div class="sn1">
+                                        <div>
+                                            <span class="basic_one">等级：
+                                                <!-- 星级组件 -->
+                                                <star-rating :max="5" :current="value"></star-rating>
+                                                <!-- over -->
+                                            </span>
+                                            <i class="one_h1 hk"></i>
+                                            <span class="basic_one">评分：
+                                                <span class="grade">{{lookgrade}}</span>
+                                            </span>
+                                            <i class="one_h1 hk"></i>
+                                            <span class="basic_one">类型：
+                                                <span v-if="lookactive==1" class="grade">服务机构</span>
+                                                <span v-if="lookactive==2" class="grade">个人</span>
+                                            </span>
+                                            <i class="one_h1 hk"></i> 
+                                            <span class="basic_one">
+                                                <i class="locat hk"></i>
+                                                <span>
+                                                    <i>{{lookpronice}}</i>-<i>{{lookcity}}</i><i v-if="lookarea!=''">-{{lookarea}}</i>
+                                                </span>
+                                            </span>
+                                        </div>
+                                        <div class="sn1">
+                                            <span class="basic_one">服务范围：<span>{{lookbusinesscope}}</span></span>
+                                        </div>
+                                    </div>
+                                    <!-- 公司简介-为公司类型时显示 -->
+                                    <div class="comj">
+                                        <p class="basic_one">公司简介：</p>
+                                        <p class="basic_one sn1 sn2">{{intro}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 联系电话-为公司类型时显示 -->
+                            <div class="contacts fr">
+                                <p class="phone1"><i class="phone hk"></i></p>
+                                <p class="tel">{{lookphone}}</p>
+                                <p class="consult1">
+                                    <a style="color: #fff;"><i class="dib qq_icon"></i>QQ咨询</a>
+                                </p>
+                                <p>客服联系人：<span>{{lookcontacts}}</span></p>
+                                <p class="qq">客服QQ：<span>{{lookcustomerqq}}</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 服务流程 -->
+                <div class="clearfix">
+                    <div class="w s_process">
+                        <div class="fl s_process_l">
+                            <!-- 服务流程 -->
+                            <div class="process_w_w">
+                                <div class="process_t"><i class="process_i hk"></i>服务流程</div>
+                                <!-- 服务流程图-后台返回 -->
+                                <div class="process_tt process_img" v-html="lookdescribeService">
+                                    <!-- <img src="/statics/images/service/exchange_test/service_process.png" alt="" class="pimg"> -->
+                                </div>
+                            </div>
+                            <!-- 服务案列 -->
+                            <div class="process_w_w">
+                                <div class="process_t"><i class="process_i hk"></i>服务案列</div>
+                                <!-- 服务案列图-后台返回 -->
+                                <!-- <div class="process_img">
+                                    <img src="/statics/images/service/exchange_test/service_process.png" alt="" class="pimg">
+                                </div> -->
+                                <div  class="process_tt" v-html="lookcases">
+                                </div>
+                            </div>
+                            <!-- 服务团队 为个人类型时不显示服务案例-->
+                            <div v-if="lookactive==1"  class="process_w_w">
+                                <div class="process_t"><i class="process_i hk"></i>服务团队</div>
+                                <!-- 服务团队图-后台返回 -->
+                                <!-- <div class="process_img">
+                                    <img src="/statics/images/service/exchange_test/sevice_tuandui.png" alt="" class="pimg">
+                                </div> -->
+                                <div class="process_tt" v-html="lookdescribeTeam">
+                                </div>
+                            </div>
+                            <!-- 服务保障 -->
+                            <div class="process_w_w">
+                                <div class="process_t"><i class="process_i hk"></i>服务保障</div>
+                                <div class="process_tt" v-html="lookdescribeSafe">
+                                </div>
+                            </div>
+                            <!-- 其他 -->
+                            <div class="process_w_w">
+                                <div class="process_t"><i class="process_i hk"></i>其他</div>
+                                <div class="process_tt" v-html="lookother">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 荣誉资质 -->
+                        <div class="fr s_process_r">
+                           <div>
+                                <div class="process_t"><i class="process_i process_i1 hk"></i>荣誉资质</div>
+                                <div class="honor">
+                                    <!-- 营业执照图-后台返回 -->
+                                    <div class="process_img process_img1" v-html="lookhonor"></div>
+                                    <div class="process_img process_img1">
+                                        <img :src="'http://47.92.70.12:9090' + businesslicense" alt="">
+                                    </div>
+                                    <p class="process_it process_it1">营业执照</p>
+                                    
+                                </div>
+                                <div  v-if="isagency == 1" class="honor">
+                                    <!-- 荣誉资质图-后台返回 -->
+                                    <div class="process_img process_img1">
+                                        <img :src="'http://47.92.70.12:9090' + agencyimg" alt="">
+                                    </div>
+                                    <p class="process_it process_it1">服务机构认证</p>
+                                </div>
+                           </div>
+                           <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+        <footer>
+            <div class="copyright ac">
+                <p>COPYRIGHT © 版本归属 广州高企云信息科技有限公司 粤ICP备16007486号-1</p>
+            </div>
+        </footer>
+    </div>
+    <!-- 公共js部分 -->
+    <th:block th:include="block/footlink :: copy" />
+    <!-- over -->
+    <script type="text/javascript" th:src="@{/statics/lib/dist/summernote.js?v=0.0.2}"></script>
+    <script type="text/javascript" th:src="@{/statics/lib/dist/lang/summernote-zh-CN.js?v=0.0.1}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/service/summer.js?v=0.0.2}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/component/star.js?v=0.0.3}"></script>
+    <script type="text/x-template" id="star-rating">
+        <div class="star-rating">
+            <span v-for="n in max">&star;</span>
+            <div class="star-rating__current" :style="{width: getRating + '%'}">
+            <span v-for="n in max">&starf;</span>
+            </div>
+        </div>
+    </script>
+    <script type="text/javascript" th:src="@{/statics/js/service/shop_edit.js?v=0.2.0}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/service/Sortable/Sortable.js?v=0.0.1}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/service/MD5.js?v=0.0.1}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/service/FraUpload.js?v=0.0.1}"></script>
+    <th:block th:include="block/service_each :: copy" />
+    <script>
+         $("#goTop").on("click", function () {
+            $('html , body').stop().animate({scrollTop: 0},'slow');
+        })
+        $('.title_list>li').mouseover(function (e) {
+            $(this).children().stop().siblings(".drop_down").animate({
+                'top': '30px',
+                'opacity': '1',
+            }, 200);
+        });
+        $('.title_list>li').mouseout(function (e) {
+            $(this).children().stop().siblings(".drop_down").animate({
+                'top': '-30px',
+                'opacity': '0'
+            }, 200);
+        })
+        // 商品图片上传
+        a = $("#upload_duixiang").FraUpload({
+            view: ".show", // 视图输出位置
+            url: "/uploadController/upload", // 上传接口
+            fetch: "img", // 视图现在只支持img
+            debug: false, // 是否开启调试模式
+            /* 外部获得的回调接口 */
+            onLoad: function (e) {
+                $(".file-preview").hide(); // 选择文件的回调方法
+                console.log("外部: 初始化完成...");
+            },
+            breforePort: function (e) { // 发送前触发
+                console.log("文件发送之前触发");
+            },
+            successPort: function (e) { // 发送成功触发
+                console.log("文件发送成功");
+                onload_image()
+            },
+            errorPort: function (e) { // 发送失败触发
+                console.log("文件发送失败");
+                onload_image()
+            },
+            deletePost: function (e) { // 删除文件触发
+                console.log("删除文件");
+                console.log(e);
+                alert('删除了' + e.filename)
+                onload_image()
+            },
+            sort: function (e) { // 排序触发
+                console.log("排序");
+                onload_image()
+            },
+        });
+
+        // 获取图片上传信息
+        function onload_image() {
+            $(".show").show();
+            $("#superme").hide();
+            var res = a.FraUpload.show()
+            var ids = [];
+            for (var k in res) {
+                this_val = res[k]
+                if (!empty(res[k]['is_upload']) && !empty(res[k]['ajax'])) {
+                    ajax_value = res[k]['ajax'];
+                    ids.push(ajax_value.data.id)
+                }
+            }
+            var arr = [];
+            for (var i in res) {
+                arr.push(res[i]);
+                //console.log(arr);
+                box.originalfile2 = arr;
+            }
+            $("#imagepath").val(ids);
+            $('#geoJsonTxt').html(JsonFormat(res));
+        }
+
+        // 将类库返回的json打印到pre中
+        function JsonFormat(json) {
+            // console.log(json);
+            if (typeof json != 'string') {
+                json = JSON.stringify(json, undefined, 2);
+            }
+            json = json.replace(/&/g, '&').replace(/</g, '<').replace(/>/g, '>');
+            return json.replace(
+                /("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g,
+                function (match) {
+                    var cls = 'number';
+                    if (/^"/.test(match)) {
+                        if (/:$/.test(match)) {
+                            cls = 'key';
+                        } else {
+                            cls = 'string';
+                        }
+                    } else if (/true|false/.test(match)) {
+                        cls = 'boolean';
+                    } else if (/null/.test(match)) {
+                        cls = 'null';
+                    }
+                    return '<span class="' + cls + '">' + match + '</span>';
+                });
+        }
+        /**
+         * 判断变量是否为空
+         */
+        function empty(value) {
+            if (value == "" || value == undefined || value == null || value == false || value == [] || value == {}) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    </script>
+    <th:block th:include="block/statistics :: copy" />
+</body>
+
+</html>

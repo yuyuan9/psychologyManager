@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- 公共头部 -->
+    <th:block th:include="block/headlink :: test('精准匹配')" />
+    <!-- 结束 -->
+    <link rel="stylesheet" th:href="@{/statics/css/policydig/pagination.css?v=0.0.2}">
+    <link rel="stylesheet" th:href="@{/statics/css/mylogin.css?v=0.0.2}">
+    <link rel="stylesheet" th:href="@{/statics/css/inquire/filt.css?v=0.0.2}">
+    <link rel="stylesheet" th:href="@{/statics/css/inquire/datepicker.css?v=0.0.2}">
+    <link rel="stylesheet" th:href="@{/statics/css/inquire/details.css?v=0.1.1}">
+    <link rel="stylesheet" th:href="@{/statics/css/inquire/msgbox.css?v=0.0.2}">
+    <link rel="stylesheet" th:href="@{/statics/css/match/match.css?v=0.0.3}">
+</head>
+
+<body style="background-color:#fff;">
+    <div id="user">
+        <div th:replace="~{user_head::copy}"></div>
+    </div>
+    <div class="wrap" id="box">
+        <div th:replace="~{header::copy}"></div>
+        <!-- 登录组件 -->
+        <mylogin :islogin="false" @close-login="isLogin=!false"></mylogin>
+        <!-- over -->
+        <section>
+            <div class="filtrate clearfix">
+                <div class="filt_l fl">当前位置：<a href="/">首页</a>><a href="/ht-biz/inquire/index?theme=1">精准匹配</a></div>
+            </div>
+            <div class="all clearfix">
+                <div class="filtrate_con">
+                    <div class="part2">
+                        <div class="part2_top">
+
+                            <div class="part2_top_choice">
+                                <!--地区范围-->
+                                <div class="choice region clearfix">
+                                    <span class="choice_title choice_title_dq">申报企业规模：</span>
+                                    <span class="choice_content" @click="scale=0;checkScaleType();" :class="{active:scale==0}">不限</span>
+                                    <span class="choice_content" @click="scale=1;checkScaleType();" :class="{active:scale==1}">超大型</span>
+                                    <span class="choice_content" @click="scale=2;checkScaleType();" :class="{active:scale==2}">大型</span>
+                                    <span class="choice_content" @click="scale=3;checkScaleType();" :class="{active:scale==3}">中大型</span>
+                                    <span class="choice_content" @click="scale=4;checkScaleType();" :class="{active:scale==4}">中小型</span>
+                                    <span class="choice_content" @click="scale=5;checkScaleType();" :class="{active:scale==5}">小微型</span>
+                                    <span class="choice_content" @click="scale=6;checkScaleType();" :class="{active:scale==6}">初创</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 展示列表 -->
+                        <div class="part2_list" style="background: #fff">
+                            <!-- 已选条件： -->
+                            <div v-cloak class="choice choice_have clearfix">
+                                <span class="result fl">匹配结果：</span>
+                                <span v-if="scaleType" v-cloak class="condition">{{scaleType}}
+                                    <i class="close" @click="scale=0;scaleType='';checkScaleType();"></i>
+                                </span>
+                                <div class="fl derive_l"><s v-if="words!=''">“{{words}}”</s> 精准为您匹配到  
+                                    <s v-if="page.totalResult != ''" style="color: #ff4f2e;">{{page.totalResult}}</s>
+                                    <s v-if="page.totalResult == ''" style="color: #ff4f2e;">0</s>
+                                    个项目</div>
+                            </div>
+                            <div class="part2_list_content">
+                                <table>
+                                    <thead>
+                                        <tr class="t1">
+                                            <td>项目名称</td>
+                                        </tr>
+                                        <tr class="t2">
+                                            <td>项目分类</td>
+                                        </tr>
+                                        <tr class="t3">
+                                            <td>申报条件</td>
+                                        </tr>
+                                        <tr class="t4">
+                                            <td>申报意义</td>
+                                        </tr>
+                                        <tr class="t5">
+                                            <td>申报领域</td>
+                                        </tr>
+                                        <tr class="t6">
+                                            <td>申报企业规模</td>
+                                        </tr>
+                                        <tr class="t7">
+                                            <td>申报时间</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody v-cloak v-for="(contentData, index) in contentDatas">
+                                        <tr class="t1">
+                                            <td class="tips1">
+                                                <i>{{index+1}}</i><span v-html="contentData.projectName"></span>
+                                                <p v-show="contentData.projectName !=''" v-html="contentData.projectName"></p>
+                                            </td>
+                                        </tr>
+                                        <tr class="t2">
+                                            <td class="tips1">
+                                                <s v-html="contentData.type"></s>
+                                                <p v-show="contentData.type !=''" v-html="contentData.type"></p>
+                                            </td>
+                                        </tr>
+                                        <tr class="t3">
+                                            <td class="tips1"> 
+                                                <s v-html="contentData.applyCon"></s>
+                                                <p v-show="contentData.applyCon !=''" v-html="contentData.applyCon"></p>
+                                            </td>
+                                        </tr>
+                                        <tr class="t4">
+                                            <td class="tips1">
+                                                <s v-html="contentData.applyMean"></s>
+                                                <p v-show="contentData.applyMean !=''" v-html="contentData.applyMean"></p>
+                                            </td>
+                                        </tr>
+                                        <tr class="t5">
+                                            <td class="tips1">
+                                                <s v-html="contentData.applyField2"></s>
+                                                <p v-show="contentData.applyField2 !=''" v-html="contentData.applyField2"></p>
+                                            </td>
+                                        </tr>
+                                        <tr class="t6">
+                                            <td class="tips1">
+                                                <s v-html="contentData.applyScale2"></s>
+                                                <p v-show="contentData.applyScale2 !=''" v-html="contentData.applyScale2"></p>
+                                            </td>
+                                        </tr>
+                                        <tr class="t7">
+                                            <td class="tips1">
+                                                <s v-html="contentData.applyTime"></s>
+                                                <p style="width: auto;" v-show="contentData.applyTime !=''" v-html="contentData.applyTime"></p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    
+                                </table>
+                                <div class="mainHolder">
+                                    <div v-cloak v-if="notfind != 1" class="textHolder">
+                                        <h3>剩余
+                                            <i v-if="page.totalResult-14>0">{{page.totalResult-14}}</i>
+                                            <i v-if="page.totalResult-14<=0">0</i>
+                                            个项目，下载即可查看全部结果</h3>
+                                        <p @click="getUserHoney();downloadInfo();"><i></i>立即下载</p>
+                                    </div>
+                                </div>
+                                <div v-cloak v-if="notfind == 1" class="not-find1"><a href="http://p.qiao.baidu.com/cps/chat?siteId=11406523&userId=20408321"></a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="clearfix" style="width: 1200px;margin:0 auto;">
+                <div class="text">
+                    <!-- 查询不到想要的结果？<a href="">在线反馈</a> -->
+                </div>
+            </div>
+        </section>
+        <section v-cloak>
+            <!-- 点击导出的弹窗-->
+            <div v-cloak class="contract_mask" v-show="deriveInfo"></div>
+            <div v-cloak class="read_over" v-show="deriveInfo">
+                <div id="look" class="next_page">
+                    <div class="table_top">
+                        <p>项目匹配结果下载<i>(10honey/条)</i></p>
+                        <s class="fa close_login fr" @click="deriveInfo=false"></s>
+                    </div>
+                    <div class="table_bottom ac middle">
+                        <p style="justify-content: left;margin-left: 125px;"><span class="fl pdf_size size_big" v-cloak>下载信息数量：<i>{{page.totalResult}}</i> 条</span></p>                        
+                        <p style="justify-content: left; margin-left: 125px;"><span class="fl pdf_size size_big" v-cloak>导出文档所需：<i>{{page.totalResult*10}}</i> honey</span></p>
+                        <p style="justify-content: left;margin-left: 125px;"><span class="fl pdf_size" v-cloak>您的账户余额：<s style="color:#ff4a2b;">{{userHoney}}</s> honey</span></p>
+
+                    </div>
+                    <div class="table_bottom ac">
+                        <p>
+                            <a href="/ht-biz/usercenter/user/pay_honey" target="_blank" class="use_honey buy_honey ac" >前去充值</a>
+                            <a href="javascript:void(0)" class="use_honey ac" @click="deriveToIf()">立即下载</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer>
+            <div>COPYRIGHT © 版权归属 广州高企云信息科技有限公司 粤ICP备16007486号-1</div>
+        </footer>
+    </div>
+    <!-- 公共js部分 -->
+    <th:block th:include="block/inquirelink :: copy" />
+    <div th:replace="~{block/confine::copy}"></div>
+    <!-- over -->
+    <script type="text/javascript" th:src="@{/statics/js/component/mylogin.js?v=1.0.3}"></script>
+    <script type="text/javascript" th:src="@{/statics/js/match/precise_match.js?v=0.1.5}"></script>
+    <script>
+        $('.head_nav>li').mouseover(function (e) {
+            $('.head_nav>li').removeClass('active');
+            $(this).addClass('active');
+            $(this).children().stop().siblings(".search_drop_down").animate({
+                'top': '57px',
+            }, 200);
+            $(this).children().stop().siblings(".search_drop_down").css({
+                'display': 'block',
+            });
+        });
+        $('.head_nav>li').mouseout(function (e) {
+            $(this).children().stop().siblings(".search_drop_down").animate({
+                'top': '30px',
+            }, 200);
+            $(this).children().stop().siblings(".search_drop_down").css({
+                'display': 'none',
+            });
+        })
+        $(".xcx_h").mouseover(function () {
+            $(".xcx").css({
+                'visibility': 'visible'
+            })
+        })
+        $(".xcx_h").mouseleave(function () {
+            $(".xcx").css({
+                'visibility': 'hidden'
+            })
+        })
+    </script>
+    <th:block th:include="block/statistics :: copy" />
+</body>
+
+</html>
